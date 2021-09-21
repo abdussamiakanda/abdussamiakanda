@@ -122,6 +122,12 @@ code{
   .inners{
     width: 100%;
   }
+  .inner70{
+    width: 70%;
+  }
+  .inner30{
+    width: 30%;
+  }
   .right{
     text-align: right;
   }
@@ -140,6 +146,58 @@ code{
     max-width: 1200px;
     padding: 10px;
     margin: 0px auto;
+  }
+  .gallery{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .gallery img{
+    width: 120px;
+    height: 120px;
+    margin: 5px;
+    cursor: pointer;
+  }
+  .gallery img:hover{
+    width: 115px;
+    height: 115px;
+    margin: 7.5px;
+    box-shadow: 0px 0px 15px rgba(255,255,255,0.5);
+  }
+  .skills{
+    padding: 10px 0px;
+    width: 100%;
+  }
+  .skill{
+    width: 100%;
+    background: #eee;
+    border-radius: 3px;
+    margin: 5px 0px;
+  }
+  .percent{
+    padding: 5px 10px;
+    background-color: #006ba1;
+    border-radius: 3px;
+  }
+  .padding{
+    padding: 10px 0px;
+  }
+  .social{
+    padding: 20px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .social-item{
+    margin: 5px;
+    padding: 0px 5px;
+    font-size: 40px;
+    cursor: pointer;
+  }
+  .social-item:hover{
+    color: rgba(0,0,0,0.7);
   }
 
 
