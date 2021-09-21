@@ -199,6 +199,9 @@ code{
   .social-item:hover{
     color: rgba(0,0,0,0.7);
   }
+  .moblie{
+    display: none;
+  }
 
 
 
@@ -236,7 +239,7 @@ code{
     font-weight: 500;
     background-color: var(--no1);
     color: var(--no4);
-    font-size: 14px;
+    font-size: 13px;
     margin: 0;
     padding: 0;
     width:100%;
@@ -247,68 +250,89 @@ code{
         -ms-user-select: none;
             user-select: none;
   }
+  .moblie{
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    font-size: 30px;
+    padding: 5px 14px 3px 14px;
+    z-index: 50;
+    background-color: white;
+    box-shadow: 0px 0px 5px black;
+    border-radius: 50%;
+  }
+  .moblie:hover{
+    color: white;
+    background-color: black;
+    box-shadow: 0px 0px 5px white;
+  }
   .navigator{
     position: fixed;
-    right: 0;
-    bottom: 50%;
-    transform: translateY(50%);
-    background: rgba(255,255,255,0.8);
-    box-shadow: 0px 0px 5px rgba(0,0,0,0.8);
-    border-radius: 5px 0px 0px 5px;
-    font-size: 25px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0,0,0,0.9);
+    color: white;
+    font-size: 16px;
     text-align: center;
+    z-index: 100;
+  }
+  .cross{
+    font-size: 30px;
+    text-align: right;
+    padding: 0px 20px;
+  }
+  .cros{
+    cursor: pointer;
+    padding: 5px 10px;
+  }
+  .cros:hover{
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 50%;
   }
   .menu-item{
     padding: 3px 10px;
+    margin: 2px 0px;
     cursor: pointer;
-    border-radius: 5px 0px 0px 5px;
-    position: relative;
+    border-radius: 5px;
+    background-color: rgba(0,0,0,0.5);
   }
   .menu-item:hover{
-    background-color: rgba(0,0,0,0.7);
-    color: white;
-  }
-  .menu-item .tooltiptext {
-    visibility: hidden;
-    max-width: 400px;
-    background-color: rgba(0,0,0,0.7);
-    color: #fff;
-    text-align: center;
-    border: 1px solid white;
-    border-radius: 5px;
-    font-size: 18px;
-    padding: 5px 10px;
-    position: absolute;
-    z-index: 1;
-    top: 50%;
-    right: 110%;
-    transform: translateY(-50%);
-  }
-  .menu-item:hover .tooltiptext {
-    visibility: visible;
+    background-color: rgba(255,255,255,0.7);
+    color: black;
   }
   .name{
     font-size: 25px;
     font-weight: 600;
-    margin: 20px 0px;
+    margin: 15px 0px;
   }
   h3{
-    font-size: 30px;
+    font-size: 20px;
     font-weight: 600;
     margin: 10px 0px;
   }
   .white{
     background-color: white;
     color: black;
-    padding: 30px 0px;
+    padding: 10px 0px;
   }
   .white-inner{
     padding: 10px;
     margin: 0px auto;
   }
+  .black{
+    background-color: #202020;
+    color: white;
+    padding: 10px 0px;
+  }
+  .black-inner{
+    padding: 10px;
+    margin: 0px auto;
+  }
   .flex{
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
   .inners{
     width: 100%;
@@ -320,23 +344,13 @@ code{
     width: 100%;
   }
   .right{
-    text-align: right;
+    text-align: center;
   }
   .resume{
-    margin: 30px 40px;
+    margin: 20px 40px;
   }
   .main-photo{
-    width: 300px;
-  }
-  .black{
-    background-color: #202020;
-    color: white;
-    padding: 30px 0px;
-  }
-  .black-inner{
-    max-width: 1200px;
-    padding: 10px;
-    margin: 0px auto;
+    width: 200px;
   }
   .gallery{
     display: flex;
@@ -345,14 +359,14 @@ code{
     flex-wrap: wrap;
   }
   .gallery img{
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     margin: 5px;
     cursor: pointer;
   }
   .gallery img:hover{
-    width: 115px;
-    height: 115px;
+    width: 95px;
+    height: 95px;
     margin: 7.5px;
     box-shadow: 0px 0px 15px rgba(255,255,255,0.5);
   }
@@ -367,6 +381,7 @@ code{
     margin: 5px 0px;
   }
   .percent{
+    font-size: 12px;
     padding: 5px 10px;
     background-color: #006ba1;
     border-radius: 3px;
@@ -383,8 +398,8 @@ code{
   }
   .social-item{
     margin: 5px;
-    padding: 0px 5px;
-    font-size: 40px;
+    padding: 0px 3px;
+    font-size: 30px;
     cursor: pointer;
   }
   .social-item:hover{

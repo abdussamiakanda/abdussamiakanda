@@ -2,6 +2,17 @@ function goTo(path){
   window.location.assign(path);
 }
 
+function goToTo(path){
+  window.location.assign(path);
+  document.getElementById('moblie').classList.remove('hide');
+  document.getElementById('navigator').classList.add('hide');
+}
+
+function showMenu(){
+  document.getElementById('moblie').classList.add('hide');
+  document.getElementById('navigator').classList.remove('hide');
+}
+
 var social = [
   'https://www.researchgate.net/profile/Md_Akanda2',
   'https://scholar.google.com/citations?user=hCntcSgAAAAJ&hl=en',

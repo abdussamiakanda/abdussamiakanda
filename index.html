@@ -18,7 +18,30 @@
   </head>
   <body>
 
-    <section class="navigator hide">
+    <div class="moblie" id="moblie" onclick="showMenu()"><i class="fas fa-bars"></i></div>
+
+    <section class="navigator hide" id="navigator">
+      <div class="cross">
+        <i class="cros fas fa-times"></i>
+      </div>
+      <div onclick="goToTo('#intro')" class="menu-item"><span class="tooltiptext">Introduction</span></div>
+      <div onclick="goToTo('#researcher')" class="menu-item"><span class="tooltiptext">Researcher</span></div>
+      <div onclick="goToTo('#student')" class="menu-item"><span class="tooltiptext">Student</span></div>
+      <div onclick="goToTo('#teacher')" class="menu-item"><span class="tooltiptext">Teacher</span></div>
+      <div onclick="goToTo('#programmer')" class="menu-item"><span class="tooltiptext">Programmer</span></div>
+      <div onclick="goToTo('#developer')" class="menu-item"><span class="tooltiptext">Web Developer</span></div>
+      <div onclick="goToTo('#scibbler')" class="menu-item"><span class="tooltiptext">Scibbler</span></div>
+      <div onclick="goToTo('#doodler')" class="menu-item"><span class="tooltiptext">Doodler</span></div>
+      <div onclick="goToTo('#minstrel')" class="menu-item"><span class="tooltiptext">Minstrel</span></div>
+      <div onclick="goToTo('#skillset')" class="menu-item"><span class="tooltiptext">Skillset</span></div>
+      <div onclick="goToTo('#gallary')" class="menu-item"><span class="tooltiptext">Gallary</span></div>
+      <div onclick="goToTo('#works')" class="menu-item"><span class="tooltiptext">Works</span></div>
+      <div onclick="goToTo('#posts')" class="menu-item"><span class="tooltiptext">Posts</span></div>
+      <div onclick="goToTo('#awards')" class="menu-item"><span class="tooltiptext">Awards</span></div>
+      <div onclick="goToTo('#contact')" class="menu-item"><span class="tooltiptext">Contact</span></div>
+    </section>
+
+    <section class="navigator hide2">
       <div onclick="goTo('#intro')" class="menu-item"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="tooltiptext">Introduction</span></div>
       <div onclick="goTo('#researcher')" class="menu-item"><i class="fas fa-flask" aria-hidden="true"></i><span class="tooltiptext">Researcher</span></div>
       <div onclick="goTo('#student')" class="menu-item"><i class="fas fa-user-graduate" aria-hidden="true"></i><span class="tooltiptext">Student</span></div>
@@ -234,14 +257,14 @@
           </div>
 
           <div class="skill">
-            <div class="percent" style="width: 10%;">
+            <div class="percent" style="width: 15%;">
               C++
-              <span style="float: right;">10%</span>
+              <span style="float: right;">15%</span>
             </div>
           </div>
 
           <div class="skill">
-            <div class="percent" style="width: 50%;">
+            <div class="percent" style="width: 45%;">
               Python
               <span style="float: right;">45%</span>
             </div>
@@ -297,14 +320,14 @@
           </div>
 
           <div class="skill">
-            <div class="percent" style="width: 20%;">
+            <div class="percent" style="width: 25%;">
               Blender
-              <span style="float: right;">20%</span>
+              <span style="float: right;">25%</span>
             </div>
           </div>
 
-          <div class="skill">
-            <div class="percent" style="width: 98.4%;">
+          <div class="percent">
+            <div>
               Procrastinating
               <span style="float: right;">100%</span>
             </div>
