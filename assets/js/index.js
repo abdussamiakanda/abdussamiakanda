@@ -14,6 +14,7 @@ function showMenu(){
 }
 
 function hide(){
+  document.getElementById('moblie').classList.remove('hide');
   document.getElementById('navigator').classList.add('hide');
 }
 
