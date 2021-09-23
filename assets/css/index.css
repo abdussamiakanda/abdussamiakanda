@@ -482,6 +482,7 @@ code{
     max-height: 95vh;
     max-width: 90%;
     margin: 10px auto;
+    transform: translateY(50%);
   }
   .times{
     color: white;
