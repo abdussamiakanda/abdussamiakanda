@@ -175,7 +175,7 @@ code{
     font-weight: 500;
     background-color: var(--no1);
     color: var(--no4);
-    font-size: 16px;
+    font-size: 14px;
     margin: 0;
     padding: 0;
     width:100%;
@@ -186,10 +186,13 @@ code{
         -ms-user-select: none;
             user-select: none;
   }
+  p{
+    margin: 0;
+  }
   .name{
-    font-size: 40px;
+    font-size: 22px;
     font-weight: 600;
-    margin: 20px 30px;
+    margin: 5px 0px;
   }
   h3{
     font-size: 30px;
@@ -199,42 +202,43 @@ code{
   .white{
     background-color: white;
     color: black;
-    padding: 10px 0px;
+    padding: 5px 0px;
   }
   .white-inner{
-    max-width: 1200px;
-    padding: 10px;
+    padding: 5px;
     margin: 0px auto;
   }
   .flex{
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
   }
   .inners{
     width: 100%;
   }
   .inner75{
-    width: 75%;
+    width: 100%;
   }
   .inner25{
-    width: 25%;
+    display: flex;
+    width: 100%;
   }
   .right{
     text-align: right;
   }
   .course-thumb{
-    width: 100%;
+    display: none;
   }
   .tag{
-    margin-left: 30px;
-    padding: 5px 10px;
+    padding: 3px 7px;
+    font-size: 12px;
     border: 1px solid rgba(255,0,0,0.4);
     border-radius: 5px;
     display: inline-block;
   }
   .item{
-    padding: 10px 12px;
-    margin: 2px 0px;
+    padding: 5px 8px;
+    margin: 0px 2px;
     background-color: rgba(0,0,0,0.1);
     border-radius: 5px;
     cursor: pointer;
@@ -248,14 +252,12 @@ code{
     background-color: rgba(0,0,0,0.5);
   }
   .div-item{
-    margin-left: 30px;
-  }
-  .details{
-    margin-left: 30px;
+    margin-top: 10px;
+    padding: 5px;
   }
   .back{
     border: 1px solid rgba(0,0,0,0.6);
-    padding: 10px 13px;
+    padding: 3px 7px;
     display: inline-block;
     margin: 0px auto;
     cursor: pointer;
