@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <title>The volume of an n-dimensional sphere - Md. Abdus Sami Akanda</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta property="og:title" content="The volume of an n-dimensional sphere by Md. Abdus Sami Akanda"/>
+    <meta property="og:image" content="https://drive.google.com/uc?export=download&id=1s9MCpcG0sVXmEKCtWIOGssBsAeVyHorp"/>
+    <link rel="shortcut icon" href="./../assets/image/icon.png">
+    <script src="https://kit.fontawesome.com/1421ad6393.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css" integrity="sha384-zTROYFVGOfTw7JV7KUu8udsvW2fx4lWOsCEDqhBreBwlHI4ioVRtmIvEThzJHGET" crossorigin="anonymous">
+    <link rel="stylesheet" href="./../assets/css/article.css">
+  </head>
+  <body>
+
+    <section class="black" id="intro">
+      <div class="flex">
+        <div class="back" onclick="goTo('./../')">Back to Home</div>
+        <div class="back" onclick="goTo('./../articles')">All Articles</div>
+      </div>
+      <div class="black-inner flex">
+        <div class="inners">
+          <div class="type">Article</div>
+          <h1 class="name">The volume of an n-dimensional sphere</h1>
+          <p class="details">
+            Posted: 31 December 2020 <br>
+            Written by: Md. Abdus Sami Akanda
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="white">
+      <div class="white-inner">
+        <div class="inners">
+
+          <strong>The volume of an n-dimensional sphere (n-sphere) enclosed by a (n-1) dimensional surface</strong>
+          <br><br>
+          This is a very interesting problem in mathematics. And now, we'll solve this problem from zero.
+          <br><br>
+          We'll use the same trick as to find the area under a Gaussian function,
+          $$y = e^{-x^2}$$
+
+          Here is a plotting of this function using <h4>python</h4>.
+          <code>
+            import numpy as np <br>
+            import matplotlib.pyplot as plt <br><br>
+
+            x = np.linspace(-2, 2, 100) <br>
+            y = np.exp(-x**2) <br><br>
+
+            plt.plot(x, y) <br>
+            plt.xlabel("x") <br>
+            plt.ylabel("y") <br>
+            plt.show()
+          </code>
+          <img src="https://drive.google.com/uc?export=download&id=1fylNtuRRHuT7BZAXoumJqAcQonE0Sr8N" alt="">
+          <br>
+
+          Now, the area below this curve is simply defined by the integral,
+          $$\int_{-\infty}^\infty e^{-x^2} dx$$
+          <br>
+
+          This integral is a tricky one. But, it turns out that the square of this integral can be evaluated much easily.
+          $$ \begin{align*}
+            \left(\int_{-\infty}^\infty e^{-x^2} dx\right)^2 & = \left(\int_{-\infty}^\infty e^{-x_1^2} dx_1\right) \left(\int_{-\infty}^\infty e^{-x_2^2} dx_2\right) \\
+            & = \int_{-\infty}^\infty \int_{-\infty}^\infty e^{-(x_1^2+x_2^2)} dx_1 dx_2
+          \end{align*} $$
+          <br>
+
+          It is much easy, because we can write it in polar coordinates. The transformation equations are,
+          $$x_1 = r \sin \theta \qquad \text{;} \qquad x_2 = r \cos \theta \qquad \text{;} \qquad x_1^2 + x_2^2 = r^2$$
+          $$dx_1 dx_2 = rdrd\theta$$
+
+          Now, the integral becomes,
+          $$ \begin{align*}
+            \int_{-\infty}^\infty \int_{-\infty}^\infty e^{-(x_1^2+x_2^2)} dx_1 dx_2 & = \int_{r=0}^\infty \int_{\theta = 0}^{2\pi} e^{-r^2} r dr d\theta \\
+            & = \int_{r=0}^\infty \int_{\theta = 0}^{2\pi} e^{-r^2} \frac{1}{2} 2 r dr d\theta \\
+            & = \int_{r=0}^\infty \int_{\theta = 0}^{2\pi} e^{-r^2} \frac{1}{2} dr^2 d\theta
+          \end{align*} $$
+
+          Let, $r^2 = u$; $2r dr = du$. Then the equation becomes,
+          $$ \begin{align*}
+            & = \int_{u=0}^\infty \int_{\theta = 0}^{2\pi} e^{-u} \frac{1}{2} du d\theta \\
+            & = \frac{1}{2} \int_{\theta = 0}^{2\pi} d\theta \int_{u=0}^\infty e^{-u} du \\
+            & = \frac{1}{2} \cdot 2\pi \left[-e^{-u}\right]_0^\infty \\
+            & = \pi
+          \end{align*} $$
+
+          Now, we get,
+          $$\int_{-\infty}^\infty e^{-x^2} dx = \sqrt{\pi}$$
+
+          Now, let's work out this integral for three dimensional case. Yes. You guessed it (hopefully), we'll take the cube of the integral this time.
+          $$ \begin{align*}
+            \left(\int_{-\infty}^\infty e^{-x^2} dx\right)^3 & = \left(\int_{-\infty}^\infty e^{-x_1^2} dx_1\right) \left(\int_{-\infty}^\infty e^{-x_2^2} dx_2\right) \left(\int_{-\infty}^\infty e^{-x_3^2} dx_3\right) \\
+            & = \int_{-\infty}^\infty \int_{-\infty}^\infty \int_{-\infty}^\infty e^{-(x_1^2+x_2^2+x_3^2)} dx_1 dx_2 dx_3
+          \end{align*} $$
+
+          The transformation equations for spherical polar coordinates are,
+          $$x_1 = r \sin \theta \cos \phi \qquad \text{;} \qquad x_2 = r \sin \theta \sin \phi \qquad \text{;} \qquad x_3 = r \cos \theta$$
+          $$x_1^2 + x_2^2 + x_3^2 = r^2 \qquad \text{;} \qquad dx_1 dx_2 dx_3 = r^2dr \sin \theta d\theta d\phi$$
+
+          The integral becomes,
+          $$ \begin{align*}
+            \int_{-\infty}^\infty \int_{-\infty}^\infty \int_{-\infty}^\infty e^{-(x_1^2+x_2^2+x_3^2)} dx_1 dx_2 dx_3 & = \int_{\phi = 0}^{2 \pi} \int_{\theta = 0}^{\pi} \int_{r=0}^\infty e^{-r^2} r^2dr \sin \theta d\theta d\phi \\
+            & = \int_{\phi = 0}^{2 \pi} d\phi \int_{\theta = 0}^{\pi} \sin \theta d\theta \int_{r=0}^\infty e^{-r^2} r^2dr \\
+            & = 4 \pi \cdot \frac{\sqrt{\pi}}{4} \\
+            & = \left( \sqrt{\pi} \right)^3
+          \end{align*} $$
+
+          Now, it's obvious that,
+          $$ \begin{align*}
+            \left(\int_{-\infty}^\infty e^{-x^2} dx\right)^n & = \left(\int_{-\infty}^\infty e^{-x_1^2} dx_1\right) \left(\int_{-\infty}^\infty e^{-x_2^2} dx_2\right) \cdots \left(\int_{-\infty}^\infty e^{-x_n^2} dx_n\right) \\
+            & = \int_{-\infty}^\infty \int_{-\infty}^\infty \cdots \int_{-\infty}^\infty e^{-(x_1^2+x_2^2+ \cdots +x_n^2)} dx_1 dx_2 \cdots dx_n \\
+            & = \int_{-\infty}^\infty \int \cdots \int e^{-r^2} dr d\phi_1 \cdots d\phi_{n-1} \\
+            & = \left( \sqrt{\pi} \right)^n
+          \end{align*} $$
+
+          We need to switch from coordinates $(x_1, x_2, \cdots , x_n)$ to hyperspherical coordinates $(r,\phi_1, \cdots , \phi_n)$. <br>
+          $$x_1^2 + x_2^2 + \cdots + x_n^2 = r^2 \qquad \text{;} \qquad dx_1 dx_2 \cdots dx_n = r^{n-1}dr d\Omega_{n-1}$$ <br>
+
+          We need to, now, understand what $d\Omega_{n-1}$ is. <br> <br>
+
+          Recall from the two dimensional case,
+          $$\int d\Omega_{2-1} = \int d\Omega_1 = \int_0^{2\pi} d \theta = 2 \pi$$
+
+          This can be thought as the perimeter of a circle (2-sphere) of radius 1 unit $(2 \pi r)$. Mathematically, we can think this one dimensional perimeter as the surface area of a two dimensinal sphere. <br> <br>
+
+          Also recall, from the three dimensional case,
+          $$ \begin{align*}
+            \int d\Omega_{3-1} = \int d\Omega_2 = \int_0^{\pi} \int_0^{2\pi} \sin \theta d \theta d \phi = 4 \pi
+          \end{align*} $$
+          This can be thought as the surface area of a sphere (3-sphere) of radius 1 unit $(4 \pi r^2)$. <br> <br>
+
+          Similarly, for a n-dimensional sphere $\int d\Omega_{n-1}$ represents the surface area. <br>
+
+          $$\int_{-\infty}^\infty \int_{-\infty}^\infty \cdots \int_{-\infty}^\infty e^{-(x_1^2+x_2^2+ \cdots +x_n^2)} dx_1 dx_2 \cdots dx_n = \int_{-\infty}^\infty e^{-r^2} r^{n-1} dr \int d\Omega_{n-1}$$
+
+          $$\Rightarrow \left( \sqrt{\pi} \right)^n = \int_{-\infty}^\infty e^{-r^2} r^{n-2} \frac{1}{2} 2 r dr S_n$$
+          where, $S_n = \int d\Omega_{n-1}$ denotes the (n-1) dimensional surface area of a n-sphere. Let, $r^2 = u$; $2r dr = du$.
+
+          $$\Rightarrow \left( \pi \right)^{n/2} = \int_{-\infty}^\infty e^{-u} \left(\sqrt{u}\right)^{n-2} \frac{1}{2} du S_n$$
+
+          $$\Rightarrow \left( \pi \right)^{n/2} = \int_{-\infty}^\infty e^{-u} \left(u\right)^{n/2-1} \frac{1}{2} du S_n$$ <br>
+
+          Using the definition of Gamma function, $\int_{-\infty}^\infty e^{-u} u^{n-1} du = \Gamma n$,
+
+          $$\Rightarrow \left( \pi \right)^{n/2} = \frac{1}{2} \Gamma \left( \frac{n}{2} \right) S_n$$
+          $$\Rightarrow S_n = \frac{\left( \pi \right)^{n/2}}{\frac{1}{2} \Gamma \left( \frac{n}{2} \right)} $$
+
+          The integral of this surface area with respect to the $r$ coordinate, gives the volume enclosed by the surface.
+          $$ \begin{align*}
+            V_n & = \int S_n r^{n-1} dr \\
+            & = S_n \frac{r^n}{n} \\
+            & = \frac{\left( \pi \right)^{n/2}}{\frac{1}{2} \Gamma \left( \frac{n}{2} \right)} \frac{r^n}{n} \\
+            & = \frac{\left( \pi \right)^{n/2}}{\frac{n}{2} \Gamma \left( \frac{n}{2} \right)} r^n \\
+            & = \frac{\left( \pi \right)^{n/2}}{\Gamma \left( \frac{n}{2} +1 \right)} r^n
+          \end{align*} $$
+
+          where, from Gamma function, $\Gamma (n+1) = n \Gamma n$. And for a n-sphere of radius 1, the equation becomes,
+          $$ V_n = \frac{\left( \pi \right)^{n/2}}{\Gamma \left( \frac{n}{2} +1 \right)}$$ <br>
+
+          Now, let's see the property of the Gamma function. As you see, the Gamma function increases rapidly with increase of n.
+
+          <code>
+            from scipy.special import gamma <br>
+            import numpy as np <br>
+            import matplotlib.pyplot as plt <br> <br>
+
+            n = np.linspace(-10, 10, 200) <br>
+            y = gamma(n) <br> <br>
+
+            plt.plot(n, y) <br>
+            plt.ylim(-20,20) <br>
+            plt.xlim(-6, 6) <br>
+            plt.xlabel("n") <br>
+            plt.ylabel("$\Gamma n$") <br>
+            plt.show()
+          </code>
+          <img src="https://drive.google.com/uc?export=download&id=1oXr1ieIwD27ZDF1R5-4EB6KXepZ3_e6f" alt="">
+          <br>
+
+          Now, what about the volume? You might think that the volume increases with the dimension. So, let's see.
+          <br>
+
+          <code>
+            from scipy.special import gamma <br>
+            import numpy as np <br>
+            import matplotlib.pyplot as plt <br> <br>
+
+            n = np.linspace(1, 30, 2000) <br>
+            V = np.pi**(n/2)/gamma((n/2)+1) <br> <br>
+
+            plt.plot(n, V) <br>
+            plt.xlabel("n (dimension)") <br>
+            plt.ylabel("V (volume)") <br>
+            plt.show()
+          </code>
+          <img src="https://drive.google.com/uc?export=download&id=1s9MCpcG0sVXmEKCtWIOGssBsAeVyHorp" alt="">
+          <br>
+          We can see that the volume increases with the dimension upto 5 dimensions. After that it keeps going near zero with the increase of dimension.
+
+          <br><br>
+          <br><br>
+
+        </div>
+      </div>
+    </section>
+
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js" integrity="sha384-GxNFqL3r9uRJQhR+47eDxuPoNE7yLftQM8LcxzgS4HT73tp970WS/wV5p8UzCOmb" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+    <script src="./../assets/js/article.js"></script>
+  </body>
+</html>
