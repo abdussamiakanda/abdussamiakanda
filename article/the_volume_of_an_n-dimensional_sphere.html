@@ -67,20 +67,22 @@
 
           This integral is a tricky one. But, it turns out that the square of this integral can be evaluated much easily.
           $$ \begin{align*}
-            \left(\int_{-\infty}^\infty e^{-x^2} dx\right)^2 & = \left(\int_{-\infty}^\infty e^{-x_1^2} dx_1\right) \left(\int_{-\infty}^\infty e^{-x_2^2} dx_2\right) \\
-            & = \int_{-\infty}^\infty \int_{-\infty}^\infty e^{-(x_1^2+x_2^2)} dx_1 dx_2
+            & \left(\int_{-\infty}^\infty e^{-x^2} dx\right)^2 \\
+            = & \left(\int_{-\infty}^\infty e^{-x_1^2} dx_1\right) \left(\int_{-\infty}^\infty e^{-x_2^2} dx_2\right) \\
+            = & \int_{-\infty}^\infty \int_{-\infty}^\infty e^{-(x_1^2+x_2^2)} dx_1 dx_2
           \end{align*} $$
           <br>
 
           It is much easy, because we can write it in polar coordinates. The transformation equations are,
-          $$x_1 = r \sin \theta \qquad \text{;} \qquad x_2 = r \cos \theta \qquad \text{;} \qquad x_1^2 + x_2^2 = r^2$$
+          $$x_1 = r \sin \theta \\ x_2 = r \cos \theta \\ x_1^2 + x_2^2 = r^2$$
           $$dx_1 dx_2 = rdrd\theta$$
 
           Now, the integral becomes,
           $$ \begin{align*}
-            \int_{-\infty}^\infty \int_{-\infty}^\infty e^{-(x_1^2+x_2^2)} dx_1 dx_2 & = \int_{r=0}^\infty \int_{\theta = 0}^{2\pi} e^{-r^2} r dr d\theta \\
-            & = \int_{r=0}^\infty \int_{\theta = 0}^{2\pi} e^{-r^2} \frac{1}{2} 2 r dr d\theta \\
-            & = \int_{r=0}^\infty \int_{\theta = 0}^{2\pi} e^{-r^2} \frac{1}{2} dr^2 d\theta
+            & \int_{-\infty}^\infty \int_{-\infty}^\infty e^{-(x_1^2+x_2^2)} dx_1 dx_2 \\
+            = & \int_{r=0}^\infty \int_{\theta = 0}^{2\pi} e^{-r^2} r dr d\theta \\
+            = & \int_{r=0}^\infty \int_{\theta = 0}^{2\pi} e^{-r^2} \frac{1}{2} 2 r dr d\theta \\
+            = & \int_{r=0}^\infty \int_{\theta = 0}^{2\pi} e^{-r^2} \frac{1}{2} dr^2 d\theta
           \end{align*} $$
 
           Let, $r^2 = u$; $2r dr = du$. Then the equation becomes,
@@ -96,32 +98,40 @@
 
           Now, let's work out this integral for three dimensional case. Yes. You guessed it (hopefully), we'll take the cube of the integral this time.
           $$ \begin{align*}
-            \left(\int_{-\infty}^\infty e^{-x^2} dx\right)^3 & = \left(\int_{-\infty}^\infty e^{-x_1^2} dx_1\right) \left(\int_{-\infty}^\infty e^{-x_2^2} dx_2\right) \left(\int_{-\infty}^\infty e^{-x_3^2} dx_3\right) \\
-            & = \int_{-\infty}^\infty \int_{-\infty}^\infty \int_{-\infty}^\infty e^{-(x_1^2+x_2^2+x_3^2)} dx_1 dx_2 dx_3
+            & \left(\int_{-\infty}^\infty e^{-x^2} dx\right)^3 \\
+            = & \left(\int_{-\infty}^\infty e^{-x_1^2} dx_1\right) \left(\int_{-\infty}^\infty e^{-x_2^2} dx_2\right) \left(\int_{-\infty}^\infty e^{-x_3^2} dx_3\right) \\
+            = & \int_{-\infty}^\infty \int_{-\infty}^\infty \int_{-\infty}^\infty e^{-(x_1^2+x_2^2+x_3^2)} dx_1 dx_2 dx_3
           \end{align*} $$
 
           The transformation equations for spherical polar coordinates are,
-          $$x_1 = r \sin \theta \cos \phi \qquad \text{;} \qquad x_2 = r \sin \theta \sin \phi \qquad \text{;} \qquad x_3 = r \cos \theta$$
-          $$x_1^2 + x_2^2 + x_3^2 = r^2 \qquad \text{;} \qquad dx_1 dx_2 dx_3 = r^2dr \sin \theta d\theta d\phi$$
+          $$ \begin{align*}
+            & x_1 = r \sin \theta \cos \phi \text{ ;} \\
+            & x_2 = r \sin \theta \sin \phi \text{ ;} \\
+            & x_3 = r \cos \theta \text{ ;} \\
+            & x_1^2 + x_2^2 + x_3^2 = r^2 \text{ ;} \\
+            & dx_1 dx_2 dx_3 = r^2dr \sin \theta d\theta d\phi
+          \end{align*} $$
 
           The integral becomes,
           $$ \begin{align*}
-            \int_{-\infty}^\infty \int_{-\infty}^\infty \int_{-\infty}^\infty e^{-(x_1^2+x_2^2+x_3^2)} dx_1 dx_2 dx_3 & = \int_{\phi = 0}^{2 \pi} \int_{\theta = 0}^{\pi} \int_{r=0}^\infty e^{-r^2} r^2dr \sin \theta d\theta d\phi \\
-            & = \int_{\phi = 0}^{2 \pi} d\phi \int_{\theta = 0}^{\pi} \sin \theta d\theta \int_{r=0}^\infty e^{-r^2} r^2dr \\
-            & = 4 \pi \cdot \frac{\sqrt{\pi}}{4} \\
-            & = \left( \sqrt{\pi} \right)^3
+            & \int_{-\infty}^\infty \int_{-\infty}^\infty \int_{-\infty}^\infty e^{-(x_1^2+x_2^2+x_3^2)} dx_1 dx_2 dx_3 \\
+            = & \int_{\phi = 0}^{2 \pi} \int_{\theta = 0}^{\pi} \int_{r=0}^\infty e^{-r^2} r^2dr \sin \theta d\theta d\phi \\
+            = & \int_{\phi = 0}^{2 \pi} d\phi \int_{\theta = 0}^{\pi} \sin \theta d\theta \int_{r=0}^\infty e^{-r^2} r^2dr \\
+            = & 4 \pi \cdot \frac{\sqrt{\pi}}{4} \\
+            = & \left( \sqrt{\pi} \right)^3
           \end{align*} $$
 
           Now, it's obvious that,
           $$ \begin{align*}
-            \left(\int_{-\infty}^\infty e^{-x^2} dx\right)^n & = \left(\int_{-\infty}^\infty e^{-x_1^2} dx_1\right) \left(\int_{-\infty}^\infty e^{-x_2^2} dx_2\right) \cdots \left(\int_{-\infty}^\infty e^{-x_n^2} dx_n\right) \\
-            & = \int_{-\infty}^\infty \int_{-\infty}^\infty \cdots \int_{-\infty}^\infty e^{-(x_1^2+x_2^2+ \cdots +x_n^2)} dx_1 dx_2 \cdots dx_n \\
-            & = \int_{-\infty}^\infty \int \cdots \int e^{-r^2} dr d\phi_1 \cdots d\phi_{n-1} \\
-            & = \left( \sqrt{\pi} \right)^n
+            & \left(\int_{-\infty}^\infty e^{-x^2} dx\right)^n \\
+            = & \left(\int_{-\infty}^\infty e^{-x_1^2} dx_1\right) \left(\int_{-\infty}^\infty e^{-x_2^2} dx_2\right) \cdots \left(\int_{-\infty}^\infty e^{-x_n^2} dx_n\right) \\
+            = & \int_{-\infty}^\infty \int_{-\infty}^\infty \cdots \int_{-\infty}^\infty e^{-(x_1^2+x_2^2+ \cdots +x_n^2)} dx_1 dx_2 \cdots dx_n \\
+            = & \int_{-\infty}^\infty \int \cdots \int e^{-r^2} dr d\phi_1 \cdots d\phi_{n-1} \\
+            = & \left( \sqrt{\pi} \right)^n
           \end{align*} $$
 
           We need to switch from coordinates $(x_1, x_2, \cdots , x_n)$ to hyperspherical coordinates $(r,\phi_1, \cdots , \phi_n)$. <br>
-          $$x_1^2 + x_2^2 + \cdots + x_n^2 = r^2 \qquad \text{;} \qquad dx_1 dx_2 \cdots dx_n = r^{n-1}dr d\Omega_{n-1}$$ <br>
+          $$x_1^2 + x_2^2 + \cdots + x_n^2 = r^2 \text{ ;} \\ dx_1 dx_2 \cdots dx_n = r^{n-1}dr d\Omega_{n-1}$$ <br>
 
           We need to, now, understand what $d\Omega_{n-1}$ is. <br> <br>
 
@@ -136,12 +146,15 @@
           \end{align*} $$
           This can be thought as the surface area of a sphere (3-sphere) of radius 1 unit $(4 \pi r^2)$. <br> <br>
 
-          Similarly, for a n-dimensional sphere $\int d\Omega_{n-1}$ represents the surface area. <br>
+          Similarly, for a n-dimensional sphere $\int d\Omega_{n-1}$ represents the surface area.
+          $$ \begin{align*}
+            & \int_{-\infty}^\infty \int_{-\infty}^\infty \cdots \int_{-\infty}^\infty e^{-(x_1^2+x_2^2+ \cdots +x_n^2)} dx_1 dx_2 \cdots dx_n \\
+            = & \int_{-\infty}^\infty e^{-r^2} r^{n-1} dr \int d\Omega_{n-1} \\
+            \Rightarrow & \left( \sqrt{\pi} \right)^n = \int_{-\infty}^\infty e^{-r^2} r^{n-2} \frac{1}{2} 2 r dr S_n
+          \end{align*} $$
 
-          $$\int_{-\infty}^\infty \int_{-\infty}^\infty \cdots \int_{-\infty}^\infty e^{-(x_1^2+x_2^2+ \cdots +x_n^2)} dx_1 dx_2 \cdots dx_n = \int_{-\infty}^\infty e^{-r^2} r^{n-1} dr \int d\Omega_{n-1}$$
-
-          $$\Rightarrow \left( \sqrt{\pi} \right)^n = \int_{-\infty}^\infty e^{-r^2} r^{n-2} \frac{1}{2} 2 r dr S_n$$
-          where, $S_n = \int d\Omega_{n-1}$ denotes the (n-1) dimensional surface area of a n-sphere. Let, $r^2 = u$; $2r dr = du$.
+          where, $S_n = \int d\Omega_{n-1}$ denotes the (n-1) dimensional surface area of a n-sphere. <br><br>
+          Let, $r^2 = u$; $2r dr = du$.
 
           $$\Rightarrow \left( \pi \right)^{n/2} = \int_{-\infty}^\infty e^{-u} \left(\sqrt{u}\right)^{n-2} \frac{1}{2} du S_n$$
 
