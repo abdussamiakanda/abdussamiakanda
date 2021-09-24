@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <title>The Landau-Lifshitz-Gilbert equation - Md. Abdus Sami Akanda</title>
+    <title>Spin-Orbit Interaction - Md. Abdus Sami Akanda</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta property="og:title" content="The Landau-Lifshitz-Gilbert equation by Md. Abdus Sami Akanda"/>
+    <meta property="og:title" content="Spin-Orbit Interaction by Md. Abdus Sami Akanda"/>
     <meta property="og:image" content="https://drive.google.com/uc?export=download&id=1s9MCpcG0sVXmEKCtWIOGssBsAeVyHorp"/>
     <link rel="shortcut icon" href="./../assets/image/icon.png">
     <script src="https://kit.fontawesome.com/1421ad6393.js" crossorigin="anonymous"></script>
@@ -25,9 +25,9 @@
       <div class="black-inner flex">
         <div class="inners">
           <div class="type">Article</div>
-          <h1 class="name">The Landau-Lifshitz-Gilbert equation</h1>
+          <h1 class="name">Spin-Orbit Interaction</h1>
           <p class="details">
-            Posted: 22 November 2020 <br>
+            Posted: 14 December 2020 <br>
             Written by: Md. Abdus Sami Akanda
           </p>
         </div>
@@ -38,122 +38,117 @@
       <div class="white-inner">
         <div class="inners">
 
-          In 1935 L. D. Landau and E. M. Lifshitz wrote a paper$^{[1]}$ where they
-          derived the phenomenological equation of magnetization dynamics for small
-          damping. But it wasn't quite useful when the damping was large. After the
-          discovery of memory devices, studying magnetization dynamics became crucial.
-          In 2004 Thomas L. Gilbert wrote a paper$^{[2]}$ developing the equation for
-          large damping.<br><br>
+          <h3>Introduction</h3>
 
-          Let's start by understanding the phenomenological theory of an undamped and
-          uncoupled magnetization. It means that we are considering only one spin (say
-          an electron) moment, which does not tend to align itself to an external field
-          and has no effect on it by external spins. Now what might happen if we apply an
-          effective field $\mathbf{H}$ on the magnetic moment $\mathbf{M}$? $\mathbf{M}$
-          will keep rotating around $\mathbf{H}$ as we assumed that there is no damping.
-          <br><br>
+          In quantum physics, the spin-orbit interaction (also called spin-orbit
+          effect or spin-orbit coupling) is a relativistic interaction of a particle's
+          spin with its motion inside a potential. <br><br>
 
-          From Lagrangian formulation we can write that
-          $$ \begin{align}
-            \frac{d\mathbf{L}}{dt} = \mathbf{T}
-          \end{align} $$
-          where $\mathbf{L}$ is the angular momentum of the body and $\mathbf{T}$ is the torque acting on it. We can rewrite this equation in quantum mechanics just by replacing $\mathbf{L}$ with the spin angular momentum $\mathbf{S}$.
-          $$ \begin{align}
-            \frac{d\mathbf{S}}{dt} = \mathbf{T}
-          \end{align} $$
+          A key example of this phenomenon is the spin-orbit interaction leading to
+          shifts in an electron's atomic energy levels, due to electromagnetic
+          interaction between the electron's magnetic dipole, its orbital motion,
+          and the electrostatic field of the positively charged nucleus. This
+          phenomenon is detectable as a splitting of spectral lines, which can be
+          thought of as a Zeeman effect product of two relativistic effects: the
+          apparent magnetic field seen from the electron perspective and the magnetic
+          moment of the electron associated with its intrinsic spin. A similar effect,
+          due to the relationship between angular momentum and the strong nuclear
+          force, occurs for protons and neutrons moving inside the nucleus, leading
+          to a shift in their energy levels in the nucleus shell model. In the field
+          of spintronics, spin-orbit effects for electrons in semiconductors and other
+          materials are explored for technological applications. The spin-orbit
+          interaction is one cause of magnetocrystalline anisotropy and the spin Hall effect.
 
-          Now, to inject in the magnetic moment $\mathbf{M}$ in our equations we will use the concept of gyromagnetic ratio$^{[3]}$. It is defined by,
-          $$ \begin{align}
-            \gamma = \frac{\mathbf{M}}{\mathbf{S}}
-          \end{align} $$
-          where ($\gamma < 0$) is the gyromagnetic ratio for an electron spin. <br><br>
+          <h3>Relativistic origin of the Spin-Orbit Interaction</h3>
 
-          Now, remember the effective field $\mathbf{H}$ we applied on $\mathbf{M}$? Experimental
-          and theoretical studies of ferromagnets have identified that there are five different
-          fields that may contribute to the effective field:
-          <ul>
-            <li>external field</li>
-            <li>demagnetization field</li>
-            <li>exchange interaction field</li>
-            <li>anisotropy field</li>
-            <li>magnetoelastic field</li>
-          </ul>
+          According to the theory of relativity, a particle moving in an electrical
+          field experiences an effective magnetic field, which is directed perpendicularly
+          to the electrical field and the particle movement direction. The interaction of
+          this effective magnetic field with the electron spin is called Spin-Orbit
+          interaction. It is important to emphasize that the direction and magnitude
+          of the effective magnetic field do not depend either on the particle charge
+          or on the particle spin. <br><br>
 
-          The first two are magnetic field, but the rest have quantum mechanical origins.
-          $\mathbf{H}$ will exert a torque on $\mathbf{M}$, which can be expressed as
-          $$ \begin{align}
-            \mathbf{T} = \mathbf{M} \times \mathbf{H}
-          \end{align} $$
+          According to this theory, the electric and magnetic field mutually
+          transformed into each other depending on the speed of an observer. For
+          example, if in a coordinate system of static observer there is only a
+          magnetic field, a movable observer will experience this field as both
+          an electrical field and a magnetic field. <br><br>
 
-          Now, we can work out the equation of motion for the magnetic moment of an
-          electron spin using equations (2, 3, 4),
-          $$ \begin{align}
-            \frac{d \mathbf{M}}{dt} = \gamma \mathbf{M} \times \mathbf{H}
-          \end{align} $$
+          A particle moving in a static magnetic field experience an effective
+          electric field. The effective electrical field acts on the particle
+          charge (the Lorentz force, Hall effect) and forces the particle to move
+          along this field. <br><br>
 
-          The Lagrangian in our case is
-          $$ \begin{align}
-            \mathcal{L} [\mathbf{M}(\mathbf{r},t), \dot{\mathbf{M}}(\mathbf{r},t)] = \mathcal{T} [\mathbf{M}(\mathbf{r},t), \dot{\mathbf{M}}(\mathbf{r},t)] - U [\mathbf{M}(\mathbf{r},t)]
-          \end{align} $$
-          where, $\mathcal{T}$ is the kinetic energy and $U$ is the potential energy. <br><br>
+          A particle moving in a static electrical field experience an effective
+          magnetic field. The effective magnetic field acts on the particle magnetic
+          moment (spin-orbit interaction) and causes the precession of the magnetic
+          moment around the direction of the effective magnetic field. <br><br>
 
-          Hence the Euler-Lagrangian equation,
-          $$ \begin{align}
-            \frac{d}{dt} \frac{\partial \mathcal{L}}{\partial \dot{\mathbf{M}}} - \frac{\partial \mathcal{L}}{\partial \mathbf{M}} = 0
-          \end{align} $$
+          The electromagnetic field is a relativistic object and the Lorentz
+          transformation equations are written as,
 
-          This could have been true. But, unfortunately, in reality it is not true because it does not account for the damping. To convert equation (7) into an equation for damped magnetization, we will add a dissipative force term.
-          $$ \begin{align}
-            \mathcal{F} = - \frac{\partial \mathcal{R}[\dot{\mathbf{M}}]}{\partial \dot{\mathbf{M}}}
-          \end{align} $$
-          where $\mathcal{R}$ is a Rayleigh dissipation functional.
+          $$\mathbf{E}_\mathrm{move} = \frac{\mathbf{E}_\mathrm{static} + \mathbf{v} \times \mathbf{H}_\mathrm{static}}{\sqrt{1 - \frac{v^2}{c^2}}} \qquad \text{;} \qquad \mathbf{H}_\mathrm{move} = \frac{\mathbf{H}_\mathrm{static} - \frac{\mathbf{v}}{c^2} \times \mathbf{E}_\mathrm{static}}{\sqrt{1 - \frac{v^2}{c^2}}}$$
 
-          $$ \begin{equation}
-            \begin{split}
-            & \frac{d}{dt} \frac{\partial \mathcal{L}}{\partial \dot{\mathbf{M}}} - \frac{\partial \mathcal{L}}{\partial \mathbf{M}} = - \frac{\partial \mathcal{R}[\dot{\mathbf{M}}]}{\partial \dot{\mathbf{M}}} \\
-            \Rightarrow \text{\:} & \frac{d}{dt} \frac{\partial \mathcal{L}}{\partial \dot{\mathbf{M}}} - \frac{\partial \mathcal{L}}{\partial \mathbf{M}} + \frac{\partial \mathcal{R}[\dot{\mathbf{M}}]}{\partial \dot{\mathbf{M}}} = 0
-            \end{split}
-          \end{equation} $$
+          where, $\mathbf{E}_\mathrm{static}, \mathbf{H}_\mathrm{static}$ are the electric and magnetic field in the static coordinate system and $\mathbf{E}_\mathrm{move}, \mathbf{H}_\mathrm{move}$ are the elctric and magnetic field in the coordinate system, which moves with a constant velocity $\mathbf{v}$.
 
-          Recall from classical mechanics that, the force is negative gradient or negative
-          position derivative of the potential function. For dissipative force such as friction,
-          the potential is a function of velocity. Try to visualize that you don't feel friction
-          if you're not moving. But you will feel the frictional force if you're moving.
+          As a result, an electron, which moves in a static magnetic field
+          $\mathbf{H}_\text{static}$, experiences in own reference frame an
+          effective electrical field $\mathbf{E}_\text{Hall}$, which is called
+          the Hall field (Hall voltage). Similarly, when an electron moves in a
+          static electrical field $\mathbf{E}_\text{static}$, it experiences in
+          own reference frame an effective magnetic field $\mathbf{H}_\text{SO}$,
+          which is called the effective spin-orbit magnetic field. <br><br>
 
-          From Goldstein's classical mechanics textbook$^{[4]}$, we will use the definition of
-          the Rayleigh dissipation functional $\mathcal{R}$. <br> (Here, $\mathcal{R}$ and $\mathcal{F}$
-          are equivalent to $\mathcal{F}$ and $F$ respectively as used in the textbook)
+          For example, when an electron moves in the $x$-direction,
+          $$v_x \neq 0 \qquad \text{;} \qquad v_y = 0 \qquad \text{;} \qquad v_z = 0$$
 
-          $$ \begin{align}
-            \mathcal{R} = \frac{1}{2} \eta \dot{M}^2
-          \end{align} $$
+          the effective electric field and the effective magnetic field are,
+          $$E_\text{Hall} = E_\text{y} = - \frac{v}{\sqrt{1 - \frac{v^2}{c^2}}} H_\text{z} \qquad \text{;} \qquad H_\text{SO} = H_\text{y} = \frac{\frac{v}{c^2}}{\sqrt{1 - \frac{v^2}{c^2}}} E_\text{z}$$
 
-          Try to match the notations used here with the notations in the textbook. [$\mathbf{M} \leftrightarrow \mathbf{r}$; $\eta \leftrightarrow k$]. Putting the value of $\mathcal{R}$ in equation (9), we get,
-          $$ \begin{align*}
-            & \frac{d}{dt} \frac{\partial \mathcal{L}}{\partial \dot{\mathbf{M}}} - \frac{\partial \mathcal{L}}{\partial \mathbf{M}} + \frac{\partial \mathcal{R}[\dot{\mathbf{M}}]}{\partial \dot{\mathbf{M}}} = 0 \\
-            \Rightarrow \text{\:} & \frac{d}{dt} \frac{\partial (\mathcal{T} - U)}{\partial \dot{\mathbf{M}}} - \frac{\partial (\mathcal{T} - U)}{\partial \mathbf{M}} + \frac{\partial}{\partial \dot{\mathbf{M}}} \left( \frac{1}{2} \eta \dot{M}^2 \right) = 0 \\
-            \Rightarrow \text{\:} & \frac{d}{dt} \frac{\partial \mathcal{T}}{\partial \dot{\mathbf{M}}} - \frac{\partial \mathcal{T}}{\partial \mathbf{M}} + \frac{\partial U}{\partial \mathbf{M}} + \eta \dot{\mathbf{M}} = 0 \\
-            \Rightarrow \text{\:} & \frac{d}{dt} \frac{\partial \mathcal{T}}{\partial \dot{\mathbf{M}}} - \frac{\partial \mathcal{T}}{\partial \mathbf{M}} - \left[ \mathbf{H} - \eta \frac{\partial \mathbf{M}}{\partial t} \right] = 0 \\
-          \end{align*} $$
-          where, $\mathbf{H} = - \frac{\partial U}{\partial \mathbf{M}}$ is the effective field on the magnetic moment and the damping term $\eta \frac{\partial \mathbf{M}}{\partial t}$ is an added damping field that can reduce the effective field.
+          For the non-relativistic case $(v << c)$:
+          $$\sqrt{1 - \frac{v^2}{c^2}} \simeq 1$$
 
-          Now, we will simply replace $\mathbf{H}$ with $\left[ \mathbf{H} - \eta \frac{\partial \mathbf{M}}{\partial t} \right]$ in equation (5).
-          $$ \begin{align*}
-            & \frac{\partial \mathbf{M}}{\partial t} = \gamma \mathbf{M} \times \left[ \mathbf{H} - \eta \frac{\partial \mathbf{M}}{\partial t} \right] \\
-            \Rightarrow \text{\:} & \frac{\partial \mathbf{M}}{\partial t} = \gamma \mathbf{M} \times \mathbf{H} - \gamma \eta \mathbf{M} \times \frac{\partial \mathbf{M}}{\partial t} \\
-            \Rightarrow \text{\:} & \frac{\partial \mathbf{M}}{\partial t} = \gamma \mathbf{M} \times \mathbf{H} - \left(\frac{\alpha}{M}\right) \mathbf{M} \times \frac{\partial \mathbf{M}}{\partial t} \\
-            \Rightarrow \text{\:} & \frac{\partial}{\partial t} \left(\frac{\mathbf{M}}{M}\right) = \gamma \left(\frac{\mathbf{M}}{M}\right) \times \mathbf{H} - \left(\frac{\alpha}{M}\right) \mathbf{M} \times \frac{\partial}{\partial t} \left(\frac{\mathbf{M}}{M}\right) \\
-            \Rightarrow \text{\:} & \frac{\partial \mathbf{m}}{\partial t} = \gamma \mathbf{m} \times \mathbf{H} - \alpha \mathbf{m} \times \frac{\partial \mathbf{m}}{\partial t}
-          \end{align*} $$
-          where we defined $\alpha = \eta \gamma M$ as the dimensionless damping parameter and $\mathbf{m} = \frac{\mathbf{M}}{M}$ as the normalized (unit) magnetization. And finally, this is the Landau-Lifshitz-Gilbert equation.
-          <br><br>
+          The effective electric field and the effective magnetic field are then,
+          $$E_\text{Hall} = E_\text{y} = - v H_\text{z} \qquad \text{;} \qquad H_\text{SO} = H_\text{y} = \frac{v}{c^2} E_\text{z}$$
 
-          <strong><big>References:</big></strong> <br><br>
-          [1] L. D. Landau and E. M. Lifshitz, “On the theory of the dispersion of magnetic permeability in ferromagnetic bodies,” Phys. Z. Sowjet., vol. 8, pp. 153–169, 1935. In L. D. Landau, Collected Papers. ed. by D. ter Haar. Gordon and Breach, New York, 1967, p. 101 <br>
-          [2] Gilbert, T. L. (2004). A phenomenological theory of damping in ferromagnetic materials. IEEE transactions on magnetics, 40(6), 3443-3449. <br>
-          [3] Wikipedia Contributors. “Gyromagnetic Ratio.” Wikipedia, https://en.wikipedia.org/wiki/Gyromagnetic_ratio <br>
-          [4] Goldstein, H. (1980). Classical Mechanics. Addison-Wesley.
+          <strong>Question:</strong> An electron always moves along the electrical
+          field (but not perpendicularly). Then, how it can experience the spin-orbit
+          interaction? <br>
+          <strong>Answer:</strong> The trajectory of an electron may be very different.
+          There are many cases when an electron moves perpendicularly to an electrical
+          field. For example, when the electron is orbiting around a nucleus. <br><br>
 
+          <strong>Question:</strong> Which parameter characterizes the spin-orbit
+          interaction? Is it a classical parameter or a quantum mechanical parameter?
+          <br>
+          <strong>Answer:</strong> There is only one cause of spin-orbit interaction.
+          It is the magnetic field $\mathbf{H}_\text{SO}$. All other parameters are
+          consequences of $\mathbf{H}_\text{SO}$. For example, the electron spin
+          aligns itself along $\mathbf{H}_\text{SO}$. It changes the energy of the
+          electron. The change in energy can be defined as the energy of the
+          spin-orbit interaction $E_\text{SO}$. If an additional external magnetic
+          field $\mathbf{H}_\text{ext}$ is applied, the electron spin is aligned along
+          the total magnetic field $\mathbf{H}_\text{SO} + \mathbf{H}_\text{ext}$ and
+          $E_\text{SO}$ has no physical meaning. <br><br>
+
+          <strong>Question:</strong> Since the spin-orbit magnetic field
+          $\mathbf{H}_\text{SO}$ is proportional to $1/c^2$, then it should
+          be negligibly small. Should we care about such a tiny effect? <br>
+          <strong>Answer:</strong> Yes. It is small, except for when
+          $\mathbf{E}_\text{static}$ is huge. For example, near the nucleus
+          $\mathbf{H}_\text{SO}$ is large. Any substantial spin-orbit interaction
+          is induced only by an electrical field of a nucleus. Other realistic
+          sources of the electrical field in a solid induce very weak spin-orbit
+          interaction. This field is very symmetric, and it cancels itself out in
+          a nucleus. External fields may break this symmetry. <br><br>
+
+          <strong>Question:</strong> Is spin-orbit interaction is a quantum
+          mechanical effect?<br>
+          <strong>Answer:</strong> No. The spin-orbit interaction affects both small
+          and large objects. It exists in the macro world as well.<br><br>
+
+          More to be done...
 
 
           <br><br>
