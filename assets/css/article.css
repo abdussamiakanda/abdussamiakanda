@@ -65,11 +65,11 @@ code{
     font-weight: 600;
     margin: 10px 0px;
   }
-  h4 {
+  h6 {
     background-color: #eee;
     font-family: monospace;
     padding: 3px 5px;
-    font-size: 110%;
+    font-size: 105%;
     display: inline-block;
     border-radius: 3px;
     margin: 0;
@@ -191,11 +191,11 @@ code{
     font-weight: 600;
     margin: 10px 0px;
   }
-  h4 {
+  h6 {
     background-color: #eee;
     font-family: monospace;
     padding: 3px 5px;
-    font-size: 110%;
+    font-size: 105%;
     display: inline-block;
     border-radius: 3px;
     margin: 0;
