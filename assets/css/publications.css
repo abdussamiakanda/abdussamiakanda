@@ -91,43 +91,6 @@ code{
   .inners{
     width: 100%;
   }
-  .inner75{
-    width: 75%;
-  }
-  .inner25{
-    width: 25%;
-  }
-  .right{
-    text-align: right;
-  }
-  .course-thumb{
-    width: 100%;
-  }
-  .tag{
-    margin-left: 30px;
-    padding: 5px 10px;
-    border: 2px solid rgba(255,155,0,0.4);
-    border-radius: 5px;
-    display: inline-block;
-  }
-  .item{
-    padding: 10px 12px;
-    margin: 2px 0px;
-    background-color: rgba(0,0,0,0.1);
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  .item:hover{
-    color: white;
-    background-color: rgba(0,0,0,0.5);
-  }
-  .item-selected{
-    color: white;
-    background-color: rgba(0,0,0,0.5);
-  }
-  .div-item{
-    margin-left: 30px;
-  }
   .details{
     margin-left: 30px;
   }
@@ -139,18 +102,18 @@ code{
     cursor: pointer;
   }
   .back:hover{
-    background-color: rgba(255,255,255,0.1);
+    background-color: rgba(255,255,255,0.2);
   }
-  .player{
-    padding-bottom: 56.20%;
-    position: relative;
+  .item{
+    border: 1px solid rgba(0,0,0,0.5);
+    padding: 10px 12px;
+    border-radius: 5px;
+    display: flex;
   }
-  .playlist{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+  .number{
+    font-size: 30px;
+    font-weight: bold;
+    padding-right: 20px;
   }
 
 
@@ -235,45 +198,6 @@ code{
   .inners{
     width: 100%;
   }
-  .inner75{
-    width: 100%;
-  }
-  .inner25{
-    display: flex;
-    width: 100%;
-  }
-  .right{
-    text-align: right;
-  }
-  .course-thumb{
-    display: none;
-  }
-  .tag{
-    padding: 3px 7px;
-    font-size: 12px;
-    border: 2px solid rgba(255,155,0,0.4);
-    border-radius: 5px;
-    display: inline-block;
-  }
-  .item{
-    padding: 5px 8px;
-    margin: 0px 2px;
-    background-color: rgba(0,0,0,0.1);
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  .item:hover{
-    color: white;
-    background-color: rgba(0,0,0,0.5);
-  }
-  .item-selected{
-    color: white;
-    background-color: rgba(0,0,0,0.5);
-  }
-  .div-item{
-    margin-top: 10px;
-    padding: 5px;
-  }
   .back{
     border: 1px solid rgba(255,255,255,0.6);
     padding: 3px 7px;
@@ -284,16 +208,16 @@ code{
   .back:hover{
     background-color: rgba(255,255,255,0.1);
   }
-  .player{
-    padding-bottom: 56.20%;
-    position: relative;
+  .item{
+    border: 1px solid rgba(0,0,0,0.5);
+    padding: 5px 6px;
+    border-radius: 5px;
+    display: flex;
   }
-  .playlist{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+  .number{
+    font-size: 17px;
+    font-weight: bold;
+    padding-right: 8px;
   }
 
 
