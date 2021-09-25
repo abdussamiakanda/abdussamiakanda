@@ -65,6 +65,12 @@ code{
     font-weight: 600;
     margin: 10px 0px;
   }
+  h4{
+    margin: 10px 0px;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 10px 0px;
+  }
   h6 {
     background-color: #eee;
     font-family: monospace;
@@ -138,6 +144,11 @@ code{
   .back:hover{
     background-color: rgba(255,255,255,0.1);
   }
+  .center{
+    margin: 0px auto;
+    display: block;
+    max-width: 90%;
+  }
 
 
 
@@ -188,6 +199,12 @@ code{
   h3{
     margin: 10px 0px;
     font-size: 25px;
+    font-weight: 600;
+    margin: 10px 0px;
+  }
+  h4{
+    margin: 10px 0px;
+    font-size: 20px;
     font-weight: 600;
     margin: 10px 0px;
   }
@@ -264,6 +281,11 @@ code{
   }
   .back:hover{
     background-color: rgba(255,255,255,0.1);
+  }
+  .center{
+    margin: 0px auto;
+    display: block;
+    max-width: 90%;
   }
 
 
