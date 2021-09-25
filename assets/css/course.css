@@ -86,7 +86,12 @@ code{
   }
   .flex{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+  }
+  .flex2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .inners{
     width: 100%;
@@ -140,7 +145,7 @@ code{
     border: 1px solid rgba(255,255,255,0.6);
     padding: 10px 13px;
     display: inline-block;
-    margin: 0px auto;
+    margin: 0px 5px;
     cursor: pointer;
   }
   .back:hover{
@@ -237,6 +242,11 @@ code{
     flex-direction: column;
     justify-content: space-between;
   }
+  .flex2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .inners{
     width: 100%;
   }
@@ -283,8 +293,7 @@ code{
   .back{
     border: 1px solid rgba(255,255,255,0.6);
     padding: 3px 7px;
-    display: inline-block;
-    margin: 0px auto;
+    margin: 0px 2px;
     cursor: pointer;
   }
   .back:hover{
