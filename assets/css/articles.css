@@ -64,6 +64,9 @@ code{
     font-weight: 600;
     margin: 10px 0px;
   }
+  strong{
+    font-size: 105%;
+  }
   .white{
     background-color: white;
     color: black;
