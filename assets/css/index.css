@@ -136,6 +136,7 @@ code{
   }
   .main-photo{
     width: 300px;
+    border-radius: 50%;
   }
   .black{
     background-color: #202020;
@@ -414,6 +415,7 @@ code{
   }
   .main-photo{
     width: 200px;
+    border-radius: 50%;
   }
   .gallery{
     display: flex;
