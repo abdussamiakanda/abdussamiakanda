@@ -1,0 +1,370 @@
+:root {
+  --back: #202020;
+}
+
+a{
+  text-decoration: none;
+  color: #2cce00;
+}
+a:hover {
+  color: red;
+}
+a:visited {
+  text-decoration: none;
+}
+input,select{
+  font-family: 'Poppins', sans-serif;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+hr{
+  border: none;
+  border-bottom: 1px solid var(--no4);
+}
+code{
+  background-color: rgba(255,255,255,0.4);
+  padding: 0px 3px;
+  border-radius: 4px;
+}
+
+.hello {
+  opacity: 1 !important;
+}
+.full {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.full .content {
+  background-color: rgba(0,0,0,0.75) !important;
+  height: 100%;
+  width: 100%;
+  display: grid;
+}
+.full .content img {
+  object-fit: cover;
+  left: 50%;
+  transform: translate3d(0, 0, 0);
+  animation: zoomin 1s ease;
+  max-width: 95%;
+  max-height: 95vh;
+  margin: auto;
+}
+.byebye {
+  opacity: 0;
+}
+.byebye:hover {
+  transform: scale(0.2) !important;
+}
+.gallery {
+  display: grid;
+  grid-column-gap: 8px;
+  grid-row-gap: 8px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-auto-rows: 8px;
+}
+.gallery img {
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 0 16px #333;
+  transition: all 1.5s ease;
+}
+.gallery img:hover {
+  box-shadow: 0 0 32px #333;
+}
+.gallery .content {
+  padding: 4px;
+}
+.gallery .gallery-item {
+  transition: grid-row-start 300ms linear;
+  transition: transform 300ms ease;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+.gallery .gallery-item:hover {
+  transform: scale(1.025);
+}
+
+
+
+
+
+@media screen and (min-width: 40em) {
+  html{
+    width:100%;
+    margin: 0px auto;
+  }
+  body{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    background-color: var(--no1);
+    color: var(--no4);
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    width:100%;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+  }
+  .name{
+    font-size: 40px;
+    font-weight: 600;
+    margin: 20px 30px;
+  }
+  h3{
+    font-size: 30px;
+    font-weight: 600;
+    margin: 10px 0px;
+  }
+  strong{
+    font-size: 105%;
+  }
+  .white{
+    background-color: white;
+    color: black;
+    padding: 10px 0px;
+  }
+  .white-inner{
+    max-width: 1200px;
+    padding: 10px;
+    margin: 0px auto;
+  }
+  .black{
+    background-color: black;
+    color: white;
+    padding: 10px 0px;
+  }
+  .black-inner{
+    max-width: 1200px;
+    padding: 10px;
+    margin: 0px auto;
+  }
+  .flex{
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
+  .inners{
+    width: 100%;
+  }
+  .details{
+    margin-left: 30px;
+  }
+  .back{
+    border: 1px solid rgba(255,255,255,0.6);
+    padding: 10px 13px;
+    display: inline-block;
+    margin: 0px auto;
+    cursor: pointer;
+  }
+  .back:hover{
+    background-color: rgba(255,255,255,0.2);
+  }
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  }
+
+
+
+
+
+  .katex {
+    font-size: 1.1em;
+    font-weight: 500;
+  }
+  .katex-display{
+    margin: 0px;
+  }
+
+
+}
+
+@media screen and (min-width: 0em) and (max-width: 40em) {
+  html{
+    width:100%;
+    margin: 0px auto;
+  }
+  body{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    background-color: var(--no1);
+    color: var(--no4);
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    width:100%;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+  }
+  p{
+    margin: 0px;
+  }
+  .name{
+    font-size: 22px;
+    font-weight: 600;
+    margin: 5px 0px;
+  }
+  h3{
+    font-size: 30px;
+    font-weight: 600;
+    margin: 10px 0px;
+  }
+  .white{
+    background-color: white;
+    color: black;
+    padding: 5px 0px;
+  }
+  .white-inner{
+    padding: 5px;
+    margin: 0px auto;
+  }
+  .black{
+    background-color: black;
+    color: white;
+    padding: 5px 0px;
+  }
+  .black-inner{
+    padding: 5px;
+    margin: 0px auto;
+  }
+  .flex{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .inners{
+    width: 100%;
+  }
+  .back{
+    border: 1px solid rgba(255,255,255,0.6);
+    padding: 3px 7px;
+    display: inline-block;
+    margin: 0px auto;
+    cursor: pointer;
+  }
+  .back:hover{
+    background-color: rgba(255,255,255,0.1);
+  }
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+  }
+
+
+
+
+
+
+  .katex {
+    font-size: 1.1em;
+    font-weight: 500;
+  }
+  .katex-display{
+    margin: 0px;
+  }
+  .hide2{
+    display: none;
+  }
+
+
+
+}
+
+.hide{
+  display: none;
+}
+
+
+@-moz-keyframes zoomin {
+  0% {
+    max-width: 50%;
+    transform: rotate(-30deg);
+    filter: blur(4px);
+  }
+  30% {
+    filter: blur(4px);
+    transform: rotate(-80deg);
+  }
+  70% {
+    max-width: 50%;
+    transform: rotate(45deg);
+  }
+  100% {
+    max-width: 100%;
+    transform: rotate(0deg);
+  }
+}
+@-webkit-keyframes zoomin {
+  0% {
+    max-width: 50%;
+    transform: rotate(-30deg);
+    filter: blur(4px);
+  }
+  30% {
+    filter: blur(4px);
+    transform: rotate(-80deg);
+  }
+  70% {
+    max-width: 50%;
+    transform: rotate(45deg);
+  }
+  100% {
+    max-width: 100%;
+    transform: rotate(0deg);
+  }
+}
+@-o-keyframes zoomin {
+  0% {
+    max-width: 50%;
+    transform: rotate(-30deg);
+    filter: blur(4px);
+  }
+  30% {
+    filter: blur(4px);
+    transform: rotate(-80deg);
+  }
+  70% {
+    max-width: 50%;
+    transform: rotate(45deg);
+  }
+  100% {
+    max-width: 100%;
+    transform: rotate(0deg);
+  }
+}
+@keyframes zoomin {
+  0% {
+    max-width: 50%;
+    transform: rotate(-30deg);
+    filter: blur(4px);
+  }
+  30% {
+    filter: blur(4px);
+    transform: rotate(-80deg);
+  }
+  70% {
+    max-width: 50%;
+    transform: rotate(45deg);
+  }
+  100% {
+    max-width: 100%;
+    transform: rotate(0deg);
+  }
+}
