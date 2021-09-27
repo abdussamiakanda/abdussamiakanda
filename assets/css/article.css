@@ -149,6 +149,12 @@ code{
     display: block;
     max-width: 90%;
   }
+  .image-span{
+    float: right;
+  }
+  .image-span img{
+    width: 400px;
+  }
 
 
 
@@ -258,6 +264,7 @@ code{
   }
   .inners img{
     width: 80%;
+    display: block;
   }
   .right{
     text-align: right;
