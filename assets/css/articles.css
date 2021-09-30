@@ -1,5 +1,9 @@
 :root {
   --back: #202020;
+  --width: 300px;
+  --x-speed: 13s;
+  --y-speed: 7s;
+  --transition-speed: 2.2s;
 }
 
 a{
@@ -147,6 +151,19 @@ code{
     padding: 10px;
   }
 
+  .el {
+    display: inline-block;
+  }
+  .y{
+    display: inline-block;
+    animation: move 2s linear infinite alternate;
+  }
+
+  @keyframes move {
+    100% {
+      transform: translateY(100%);
+    }
+  }
 
 
 
@@ -283,6 +300,19 @@ code{
   }
 
 
+  .el {
+    display: inline-block;
+  }
+  .y{
+    display: inline-block;
+    animation: move 2s linear infinite alternate;
+  }
+
+  @keyframes move {
+    100% {
+      transform: translateY(100%);
+    }
+  }
 
 
 
