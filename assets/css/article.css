@@ -81,7 +81,7 @@ code{
     margin: 0;
   }
   code {
-    background-color: #eee;
+    background-color: rgba(0,0,0,0.1);
     font-family: monospace;
     font-size: 110%;
     display: block;
@@ -224,7 +224,7 @@ code{
     margin: 0;
   }
   code {
-    background-color: #eee;
+    background-color: rgba(0,0,0,0.1);
     font-family: monospace;
     font-size: 110%;
     display: block;
