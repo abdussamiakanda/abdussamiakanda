@@ -88,6 +88,9 @@ code{
     padding: 10px 15px;
     margin: 10px 0px;
   }
+  .coderesult{
+    padding: 0px 15px;
+  }
   .white{
     background-color: white;
     color: black;
@@ -167,6 +170,7 @@ code{
 
 
 
+
   .katex {
     font-size: 1.25em;
     font-weight: 500;
@@ -230,6 +234,9 @@ code{
     display: block;
     padding: 5px 10px;
     margin: 10px 0px;
+  }
+  .coderesult{
+    padding: 0px 10px;
   }
   .name{
     font-size: 22px;
