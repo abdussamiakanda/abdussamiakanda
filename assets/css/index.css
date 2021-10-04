@@ -338,7 +338,7 @@ code{
     height: 110vh;
     background: rgba(0,0,0,0.9);
     color: white;
-    font-size: 16px;
+    font-size: 17px;
     text-align: center;
     z-index: 100;
   }
@@ -356,7 +356,7 @@ code{
     border-radius: 50%;
   }
   .menu-item{
-    padding: 3px 10px;
+    padding: 4px 10px;
     margin: 2px 0px;
     cursor: pointer;
     border-radius: 5px;
