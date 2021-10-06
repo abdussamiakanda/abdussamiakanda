@@ -1,10 +1,6 @@
-## Hola, I'm [Md. Abdus Sami Akanda!](https://abdussamiakanda.com) 👋
+# Hola, I'm [Md. Abdus Sami Akanda!](https://abdussamiakanda.com) 👋
 
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=abdussamiakanda&label=Views&color=blue&style=plastic" alt="sami" /> </p>
-
-<br/>
-<br/>
-
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=abdussamiakanda&label=Views&color=blue&style=plastic" alt="sami" /></p>
 
 - 🔭 I’m currently working on [Frontier](https://frontier.xyz/).
 - 🌱 I’m currently learning more about BlockChain.
