@@ -2,7 +2,7 @@
 
 ![](https://hit.yhype.me/github/profile?user_id=48517653)
 
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=iampawan&label=Views&color=blue&style=plastic" alt="sami" /> </p>
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=abdussamiakanda&label=Views&color=blue&style=plastic" alt="sami" /> </p>
 
 <a href="https://twitter.com/imthepk">
   <img align="left" alt="Pawan's Twitter" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/twitter.svg" />
