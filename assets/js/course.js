@@ -1,6 +1,6 @@
-var btns = ['btn0','btn1','btn2','btn3'];
+var btns = ['btn0','btn1','btn2','btn3','btn4'];
 
-var divs = ['div0','div1','div2','div3'];
+var divs = ['div0','div1','div2','div3','div4'];
 
 function show(btn){
   for(var i in btns){
