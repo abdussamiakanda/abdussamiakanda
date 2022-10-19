@@ -26,7 +26,8 @@ var social = [
   'https://github.com/abdussamiakanda',
   'https://www.facebook.com/mdabdussami.akanda/',
   'https://www.youtube.com/channel/UC7yhrEJBWA5JTERVBmWNRUQ?view_as=subscriber',
-  'https://soundcloud.com/abdussamiakanda'
+  'https://soundcloud.com/abdussamiakanda',
+  'https://khulna.academia.edu/AbdusSamiAkanda'
 ]
 
 function goNow(no){
