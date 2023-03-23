@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <title>Md Abdus Sami Akanda</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shortcut icon" href="./../assets/image/icon.png" />
+    <script src="https://kit.fontawesome.com/1421ad6393.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./../assets/css/life.css" />
+  </head>
+  <body>
+    <section class="black" id="intro">
+      <div class="black-inner" id="top"></div>
+    </section>
+
+    <section class="white">
+      <div class="white-inner">
+
+        <div class="login" id="login">
+          <div class="login-btn" onclick="GoogleLogin()">
+            <i class="fa fa-google"></i> <b>Log in with Google</b>
+          </div>
+        </div>
+
+        <div class="items hide" id="main"></div>
+
+        <div class="hide" id="new">
+          <form class="new-entry" onSubmit="return false;">
+            <div>
+              <span></span>
+              <input
+              type="text"
+              id="title"
+              placeholder="Enter title..."
+              autocomplete="off"
+              required />
+            </div>
+            <div>
+              <span></span>
+              <textarea id="details" placeholder="Enter details..."></textarea>
+            </div>
+            <div>
+              <span></span>
+              <input
+              type="text"
+              id="tags"
+              placeholder="Enter tags... (Comma separated)"
+              autocomplete="off"
+              required />
+            </div>
+            <div>
+              <span></span>
+              <button type="submit" id="add_new_entry">Add New Entry</button>
+            </div>
+          </form>
+        </div>
+
+
+
+      </div>
+    </section>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-analytics.js"></script>
+    <script src="./assets/js/firebase.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script type="module" src="https://md-block.verou.me/md-block.js"></script>
+    <script src="./../assets/js/life.js"></script>
+  </body>
+</html>
