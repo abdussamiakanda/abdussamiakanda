@@ -527,7 +527,6 @@ h1, h2, h3, h4, h5, h6 {
   .new-entry button:focus {
     outline: none;
   }
-
   .items {
     display: flex;
     flex-direction: column-reverse;
@@ -538,10 +537,45 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 5px;
     margin: 3px 0px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .item:hover {
     box-shadow: 0px 0px 3px rgba(0,0,0,0.6);
   }
+
+  .item-del {
+    box-shadow: 0px 0px 3px rgba(255,0,0,0.8);
+  }
+  .item-del:hover {
+    box-shadow: 0px 0px 3px rgba(255,0,0,0.8);
+  }
+
+  .item-info {
+    flex: 1;
+  }
+  .item-edit {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: stretch;
+    gap: 5px;
+    text-align: center;
+    z-index: 10;
+  }
+  .item-edit i {
+    font-size: 18px;
+    padding: 5px;
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.5);
+    border-radius: 3px;
+  }
+  .item-edit i:hover {
+    color: rgba(255, 0, 0, 1);
+    box-shadow: 0px 0px 3px rgba(255, 0, 0, 0.8);
+  }
+  
+
   .item span {
     display: block;
     font-size: 12px;
@@ -550,7 +584,7 @@ h1, h2, h3, h4, h5, h6 {
   .item b {
     display: block;
   }
-  .item div span {
+  .item div div span {
     display: inline-block;
     font-size: 12px;
     padding: 2px 8px;
