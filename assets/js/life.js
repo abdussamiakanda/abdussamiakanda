@@ -62,10 +62,12 @@ document.getElementById("add_new_entry").onclick = function () {
       tags:tags,
       time: moment().format("LT, DD MMMM YYYY"),
     });
+    showThings('main');
+    showMain();
+    document.getElementById("title").value = '';
+    document.getElementById("details").value = '';
+    document.getElementById("tags").value = '';
   }
-
-  showThings('main');
-  showMain();
 };
 
 function showMain() {
