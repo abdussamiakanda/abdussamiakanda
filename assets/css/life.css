@@ -308,7 +308,7 @@ h1, h2, h3, h4, h5, h6 {
   body{
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
-    font-size: 12px;
+    font-size: 14px;
     margin: 0;
     padding: 0;
     width:100%;
@@ -331,7 +331,7 @@ h1, h2, h3, h4, h5, h6 {
     background-color: white;
     color: black;
     padding: 5px 0px;
-    margin-top: 70px;
+    margin-top: 80px;
   }
   .white-inner{
     padding: 5px;
@@ -353,13 +353,16 @@ h1, h2, h3, h4, h5, h6 {
     --scrollAmount: 0%;
     background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
     width: var(--scrollAmount);
-    height: 4px;
+    height: 3px;
   }
   .top-flex {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
   .top-flex .title {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     cursor: pointer;
   }
@@ -369,8 +372,8 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 5px;
     background-color: white;
     padding: 5px 8px;
-    margin: 3px 0px;
-    font-size: 12px;
+    margin-top: 5px;
+    font-size: 14px;
     flex: 1;
   }
   .top-flex input:focus {
@@ -388,7 +391,7 @@ h1, h2, h3, h4, h5, h6 {
   }
   .top-buttons i {
     display: block;
-    font-size: 16px;
+    font-size: 18px;
     padding: 5px 8px;
     border-radius: 5px;
     background-color: rgba(255,255,255,0.4);
@@ -400,17 +403,18 @@ h1, h2, h3, h4, h5, h6 {
   }
   .search-input {
     display: flex;
+    width: 100%;
   }
 
   .login {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 100px 0px;
+    margin: 150px 0px;
   }
   .login-btn {
     padding: 10px 15px;
-    border-radius: 2px;
+    border-radius: 3px;
     box-shadow: 0px 0px 3px rgba(0,0,0,0.5);
     cursor: pointer;
     display: flex;
@@ -437,17 +441,17 @@ h1, h2, h3, h4, h5, h6 {
   .new-entry div {
     width: 100%;
     display: flex;
-    margin: 5px 0px;
+    margin: 3px 0px;
   }
   .new-entry input {
     flex: 1;
-    box-shadow: 0px 1px 5px rgba(0,0,0,0.3);
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.3);
     display: block;
     border: none;
     border-radius: 5px;
     background-color: white;
-    padding: 10px 15px;
-    font-size: 15px;
+    padding: 5px 10px;
+    font-size: 14px;
   }
   .new-entry input:focus {
     outline: none;
@@ -464,8 +468,8 @@ h1, h2, h3, h4, h5, h6 {
     border: none;
     border-radius: 5px;
     background-color: white;
-    padding: 10px 15px;
-    font-size: 15px;
+    padding: 5px 10px;
+    font-size: 14px;
   }
   .new-entry textarea:focus {
     outline: none;
@@ -479,7 +483,7 @@ h1, h2, h3, h4, h5, h6 {
     border: none;
     border-radius: 5px;
     padding: 10px 15px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
   }
@@ -496,14 +500,14 @@ h1, h2, h3, h4, h5, h6 {
     flex-direction: column-reverse;
   }
   .item {
-    padding: 10px;
-    box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
+    padding: 5px;
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
     border-radius: 5px;
-    margin: 5px 0px;
+    margin: 3px 0px;
     cursor: pointer;
   }
   .item:hover {
-    box-shadow: 0px 0px 5px rgba(0,0,0,0.6);
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.6);
   }
   .item span {
     display: block;
@@ -535,7 +539,7 @@ h1, h2, h3, h4, h5, h6 {
   .single-item p {
     margin: 0px;
     padding: 0px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   .single-item p span {
     display: inline-block;
@@ -547,14 +551,14 @@ h1, h2, h3, h4, h5, h6 {
     background-color: rgba(0,0,0,0.3);
   }
   .single-item div {
-    padding: 10px;
+    padding: 5px;
     box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
     border-radius: 2px;
   }
   .single-item img {
     display: block;
     margin: 10px auto;
-    max-height: 300px;
+    max-height: 250px;
     width: auto;
     height: 100%;
     object-fit: contain;
@@ -562,7 +566,7 @@ h1, h2, h3, h4, h5, h6 {
   }
   .no-result {
     display: block;
-    margin: 20px auto;
+    margin: 30px auto;
     text-align: center;
   }
 
