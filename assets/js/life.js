@@ -44,6 +44,7 @@ function showThings(id){
   document.getElementById('main').classList.add('hide');
   document.getElementById('new').classList.add('hide');
   document.getElementById('single').classList.add('hide');
+  document.getElementById('edit').classList.add('hide');
 
   document.getElementById(id).classList.remove('hide');
 }
@@ -82,13 +83,101 @@ function showMain() {
       tags = tags.replaceAll(',','</span><span>')
 
       document.getElementById('main').innerHTML += `
-        <div class="item" onclick="showSingle('${childSnap.key}')">
-          <span>${time}</span>
-          <b>${title}</b>
-          <div><span>${tags}</span></div>
+        <div class="item" onclick="showSingle('${childSnap.key}')" id="item-${childSnap.key}">
+          <div class="item-info">
+            <span>${time}</span>
+            <b>${title}</b>
+            <div><span>${tags}</span></div>
+          </div>
+          <div class="item-edit" id="item-edit-${childSnap.key}" onclick="event.stopPropagation();">
+            <i class="fas fa-edit" onclick="showEditBox('${childSnap.key}')"></i>
+            <i class="fas fa-trash-alt" onclick="delPop('${childSnap.key}')"></i>
+          </div>
         </div>`;
     })
   })
+}
+
+function delPop(key) {
+  document.getElementById('item-edit-'+key).innerHTML = `
+    <i class="fas fa-check" onclick="delLife('${key}')"></i>
+    <i class="fas fa-times" onclick="noPop('${key}')"></i>`;
+  document.getElementById('item-'+key).classList.add('item-del');
+}
+
+function delLife(key) {
+  database.ref('/life/'+key).remove();
+  document.getElementById('item-'+key).remove();
+}
+
+function showEditBox(key) {
+  showThings('edit');
+
+  database
+  .ref("/life/"+key)
+  .once("value")
+  .then((snap) => {
+    var title = snap.child("title").val();
+    var details = snap.child("details").val();
+    var tags = snap.child("tags").val();
+
+    document.getElementById('edit').innerHTML = `
+    <form class="new-entry" onSubmit="return false;">
+      <div>
+        <span></span>
+        <input
+        type="text"
+        id="title2"
+        placeholder="Enter title..."
+        autocomplete="off"
+        value="${title}"
+        required />
+      </div>
+      <div>
+        <span></span>
+        <textarea id="details2" placeholder="Enter details...">${details}</textarea>
+      </div>
+      <div>
+        <span></span>
+        <input
+        type="text"
+        id="tags2"
+        placeholder="Enter tags... (Comma separated)"
+        autocomplete="off"
+        value="${tags}"
+        required />
+      </div>
+      <div>
+        <span></span>
+        <button type="submit" onclick="editEntry('${key}')">Edit This Entry</button>
+      </div>
+    </form>`;
+  })
+}
+
+function editEntry(key) {
+  var title = document.getElementById("title2").value;
+  var details = document.getElementById("details2").value;
+  var tags = document.getElementById("tags2").value;
+
+  if (title && details && tags) {
+    database.ref("/life/" + key).update({
+      title: title.replace(/(\r\n|\r|\n)/g, '<br><br>'),
+      details: details,
+      tags:tags,
+    });
+  }
+
+  showThings('main');
+  showMain();
+}
+
+
+function noPop(key) {
+  document.getElementById('item-edit-'+key).innerHTML = `
+    <i class="fas fa-edit"></i>
+    <i class="fas fa-trash-alt" onclick="delPop('${key}')"></i>`;
+  document.getElementById('item-'+key).classList.remove('item-del');
 }
 
 function showSingle(id) {
@@ -133,10 +222,16 @@ function showSearchResult() {
         var tagsHtml = tags.replaceAll(',','</span><span>');
 
         document.getElementById('main').innerHTML += `
-          <div class="item" onclick="showSingle('${childSnap.key}')">
-            <span>${time}</span>
-            <b>${title}</b>
-            <div><span>${tagsHtml}</span></div>
+          <div class="item" onclick="showSingle('${childSnap.key}')" id="item-${childSnap.key}">
+            <div class="item-info">
+              <span>${time}</span>
+              <b>${title}</b>
+              <div><span>${tagsHtml}</span></div>
+            </div>
+            <div class="item-edit" id="item-edit-${childSnap.key}" onclick="event.stopPropagation();">
+              <i class="fas fa-edit" onclick="showEditBox('${childSnap.key}')"></i>
+              <i class="fas fa-trash-alt" onclick="delPop('${childSnap.key}')"></i>
+            </div>
           </div>`;
       }
     });
