@@ -25,7 +25,7 @@ document.addEventListener('scroll', processScroll);
 function startWorking(user) {
   document.getElementById('top').innerHTML = `
     <div class="top-flex">
-      <div class="title" onclick="showThings('main')">Life of Sami</div>
+      <div class="title" onclick="showThings('main')">Logs of Sami</div>
       <div class="search-input">
         <span></span>
         <input type="text" id="search-text" placeholder="Search life..." autocomplete="off" onkeydown="if(event.keyCode===13){showSearchResult();}" required/>
@@ -278,6 +278,7 @@ function showSingle(id) {
     <div class="single-item">
       <div class="single-item-flex">
         <div class="item-info">
+          <em onclick="copy('${id}')">${id} <i class="fas fa-copy"></i></em>
           <span>${time}</span>
           <b>${title}</b>
           <p><span>${tags}</span></p>
@@ -293,6 +294,10 @@ function showSingle(id) {
     processSingle();
   })
   showThings('single');
+}
+
+function copy(id) {
+  navigator.clipboard.writeText(id);
 }
 
 function processSingle() {
