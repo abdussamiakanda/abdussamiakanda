@@ -614,7 +614,7 @@ h1, h2, h3, h4, h5, h6 {
   .item div div span {
     display: inline-block;
     font-size: 12px;
-    padding: 2px 8px;
+    padding: 0px 5px;
     margin-right: 5px;
     border-radius: 5px;
     color: white;
@@ -639,7 +639,7 @@ h1, h2, h3, h4, h5, h6 {
   .single-item div div p span {
     display: inline-block;
     font-size: 12px;
-    padding: 2px 8px;
+    padding: 0px 5px;
     margin-right: 5px;
     border-radius: 5px;
     color: white;
