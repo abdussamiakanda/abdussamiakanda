@@ -243,6 +243,7 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 10px;
     cursor: pointer;
     margin-bottom: 5px;
+    user-select: none;
   }
   .item-edit {
     display: flex;
@@ -578,6 +579,7 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 10px;
     cursor: pointer;
     margin-bottom: 5px;
+    user-select: none;
   }
   .item-edit {
     display: flex;
