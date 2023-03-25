@@ -252,6 +252,7 @@ h1, h2, h3, h4, h5, h6 {
     padding: 8px;
     box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
     border-radius: 5px;
+    cursor: pointer;
   }
   .item-edit i:hover {
     color: rgba(255, 0, 0, 1);
@@ -275,22 +276,22 @@ h1, h2, h3, h4, h5, h6 {
     color: white;
     background-color: rgba(0,0,0,0.3);
   }
-  .single-item span {
+  .single-item div div span {
     display: block;
     font-size: 12px;
     color: #28b800;
   }
-  .single-item b {
+  .single-item div div b {
     display: block;
     font-size: 25px;
     margin: 10px 0px;
   }
-  .single-item p {
+  .single-item div div p {
     margin: 0px;
     padding: 0px;
     margin-bottom: 20px;
   }
-  .single-item p span {
+  .single-item div div p span {
     display: inline-block;
     font-size: 12px;
     padding: 2px 8px;
@@ -299,7 +300,10 @@ h1, h2, h3, h4, h5, h6 {
     color: white;
     background-color: rgba(0,0,0,0.3);
   }
-  .single-item div {
+  .single-item-flex {
+    display: flex;
+  }
+  .single-item .details {
     padding: 10px;
     box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
     border-radius: 2px;
@@ -593,22 +597,23 @@ h1, h2, h3, h4, h5, h6 {
     color: white;
     background-color: rgba(0,0,0,0.3);
   }
-  .single-item span {
+
+  .single-item div div span {
     display: block;
     font-size: 12px;
     color: #28b800;
   }
-  .single-item b {
+  .single-item div div b {
     display: block;
     font-size: 18px;
     margin: 10px 0px;
   }
-  .single-item p {
+  .single-item div div p {
     margin: 0px;
     padding: 0px;
     margin-bottom: 10px;
   }
-  .single-item p span {
+  .single-item div div p span {
     display: inline-block;
     font-size: 12px;
     padding: 2px 8px;
@@ -617,8 +622,11 @@ h1, h2, h3, h4, h5, h6 {
     color: white;
     background-color: rgba(0,0,0,0.3);
   }
-  .single-item div {
-    padding: 5px;
+  .single-item-flex {
+    display: flex;
+  }
+  .single-item .details {
+    padding: 10px;
     box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
     border-radius: 2px;
   }

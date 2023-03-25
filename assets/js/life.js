@@ -104,12 +104,25 @@ function delPop(key) {
   document.getElementById('item-edit-'+key).innerHTML = `
     <i class="fas fa-check" onclick="delLife('${key}')"></i>
     <i class="fas fa-times" onclick="noPop('${key}')"></i>`;
+
   document.getElementById('item-'+key).classList.add('item-del');
+}
+
+function delPop2(key) {
+  document.getElementById('item-single-'+key).innerHTML = `
+    <i class="fas fa-check" onclick="delLife2('${key}')"></i>
+    <i class="fas fa-times" onclick="noPop2('${key}')"></i>`;
 }
 
 function delLife(key) {
   database.ref('/life/'+key).remove();
   document.getElementById('item-'+key).remove();
+}
+
+function delLife2(key) {
+  database.ref('/life/'+key).remove();
+  showThings('main');
+  showMain();
 }
 
 function showEditBox(key) {
@@ -157,6 +170,52 @@ function showEditBox(key) {
   })
 }
 
+function showEditBox2(key) {
+  showThings('edit');
+
+  database
+  .ref("/life/"+key)
+  .once("value")
+  .then((snap) => {
+    var title = snap.child("title").val();
+    var details = snap.child("details").val();
+    var tags = snap.child("tags").val();
+
+    document.getElementById('edit').innerHTML = `
+    <form class="new-entry" onSubmit="return false;">
+      <div>
+        <span></span>
+        <input
+        type="text"
+        id="title2"
+        placeholder="Enter title..."
+        autocomplete="off"
+        value="${title}"
+        required />
+      </div>
+      <div>
+        <span></span>
+        <textarea id="details2" placeholder="Enter details...">${details}</textarea>
+      </div>
+      <div>
+        <span></span>
+        <input
+        type="text"
+        id="tags2"
+        placeholder="Enter tags... (Comma separated)"
+        autocomplete="off"
+        value="${tags}"
+        required />
+      </div>
+      <div>
+        <span></span>
+        <button type="submit" onclick="editEntry2('${key}')">Edit This Entry</button>
+      </div>
+    </form>`;
+  })
+}
+
+
 function editEntry(key) {
   var title = document.getElementById("title2").value;
   var details = document.getElementById("details2").value;
@@ -168,19 +227,40 @@ function editEntry(key) {
       details: details,
       tags:tags,
     });
-  }
-
   showThings('main');
   showMain();
+  }
+}
+
+function editEntry2(key) {
+  var title = document.getElementById("title2").value;
+  var details = document.getElementById("details2").value;
+  var tags = document.getElementById("tags2").value;
+
+  if (title && details && tags) {
+    database.ref("/life/" + key).update({
+      title: title.replace(/(\r\n|\r|\n)/g, '<br><br>'),
+      details: details,
+      tags:tags,
+    });
+  showSingle(key);
+  }
 }
 
 
 function noPop(key) {
   document.getElementById('item-edit-'+key).innerHTML = `
-    <i class="fas fa-edit"></i>
+    <i class="fas fa-edit" onclick="showEditBox('${key}')"></i>
     <i class="fas fa-trash-alt" onclick="delPop('${key}')"></i>`;
   document.getElementById('item-'+key).classList.remove('item-del');
 }
+
+function noPop2(key) {
+  document.getElementById('item-single-'+key).innerHTML = `
+    <i class="fas fa-edit" onclick="showEditBox2('${key}')"></i>
+    <i class="fas fa-trash-alt" onclick="delPop2('${key}')"></i>`;
+}
+
 
 function showSingle(id) {
   database
@@ -195,15 +275,22 @@ function showSingle(id) {
 
     document.getElementById('single').innerHTML = `
     <div class="single-item">
-      <span>${time}</span>
-      <b>${title}</b>
-      <p><span>${tags}</span></p>
-      <div><md-block>${details}</md-block></div>
+      <div class="single-item-flex">
+        <div class="item-info">
+          <span>${time}</span>
+          <b>${title}</b>
+          <p><span>${tags}</span></p>
+        </div>
+        <div class="item-edit" id="item-single-${snap.key}" onclick="event.stopPropagation();">
+          <i class="fas fa-edit" onclick="showEditBox2('${snap.key}')"></i>
+          <i class="fas fa-trash-alt" onclick="delPop2('${snap.key}')"></i>
+        </div>
+      </div>
+      <div class="details"><md-block>${details}</md-block></div>
     </div>`;
   })
   showThings('single');
 }
-
 
 function showSearchResult() {
   var searchInput = document.getElementById('search-text').value.toLowerCase().replaceAll(' ','');
@@ -243,3 +330,4 @@ function showSearchResult() {
   });
   showThings('main');
 }
+
