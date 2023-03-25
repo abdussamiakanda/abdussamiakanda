@@ -272,6 +272,7 @@ function showSingle(id) {
     var time = snap.child("time").val();
     var tags = snap.child("tags").val();
     tags = tags.replaceAll(',','</span><span>')
+    console.log(id);
 
     document.getElementById('single').innerHTML = `
     <div class="single-item">
@@ -286,10 +287,22 @@ function showSingle(id) {
           <i class="fas fa-trash-alt" onclick="delPop2('${snap.key}')"></i>
         </div>
       </div>
-      <div class="details"><md-block>${details}</md-block></div>
+      <div class="details" id="deets"><md-block>${details}</md-block></div>
     </div>`;
+  }).then((value) => {
+    processSingle();
   })
   showThings('single');
+}
+
+function processSingle() {
+  const details = document.getElementById('deets');
+  const regex = /@\{(\d+)\}/g;
+  details.innerHTML = details.innerHTML.replace(regex, (match, number) => {
+    const id = parseInt(number, 10);
+    const customTag = `<i class="hyperlink fas fa-link" onclick="showSingle('${id}')"></i>`;
+    return customTag;
+  });
 }
 
 function showSearchResult() {

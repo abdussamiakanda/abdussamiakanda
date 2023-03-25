@@ -317,6 +317,14 @@ h1, h2, h3, h4, h5, h6 {
     object-fit: contain;
     box-shadow: 0px 0px 3px rgba(0,0,0,0.1);
   }
+  .hyperlink {
+    color: rgba(0,0,0,0.5);
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  .hyperlink:hover {
+    color: rgba(0,0,0,0.8);
+  }
   .no-result {
     display: block;
     margin: 20px auto;
@@ -638,6 +646,14 @@ h1, h2, h3, h4, h5, h6 {
     height: 100%;
     object-fit: contain;
     box-shadow: 0px 0px 3px rgba(0,0,0,0.1);
+  }
+  .hyperlink {
+    color: rgba(0,0,0,0.5);
+    margin-left: 5px;
+    cursor: pointer;
+  }
+  .hyperlink:hover {
+    color: rgba(0,0,0,0.8);
   }
   .no-result {
     display: block;
