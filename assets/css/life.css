@@ -273,6 +273,7 @@ h1, h2, h3, h4, h5, h6 {
   }
   .item b {
     display: block;
+    font-size: 18px;
   }
   .item div div span {
     display: inline-block;
