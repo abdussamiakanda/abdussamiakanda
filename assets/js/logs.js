@@ -50,7 +50,6 @@ function showThings(id){
   }
 }
 
-
 document.getElementById("add_new_entry").onclick = function () {
   var title = document.getElementById("title").value;
   var details = document.getElementById("details").value;
