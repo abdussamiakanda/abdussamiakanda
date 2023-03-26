@@ -16,11 +16,15 @@ let processScroll = () => {
 
 document.addEventListener('scroll', processScroll);
 
+function showAll() {
+  showThings('main');
+  showMain();
+}
 
 function startWorking(user) {
   document.getElementById('top').innerHTML = `
     <div class="top-flex">
-      <div class="title" onclick="showThings('main')">Logs of Sami</div>
+      <div class="title" onclick="showAll()">Logs of Sami</div>
       <div class="search-input">
         <span></span>
         <input type="text" id="search-text" placeholder="Search log..." autocomplete="off" onkeydown="if(event.keyCode===13){showSearchResult();}" required/>
@@ -50,26 +54,27 @@ function showThings(id){
   }
 }
 
-document.getElementById("add_new_entry").onclick = function () {
+function addLog() {
   var title = document.getElementById("title").value;
   var details = document.getElementById("details").value;
   var tags = document.getElementById("tags").value;
-  var id = moment().format("x");
+  var lid = moment().format("x");
+  console.log('ok')
 
   if (title && details && tags) {
-    database.ref("/life/" + id).update({
+    database.ref("/life/" + lid).update({
       title: title.replace(/(\r\n|\r|\n)/g, '<br><br>'),
       details: details,
       tags:tags,
       time: moment().format("LT, DD MMMM YYYY"),
     });
     showThings('single');
-    showSingle(id);
+    showSingle(lid);
     document.getElementById("title").value = '';
     document.getElementById("details").value = '';
     document.getElementById("tags").value = '';
   }
-};
+}
 
 function showMain() {
   document.getElementById('main').innerHTML = '';
