@@ -28,7 +28,7 @@ function startWorking(user) {
       <div class="title" onclick="showThings('main')">Logs of Sami</div>
       <div class="search-input">
         <span></span>
-        <input type="text" id="search-text" placeholder="Search life..." autocomplete="off" onkeydown="if(event.keyCode===13){showSearchResult();}" required/>
+        <input type="text" id="search-text" placeholder="Search log..." autocomplete="off" onkeydown="if(event.keyCode===13){showSearchResult();}" required/>
       </div>
       <div class="top-buttons">
         <i class="fas fa-plus" onclick="showThings('new')"></i>
@@ -47,6 +47,12 @@ function showThings(id){
   document.getElementById('edit').classList.add('hide');
 
   document.getElementById(id).classList.remove('hide');
+
+  if (id === 'new') {
+    document.getElementById('renderbox').innerHTML = '';
+  } else if (id === 'edit') {
+    document.getElementById('renderbox2').innerHTML = '';
+  }
 }
 
 
@@ -126,8 +132,6 @@ function delLife2(key) {
 }
 
 function showEditBox(key) {
-  showThings('edit');
-
   database
   .ref("/life/"+key)
   .once("value")
@@ -148,9 +152,9 @@ function showEditBox(key) {
         value="${title}"
         required />
       </div>
-      <div>
-        <span></span>
-        <textarea id="details2" placeholder="Enter details...">${details}</textarea>
+      <div class="renderWindow">
+        <textarea id="details2" placeholder="Enter details..." onkeyup="processRender('2')" required>${details}</textarea>
+        <div class="renderbox" id="renderbox2"></div>
       </div>
       <div>
         <span></span>
@@ -167,12 +171,12 @@ function showEditBox(key) {
         <button type="submit" onclick="editEntry('${key}')">Edit This Entry</button>
       </div>
     </form>`;
+  }).then((value) => {
+    showThings('edit');
   })
 }
 
 function showEditBox2(key) {
-  showThings('edit');
-
   database
   .ref("/life/"+key)
   .once("value")
@@ -193,9 +197,9 @@ function showEditBox2(key) {
         value="${title}"
         required />
       </div>
-      <div>
-        <span></span>
-        <textarea id="details2" placeholder="Enter details...">${details}</textarea>
+      <div class="renderWindow">
+        <textarea id="details2" placeholder="Enter details..." onkeyup="processRender('2')" required>${details}</textarea>
+        <div class="renderbox" id="renderbox2"></div>
       </div>
       <div>
         <span></span>
@@ -212,6 +216,8 @@ function showEditBox2(key) {
         <button type="submit" onclick="editEntry2('${key}')">Edit This Entry</button>
       </div>
     </form>`;
+  }).then((value) => {
+    showThings('edit');
   })
 }
 
@@ -292,6 +298,7 @@ function showSingle(id) {
     </div>`;
   }).then((value) => {
     processSingle();
+    renderMath();
   })
   showThings('single');
 }
@@ -300,8 +307,21 @@ function copy(id) {
   navigator.clipboard.writeText(id);
 }
 
+function processRender(id) {
+  if (id === '1'){
+    var details = document.getElementById('details').value
+
+    document.getElementById('renderbox').innerHTML = '<md-block>'+details+'</md-block>';
+  } else if (id === '2') {
+    var details = document.getElementById('details2').value
+
+    document.getElementById('renderbox2').innerHTML = '<md-block>'+details+'</md-block>';
+  }
+  renderMath();
+}
+
 function processSingle() {
-  const details = document.getElementById('deets');
+  const details = document.body;
   const regex = /@\{(\d+)\}/g;
   details.innerHTML = details.innerHTML.replace(regex, (match, number) => {
     const id = parseInt(number, 10);
@@ -349,3 +369,17 @@ function showSearchResult() {
   showThings('main');
 }
 
+function renderMath() {
+  setTimeout(
+    function() {
+      renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+            {left: '\\(', right: '\\)', display: false},
+            {left: '\\[', right: '\\]', display: true}
+        ],
+        throwOnError : false
+      });
+    }, 100);
+}
