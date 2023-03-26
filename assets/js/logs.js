@@ -2,11 +2,6 @@ var provider = new firebase.auth.GoogleAuthProvider();
 var database = firebase.database();
 var userdata = null;
 
-// const queryString = window.location.search;
-// const urlParams = new URLSearchParams(queryString);
-// const pageid = urlParams.get("id");
-
-
 // MAIN FUNCTIONS
 
 let processScroll = () => {
@@ -60,16 +55,17 @@ document.getElementById("add_new_entry").onclick = function () {
   var title = document.getElementById("title").value;
   var details = document.getElementById("details").value;
   var tags = document.getElementById("tags").value;
+  var id = moment().format("x");
 
   if (title && details && tags) {
-    database.ref("/life/" + moment().format("x")).update({
+    database.ref("/life/" + id).update({
       title: title.replace(/(\r\n|\r|\n)/g, '<br><br>'),
       details: details,
       tags:tags,
       time: moment().format("LT, DD MMMM YYYY"),
     });
-    showThings('main');
-    showMain();
+    showThings('single');
+    showSingle(id);
     document.getElementById("title").value = '';
     document.getElementById("details").value = '';
     document.getElementById("tags").value = '';
