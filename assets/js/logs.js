@@ -337,14 +337,14 @@ function processRender(id) {
     var objDiv = document.getElementById('renderbox')
     
     objDiv.innerHTML = marked.parse(details);
-    objDiv.scrollTop = objDiv.scrollHeight;
+    objDiv.scrollTop = objDiv.scrollHeight - objDiv.clientHeight;
   } else if (id === '2') {
     var details = document.getElementById('details2').value
 
     var objDiv = document.getElementById('renderbox2')
     
     objDiv.innerHTML = marked.parse(details);
-    objDiv.scrollTop = objDiv.scrollHeight;
+    objDiv.scrollTop = objDiv.scrollHeight - objDiv.clientHeight;
   }
   renderMath();
 }
