@@ -334,11 +334,17 @@ function processRender(id) {
   if (id === '1'){
     var details = document.getElementById('details').value
 
-    document.getElementById('renderbox').innerHTML = marked.parse(details);
+    var objDiv = document.getElementById('renderbox')
+    
+    objDiv.innerHTML = marked.parse(details);
+    objDiv.scrollTop = objDiv.scrollHeight;
   } else if (id === '2') {
     var details = document.getElementById('details2').value
 
-    document.getElementById('renderbox2').innerHTML = marked.parse(details);
+    var objDiv = document.getElementById('renderbox2')
+    
+    objDiv.innerHTML = marked.parse(details);
+    objDiv.scrollTop = objDiv.scrollHeight;
   }
   renderMath();
 }
