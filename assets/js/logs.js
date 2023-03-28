@@ -58,16 +58,20 @@ function addLog() {
   var title = document.getElementById("title").value;
   var details = document.getElementById("details").value;
   var tags = document.getElementById("tags").value;
+  var public = document.getElementById("public").value;
   var lid = moment().format("x");
-  console.log('ok')
 
   if (title && details && tags) {
     database.ref("/life/" + lid).update({
       title: title.replace(/(\r\n|\r|\n)/g, '<br><br>'),
       details: details,
       tags:tags,
+      public:public,
       time: moment().format("LT, DD MMMM YYYY"),
     });
+    if (public === 'true') {
+      database.ref("/public/" + lid).set(true);
+    }
     showThings('single');
     showSingle(lid);
     document.getElementById("title").value = '';
@@ -122,11 +126,13 @@ function delPop2(key) {
 
 function delLife(key) {
   database.ref('/life/'+key).remove();
+  database.ref('/public/'+key).remove();
   document.getElementById('item-'+key).remove();
 }
 
 function delLife2(key) {
   database.ref('/life/'+key).remove();
+  database.ref('/public/'+key).remove();
   showThings('main');
   showMain();
 }
@@ -139,11 +145,11 @@ function showEditBox(key) {
     var title = snap.child("title").val();
     var details = snap.child("details").val();
     var tags = snap.child("tags").val();
+    var public = snap.child("public").val();
 
     document.getElementById('edit').innerHTML = `
     <form class="new-entry" onSubmit="return false;">
       <div>
-        <span></span>
         <input
         type="text"
         id="title2"
@@ -157,7 +163,6 @@ function showEditBox(key) {
         <div class="renderbox" id="renderbox2"></div>
       </div>
       <div>
-        <span></span>
         <input
         type="text"
         id="tags2"
@@ -165,9 +170,12 @@ function showEditBox(key) {
         autocomplete="off"
         value="${tags}"
         required />
+        <select id="public2">
+          <option value="false" ${public === 'false' ? 'selected' : ''}>Private Log</option>
+          <option value="true" ${public === 'true' ? 'selected' : ''}>Public Log</option>
+        </select>
       </div>
       <div>
-        <span></span>
         <button type="submit" onclick="editEntry('${key}')">Edit This Entry</button>
       </div>
     </form>`;
@@ -184,11 +192,11 @@ function showEditBox2(key) {
     var title = snap.child("title").val();
     var details = snap.child("details").val();
     var tags = snap.child("tags").val();
+    var public = snap.child("public").val();
 
     document.getElementById('edit').innerHTML = `
     <form class="new-entry" onSubmit="return false;">
       <div>
-        <span></span>
         <input
         type="text"
         id="title2"
@@ -202,7 +210,6 @@ function showEditBox2(key) {
         <div class="renderbox" id="renderbox2"></div>
       </div>
       <div>
-        <span></span>
         <input
         type="text"
         id="tags2"
@@ -210,9 +217,12 @@ function showEditBox2(key) {
         autocomplete="off"
         value="${tags}"
         required />
+        <select id="public2">
+          <option value="false" ${public === 'false' ? 'selected' : ''}>Private Log</option>
+          <option value="true" ${public === 'true' ? 'selected' : ''}>Public Log</option>
+        </select>
       </div>
       <div>
-        <span></span>
         <button type="submit" onclick="editEntry2('${key}')">Edit This Entry</button>
       </div>
     </form>`;
@@ -226,15 +236,22 @@ function editEntry(key) {
   var title = document.getElementById("title2").value;
   var details = document.getElementById("details2").value;
   var tags = document.getElementById("tags2").value;
+  var public = document.getElementById("public2").value;
 
   if (title && details && tags) {
     database.ref("/life/" + key).update({
       title: title.replace(/(\r\n|\r|\n)/g, '<br><br>'),
       details: details,
       tags:tags,
+      public:public,
     });
-  showThings('main');
-  showMain();
+    if (public === 'true') {
+      database.ref("/public/" + key).set(true);
+    } else if (public === 'false') {
+      database.ref('/public/'+key).remove();
+    }
+    showThings('main');
+    showMain();
   }
 }
 
@@ -242,14 +259,21 @@ function editEntry2(key) {
   var title = document.getElementById("title2").value;
   var details = document.getElementById("details2").value;
   var tags = document.getElementById("tags2").value;
+  var public = document.getElementById("public2").value;
 
   if (title && details && tags) {
     database.ref("/life/" + key).update({
       title: title.replace(/(\r\n|\r|\n)/g, '<br><br>'),
       details: details,
       tags:tags,
+      public:public,
     });
-  showSingle(key);
+    if (public === 'true') {
+      database.ref("/public/" + key).set(true);
+    } else if (public === 'false') {
+      database.ref('/public/'+key).remove();
+    }
+    showSingle(key);
   }
 }
 
@@ -278,7 +302,6 @@ function showSingle(id) {
     var time = snap.child("time").val();
     var tags = snap.child("tags").val();
     tags = tags.replaceAll(',','</span><span>')
-    console.log(id);
 
     document.getElementById('single').innerHTML = `
     <div class="single-item">
@@ -294,7 +317,7 @@ function showSingle(id) {
           <i class="fas fa-trash-alt" onclick="delPop2('${snap.key}')"></i>
         </div>
       </div>
-      <div class="details" id="deets"><md-block>${details}</md-block></div>
+      <div class="details" id="deets">${marked.parse(details)}</div>
     </div>`;
   }).then((value) => {
     processSingle();
@@ -311,11 +334,11 @@ function processRender(id) {
   if (id === '1'){
     var details = document.getElementById('details').value
 
-    document.getElementById('renderbox').innerHTML = '<md-block>'+details+'</md-block>';
+    document.getElementById('renderbox').innerHTML = marked.parse(details);
   } else if (id === '2') {
     var details = document.getElementById('details2').value
 
-    document.getElementById('renderbox2').innerHTML = '<md-block>'+details+'</md-block>';
+    document.getElementById('renderbox2').innerHTML = marked.parse(details);
   }
   renderMath();
 }

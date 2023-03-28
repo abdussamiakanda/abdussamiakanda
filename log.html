@@ -20,54 +20,10 @@
     </section>
 
 
-    <section class="white">
+    <section class="white white-log">
       <div class="white-inner">
 
-        <div class="login" id="login">
-          <div class="login-btn" onclick="GoogleLogin()">
-            <i class="fa fa-google"></i> <b>Log in with Google</b>
-          </div>
-        </div>
-
-        <div class="items hide" id="main"></div>
-
-        <div class="hide" id="new">
-          <form class="new-entry" onSubmit="return false;">
-            <div>
-              <input
-              type="text"
-              id="title"
-              placeholder="Enter title..."
-              autocomplete="off"
-              required />
-            </div>
-            <div class="renderWindow">
-              <textarea id="details" placeholder="Enter details..." onkeyup="processRender('1')" required></textarea>
-              <div class="renderbox" id="renderbox"></div>
-            </div>
-            <div>
-              <input
-              type="text"
-              id="tags"
-              placeholder="Enter tags... (Comma separated)"
-              autocomplete="off"
-              required />
-              <select id="public">
-                <option value="false" selected>Private Log</option>
-                <option value="true">Public Log</option>
-              </select>
-            </div>
-            <div>
-              <button type="submit" onclick="addLog()">Add New Entry</button>
-            </div>
-          </form>
-        </div>
-
-        <div class="hide" id="edit"></div>
-
-        <div class="hide" id="single"></div>
-
-
+        <div id="single"></div>
 
       </div>
     </section>
@@ -76,11 +32,10 @@
     <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-analytics.js"></script>
-    <script src="./assets/js/firebase.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script type="module" src="./../assets/js/marked.min.js"></script>
-    <script src="./../assets/js/logs.js"></script>
+    <script src="./../assets/js/log.js"></script>
   </body>
 </html>
