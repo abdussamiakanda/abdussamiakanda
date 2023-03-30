@@ -92,12 +92,13 @@ function showMain() {
       var title = snap.child(childSnap.key + "/title").val();
       var time = snap.child(childSnap.key + "/time").val();
       var tags = snap.child(childSnap.key + "/tags").val();
+      var public = snap.child(childSnap.key + "/public").val();
       tags = tags.replaceAll(',','</span><span>')
 
       document.getElementById('main').innerHTML += `
         <div class="item" onclick="showSingle('${childSnap.key}')" id="item-${childSnap.key}">
           <div class="item-info">
-            <span>${time}</span>
+            <span>${time} &#x2022; ${public === 'true' ? '<i class="fas fa-globe-asia"></i>' : '<i class="fas fa-user-lock"></i>'}</span>
             <b>${title}</b>
             <div><span>${tags}</span></div>
           </div>
@@ -301,6 +302,7 @@ function showSingle(id) {
     var details = snap.child("details").val();
     var time = snap.child("time").val();
     var tags = snap.child("tags").val();
+    var public = snap.child("public").val();
     tags = tags.replaceAll(',','</span><span>')
 
     document.getElementById('single').innerHTML = `
@@ -308,7 +310,7 @@ function showSingle(id) {
       <div class="single-item-flex">
         <div class="item-info">
           <em onclick="copy('${id}')">${id} <i class="fas fa-copy"></i></em>
-          <span>${time}</span>
+          <span>${time} &#x2022; ${public === 'true' ? `<i class="fas fa-globe-asia"></i> &#x2022; <i onclick="copy('https://abdussamiakanda.com/log?id=${id}')" class="share fas fa-share-alt-square"></i>` : '<i class="fas fa-user-lock"></i>'}</span>
           <b>${title}</b>
           <p><span>${tags}</span></p>
         </div>
@@ -373,6 +375,7 @@ function showSearchResult() {
       var time = snap.child(childSnap.key + "/time").val();
       var details = snap.child(childSnap.key + "/details").val();
       var tags = snap.child(childSnap.key + "/tags").val();
+      var public = snap.child(childSnap.key + "/public").val();
 
       if (title.toLowerCase().replaceAll(' ','').includes(searchInput) || time.toLowerCase().replaceAll(' ','').includes(searchInput) || details.toLowerCase().replaceAll(' ','').includes(searchInput) || tags.toLowerCase().replaceAll(' ','').includes(searchInput)) {
         var tagsHtml = tags.replaceAll(',','</span><span>');
@@ -380,7 +383,7 @@ function showSearchResult() {
         document.getElementById('main').innerHTML += `
           <div class="item" onclick="showSingle('${childSnap.key}')" id="item-${childSnap.key}">
             <div class="item-info">
-              <span>${time}</span>
+              <span>${time} &#x2022; ${public === 'true' ? '<i class="fas fa-globe-asia"></i>' : '<i class="fas fa-user-lock"></i>'}</span>
               <b>${title}</b>
               <div><span>${tagsHtml}</span></div>
             </div>
