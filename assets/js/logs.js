@@ -31,6 +31,7 @@ function startWorking(user) {
       </div>
       <div class="top-buttons">
         <i class="fas fa-plus" onclick="showThings('new')"></i>
+        <i class="fas fa-thumbtack" onclick="showThings('pin')"></i>
         <i class="fas fa-sign-out-alt" onclick="GoogleLogout()"></i>
       </div>
     </div>`;
@@ -44,6 +45,7 @@ function showThings(id){
   document.getElementById('new').classList.add('hide');
   document.getElementById('single').classList.add('hide');
   document.getElementById('edit').classList.add('hide');
+  document.getElementById('pin').classList.add('hide');
 
   document.getElementById(id).classList.remove('hide');
 
@@ -67,6 +69,7 @@ function addLog() {
       details: details,
       tags:tags,
       public:public,
+      pin:'no',
       time: moment().format("LT, DD MMMM YYYY"),
     });
     if (public === 'true') {
@@ -82,6 +85,7 @@ function addLog() {
 
 function showMain() {
   document.getElementById('main').innerHTML = '';
+  document.getElementById('pin').innerHTML = '';
   database
   .ref("/life")
   .orderByKey()
@@ -93,6 +97,7 @@ function showMain() {
       var time = snap.child(childSnap.key + "/time").val();
       var tags = snap.child(childSnap.key + "/tags").val();
       var public = snap.child(childSnap.key + "/public").val();
+      var pin = snap.child(childSnap.key + "/pin").val();
       tags = tags.replaceAll(',','</span><span>')
 
       document.getElementById('main').innerHTML += `
@@ -107,6 +112,20 @@ function showMain() {
             <i class="fas fa-trash-alt" onclick="delPop('${childSnap.key}')"></i>
           </div>
         </div>`;
+      if (pin === 'yes') {
+        document.getElementById('pin').innerHTML += `
+          <div class="item" onclick="showSingle('${childSnap.key}')" id="item-${childSnap.key}">
+            <div class="item-info">
+              <span>${time} &#x2022; ${public === 'true' ? '<i class="fas fa-globe-asia"></i>' : '<i class="fas fa-user-lock"></i>'}</span>
+              <b>${title}</b>
+              <div><span>${tags}</span></div>
+            </div>
+            <div class="item-edit" id="item-edit-${childSnap.key}" onclick="event.stopPropagation();">
+              <i class="fas fa-edit" onclick="showEditBox('${childSnap.key}')"></i>
+              <i class="fas fa-trash-alt" onclick="delPop('${childSnap.key}')"></i>
+            </div>
+          </div>`;
+      }
     })
   })
 }
@@ -303,6 +322,7 @@ function showSingle(id) {
     var time = snap.child("time").val();
     var tags = snap.child("tags").val();
     var public = snap.child("public").val();
+    var pin = snap.child("pin").val();
     tags = tags.replaceAll(',','</span><span>')
 
     document.getElementById('single').innerHTML = `
@@ -310,7 +330,8 @@ function showSingle(id) {
       <div class="single-item-flex">
         <div class="item-info">
           <em onclick="copy('${id}')">${id} <i class="fas fa-copy"></i></em>
-          <span>${time} &#x2022; ${public === 'true' ? `<i class="fas fa-globe-asia"></i> &#x2022; <i onclick="copy('https://abdussamiakanda.com/log?id=${id}')" class="share fas fa-share-alt-square"></i>` : '<i class="fas fa-user-lock"></i>'}</span>
+          <span>${time} &#x2022; ${public === 'true' ? `<i class="fas fa-globe-asia"></i> &#x2022; <i onclick="copy('https://abdussamiakanda.com/log?id=${id}')" class="share fas fa-share-alt-square"></i>` : '<i class="fas fa-user-lock"></i>'} &#x2022; 
+          ${pin === 'yes' ? `<i class="share fas fa-map-marker-alt" onclick="makePin('${id}','no')"></i>` : `<i class="share fas fa-map-marker" onclick="makePin('${id}','yes')"></i>`}</span>
           <b>${title}</b>
           <p><span>${tags}</span></p>
         </div>
@@ -326,6 +347,15 @@ function showSingle(id) {
     renderMath();
   })
   showThings('single');
+}
+
+function makePin(id,tag) {
+  if (tag === 'yes') {
+    database.ref("/life/"+id+"/pin").set('yes');
+  } else {
+    database.ref("/life/"+id+"/pin").set('no');
+  }
+  showSingle(id);
 }
 
 function copy(id) {
