@@ -86,12 +86,7 @@ function addLog() {
 function showMain() {
   document.getElementById('main').innerHTML = '';
   document.getElementById('pin').innerHTML = '';
-  database
-  .ref("/life")
-  .orderByKey()
-  .limitToLast(50)
-  .once("value")
-  .then((snap) => {
+  database.ref("/life").orderByKey().limitToLast(50).once("value").then((snap) => {
     snap.forEach(function (childSnap) {
       var title = snap.child(childSnap.key + "/title").val();
       var time = snap.child(childSnap.key + "/time").val();
@@ -158,10 +153,7 @@ function delLife2(key) {
 }
 
 function showEditBox(key) {
-  database
-  .ref("/life/"+key)
-  .once("value")
-  .then((snap) => {
+  database.ref("/life/"+key).once("value").then((snap) => {
     var title = snap.child("title").val();
     var details = snap.child("details").val();
     var tags = snap.child("tags").val();
@@ -205,10 +197,7 @@ function showEditBox(key) {
 }
 
 function showEditBox2(key) {
-  database
-  .ref("/life/"+key)
-  .once("value")
-  .then((snap) => {
+  database.ref("/life/"+key).once("value").then((snap) => {
     var title = snap.child("title").val();
     var details = snap.child("details").val();
     var tags = snap.child("tags").val();
@@ -313,10 +302,7 @@ function noPop2(key) {
 
 
 function showSingle(id) {
-  database
-  .ref("/life/"+id)
-  .once("value")
-  .then((snap) => {
+  database.ref("/life/"+id).once("value").then((snap) => {
     var title = snap.child("title").val();
     var details = snap.child("details").val();
     var time = snap.child("time").val();
@@ -395,11 +381,7 @@ function showSearchResult() {
   var searchInput = document.getElementById('search-text').value.toLowerCase().replaceAll(' ','');
   document.getElementById('main').innerHTML = '';
 
-  database
-  .ref("/life")
-  .orderByKey()
-  .once("value")
-  .then((snap) => {
+  database.ref("/life").orderByKey().once("value").then((snap) => {
     snap.forEach(function (childSnap) {
       var title = snap.child(childSnap.key + "/title").val();
       var time = snap.child(childSnap.key + "/time").val();
