@@ -193,6 +193,8 @@ function showEditBox(key) {
     </form>`;
   }).then((value) => {
     showThings('edit');
+    processRender('2');
+    processTextAreaHeight();
   })
 }
 
@@ -237,6 +239,8 @@ function showEditBox2(key) {
     </form>`;
   }).then((value) => {
     showThings('edit');
+    processRender('2');
+    processTextAreaHeight();
   })
 }
 
@@ -349,22 +353,32 @@ function copy(id) {
 }
 
 function processRender(id) {
+  let textArea = '';
+  let details = '';
+  let objDiv = '';
+
   if (id === '1'){
-    var details = document.getElementById('details').value
-
-    var objDiv = document.getElementById('renderbox')
-    
-    objDiv.innerHTML = marked.parse(details);
-    objDiv.scrollTop = objDiv.scrollHeight - objDiv.clientHeight;
+    textArea = document.getElementById('details');
+    details = textArea.value;
+    objDiv = document.getElementById('renderbox');
   } else if (id === '2') {
-    var details = document.getElementById('details2').value
-
-    var objDiv = document.getElementById('renderbox2')
-    
-    objDiv.innerHTML = marked.parse(details);
-    objDiv.scrollTop = objDiv.scrollHeight - objDiv.clientHeight;
+    textArea = document.getElementById('details2');
+    details = textArea.value;
+    objDiv = document.getElementById('renderbox2')
   }
+  objDiv.innerHTML = marked.parse(details);
+  objDiv.scrollTop = objDiv.scrollHeight - objDiv.clientHeight;
   renderMath();
+
+  textArea.addEventListener("input", function (e) {
+    this.style.height = "auto";
+    this.style.height = this.scrollHeight + "px";
+  });
+}
+
+function processTextAreaHeight() {
+  document.getElementById('details2').style.height = "auto";
+  document.getElementById('details2').style.height = document.getElementById('details2').scrollHeight + "px";
 }
 
 function processSingle() {
