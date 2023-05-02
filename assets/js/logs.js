@@ -377,7 +377,7 @@ function processRender(id) {
   textArea.addEventListener("input", function (e) {
     this.style.height = "auto";
     this.style.height = this.scrollHeight + "px";
-    if (textArea.selectionEnd === textArea.value.length && !(window.innerHeight + window.scrollY >= document.body.offsetHeight)) {
+    if (textArea.selectionEnd === textArea.value.length) {
       window.scrollTo(0, document.body.scrollHeight);
     }
   });
