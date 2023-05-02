@@ -382,7 +382,6 @@ function processRender(id) {
     } else {
       window.scrollTo(0, window.scrollY);
     }
-    console.log(textArea.selectionEnd,textArea.value.length,window.scrollY)
   });
 }
 
