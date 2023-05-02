@@ -377,9 +377,12 @@ function processRender(id) {
   textArea.addEventListener("input", function (e) {
     this.style.height = "auto";
     this.style.height = this.scrollHeight + "px";
-    if (textArea.selectionEnd === textArea.value.length) {
+    if (textArea.selectionEnd === textArea.value.length && !(window.innerHeight + window.scrollY >= document.body.offsetHeight)) {
       window.scrollTo(0, document.body.scrollHeight);
+    } else {
+      window.scrollTo(0, window.scrollY);
     }
+    console.log(textArea.selectionEnd,textArea.value.length,window.scrollY)
   });
 }
 
