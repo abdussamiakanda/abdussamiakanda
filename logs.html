@@ -47,20 +47,22 @@
               <textarea id="details" placeholder="Enter details..." onkeyup="processRender('1')" required></textarea>
               <div class="renderbox" id="renderbox"></div>
             </div>
-            <div>
-              <input
-              type="text"
-              id="tags"
-              placeholder="Enter tags... (Comma separated)"
-              autocomplete="off"
-              required />
-              <select id="public">
-                <option value="false" selected>Private Log</option>
-                <option value="true">Public Log</option>
-              </select>
-            </div>
-            <div>
-              <button type="submit" onclick="addLog()">Add New Entry</button>
+            <div class="fixed">
+              <div>
+                <input
+                type="text"
+                id="tags"
+                placeholder="Enter tags... (Comma separated)"
+                autocomplete="off"
+                required />
+                <select id="public">
+                  <option value="false" selected>Private Log</option>
+                  <option value="true">Public Log</option>
+                </select>
+              </div>
+              <div>
+                <button type="submit" onclick="addLog()">Add New Entry</button>
+              </div>
             </div>
           </form>
         </div>

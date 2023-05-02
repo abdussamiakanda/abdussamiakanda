@@ -174,21 +174,23 @@ function showEditBox(key) {
         <textarea id="details2" placeholder="Enter details..." onkeyup="processRender('2')" required>${details}</textarea>
         <div class="renderbox" id="renderbox2"></div>
       </div>
-      <div>
-        <input
-        type="text"
-        id="tags2"
-        placeholder="Enter tags... (Comma separated)"
-        autocomplete="off"
-        value="${tags}"
-        required />
-        <select id="public2">
-          <option value="false" ${public === 'false' ? 'selected' : ''}>Private Log</option>
-          <option value="true" ${public === 'true' ? 'selected' : ''}>Public Log</option>
-        </select>
-      </div>
-      <div>
-        <button type="submit" onclick="editEntry('${key}')">Edit This Entry</button>
+      <div class="fixed">
+        <div>
+          <input
+          type="text"
+          id="tags2"
+          placeholder="Enter tags... (Comma separated)"
+          autocomplete="off"
+          value="${tags}"
+          required />
+          <select id="public2">
+            <option value="false" ${public === 'false' ? 'selected' : ''}>Private Log</option>
+            <option value="true" ${public === 'true' ? 'selected' : ''}>Public Log</option>
+          </select>
+        </div>
+        <div>
+          <button type="submit" onclick="editEntry('${key}')">Edit This Entry</button>
+        </div>
       </div>
     </form>`;
   }).then((value) => {
@@ -220,21 +222,23 @@ function showEditBox2(key) {
         <textarea id="details2" placeholder="Enter details..." onkeyup="processRender('2')" required>${details}</textarea>
         <div class="renderbox" id="renderbox2"></div>
       </div>
-      <div>
-        <input
-        type="text"
-        id="tags2"
-        placeholder="Enter tags... (Comma separated)"
-        autocomplete="off"
-        value="${tags}"
-        required />
-        <select id="public2">
-          <option value="false" ${public === 'false' ? 'selected' : ''}>Private Log</option>
-          <option value="true" ${public === 'true' ? 'selected' : ''}>Public Log</option>
-        </select>
-      </div>
-      <div>
-        <button type="submit" onclick="editEntry2('${key}')">Edit This Entry</button>
+      <div class="fixed">
+        <div>
+          <input
+          type="text"
+          id="tags2"
+          placeholder="Enter tags... (Comma separated)"
+          autocomplete="off"
+          value="${tags}"
+          required />
+          <select id="public2">
+            <option value="false" ${public === 'false' ? 'selected' : ''}>Private Log</option>
+            <option value="true" ${public === 'true' ? 'selected' : ''}>Public Log</option>
+          </select>
+        </div>
+        <div>
+          <button type="submit" onclick="editEntry2('${key}')">Edit This Entry</button>
+        </div>
       </div>
     </form>`;
   }).then((value) => {

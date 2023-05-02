@@ -195,6 +195,7 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     align-items: flex-start;
     justify-content: stretch;
+    padding-bottom: 100px;
   }
   .new-entry .renderbox {
     width: 100%;
@@ -223,6 +224,18 @@ h1, h2, h3, h4, h5, h6 {
   .new-entry textarea:focus {
     outline: none;
     background-color: rgba(0,0,0,0.1);
+  }
+  .new-entry .fixed {
+    position: fixed;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: -5px;
+    background-color: white;
+    bottom: 0px;
+    padding: 10px 20px;
+    gap: 0px;
+    border-top: 1px solid rgba(0,0,0,0.1);
   }
   .new-entry button {
     flex: 1;
@@ -541,6 +554,9 @@ h1, h2, h3, h4, h5, h6 {
     margin: 3px 0px;
     gap: 5px;
   }
+  .renderWindow {
+    padding-bottom: 100px;
+  }
   .new-entry input {
     flex: 1;
     box-shadow: 0px 1px 3px rgba(0,0,0,0.3);
@@ -590,6 +606,18 @@ h1, h2, h3, h4, h5, h6 {
   .new-entry textarea:focus {
     outline: none;
     background-color: rgba(0,0,0,0.1);
+  }
+  .new-entry .fixed {
+    position: fixed;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 95%;
+    margin: -5px;
+    background-color: white;
+    bottom: 0px;
+    padding: 10px 20px;
+    gap: 0px;
+    border-top: 1px solid rgba(0,0,0,0.1);
   }
   .new-entry button {
     flex: 1;
