@@ -379,8 +379,6 @@ function processRender(id) {
     this.style.height = this.scrollHeight + "px";
     if (textArea.selectionEnd === textArea.value.length && !(window.innerHeight + window.scrollY >= document.body.offsetHeight)) {
       window.scrollTo(0, document.body.scrollHeight);
-    } else {
-      window.scrollTo(0, window.scrollY);
     }
   });
 }
