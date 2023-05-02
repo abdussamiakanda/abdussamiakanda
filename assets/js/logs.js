@@ -377,6 +377,7 @@ function processRender(id) {
   textArea.addEventListener("input", function (e) {
     this.style.height = "auto";
     this.style.height = this.scrollHeight + "px";
+    window.scrollTo(0, document.body.scrollHeight);
   });
 }
 
