@@ -58,6 +58,7 @@ function showAcademic() {
   document.getElementById('menu-personal-inner').classList.remove("colorful");
   document.getElementById('back1').style.visibility = "visible";
   document.getElementById('back2').style.visibility = "hidden";
+  window.scrollTo(0, 0);
 }
 
 function showPersonal() {
@@ -68,6 +69,7 @@ function showPersonal() {
   document.getElementById('menu-personal-inner').classList.add("colorful");
   document.getElementById('back1').style.visibility = "hidden";
   document.getElementById('back2').style.visibility = "visible";
+  window.scrollTo(0, 0);
 }
 
 // function goToTo(path){
