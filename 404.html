@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta property="og:title" content="404 - Page not found! - Md. Abdus Sami Akanda"/>
+    <meta property="og:title" content="404 - Page not found! - Md Abdus Sami Akanda"/>
     <meta property="og:image" content="./../assets/image/me.png"/>
     <link rel="shortcut icon" href="./../assets/image/icon.png">
     <script src="https://kit.fontawesome.com/1421ad6393.js" crossorigin="anonymous"></script>
@@ -15,61 +15,56 @@
     <link rel="stylesheet" href="./../assets/css/articles.css">
   </head>
   <body>
-
-    <section class="black" id="intro">
-      <div class="flex">
-        <div class="back" onclick="goTo('./../')">Back to Home</div>
-      </div>
-      <div class="black-inner">
-        <div class="inners">
-          <h1 class="name">404 error!</h1>
-          <p class="details">
-            Page not found!
-          </p>
+    
+    <section>
+      <div class="menu">
+        <div class="head" onclick="goTo('../')">
+          <i class="fas fa-arrow-left"></i>
+        </div>
+        <div class="right-menu" onclick="goTo('../')">
+          <i class="fas fa-home"></i>
         </div>
       </div>
     </section>
 
-    <section class="white">
-      <div class="white-inner">
-        <div class="inners">
-          <!-- ITEMS HERE -->
-          <div style="font-size: 70px;text-align: center;">
-            <div class="el">
-              <div class="y">404!</div>
-            </div>
-          </div>
+    <section id="academic">
+
+      <div class="introduction">
+        <div class="div-title">
+          <h2>404 error!</h2>
         </div>
+        Page not found!
       </div>
+
+
+    
+
+
+      <br><br>
+
+      <div id="academic-contact" class="social-div">
+
+        <div class="social">
+          <div onclick="goSocial('9')" class="social-item"><i class="fas fa-envelope"></i></div>
+          <div onclick="goSocial('0')" class="social-item"><i class="fab fa-researchgate"></i></div>
+          <div onclick="goSocial('8')" class="social-item"><i class="fa-solid fa-graduation-cap"></i></div>
+          <div onclick="goSocial('1')" class="social-item"><i class="fab fa-google"></i></div>
+          <div onclick="goSocial('2')" class="social-item"><i class="fab fa-linkedin"></i></div>
+          <div onclick="goSocial('3')" class="social-item"><i class="fab fa-orcid"></i></div>
+          <div onclick="goSocial('4')" class="social-item"><i class="fab fa-github"></i></div>
+          <div onclick="goSocial('5')" class="social-item"><i class="fab fa-facebook"></i></div>
+          <div onclick="goSocial('6')" class="social-item"><i class="fab fa-youtube"></i></div>
+          <div onclick="goSocial('7')" class="social-item"><i class="fab fa-soundcloud"></i></div>
+        </div>
+        <p>
+          Copyright @2017 Md Abdus Sami Akanda. All rights reserved.
+        </p>
+
+      </div>
+
     </section>
 
-    <script type="text/javascript">
-      function goTo(path){
-        window.location.assign(path);
-      }
-      document.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-      });
 
-      document.onkeydown = function(e) {
-        if(event.keyCode == 123) {
-           return false;
-        }
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
-           return false;
-        }
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
-           return false;
-        }
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
-           return false;
-        }
-        if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
-           return false;
-        }
-      }
-    </script>
-
-
+    <script src="./assets/js/publications.js"></script>
   </body>
 </html>

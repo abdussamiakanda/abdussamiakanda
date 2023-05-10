@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <title>Md. Abdus Sami Akanda</title>
+    <title>Md Abdus Sami Akanda</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta property="og:title" content="Md. Abdus Sami Akanda"/>
+    <meta property="og:title" content="Md Abdus Sami Akanda"/>
     <meta property="og:description" content="I am a Researcher, Student, Learner, Physicist, Web Developer, Programmer, Teacher, Guitarist, Bookworm, Back-Bencher."/>
     <meta property="og:image" content="./assets/image/me.png"/>
     <link rel="shortcut icon" href="./assets/image/icon.png">
@@ -13,109 +13,99 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css" integrity="sha384-zTROYFVGOfTw7JV7KUu8udsvW2fx4lWOsCEDqhBreBwlHI4ioVRtmIvEThzJHGET" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/css/index.css">
   </head>
   <body>
-
-    <div class="moblie" id="moblie" onclick="showMenu()"><i class="fas fa-bars"></i></div>
-
-    <section class="navigator hide" id="navigator">
-      <div class="cross" onclick="hide()">
-        <i class="cros fas fa-times"></i>
-      </div>
-      <div onclick="goToTo('#intro')" class="menu-item"><span class="tooltiptext">Introduction</span></div>
-      <div onclick="goToTo('#researcher')" class="menu-item"><span class="tooltiptext">Researcher</span></div>
-      <div onclick="goToTo('#student')" class="menu-item"><span class="tooltiptext">Student</span></div>
-      <div onclick="goToTo('#teacher')" class="menu-item"><span class="tooltiptext">Teacher</span></div>
-      <div onclick="goToTo('#programmer')" class="menu-item"><span class="tooltiptext">Programmer</span></div>
-      <div onclick="goToTo('#developer')" class="menu-item"><span class="tooltiptext">Web Developer</span></div>
-      <div onclick="goToTo('#scribbler')" class="menu-item"><span class="tooltiptext">Scribbler</span></div>
-      <div onclick="goToTo('#doodler')" class="menu-item"><span class="tooltiptext">Doodler</span></div>
-      <div onclick="goToTo('#minstrel')" class="menu-item"><span class="tooltiptext">Minstrel</span></div>
-      <div onclick="goToTo('#skillset')" class="menu-item"><span class="tooltiptext">Skillset</span></div>
-      <div onclick="goToTo('#gallary')" class="menu-item"><span class="tooltiptext">Gallary</span></div>
-      <div onclick="goToTo('#works')" class="menu-item"><span class="tooltiptext">Works</span></div>
-      <div onclick="goToTo('#posts')" class="menu-item"><span class="tooltiptext">Posts</span></div>
-      <div onclick="goToTo('#awards')" class="menu-item"><span class="tooltiptext">Awards</span></div>
-      <div onclick="goToTo('#contact')" class="menu-item"><span class="tooltiptext">Contact</span></div>
-    </section>
-
-    <!-- IMAGE VIEWER -->
-
-    <div class="imageview hide" id="imageview"></div>
-
-    <section class="navigator hide2">
-      <div onclick="goTo('#intro')" class="menu-item"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="tooltiptext">Introduction</span></div>
-      <div onclick="goTo('#researcher')" class="menu-item"><i class="fas fa-flask" aria-hidden="true"></i><span class="tooltiptext">Researcher</span></div>
-      <div onclick="goTo('#student')" class="menu-item"><i class="fas fa-user-graduate" aria-hidden="true"></i><span class="tooltiptext">Student</span></div>
-      <div onclick="goTo('#teacher')" class="menu-item"><i class="fas fa-chalkboard-teacher" aria-hidden="true"></i><span class="tooltiptext">Teacher</span></div>
-      <div onclick="goTo('#programmer')" class="menu-item"><i class="fas fa-terminal" aria-hidden="true"></i><span class="tooltiptext">Programmer</span></div>
-      <div onclick="goTo('#developer')" class="menu-item"><i class="fas fa-code" aria-hidden="true"></i><span class="tooltiptext">Web Developer</span></div>
-      <div onclick="goTo('#scribbler')" class="menu-item"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="tooltiptext">Scribbler</span></div>
-      <div onclick="goTo('#doodler')" class="menu-item"><i class="fas fa-paint-brush" aria-hidden="true"></i><span class="tooltiptext">Doodler</span></div>
-      <div onclick="goTo('#minstrel')" class="menu-item"><i class="fas fa-music" aria-hidden="true"></i><span class="tooltiptext">Minstrel</span></div>
-      <div onclick="goTo('#skillset')" class="menu-item"><i class="fas fa-laptop" aria-hidden="true"></i><span class="tooltiptext">Skillset</span></div>
-      <div onclick="goTo('#gallary')" class="menu-item"><i class="fas fa-images" aria-hidden="true"></i><span class="tooltiptext">Gallary</span></div>
-      <div onclick="goTo('#works')" class="menu-item"><i class="fas fa-briefcase" aria-hidden="true"></i><span class="tooltiptext">Works</span></div>
-      <div onclick="goTo('#posts')" class="menu-item"><i class="fas fa-paragraph" aria-hidden="true"></i><span class="tooltiptext">Posts</span></div>
-      <div onclick="goTo('#awards')" class="menu-item"><i class="fas fa-trophy" aria-hidden="true"></i><span class="tooltiptext">Awards</span></div>
-      <div onclick="goTo('#contact')" class="menu-item"><i class="fas fa-envelope" aria-hidden="true"></i><span class="tooltiptext">Contact</span></div>
-    </section>
-
-    <section class="white" id="intro">
-      <div class="white-inner flex">
-        <div class="inner70">
-          Hi, my name is
-          <h1 class="name">Md. Abdus Sami Akanda</h1>
-          <p>
-            I am a Researcher, Student, Learner, Physicist, Web Developer, Programmer, Teacher, Guitarist, Bookworm, Back-Bencher. <br>
-          </p>
-          <div class="resume">
-            <a target="_blank" href="https://drive.google.com/uc?export=download&id=1wWmIKoF0de-FayGWhGNBLlRdVJIoNcfN"><i class="fas fa-download" aria-hidden="true"></i> Download CV</a>
+    
+    <section>
+      <div class="menu">
+        <div class="head">
+          <img src="./assets/image/icon.png" alt="">
+        </div>
+        <div class="center-menu">
+          <div class="menu-item selected" id="menu-academic" onclick="showAcademic()">
+            Academic
+          </div>
+          <div class="menu-item" id="menu-personal" onclick="showPersonal()">
+            <div id="menu-personal-inner">
+            Personal
+            </div>
           </div>
         </div>
-        <div class="inner30 right">
-          <img class="main-photo" src="./assets/image/me.png" alt="">
+        <div class="right-menu">
+          <i class="fas fa-bars"></i>
         </div>
       </div>
     </section>
 
-    <section class="black" id="researcher">
-      <div class="black-inner">
-        <h3>Researcher</h3>
+    <section id="background" class="background">
+      <div class="back1" id="back1">
+        <div class="floating fas fa-microscope"></div>
+        <div class="floating fas fa-atom"></div>
+        <div class="floating fas fa-radiation-alt"></div>
+        <div class="floating fas fa-magnet"></div>
+        <div class="floating fas fa-temperature-high"></div>
+        <div class="floating fas fa-book"></div>
+        <div class="floating fas fa-user-astronaut"></div>
+        <div class="floating fas fa-tv"></div>
+        <div class="floating fas fa-space-shuttle"></div>
+        <div class="floating fas fa-satellite-dish"></div>
+        <div class="floating fas fa-microchip"></div>
+      </div>
+      <div class="back2" id="back2" style="visibility: hidden;">
+        <div class="floating colorful2 fas fa-code-merge"></div>
+        <div class="floating colorful2 fas fa-code"></div>
+        <div class="floating colorful2 fas fa-laptop-code"></div>
+        <div class="floating colorful2 fas fa-keyboard"></div>
+        <div class="floating colorful2 fas fa-pen-fancy"></div>
+        <div class="floating colorful2 fas fa-paragraph"></div>
+        <div class="floating colorful2 fas fa-palette"></div>
+        <div class="floating colorful2 fas fa-guitar"></div>
+        <div class="floating colorful2 fas fa-headphones"></div>
+        <div class="floating colorful2 fas fa-user-ninja"></div>
+      </div>
+    </section>
+
+    <section id="academic">
+
+      <div class="introduction">
+        Hi, my name is
+        <div class="name">
+          Md Abdus Sami Akanda
+        </div>
+        I am a prospective graduate student of Physics at the University of Nebraska-Lincoln.
+        My research focuses on the fascinating field of spintronics, exploring how the spin
+        of electrons can be used to create innovative electronic devices. As an aspiring
+        physicist, I am passionate about teaching others and sharing my love for physics.
+      </div>
+
+      <div id="research" class="academic-divs">
+        <div class="div-title">
+          <span class="fas fa-magnet"></span>
+          Research
+        </div>
         <p>
           <strong>Khulna University, Khulna, Bangladesh</strong> <br>
           Research Assistant <br>
           September 12, 2020 - November 20, 2022 <br><br>
           Here are some of my works:
         </p>
-        <div class="flex">
-          <div class="inners">
-            <ul>
-              <li><a href="./publications">Publications</a></li>
-            </ul>
-          </div>
-          <div class="inners">
-            <ul>
-              <li><a href="./speeches">Speeches</a></li>
-            </ul>
-          </div>
-          <div class="inners">
-            <ul>
-              <li><a href="./articles">Articles</a></li>
-            </ul>
-          </div>
+        <div class="links">
+          <a href="./publications">Publications <i class="fas fa-arrow-right"></i></a><br>
+          <a href="./speeches">Speeches <i class="fas fa-arrow-right"></i></a><br>
+          <a href="./articles">Articles <i class="fas fa-arrow-right"></i></a>
         </div>
+        <br>
         <p>
           Find Me on: <a target="_blank" href="https://www.researchgate.net/profile/Md_Akanda2">Researchgate</a>, <a target="_blank" href="https://khulna.academia.edu/AbdusSamiAkanda">Academia</a>, <a target="_blank" href="https://scholar.google.com/citations?user=hCntcSgAAAAJ&hl=en">Google Scholar</a>
         </p>
       </div>
-    </section>
 
-    <section class="white" id="student">
-      <div class="white-inner">
-        <h3>Student</h3>
+      <div id="education" class="academic-divs">
+        <div class="div-title">
+          <span class="fas fa-university"></span>
+          Education
+        </div>
         <p>
 
           <strong>University of Nebraska-Lincoln, Nebraska, United States</strong> <br>
@@ -144,140 +134,43 @@
 
         </p>
       </div>
-    </section>
 
-    <section class="black" id="teacher">
-      <div class="black-inner">
-        <h3>Teacher</h3>
+      <div id="teaching" class="academic-divs">
+        <div class="div-title">
+          <span class="fas fa-chalkboard-teacher"></span>
+          Teaching Experience
+        </div>
         <p>
-          I really enjoy teaching. During my secondary education, I discovered my love of teaching,
-          and I am continuing engaging students in a variety of subjects. <br><br>
+          Teaching is something that I am passionate about. I discovered this passion during
+          my secondary education and have since continued to enjoy engaging students in
+          various subjects. <br><br>
           Here is a general list of the subjects I covered:
         </p>
-        <div class="flex">
-          <div class="inners">
-            <ul>
-              <li><a href="./course/calculus">Calculus</a></li>
-              <li>Vector Analysis</li>
-              <li>Waves and Oscillation</li>
-              <li>Heat and Thermodynamics</li>
-              <li>Mathematical Methods</li>
-            </ul>
-          </div>
-          <div class="inners">
-            <ul>
-              <li>Atomics Physics</li>
-              <li><a href="./course/electricity-magnetism">Electricity & Magnetism</a></li>
-              <li><a href="./course/electromagnetic-theory">Electromagnetic Theory</a></li>
-              <li><a href="./course/classical-mechanics">Classical Mechanics</a></li>
-              <li><a href="./course/special-relativity">Theory of Relativity</a></li>
-            </ul>
-          </div>
+        <div class="links">
+          <li>Calculus</li>
+          <li>Heat and Thermodynamics</li>
+          <li>Mathematical Methods</li>
+          <li>Atomics Physics</li>
+          <li>Electricity & Magnetism</li>
+          <li>Electromagnetic Theory</li>
+          <li>Classical Mechanics</li>
+          <li>Theory of Relativity</li>
         </div>
-        <p>To see all courses, <a href="./courses">click here</a>.</p>
-      </div>
-    </section>
-
-    <section class="white" id="programmer">
-      <div class="white-inner">
-        <h3>Programmer</h3>
-        <p>
-          Well, after learning about web design, programming sprang to mind.
-          In 2018 I learned C programming, then in 2019 I learned C++. I'm
-          learning Python right now in preparation for my computational research
-          projects. To find out more about my learning steps, visit my Github
-          pages. <br><br>
-          Here is my Github profile: <a target="_blank" href="https://github.com/abdussamiakanda">abdussamiakanda</a>
-          <br><br>
-          Here are a few of my programming endeavors:
-        </p>
-        <div class="flex">
-          <div class="inners">
-            <ul>
-              <li><a target="_blank" href="https://pypi.org/project/grefornoobs/">grefornoobs</a></li>
-            </ul>
-          </div>
+        <br>
+        <div class="links">
+          <a href="./courses">Explore All Courses <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
-    </section>
 
-    <section class="black" id="developer">
-      <div class="black-inner">
-        <h3>Web Developer</h3>
-        <p>
-          I've spent more than five years studying and practicing web design.
-          I gained knowledge about SEO, HTML, CSS, JavaScript, SQL, PHP, and
-          WordPress. I've created a few websites for various projects and
-          schools.<br><br>
-          These are a few of my works:
-        </p>
-        <div class="flex">
-          <div class="inners">
-            <ul>
-              <li><a target="_blank" href="https://fermionku.com/">Fermion Physics Club</a></li>
-              <li><a target="_blank" href="https://abujafarpikul.com/">Md. Abu Jafar Pikul</a></li>
-              <li><a target="_blank" href="https://zubaidakarim.com/">Zubaida Karim Juthy</a></li>
-            </ul>
-          </div>
-          <div class="inners">
-            <ul>
-              <li><a target="_blank" href="https://filmfreak.netlify.app/">FilmFreak</a></li>
-              <li><a target="_blank" href="https://playuno.netlify.app/">UNO Online</a></li>
-              <li><a target="_blank" href="https://playtictac.netlify.app/">Tic-Tac-Toe</a></li>
-            </ul>
-          </div>
+      <div id="skillset" class="academic-divs">
+        <div class="div-title">
+          <span class="fas fa-puzzle-piece"></span>
+          Skillset
         </div>
-      </div>
-    </section>
 
-    <section class="white" id="scribbler">
-      <div class="white-inner">
-        <h3>Scribbler</h3>
         <p>
-          I like to write poems and short stories time to time.<br><br>
-          Here are some of my works:
-        </p>
-        <div class="inners">
-          <ul>
-            <li><a href="./poems">Poems</a></li>
-            <li><a href="./stories">Stories</a></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="black" id="doodler">
-      <div class="black-inner">
-        <h3>Doodler</h3>
-        <p>
-          I like drawing with my pencil and on my smartphone. Here are some of my drawings:
-        </p>
-        <div class="gallery">
-          <img onclick="showIMG('doodle','0')" src="https://drive.google.com/uc?export=download&id=1JVkr2RQ6wsPaRSWbI1Ci8j7NPA_io-VH" alt="">
-          <img onclick="showIMG('doodle','1')" src="https://drive.google.com/uc?export=download&id=1-Fh72eOUPLU7xNg6d8SYvUewg0m1e9iV" alt="">
-          <img onclick="showIMG('doodle','2')" src="https://drive.google.com/uc?export=download&id=1qc_RT75nTgNrnTPQQ5D-aLalqPwnT-MA" alt="">
-          <img onclick="showIMG('doodle','3')" src="https://drive.google.com/uc?export=download&id=1aXJVp5mZ3qusZ9M7NTAr8TIe3EE6meJH" alt="">
-          <img onclick="showIMG('doodle','4')" src="https://drive.google.com/uc?export=download&id=1IOHI5GjZouEq0NB0YUCSG4KTk_5wAYMa" alt="">
-        </div>
-      </div>
-    </section>
-
-    <section class="white" id="minstrel">
-      <div class="white-inner">
-        <h3>Minstrel</h3>
-        <p>
-          I like to sing while playing my guitar. Here, I will add some of my songs.
-        </p>
-      </div>
-    </section>
-
-    <section class="black" id="skillset">
-      <div class="black-inner">
-        <h3>Skillset</h3>
-        <p>
-          These values are based on a guess about how much confidence I have in each
-          of these areas to tackle certain challenges. They don't have any scientific
-          foundations.
+          These values are not scientifically grounded and are merely based on my personal
+          estimation of how confident I am in each area to face specific challenges.
         </p>
         <div class="skills">
           <div class="skill">
@@ -363,34 +256,18 @@
               <span style="float: right;">100%</span>
             </div>
           </div>
-
-
         </div>
-      </div>
-    </section>
 
-    <section class="white" id="gallary">
-      <div class="white-inner">
-        <h3>Gallary</h3>
-        <div class="gallery padding">
-          <img onclick="showIMG('img','0')" src="https://drive.google.com/uc?export=download&id=1dlhmrjUazw1ym_uq9awoAI7nQdp-SMQR" alt="">
-          <img onclick="showIMG('img','1')" src="https://drive.google.com/uc?export=download&id=1jhVHNDlDvGHWwLuXMONnm0AmpixaQyV3" alt="">
-          <img onclick="showIMG('img','2')" src="https://drive.google.com/uc?export=download&id=1sTE7iZ0ZhSUlbVek-jUj3sgKHocN2jOv" alt="">
-          <img onclick="showIMG('img','3')" src="https://drive.google.com/uc?export=download&id=1ke5jAFtSmem1uX5n6XZdCUTkZfGjIk00" alt="">
-          <img onclick="showIMG('img','4')" src="https://drive.google.com/uc?export=download&id=1QeB6U2k8uNU84KxAQaHZE0zkN5_vfGSF" alt="">
-          <img onclick="showIMG('img','5')" src="https://drive.google.com/uc?export=download&id=1pADK_g-AYVmwD2allueBlljCiasH0GU7" alt="">
-          <img onclick="showIMG('img','6')" src="https://drive.google.com/uc?export=download&id=1w7fFk0kPk6WBQCk8IDL1I_HKGkt12A-r" alt="">
-          <img onclick="showIMG('img','7')" src="https://drive.google.com/uc?export=download&id=1aSZy73DdZoQ8lYQx5L_a39IzA2VYcchO" alt="">
+      </div>
+
+      <div id="work-experience" class="academic-divs">
+        <div class="div-title">
+          <span class="fas fa-briefcase"></span>
+          Work Experience
         </div>
-        To see more photos, <a href="./gallery">click here</a>.
-      </div>
-    </section>
 
-    <section class="black" id="works">
-      <div class="black-inner">
-        <h3>Other Works</h3>
         <p>
-
+  
           <strong>Fermion Physics Club</strong> <br>
           Founder & Instructor <br>
           May 23, 2019 - Present <br>
@@ -412,29 +289,17 @@
           <a target="_blank" href="https://www.udvash.com">https://www.udvash.com</a> <br>
 
         </p>
-      </div>
-    </section>
 
-    <section class="white" id="posts">
-      <div class="white-inner">
-        <h3>Posts</h3>
-        <p>
-          Recent Posts
-        </p>
-        <div class="inners">
-          <ul>
-            <li><a href="./post/houston-we-have-a-problem">হিউস্টন, উই হেভ এ প্রব্লেম</a></li>
-          </ul>
+      </div>
+
+      <div id="awards" class="academic-divs">
+        <div class="div-title">
+          <span class="fas fa-award"></span>
+          Awards
         </div>
-        <p>To see all posts, <a href="./posts">click here</a>.</p>
-      </div>
-    </section>
 
-    <section class="black" id="awards">
-      <div class="black-inner">
-        <h3>Awards</h3>
         <p>
-
+  
           <strong>International Conference on STEM and the Fourth Industrial Revolution (ICSTEM4IR 2022)</strong> <br>
           3 July 2022, Best Paper Award <br>
           <a target="_blank" href="https://conference.ku.ac.bd/icstem4ir">https://conference.ku.ac.bd/icstem4ir</a> <br><br>
@@ -465,38 +330,214 @@
           Featured in: <a target="_blank" href="https://www.banglatribune.com/my-campus/news/605514/%E0%A6%86%E0%A6%A8%E0%A7%8D%E0%A6%A4%E0%A6%B0%E0%A7%8D%E0%A6%9C%E0%A6%BE%E0%A6%A4%E0%A6%BF%E0%A6%95-%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%A4%E0%A6%BF%E0%A6%AF%E0%A7%8B%E0%A6%97%E0%A6%BF%E0%A6%A4%E0%A6%BE%E0%A7%9F-%E0%A6%96%E0%A7%81%E0%A6%AC%E0%A6%BF-%E0%A6%B6%E0%A6%BF%E0%A6%95%E0%A7%8D%E0%A6%B7%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%A5%E0%A7%80%E0%A6%B0-%E0%A6%9C%E0%A7%9F">Bangla Tribune</a> <br>
 
         </p>
+
       </div>
+
+      <div id="academic-contact" class="social-div">
+
+        <div class="social">
+          <div onclick="goSocial('9')" class="social-item"><i class="fas fa-envelope"></i></div>
+          <div onclick="goSocial('0')" class="social-item"><i class="fab fa-researchgate"></i></div>
+          <div onclick="goSocial('8')" class="social-item"><i class="fa-solid fa-graduation-cap"></i></div>
+          <div onclick="goSocial('1')" class="social-item"><i class="fab fa-google"></i></div>
+          <div onclick="goSocial('2')" class="social-item"><i class="fab fa-linkedin"></i></div>
+          <div onclick="goSocial('3')" class="social-item"><i class="fab fa-orcid"></i></div>
+          <div onclick="goSocial('4')" class="social-item"><i class="fab fa-github"></i></div>
+          <div onclick="goSocial('5')" class="social-item"><i class="fab fa-facebook"></i></div>
+          <div onclick="goSocial('6')" class="social-item"><i class="fab fa-youtube"></i></div>
+          <div onclick="goSocial('7')" class="social-item"><i class="fab fa-soundcloud"></i></div>
+        </div>
+        <p>
+          Copyright @2017 Md Abdus Sami Akanda. All rights reserved.
+        </p>
+
+      </div>
+
     </section>
 
-    <section class="white" id="contact">
-      <div class="white-inner">
-        <h3>Contact</h3>
+
+
+
+
+
+
+
+    <section id="personal" style="display: none;">
+
+      <div class="introduction">
+        Hi, my name is
+        <div class="name colorful">
+          Md Abdus Sami Akanda
+        </div>
+        I'm a code-loving, problem-solving ninja who enjoys taking on new projects and saving
+        the digital world. When I'm not mastering the art of coding, you can find me taking
+        long walks in nature to clear my mind and sharpen my senses. And if you catch me
+        inside, I'm probably watching a psychological or philosophical thriller, trying to
+        figure out the meaning of life (or at least the ending of the movie).
+      </div>
+
+      <div id="programming" class="academic-divs">
+        <div class="div-title colorful">
+          <span class="fas fa-terminal"></span>
+          Programming
+        </div>
         <p>
-          Want to say hi? There are a few ways to get in touch with me: <br>
-          You can shoot an email to <a href="mailto:abdussamiakanda@gmail.com">abdussamiakanda@gmail.com</a> if you want. <br><br>
-          I don’t tweet (twitter? twit?), but you can follow me on LinkedIn
-          and I’m also on Facebook (because who isn’t?). <br>
-          And, if you’re in Khulna, you can just try yelling really loud.
+          After gaining knowledge in web design, programming became a natural interest
+          for me. I delved into C programming in 2018, followed by learning C++ in 2019.
+          Currently, I am preparing for my computational research projects by studying
+          Python. If you would like to learn more about my learning journey, you can
+          visit my Github pages. <br><br>
+          Here is my Github profile: <a target="_blank" href="https://github.com/abdussamiakanda">abdussamiakanda</a>
+          <br><br>
+          Here are a few of my programming endeavors:
         </p>
-        <div class="social">
-          <div onclick="goNow('0')" class="social-item"><i class="fab fa-researchgate"></i></div>
-          <div onclick="goNow('8')" class="social-item"><i class="fa-solid fa-graduation-cap"></i></div>
-          <div onclick="goNow('1')" class="social-item"><i class="fab fa-google"></i></div>
-          <div onclick="goNow('2')" class="social-item"><i class="fab fa-linkedin"></i></div>
-          <div onclick="goNow('3')" class="social-item"><i class="fab fa-orcid"></i></div>
-          <div onclick="goNow('4')" class="social-item"><i class="fab fa-github"></i></div>
-          <div onclick="goNow('5')" class="social-item"><i class="fab fa-facebook"></i></div>
-          <div onclick="goNow('6')" class="social-item"><i class="fab fa-youtube"></i></div>
-          <div onclick="goNow('7')" class="social-item"><i class="fab fa-soundcloud"></i></div>
+        <div class="links">
+          <a target="_blank" href="https://pypi.org/project/grefornoobs/">grefornoobs <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div id="webdevelopment" class="academic-divs">
+        <div class="div-title colorful">
+          <span class="fas fa-code"></span>
+          Web Development
+        </div>
+        <p>
+          I have dedicated over eight years to studying and honing my skills in web design.
+          Throughout this time, I have acquired proficiency in several areas such as SEO,
+          HTML, CSS, JavaScript, SQL, PHP, and WordPress. I have put my knowledge into
+          practice by designing websites for various projects and schools.<br><br>
+          These are a few of my works:
+        </p>
+        <div class="links">
+          <a target="_blank" href="https://fermionku.com/">Fermion Physics Club <i class="fas fa-arrow-right"></i></a><br>
+          <a target="_blank" href="https://filmfreak.netlify.app/">FilmFreak <i class="fas fa-arrow-right"></i></a><br>
+          <a target="_blank" href="https://playuno.netlify.app/">UNO Online <i class="fas fa-arrow-right"></i></a><br>
+          <a target="_blank" href="https://playtictac.netlify.app/">Tic-Tac-Toe <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+                
+
+
+
+
+      <div id="scribbling" class="academic-divs">
+        <div class="div-title colorful">
+          <span class="fas fa-pencil-alt"></span>
+          Scribbling
+        </div>
+        <p>
+          I have a passion for expressing my creativity through writing stories, poems,
+          and drawing pictures. <br><br>
+          Explore them here:
+        </p>
+        <div class="links">
+          <a href="./poems">Poems <i class="fas fa-arrow-right"></i></a><br>
+          <a href="./stories">Stories <i class="fas fa-arrow-right"></i></a><br>
+          <a href="./drawings">Drawings <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <!-- <img onclick="showIMG('doodle','0')" src="https://drive.google.com/uc?export=download&id=1JVkr2RQ6wsPaRSWbI1Ci8j7NPA_io-VH" alt="">
+        <img onclick="showIMG('doodle','1')" src="https://drive.google.com/uc?export=download&id=1-Fh72eOUPLU7xNg6d8SYvUewg0m1e9iV" alt="">
+        <img onclick="showIMG('doodle','2')" src="https://drive.google.com/uc?export=download&id=1qc_RT75nTgNrnTPQQ5D-aLalqPwnT-MA" alt="">
+        <img onclick="showIMG('doodle','3')" src="https://drive.google.com/uc?export=download&id=1aXJVp5mZ3qusZ9M7NTAr8TIe3EE6meJH" alt="">
+        <img onclick="showIMG('doodle','4')" src="https://drive.google.com/uc?export=download&id=1IOHI5GjZouEq0NB0YUCSG4KTk_5wAYMa" alt=""> -->
+      </div>
+
+      <div id="gallary" class="academic-divs">
+        <div class="div-title colorful">
+          <span class="fas fa-images"></span>
+          Gallery
+        </div>
+
+        <!-- <img onclick="showIMG('img','0')" src="https://drive.google.com/uc?export=download&id=1dlhmrjUazw1ym_uq9awoAI7nQdp-SMQR" alt="">
+        <img onclick="showIMG('img','1')" src="https://drive.google.com/uc?export=download&id=1jhVHNDlDvGHWwLuXMONnm0AmpixaQyV3" alt="">
+        <img onclick="showIMG('img','2')" src="https://drive.google.com/uc?export=download&id=1sTE7iZ0ZhSUlbVek-jUj3sgKHocN2jOv" alt="">
+        <img onclick="showIMG('img','3')" src="https://drive.google.com/uc?export=download&id=1ke5jAFtSmem1uX5n6XZdCUTkZfGjIk00" alt="">
+        <img onclick="showIMG('img','4')" src="https://drive.google.com/uc?export=download&id=1QeB6U2k8uNU84KxAQaHZE0zkN5_vfGSF" alt="">
+        <img onclick="showIMG('img','5')" src="https://drive.google.com/uc?export=download&id=1pADK_g-AYVmwD2allueBlljCiasH0GU7" alt="">
+        <img onclick="showIMG('img','6')" src="https://drive.google.com/uc?export=download&id=1w7fFk0kPk6WBQCk8IDL1I_HKGkt12A-r" alt="">
+        <img onclick="showIMG('img','7')" src="https://drive.google.com/uc?export=download&id=1aSZy73DdZoQ8lYQx5L_a39IzA2VYcchO" alt=""> -->
+        <div class="links">
+          <a href="./gallery">Explore the Gallery <i class="fas fa-arrow-right"></i></a><br>
+        </div>
+      </div>
+
+      <div id="scribbling" class="academic-divs">
+        <div class="div-title colorful">
+          <span class="fas fa-file-alt"></span>
+          Posts
+        </div>
+
+        <p>
+          Recent Posts
+        </p>
+        <div class="inners">
+          <ul>
+            <li><a href="./post/houston-we-have-a-problem">হিউস্টন, উই হেভ এ প্রব্লেম</a></li>
+          </ul>
+        </div>
+        <div class="links">
+          <a href="./posts">See All Posts <i class="fas fa-arrow-right"></i></a><br>
+        </div>
+
+      </div>
+
+      <div id="personal-contact" class="social-div">
+
+        <div class="social colorful">
+          <div onclick="goSocial('9')" class="social-item"><i class="fas fa-envelope"></i></div>
+          <div onclick="goSocial('0')" class="social-item"><i class="fab fa-researchgate"></i></div>
+          <div onclick="goSocial('8')" class="social-item"><i class="fa-solid fa-graduation-cap"></i></div>
+          <div onclick="goSocial('1')" class="social-item"><i class="fab fa-google"></i></div>
+          <div onclick="goSocial('2')" class="social-item"><i class="fab fa-linkedin"></i></div>
+          <div onclick="goSocial('3')" class="social-item"><i class="fab fa-orcid"></i></div>
+          <div onclick="goSocial('4')" class="social-item"><i class="fab fa-github"></i></div>
+          <div onclick="goSocial('5')" class="social-item"><i class="fab fa-facebook"></i></div>
+          <div onclick="goSocial('6')" class="social-item"><i class="fab fa-youtube"></i></div>
+          <div onclick="goSocial('7')" class="social-item"><i class="fab fa-soundcloud"></i></div>
+        </div>
+        <p>
+          Copyright @2017 Md Abdus Sami Akanda. All rights reserved.
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- 
+
+
+    <section class="white" id="intro">
+      <div class="white-inner flex">
+        <div class="inner70">
+          Hi, my name is
+          <h1 class="name">Md. Abdus Sami Akanda</h1>
+          <p>
+            I am a Researcher, Student, Learner, Physicist, Web Developer, Programmer, Teacher, Guitarist, Bookworm, Back-Bencher. <br>
+          </p>
+          <div class="resume">
+            <a target="_blank" href="https://drive.google.com/uc?export=download&id=1wWmIKoF0de-FayGWhGNBLlRdVJIoNcfN"><i class="fas fa-download" aria-hidden="true"></i> Download CV</a>
+          </div>
+        </div>
+        <div class="inner30 right">
+          <img class="main-photo" src="./assets/image/me.png" alt="">
         </div>
       </div>
     </section>
 
 
+    <section class="white" id="minstrel">
+      <div class="white-inner">
+        <h3>Minstrel</h3>
+        <p>
+          I like to sing while playing my guitar. Here, I will add some of my songs.
+        </p>
+      </div>
+    </section>
+  
+  -->
 
-
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js" integrity="sha384-GxNFqL3r9uRJQhR+47eDxuPoNE7yLftQM8LcxzgS4HT73tp970WS/wV5p8UzCOmb" crossorigin="anonymous"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
     <script src="./assets/js/index.js"></script>
   </body>
 </html>

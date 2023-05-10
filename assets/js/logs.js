@@ -379,8 +379,12 @@ function processRender(id) {
     this.style.height = this.scrollHeight + "px";
     if (textArea.selectionEnd === textArea.value.length) {
       window.scrollTo(0, document.body.scrollHeight);
+    } else {
+      textArea.scrollTo(0, textArea.selectionStart+200);
     }
+    console.log(textArea.scrollTop,'event');
   });
+  console.log(textArea.selectionStart,textArea.selectionEnd);
 }
 
 function processTextAreaHeight() {
