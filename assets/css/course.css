@@ -189,6 +189,8 @@ code{
   html{
     width:100%;
     margin: 0px auto;
+    user-select: none;
+    -moz-user-select: none;
   }
   body{
     font-family: 'Poppins', sans-serif;
