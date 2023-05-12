@@ -8,7 +8,7 @@ const leftPosition = [];
 
 for (let i = 0; i < myEl.length; i++) {
   let T = randomInt(100, 350);
-  let L = randomInt(5, 95)
+  let L = randomInt(10, 90)
   myEl[i].style.top = T + 'px';
   myEl[i].style.left = L + '%';
   topPosition[i] = T;
