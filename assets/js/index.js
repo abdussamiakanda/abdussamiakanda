@@ -89,18 +89,17 @@ function showPersonal() {
   `;
 }
 
-function showMenu() {
+const menuToggle = document.getElementById('menu-toggle');
+menuToggle.addEventListener('click', function() {
+  this.classList.toggle('active');
   let element = document.getElementById('rightMenuOptions');
   if (window.getComputedStyle(element).getPropertyValue("display") === 'none'){
     document.getElementById('rightMenuOptions').style.display = 'block';
-    document.getElementById('bars').classList.add('hide');
-    document.getElementById('times').classList.remove('hide');
   } else {
     document.getElementById('rightMenuOptions').style.display = 'none';
-    document.getElementById('bars').classList.remove('hide');
-    document.getElementById('times').classList.add('hide');
   }
-}
+});
+
 // function goToTo(path){
 //   window.location.assign(path);
 //   document.getElementById('moblie').classList.remove('hide');

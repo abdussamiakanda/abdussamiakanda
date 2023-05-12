@@ -121,10 +121,34 @@ input[type=number] {
     cursor: pointer;
     position: relative;
   }
-  .right-menu:hover i {
+  .right-menu:hover #menu-toggle {
     transform: rotateZ(360deg);
     transition-duration: 1s;
   }
+  #menu-toggle {
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .bar {
+    width: 28px;
+    height: 4px;
+    background-color: #333;
+    margin: 6px 0;
+    border-radius: 3px;
+    transition: 0.5s;
+  }
+  
+  #menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  #menu-toggle.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+  }
+  #menu-toggle.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+  }
+  
   .right-menu-options {
     position: absolute;
     top: 65px;
@@ -372,10 +396,34 @@ input[type=number] {
     cursor: pointer;
     position: relative;
   }
-  .right-menu:hover i {
+  .right-menu:hover #menu-toggle {
     transform: rotateZ(360deg);
     transition-duration: 1s;
   }
+  #menu-toggle {
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .bar {
+    width: 22px;
+    height: 3px;
+    background-color: #333;
+    margin: 4px 0;
+    border-radius: 3px;
+    transition: 0.5s;
+  }
+  
+  #menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  #menu-toggle.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  #menu-toggle.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+
   .right-menu-options {
     position: absolute;
     top: 55px;
