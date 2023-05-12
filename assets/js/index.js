@@ -1,21 +1,21 @@
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+const myEl = document.querySelectorAll('.floating');
+const topPosition = [];
+const leftPosition = [];
+
+for (let i = 0; i < myEl.length; i++) {
+  let T = randomInt(100, 350);
+  let L = randomInt(5, 95)
+  myEl[i].style.top = T + 'px';
+  myEl[i].style.left = L + '%';
+  topPosition[i] = T;
+  leftPosition[i] = myEl[i].offsetLeft;
+}
+
 if (window.innerWidth >= 640) {
-  function randomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-  
-  const myEl = document.querySelectorAll('.floating');
-  const topPosition = [];
-  const leftPosition = [];
-  
-  for (let i = 0; i < myEl.length; i++) {
-    let T = randomInt(100, 350);
-    let L = randomInt(5, 95)
-    myEl[i].style.top = T + 'px';
-    myEl[i].style.left = L + '%';
-    topPosition[i] = T;
-    leftPosition[i] = myEl[i].offsetLeft;
-  }
-  
   document.addEventListener('mousemove', function(event) {
     const mouseX = event.clientX;
     const mouseY = event.clientY;

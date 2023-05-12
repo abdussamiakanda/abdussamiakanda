@@ -128,7 +128,7 @@ input[type=number] {
     position: absolute;
     top: 65px;
     right: 0px;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 1);
     box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
     border-radius: 5px;
     font-size: 20px;
@@ -279,20 +279,6 @@ input[type=number] {
     text-align: center;
   }
 
-
-
-
-
-
-  .katex {
-    font-size: 1.1em;
-    font-weight: 500;
-  }
-  .katex-display{
-    margin: 0px;
-  }
-
-
 }
 
 @media screen and (min-width: 0em) and (max-width: 40em) {
@@ -389,7 +375,7 @@ input[type=number] {
     position: absolute;
     top: 55px;
     right: 0px;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 1);
     box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
     border-radius: 5px;
     font-size: 15px;
@@ -545,17 +531,6 @@ input[type=number] {
   .social-div p {
     margin: 20px 0px;
     text-align: center;
-  }
-
-
-
-
-  .katex {
-    font-size: 1.1em;
-    font-weight: 500;
-  }
-  .katex-display{
-    margin: 0px;
   }
 
 

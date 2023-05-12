@@ -1,40 +1,32 @@
-function goTo(path){
-  window.location.assign(path);
-}
-
+var social = [
+   'https://www.researchgate.net/profile/Md_Akanda2',
+   'https://scholar.google.com/citations?user=hCntcSgAAAAJ&hl=en',
+   'https://www.linkedin.com/in/abdussamiakanda/',
+   'https://orcid.org/0000-0002-6742-2158',
+   'https://github.com/abdussamiakanda',
+   'https://www.facebook.com/mdabdussami.akanda/',
+   'https://www.youtube.com/channel/UC7yhrEJBWA5JTERVBmWNRUQ?view_as=subscriber',
+   'https://soundcloud.com/abdussamiakanda',
+   'https://khulna.academia.edu/AbdusSamiAkanda',
+   'mailto:abdussamiakanda@gmail.com'
+ ]
+ 
+ function goSocial(no){
+   window.open(social[no], '_blank').focus();
+ }
+ 
+ function goTo(path){
+   window.location.assign(path);
+ }
+ 
 document.addEventListener("DOMContentLoaded", function() {
     renderMathInElement(document.body, {
-      // customised options
-      // • auto-render specific keys, e.g.:
       delimiters: [
           {left: '$$', right: '$$', display: true},
           {left: '$', right: '$', display: false},
           {left: '\\(', right: '\\)', display: false},
           {left: '\\[', right: '\\]', display: true}
       ],
-      // • rendering keys, e.g.:
       throwOnError : false
     });
 });
-
-document.addEventListener('contextmenu', function(e) {
-  e.preventDefault();
-});
-
-document.onkeydown = function(e) {
-  if(event.keyCode == 123) {
-     return false;
-  }
-  if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
-     return false;
-  }
-  if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
-     return false;
-  }
-  if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
-     return false;
-  }
-  if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
-     return false;
-  }
-}

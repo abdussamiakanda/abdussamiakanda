@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <title>The Landau-Lifshitz-Gilbert equation - Md. Abdus Sami Akanda</title>
+    <title>The Landau-Lifshitz-Gilbert equation - Md Abdus Sami Akanda</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta property="og:title" content="The Landau-Lifshitz-Gilbert equation by Md. Abdus Sami Akanda"/>
+    <meta property="og:title" content="The Landau-Lifshitz-Gilbert equation by Md Abdus Sami Akanda"/>
     <meta property="og:image" content="https://d3i71xaburhd42.cloudfront.net/f82e9ef9b21d3c2863001048def912e20178029e/4-Figure1-1.png"/>
     <link rel="shortcut icon" href="./../assets/image/icon.png">
     <script src="https://kit.fontawesome.com/1421ad6393.js" crossorigin="anonymous"></script>
@@ -16,153 +16,175 @@
     <link rel="stylesheet" href="./../assets/css/article.css">
   </head>
   <body>
-
-    <section class="black" id="intro">
-      <div class="flex">
-        <div class="back" onclick="goTo('./../')">Back to Home</div>
-        <div class="back" onclick="goTo('./../articles')">All Articles</div>
-      </div>
-      <div class="black-inner flex">
-        <div class="inners">
-          <div class="type">Article</div>
-          <h1 class="name">The Landau-Lifshitz-Gilbert equation</h1>
-          <p class="details">
-            Posted: 22 November 2020 <br>
-            Written by: Md. Abdus Sami Akanda
-          </p>
+    
+    <section>
+      <div class="menu">
+        <div class="head" onclick="goTo('../articles')">
+          <i class="fas fa-arrow-left"></i>
+        </div>
+        <div class="right-menu" onclick="goTo('../')">
+          <i class="fas fa-home"></i>
         </div>
       </div>
     </section>
 
-    <section class="white">
-      <div class="white-inner">
-        <div class="inners">
+    <section id="academic">
 
-          In 1935 L. D. Landau and E. M. Lifshitz wrote a paper$^{[1]}$ where they
-          derived the phenomenological equation of magnetization dynamics for small
-          damping. But it wasn't quite useful when the damping was large. After the
-          discovery of memory devices, studying magnetization dynamics became crucial.
-          In 2004 Thomas L. Gilbert wrote a paper$^{[2]}$ developing the equation for
-          large damping.<br><br>
-
-          Let's start by understanding the phenomenological theory of an undamped and
-          uncoupled magnetization. It means that we are considering only one spin (say
-          an electron) moment, which does not tend to align itself to an external field
-          and has no effect on it by external spins. Now what might happen if we apply an
-          effective field $\mathbf{H}$ on the magnetic moment $\mathbf{M}$? $\mathbf{M}$
-          will keep rotating around $\mathbf{H}$ as we assumed that there is no damping.
-          <br><br>
-
-          From Lagrangian formulation we can write that
-          $$ \begin{align}
-            \frac{d\mathbf{L}}{dt} = \mathbf{T}
-          \end{align} $$
-          where $\mathbf{L}$ is the angular momentum of the body and $\mathbf{T}$ is the torque acting on it. We can rewrite this equation in quantum mechanics just by replacing $\mathbf{L}$ with the spin angular momentum $\mathbf{S}$.
-          $$ \begin{align}
-            \frac{d\mathbf{S}}{dt} = \mathbf{T}
-          \end{align} $$
-
-          Now, to inject in the magnetic moment $\mathbf{M}$ in our equations we will use the concept of gyromagnetic ratio$^{[3]}$. It is defined by,
-          $$ \begin{align}
-            \gamma = \frac{\mathbf{M}}{\mathbf{S}}
-          \end{align} $$
-          where ($\gamma < 0$) is the gyromagnetic ratio for an electron spin. <br><br>
-
-          Now, remember the effective field $\mathbf{H}$ we applied on $\mathbf{M}$? Experimental
-          and theoretical studies of ferromagnets have identified that there are five different
-          fields that may contribute to the effective field:
-          <ul>
-            <li>external field</li>
-            <li>demagnetization field</li>
-            <li>exchange interaction field</li>
-            <li>anisotropy field</li>
-            <li>magnetoelastic field</li>
-          </ul>
-
-          The first two are magnetic field, but the rest have quantum mechanical origins.
-          $\mathbf{H}$ will exert a torque on $\mathbf{M}$, which can be expressed as
-          $$ \begin{align}
-            \mathbf{T} = \mathbf{M} \times \mathbf{H}
-          \end{align} $$
-
-          Now, we can work out the equation of motion for the magnetic moment of an
-          electron spin using equations (2, 3, 4),
-          $$ \begin{align}
-            \frac{d \mathbf{M}}{dt} = \gamma \mathbf{M} \times \mathbf{H}
-          \end{align} $$
-
-          The Lagrangian in our case is
-          $$ \begin{align}
-            \mathcal{L} [\mathbf{M}(\mathbf{r},t), \dot{\mathbf{M}}(\mathbf{r},t)] = \mathcal{T} [\mathbf{M}(\mathbf{r},t), \dot{\mathbf{M}}(\mathbf{r},t)] - U [\mathbf{M}(\mathbf{r},t)]
-          \end{align} $$
-          where, $\mathcal{T}$ is the kinetic energy and $U$ is the potential energy. <br><br>
-
-          Hence the Euler-Lagrangian equation,
-          $$ \begin{align}
-            \frac{d}{dt} \frac{\partial \mathcal{L}}{\partial \dot{\mathbf{M}}} - \frac{\partial \mathcal{L}}{\partial \mathbf{M}} = 0
-          \end{align} $$
-
-          This could have been true. But, unfortunately, in reality it is not true because it does not account for the damping. To convert equation (7) into an equation for damped magnetization, we will add a dissipative force term.
-          $$ \begin{align}
-            \mathcal{F} = - \frac{\partial \mathcal{R}[\dot{\mathbf{M}}]}{\partial \dot{\mathbf{M}}}
-          \end{align} $$
-          where $\mathcal{R}$ is a Rayleigh dissipation functional.
-
-          $$ \begin{equation}
-            \begin{split}
-            & \frac{d}{dt} \frac{\partial \mathcal{L}}{\partial \dot{\mathbf{M}}} - \frac{\partial \mathcal{L}}{\partial \mathbf{M}} = - \frac{\partial \mathcal{R}[\dot{\mathbf{M}}]}{\partial \dot{\mathbf{M}}} \\
-            \Rightarrow \text{\:} & \frac{d}{dt} \frac{\partial \mathcal{L}}{\partial \dot{\mathbf{M}}} - \frac{\partial \mathcal{L}}{\partial \mathbf{M}} + \frac{\partial \mathcal{R}[\dot{\mathbf{M}}]}{\partial \dot{\mathbf{M}}} = 0
-            \end{split}
-          \end{equation} $$
-
-          Recall from classical mechanics that, the force is negative gradient or negative
-          position derivative of the potential function. For dissipative force such as friction,
-          the potential is a function of velocity. Try to visualize that you don't feel friction
-          if you're not moving. But you will feel the frictional force if you're moving.
-
-          From Goldstein's classical mechanics textbook$^{[4]}$, we will use the definition of
-          the Rayleigh dissipation functional $\mathcal{R}$. <br> (Here, $\mathcal{R}$ and $\mathcal{F}$
-          are equivalent to $\mathcal{F}$ and $F$ respectively as used in the textbook)
-
-          $$ \begin{align}
-            \mathcal{R} = \frac{1}{2} \eta \dot{M}^2
-          \end{align} $$
-
-          Try to match the notations used here with the notations in the textbook. [$\mathbf{M} \leftrightarrow \mathbf{r}$; $\eta \leftrightarrow k$]. Putting the value of $\mathcal{R}$ in equation (9), we get,
-          $$ \begin{align*}
-            & \frac{d}{dt} \frac{\partial \mathcal{L}}{\partial \dot{\mathbf{M}}} - \frac{\partial \mathcal{L}}{\partial \mathbf{M}} + \frac{\partial \mathcal{R}[\dot{\mathbf{M}}]}{\partial \dot{\mathbf{M}}} = 0 \\
-            \Rightarrow \text{\:} & \frac{d}{dt} \frac{\partial (\mathcal{T} - U)}{\partial \dot{\mathbf{M}}} - \frac{\partial (\mathcal{T} - U)}{\partial \mathbf{M}} + \frac{\partial}{\partial \dot{\mathbf{M}}} \left( \frac{1}{2} \eta \dot{M}^2 \right) = 0 \\
-            \Rightarrow \text{\:} & \frac{d}{dt} \frac{\partial \mathcal{T}}{\partial \dot{\mathbf{M}}} - \frac{\partial \mathcal{T}}{\partial \mathbf{M}} + \frac{\partial U}{\partial \mathbf{M}} + \eta \dot{\mathbf{M}} = 0 \\
-            \Rightarrow \text{\:} & \frac{d}{dt} \frac{\partial \mathcal{T}}{\partial \dot{\mathbf{M}}} - \frac{\partial \mathcal{T}}{\partial \mathbf{M}} - \left[ \mathbf{H} - \eta \frac{\partial \mathbf{M}}{\partial t} \right] = 0 \\
-          \end{align*} $$
-          where, $\mathbf{H} = - \frac{\partial U}{\partial \mathbf{M}}$ is the effective field on the magnetic moment and the damping term $\eta \frac{\partial \mathbf{M}}{\partial t}$ is an added damping field that can reduce the effective field.
-
-          Now, we will simply replace $\mathbf{H}$ with $\left[ \mathbf{H} - \eta \frac{\partial \mathbf{M}}{\partial t} \right]$ in equation (5).
-          $$ \begin{align*}
-            & \frac{\partial \mathbf{M}}{\partial t} = \gamma \mathbf{M} \times \left[ \mathbf{H} - \eta \frac{\partial \mathbf{M}}{\partial t} \right] \\
-            \Rightarrow \text{\:} & \frac{\partial \mathbf{M}}{\partial t} = \gamma \mathbf{M} \times \mathbf{H} - \gamma \eta \mathbf{M} \times \frac{\partial \mathbf{M}}{\partial t} \\
-            \Rightarrow \text{\:} & \frac{\partial \mathbf{M}}{\partial t} = \gamma \mathbf{M} \times \mathbf{H} - \left(\frac{\alpha}{M}\right) \mathbf{M} \times \frac{\partial \mathbf{M}}{\partial t} \\
-            \Rightarrow \text{\:} & \frac{\partial}{\partial t} \left(\frac{\mathbf{M}}{M}\right) = \gamma \left(\frac{\mathbf{M}}{M}\right) \times \mathbf{H} - \left(\frac{\alpha}{M}\right) \mathbf{M} \times \frac{\partial}{\partial t} \left(\frac{\mathbf{M}}{M}\right) \\
-            \Rightarrow \text{\:} & \frac{\partial \mathbf{m}}{\partial t} = \gamma \mathbf{m} \times \mathbf{H} - \alpha \mathbf{m} \times \frac{\partial \mathbf{m}}{\partial t}
-          \end{align*} $$
-          where we defined $\alpha = \eta \gamma M$ as the dimensionless damping parameter and $\mathbf{m} = \frac{\mathbf{M}}{M}$ as the normalized (unit) magnetization. And finally, this is the Landau-Lifshitz-Gilbert equation.
-          <br><br>
-
-          <strong><big>References:</big></strong> <br><br>
-          [1] L. D. Landau and E. M. Lifshitz, “On the theory of the dispersion of magnetic permeability in ferromagnetic bodies,” Phys. Z. Sowjet., vol. 8, pp. 153-169, 1935. In L. D. Landau, Collected Papers. ed. by D. ter Haar. Gordon and Breach, New York, 1967, p. 101 <br>
-          [2] Gilbert, T. L. (2004). A phenomenological theory of damping in ferromagnetic materials. IEEE transactions on magnetics, 40(6), 3443-3449. <br>
-          [3] Wikipedia Contributors. “Gyromagnetic Ratio.” Wikipedia, https://en.wikipedia.org/wiki/Gyromagnetic_ratio <br>
-          [4] Goldstein, H. (1980). Classical Mechanics. Addison-Wesley.
-
-
-
-          <br><br>
-          <br><br>
-
+      <div class="introduction">
+        <div class="type">Article</div>
+        <div class="div-title">
+          <h2>The Landau-Lifshitz-Gilbert equation</h2>
         </div>
+        Posted: 22 November 2020 <br>
+        Written by: Md. Abdus Sami Akanda
       </div>
-    </section>
 
+      <div class="academic-divs">
+
+        In 1935 L. D. Landau and E. M. Lifshitz wrote a paper$^{[1]}$ where they
+        derived the phenomenological equation of magnetization dynamics for small
+        damping. But it wasn't quite useful when the damping was large. After the
+        discovery of memory devices, studying magnetization dynamics became crucial.
+        In 2004 Thomas L. Gilbert wrote a paper$^{[2]}$ developing the equation for
+        large damping.<br><br>
+
+        Let's start by understanding the phenomenological theory of an undamped and
+        uncoupled magnetization. It means that we are considering only one spin (say
+        an electron) moment, which does not tend to align itself to an external field
+        and has no effect on it by external spins. Now what might happen if we apply an
+        effective field $\mathbf{H}$ on the magnetic moment $\mathbf{M}$? $\mathbf{M}$
+        will keep rotating around $\mathbf{H}$ as we assumed that there is no damping.
+        <br><br>
+
+        From Lagrangian formulation we can write that
+        $$ \begin{align}
+          \frac{d\mathbf{L}}{dt} = \mathbf{T}
+        \end{align} $$
+        where $\mathbf{L}$ is the angular momentum of the body and $\mathbf{T}$ is the torque acting on it. We can rewrite this equation in quantum mechanics just by replacing $\mathbf{L}$ with the spin angular momentum $\mathbf{S}$.
+        $$ \begin{align}
+          \frac{d\mathbf{S}}{dt} = \mathbf{T}
+        \end{align} $$
+
+        Now, to inject in the magnetic moment $\mathbf{M}$ in our equations we will use the concept of gyromagnetic ratio$^{[3]}$. It is defined by,
+        $$ \begin{align}
+          \gamma = \frac{\mathbf{M}}{\mathbf{S}}
+        \end{align} $$
+        where ($\gamma < 0$) is the gyromagnetic ratio for an electron spin. <br><br>
+
+        Now, remember the effective field $\mathbf{H}$ we applied on $\mathbf{M}$? Experimental
+        and theoretical studies of ferromagnets have identified that there are five different
+        fields that may contribute to the effective field:
+        <ul>
+          <li>external field</li>
+          <li>demagnetization field</li>
+          <li>exchange interaction field</li>
+          <li>anisotropy field</li>
+          <li>magnetoelastic field</li>
+        </ul>
+
+        The first two are magnetic field, but the rest have quantum mechanical origins.
+        $\mathbf{H}$ will exert a torque on $\mathbf{M}$, which can be expressed as
+        $$ \begin{align}
+          \mathbf{T} = \mathbf{M} \times \mathbf{H}
+        \end{align} $$
+
+        Now, we can work out the equation of motion for the magnetic moment of an
+        electron spin using equations (2, 3, 4),
+        $$ \begin{align}
+          \frac{d \mathbf{M}}{dt} = \gamma \mathbf{M} \times \mathbf{H}
+        \end{align} $$
+
+        The Lagrangian in our case is
+        $$ \begin{align}
+          \mathcal{L} [\mathbf{M}(\mathbf{r},t), \dot{\mathbf{M}}(\mathbf{r},t)] = \mathcal{T} [\mathbf{M}(\mathbf{r},t), \dot{\mathbf{M}}(\mathbf{r},t)] - U [\mathbf{M}(\mathbf{r},t)]
+        \end{align} $$
+        where, $\mathcal{T}$ is the kinetic energy and $U$ is the potential energy. <br><br>
+
+        Hence the Euler-Lagrangian equation,
+        $$ \begin{align}
+          \frac{d}{dt} \frac{\partial \mathcal{L}}{\partial \dot{\mathbf{M}}} - \frac{\partial \mathcal{L}}{\partial \mathbf{M}} = 0
+        \end{align} $$
+
+        This could have been true. But, unfortunately, in reality it is not true because it does not account for the damping. To convert equation (7) into an equation for damped magnetization, we will add a dissipative force term.
+        $$ \begin{align}
+          \mathcal{F} = - \frac{\partial \mathcal{R}[\dot{\mathbf{M}}]}{\partial \dot{\mathbf{M}}}
+        \end{align} $$
+        where $\mathcal{R}$ is a Rayleigh dissipation functional.
+
+        $$ \begin{equation}
+          \begin{split}
+          & \frac{d}{dt} \frac{\partial \mathcal{L}}{\partial \dot{\mathbf{M}}} - \frac{\partial \mathcal{L}}{\partial \mathbf{M}} = - \frac{\partial \mathcal{R}[\dot{\mathbf{M}}]}{\partial \dot{\mathbf{M}}} \\
+          \Rightarrow \text{\:} & \frac{d}{dt} \frac{\partial \mathcal{L}}{\partial \dot{\mathbf{M}}} - \frac{\partial \mathcal{L}}{\partial \mathbf{M}} + \frac{\partial \mathcal{R}[\dot{\mathbf{M}}]}{\partial \dot{\mathbf{M}}} = 0
+          \end{split}
+        \end{equation} $$
+
+        Recall from classical mechanics that, the force is negative gradient or negative
+        position derivative of the potential function. For dissipative force such as friction,
+        the potential is a function of velocity. Try to visualize that you don't feel friction
+        if you're not moving. But you will feel the frictional force if you're moving.
+
+        From Goldstein's classical mechanics textbook$^{[4]}$, we will use the definition of
+        the Rayleigh dissipation functional $\mathcal{R}$. <br> (Here, $\mathcal{R}$ and $\mathcal{F}$
+        are equivalent to $\mathcal{F}$ and $F$ respectively as used in the textbook)
+
+        $$ \begin{align}
+          \mathcal{R} = \frac{1}{2} \eta \dot{M}^2
+        \end{align} $$
+
+        Try to match the notations used here with the notations in the textbook. [$\mathbf{M} \leftrightarrow \mathbf{r}$; $\eta \leftrightarrow k$]. Putting the value of $\mathcal{R}$ in equation (9), we get,
+        $$ \begin{align*}
+          & \frac{d}{dt} \frac{\partial \mathcal{L}}{\partial \dot{\mathbf{M}}} - \frac{\partial \mathcal{L}}{\partial \mathbf{M}} + \frac{\partial \mathcal{R}[\dot{\mathbf{M}}]}{\partial \dot{\mathbf{M}}} = 0 \\
+          \Rightarrow \text{\:} & \frac{d}{dt} \frac{\partial (\mathcal{T} - U)}{\partial \dot{\mathbf{M}}} - \frac{\partial (\mathcal{T} - U)}{\partial \mathbf{M}} + \frac{\partial}{\partial \dot{\mathbf{M}}} \left( \frac{1}{2} \eta \dot{M}^2 \right) = 0 \\
+          \Rightarrow \text{\:} & \frac{d}{dt} \frac{\partial \mathcal{T}}{\partial \dot{\mathbf{M}}} - \frac{\partial \mathcal{T}}{\partial \mathbf{M}} + \frac{\partial U}{\partial \mathbf{M}} + \eta \dot{\mathbf{M}} = 0 \\
+          \Rightarrow \text{\:} & \frac{d}{dt} \frac{\partial \mathcal{T}}{\partial \dot{\mathbf{M}}} - \frac{\partial \mathcal{T}}{\partial \mathbf{M}} - \left[ \mathbf{H} - \eta \frac{\partial \mathbf{M}}{\partial t} \right] = 0 \\
+        \end{align*} $$
+        where, $\mathbf{H} = - \frac{\partial U}{\partial \mathbf{M}}$ is the effective field on the magnetic moment and the damping term $\eta \frac{\partial \mathbf{M}}{\partial t}$ is an added damping field that can reduce the effective field.
+
+        Now, we will simply replace $\mathbf{H}$ with $\left[ \mathbf{H} - \eta \frac{\partial \mathbf{M}}{\partial t} \right]$ in equation (5).
+        $$ \begin{align*}
+          & \frac{\partial \mathbf{M}}{\partial t} = \gamma \mathbf{M} \times \left[ \mathbf{H} - \eta \frac{\partial \mathbf{M}}{\partial t} \right] \\
+          \Rightarrow \text{\:} & \frac{\partial \mathbf{M}}{\partial t} = \gamma \mathbf{M} \times \mathbf{H} - \gamma \eta \mathbf{M} \times \frac{\partial \mathbf{M}}{\partial t} \\
+          \Rightarrow \text{\:} & \frac{\partial \mathbf{M}}{\partial t} = \gamma \mathbf{M} \times \mathbf{H} - \left(\frac{\alpha}{M}\right) \mathbf{M} \times \frac{\partial \mathbf{M}}{\partial t} \\
+          \Rightarrow \text{\:} & \frac{\partial}{\partial t} \left(\frac{\mathbf{M}}{M}\right) = \gamma \left(\frac{\mathbf{M}}{M}\right) \times \mathbf{H} - \left(\frac{\alpha}{M}\right) \mathbf{M} \times \frac{\partial}{\partial t} \left(\frac{\mathbf{M}}{M}\right) \\
+          \Rightarrow \text{\:} & \frac{\partial \mathbf{m}}{\partial t} = \gamma \mathbf{m} \times \mathbf{H} - \alpha \mathbf{m} \times \frac{\partial \mathbf{m}}{\partial t}
+        \end{align*} $$
+        where we defined $\alpha = \eta \gamma M$ as the dimensionless damping parameter and $\mathbf{m} = \frac{\mathbf{M}}{M}$ as the normalized (unit) magnetization. And finally, this is the Landau-Lifshitz-Gilbert equation.
+        <br><br>
+
+        <strong><big>References:</big></strong> <br><br>
+        [1] L. D. Landau and E. M. Lifshitz, “On the theory of the dispersion of magnetic permeability in ferromagnetic bodies,” Phys. Z. Sowjet., vol. 8, pp. 153-169, 1935. In L. D. Landau, Collected Papers. ed. by D. ter Haar. Gordon and Breach, New York, 1967, p. 101 <br>
+        [2] Gilbert, T. L. (2004). A phenomenological theory of damping in ferromagnetic materials. IEEE transactions on magnetics, 40(6), 3443-3449. <br>
+        [3] Wikipedia Contributors. “Gyromagnetic Ratio.” Wikipedia, https://en.wikipedia.org/wiki/Gyromagnetic_ratio <br>
+        [4] Goldstein, H. (1980). Classical Mechanics. Addison-Wesley.
+
+
+        
+      </div>
+
+
+      <br>
+
+      <div id="academic-contact" class="social-div">
+
+        <div class="social">
+          <div onclick="goSocial('9')" class="social-item"><i class="fas fa-envelope"></i></div>
+          <div onclick="goSocial('0')" class="social-item"><i class="fab fa-researchgate"></i></div>
+          <div onclick="goSocial('8')" class="social-item"><i class="fa-solid fa-graduation-cap"></i></div>
+          <div onclick="goSocial('1')" class="social-item"><i class="fab fa-google"></i></div>
+          <div onclick="goSocial('2')" class="social-item"><i class="fab fa-linkedin"></i></div>
+          <div onclick="goSocial('3')" class="social-item"><i class="fab fa-orcid"></i></div>
+          <div onclick="goSocial('4')" class="social-item"><i class="fab fa-github"></i></div>
+          <div onclick="goSocial('5')" class="social-item"><i class="fab fa-facebook"></i></div>
+          <div onclick="goSocial('6')" class="social-item"><i class="fab fa-youtube"></i></div>
+          <div onclick="goSocial('7')" class="social-item"><i class="fab fa-soundcloud"></i></div>
+        </div>
+        <p>
+          Copyright @2017 Md Abdus Sami Akanda. All rights reserved.
+        </p>
+
+      </div>
+
+    </section>
 
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js" integrity="sha384-GxNFqL3r9uRJQhR+47eDxuPoNE7yLftQM8LcxzgS4HT73tp970WS/wV5p8UzCOmb" crossorigin="anonymous"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>

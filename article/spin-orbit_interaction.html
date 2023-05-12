@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <title>Spin-Orbit Interaction - Md. Abdus Sami Akanda</title>
+    <title>Spin-Orbit Interaction - Md Abdus Sami Akanda</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta property="og:title" content="Spin-Orbit Interaction by Md. Abdus Sami Akanda"/>
+    <meta property="og:title" content="Spin-Orbit Interaction by Md Abdus Sami Akanda"/>
     <meta property="og:image" content="https://media.springernature.com/original/springer-static/image/chp%3A10.1007%2F978-3-030-36420-5_4/MediaObjects/329042_1_En_4_Fig1_HTML.png"/>
     <link rel="shortcut icon" href="./../assets/image/icon.png">
     <script src="https://kit.fontawesome.com/1421ad6393.js" crossorigin="anonymous"></script>
@@ -16,380 +16,407 @@
     <link rel="stylesheet" href="./../assets/css/article.css">
   </head>
   <body>
-
-    <section class="black" id="intro">
-      <div class="flex">
-        <div class="back" onclick="goTo('./../')">Back to Home</div>
-        <div class="back" onclick="goTo('./../articles')">All Articles</div>
-      </div>
-      <div class="black-inner flex">
-        <div class="inners">
-          <div class="type">Article</div>
-          <h1 class="name">Spin-Orbit Interaction</h1>
-          <p class="details">
-            Posted: 14 December 2020 <br>
-            Written by: Md. Abdus Sami Akanda
-          </p>
+    
+    <section>
+      <div class="menu">
+        <div class="head" onclick="goTo('../articles')">
+          <i class="fas fa-arrow-left"></i>
+        </div>
+        <div class="right-menu" onclick="goTo('../')">
+          <i class="fas fa-home"></i>
         </div>
       </div>
     </section>
 
-    <section class="white">
-      <div class="white-inner">
-        <div class="inners">
-
-          <h3>Introduction</h3>
-
-          In quantum physics, the spin-orbit interaction (also called spin-orbit
-          effect or spin-orbit coupling) is a relativistic interaction of a particle's
-          spin with its motion inside a potential. <br><br>
-
-          A key example of this phenomenon is the spin-orbit interaction leading to
-          shifts in an electron's atomic energy levels, due to electromagnetic
-          interaction between the electron's magnetic dipole, its orbital motion,
-          and the electrostatic field of the positively charged nucleus. This
-          phenomenon is detectable as a splitting of spectral lines, which can be
-          thought of as a Zeeman effect product of two relativistic effects: the
-          apparent magnetic field seen from the electron perspective and the magnetic
-          moment of the electron associated with its intrinsic spin. A similar effect,
-          due to the relationship between angular momentum and the strong nuclear
-          force, occurs for protons and neutrons moving inside the nucleus, leading
-          to a shift in their energy levels in the nucleus shell model. In the field
-          of spintronics, spin-orbit effects for electrons in semiconductors and other
-          materials are explored for technological applications. The spin-orbit
-          interaction is one cause of magnetocrystalline anisotropy and the spin Hall
-          effect.
-
-          <h3>Relativistic origin of the Spin-Orbit Interaction</h3>
-
-          According to the theory of relativity, a particle moving in an electrical
-          field experiences an effective magnetic field, which is directed perpendicularly
-          to the electrical field and the particle movement direction. The interaction of
-          this effective magnetic field with the electron spin is called Spin-Orbit
-          interaction. It is important to emphasize that the direction and magnitude
-          of the effective magnetic field do not depend either on the particle charge
-          or on the particle spin. <br><br>
-
-          According to this theory, the electric and magnetic field mutually
-          transformed into each other depending on the speed of an observer. For
-          example, if in a coordinate system of static observer there is only a
-          magnetic field, a movable observer will experience this field as both
-          an electrical field and a magnetic field. <br><br>
-
-          A particle moving in a static magnetic field experience an effective
-          electric field. The effective electrical field acts on the particle
-          charge (the Lorentz force, Hall effect) and forces the particle to move
-          along this field. <br><br>
-
-          A particle moving in a static electrical field experience an effective
-          magnetic field. The effective magnetic field acts on the particle magnetic
-          moment (spin-orbit interaction) and causes the precession of the magnetic
-          moment around the direction of the effective magnetic field. <br><br>
-
-          The electromagnetic field is a relativistic object and the Lorentz
-          transformation equations are written as,
-
-          $$\mathbf{E}_\mathrm{move} = \frac{\mathbf{E}_\mathrm{static} + \mathbf{v} \times \mathbf{H}_\mathrm{static}}{\sqrt{1 - \frac{v^2}{c^2}}} \text{ ;} \\ \mathbf{H}_\mathrm{move} = \frac{\mathbf{H}_\mathrm{static} - \frac{\mathbf{v}}{c^2} \times \mathbf{E}_\mathrm{static}}{\sqrt{1 - \frac{v^2}{c^2}}}$$
-
-          where, $\mathbf{E}_\mathrm{static}, \mathbf{H}_\mathrm{static}$ are the
-          electric and magnetic field in the static coordinate system and
-          $\mathbf{E}_\mathrm{move}, \mathbf{H}_\mathrm{move}$ are the elctric and
-          magnetic field in the coordinate system, which moves with a constant
-          velocity $\mathbf{v}$.
-
-          As a result, an electron, which moves in a static magnetic field
-          $\mathbf{H}_\text{static}$, experiences in own reference frame an
-          effective electrical field $\mathbf{E}_\text{Hall}$, which is called
-          the Hall field (Hall voltage). Similarly, when an electron moves in a
-          static electrical field $\mathbf{E}_\text{static}$, it experiences in
-          own reference frame an effective magnetic field $\mathbf{H}_\text{SO}$,
-          which is called the effective spin-orbit magnetic field. <br><br>
-
-          For example, when an electron moves in the $x$-direction,
-          $$v_x \neq 0 \qquad \text{;} \qquad v_y = 0 \qquad \text{;} \qquad v_z = 0$$
-
-          the effective electric field and the effective magnetic field are,
-          $$E_\text{Hall} = E_\text{y} = - \frac{v}{\sqrt{1 - \frac{v^2}{c^2}}} H_\text{z} \text{ ;} \\ H_\text{SO} = H_\text{y} = \frac{\frac{v}{c^2}}{\sqrt{1 - \frac{v^2}{c^2}}} E_\text{z}$$
-
-          For the non-relativistic case $(v << c)$:
-          $$\sqrt{1 - \frac{v^2}{c^2}} \simeq 1$$
-
-          The effective electric field and the effective magnetic field are then,
-          $$E_\text{Hall} = E_\text{y} = - v H_\text{z} \text{ ;} \\ H_\text{SO} = H_\text{y} = \frac{v}{c^2} E_\text{z}$$
-
-          <strong>Question:</strong> An electron always moves along the electrical
-          field (but not perpendicularly). Then, how it can experience the spin-orbit
-          interaction? <br>
-          <strong>Answer:</strong> The trajectory of an electron may be very different.
-          There are many cases when an electron moves perpendicularly to an electrical
-          field. For example, when the electron is orbiting around a nucleus. <br><br>
-
-          <strong>Question:</strong> Which parameter characterizes the spin-orbit
-          interaction? Is it a classical parameter or a quantum mechanical parameter?
-          <br>
-          <strong>Answer:</strong> There is only one cause of spin-orbit interaction.
-          It is the magnetic field $\mathbf{H}_\text{SO}$. All other parameters are
-          consequences of $\mathbf{H}_\text{SO}$. For example, the electron spin
-          aligns itself along $\mathbf{H}_\text{SO}$. It changes the energy of the
-          electron. The change in energy can be defined as the energy of the
-          spin-orbit interaction $E_\text{SO}$. If an additional external magnetic
-          field $\mathbf{H}_\text{ext}$ is applied, the electron spin is aligned along
-          the total magnetic field $\mathbf{H}_\text{SO} + \mathbf{H}_\text{ext}$ and
-          $E_\text{SO}$ has no physical meaning. <br><br>
-
-          <strong>Question:</strong> Since the spin-orbit magnetic field
-          $\mathbf{H}_\text{SO}$ is proportional to $1/c^2$, then it should
-          be negligibly small. Should we care about such a tiny effect? <br>
-          <strong>Answer:</strong> Yes. It is small, except for when
-          $\mathbf{E}_\text{static}$ is huge. For example, near the nucleus
-          $\mathbf{H}_\text{SO}$ is large. Any substantial spin-orbit interaction
-          is induced only by an electrical field of a nucleus. Other realistic
-          sources of the electrical field in a solid induce very weak spin-orbit
-          interaction. This field is very symmetric, and it cancels itself out in
-          a nucleus. External fields may break this symmetry. <br><br>
-
-          <strong>Question:</strong> Is spin-orbit interaction is a quantum
-          mechanical effect?<br>
-          <strong>Answer:</strong> No. The spin-orbit interaction affects both small
-          and large objects. It exists in the macro world as well.<br><br>
-
-          <h3>Energy of Spin-Orbit interaction</h3>
-
-          <img class="center" src="https://staff.aist.go.jp/v.zayets/SpinTransport/32/soPrecessionS.gif" alt="">
-
-          There is a precession of electron spin $\mathbf{S}$ around magnetic
-          field $\mathbf{H}_\text{SO}$ of spin-orbit interaction until it is
-          aligned parallel to $\mathbf{H}_\text{SO}$. After the electron spin
-          is aligned, the energy of spin-orbit interaction becomes,
-
-          $$E_\text{SO} = \mu_\text{B} H_\text{SO}$$
-
-          where, $\mu_\text{B}$ is the Bohr magneton. <br><br>
-
-          The $\mathbf{H}_\text{SO}$ only interacts with the spin magnetic
-          moment, not with the orbital magnetic moment. <br><br>
-
-          <strong>Question:</strong> Why $\mathbf{H}_\text{SO}$ does not induce
-          the Lorentz force and cannot interact with the orbital magnetic moment?
-          <br>
-          <strong>Answer:</strong> $\mathbf{H}_\text{SO}$ has relativistic origin.
-          It appears only in the coordinate system which moves together with the
-          electron. The Lorentz force has the relativistic origin as well and it
-          is originated from the electrical field, which the electron experiences
-          when moves in a magnetic field. In the moving coordinate system, where
-          the electron experiences $\mathbf{H}_\text{SO}$, the electron does not
-          move and therefore experience no Lorentz force. The interaction of the
-          orbital moment with a magnetic field is due to the Lorentz force. <br><br>
-
-          Electron spin is aligned along due to the spin precession damping.
-          The spin precession damping is a complex mechanism, which involves
-          an external particle with a non-zero spin (e.g. a photon, a magnon).
-          It could take a relatively long time until the full alignment of
-          electron spin along $\mathbf{H}_\text{SO}$. <br><br>
-
-          <strong>Question:</strong> Is there any cases when the electron spin
-          is not aligned along $\mathbf{H}_\text{SO}$? <br>
-          <strong>Answer:</strong> There are many such cases. For example, the
-          conduction electrons in a metal. There are many conduction electrons,
-          which simultaneously overlap with each other. For this reason, the
-          scattering between quantum states of conduction electrons is very
-          frequent. The time between two consequent scattering is very short
-          $(\sim 1 \mathrm{\: ps})$. This time is not enough for the
-          complete alignment.
-
-          <h3>Magnitude of the Spin-Orbit interaction</h3>
-
-          Except for a few weak effects, all spin-orbital effects are induced
-          by an electrical field of an atomic nucleus and the electron movement
-          (rotation) in the close proximity of the nucleus. <br><br>
-
-          For a realistic spin-orbit interaction, the maximum value of drift
-          velocity of electron in a solid is $1 \times 10^7 \mathrm{\: cm/s}$
-          (GaAs, Si) <a target="_blank" href="https://en.wikipedia.org/wiki/Saturation_velocity">[Ref]</a>.
-          The electron cannot go faster, because above the saturation velocity
-          the electron intensively illuminates phonons. The maximum breakdown
-          voltage applicable to a semiconductor is $5 \times 10^5 \mathrm{\: cm/s}$
-          (a oxide). For higher voltage, the avalanche breakdown occurs. <br><br>
-
-          For these values, the effective magnetic field of the spin-orbit
-          interaction is only $0.5 \mathrm{\: Gauss}$. For comparison, Earth's
-          magnetic field is about $0.25-0.65 \mathrm{\: Gauss}$. <br><br>
-
-          For an electron rotating around the nucleus, the speed of the electron
-          is about $\sim 2.1 \times 10^6 \mathrm{\: m/s}$. The Coulomb electrical
-          field in H atom at the first orbital $(r = 0.053 \mathrm{\: nm})$ is
-          $5.1 \times 10^9 \mathrm{\: V/cm}$. <br><br>
-
-          For these values, the effective magnetic field of the spin-orbit
-          interaction is $125 \mathrm{\: kGauss} = 12.5 \mathrm{\: T}$.
-
-          <h3>Spin-Orbit interaction and orbital moment</h3>
-
-          Electron orbital can be represented as 2D electron rotation around a rotating axis.
-          <br>
-          <img class="center" src="https://staff.aist.go.jp/v.zayets/SpinTransport/32/OrbitFulls.gif" alt="">
-
-          <strong>Question:</strong> Is the spin-orbit interaction proportional to the orbital moment?
-          <br>
-          <strong>Answer:</strong> No. Even though there are common tendencies
-          between the spin-orbit interaction and the orbital moment. For example,
-          when the orbital moment is zero, the spin-orbit interaction is zero.
-          When the orbital moment changes its sign, the spin-orbit interaction
-          changes its sign as well. <br>
-          Even though "orbit" is a part of the name of the spin-orbit interaction,
-          the relation between orbital moment and $\mathbf{H}_\text{SO}$ is complex
-          and not straightforward.<br><br>
-
-          <strong>Question:</strong> How is it possible that an electron, while
-          rotating around a nucleus, does not experience the spin-orbit interaction?
-          <br>
-          <strong>Answer:</strong> It is because for the spherical orbit an electron
-          makes an equal number of rotations in two opposite directions. Since for
-          opposite rotation directions, the directions of the effective magnetic
-          field of the spin-orbit interaction are opposite, an electron does not
-          experience any spin-orbit interaction.
-
-          <h3>Types of Spin-Orbit interaction</h3>
-
-          It is convenient to divide effects related to the spin-orbit interaction
-          into 3 classes depending on the source of the electrical field and the
-          source of breaking of the time-reversal symmetry.
-
-          <ul>
-            <li>Type 1: Weak spin-orbit interaction</li>
-            <li>Type 2: Strong spin-orbit interaction</li>
-            <li>Type 3: Moderate spin-orbit interaction</li>
-          </ul>
-
-          <h4>Type 1: Weak spin-orbit interaction</h4>
-
-          Only the conduction electrons experience this type of spin-orbit effect.
-          The electrical field at an interface or electrical field of a Schottky
-          barrier is the sources of the electrical field for this type. An
-          electrical current flowing along with the interface and perpendicularly
-          to the interface electrical field breaks the time-reversal symmetry.
-          <br><br>
-
-          This type of effect includes:
-
-          <ul>
-            <li>spin Hall effect</li>
-            <li>anomalous spin Hall effect</li>
-            <li>anomalous magneto-resistance</li>
-            <li>rashba effect</li>
-          </ul>
-
-          <h4>Type 2: Strong spin-orbit interaction</h4>
-
-          Only localized electrons (e.g. d- or f- electrons) experience this type
-          of spin-orbit effect. The centrosymmetric electrical field of the atomic
-          nucleus is the source of this type of spin-orbit effect. An external
-          magnetic field is a source of breaking the time-reversal symmetry.
-          <br><br>
-
-          This type of effect includes:
-
-          <ul>
-            <li>perpendicular magnetic anisotropy</li>
-            <li>g-factor</li>
-            <li>magneto-elastic effect</li>
-            <li>voltage-controlled magnetic anisotropy</li>
-            <li>interface sensing</li>
-            <li>magnetic anisotropy</li>
-          </ul>
-
-          In absence of external magnetic field, a localized electron does
-          not experience any $\mathbf{H}_\text{SO}$. However, when an external
-          magnetic field $\mathbf{H}_\text{ext}$ is applied, it induces strong
-          $\mathbf{H}_\text{SO}$ parallel to $\mathbf{H}_\text{ext}$ and the
-          electron experiences a stronger total magnetic field
-          $\mathbf{H}_\text{total} = \mathbf{H}_\text{ext} + \mathbf{H}_\text{SO}$.
-          <br><br>
-
-          The orbital moment of the localized electrons is zero. Any 3D orbital
-          can be represented as the sum of two 2D orbitals of clockwise and
-          anti-clockwise electron rotation. Clockwise and anti-clockwise orbitals
-          are identical. As a result, the electron experience the same but opposite
-          $\mathbf{H}_\text{SO}$ for the clockwise and anti-clockwise orbitals.
-          <br><br>
-
-          When an external magnetic field is applied, the time-reversal symmetry
-          is broken. Since electron rotations in the clockwise and anti-clockwise
-          orbitals are opposite, the Lorentz force is the opposite. As a result,
-          the clockwise and anti-clockwise orbitals are deformed differently in
-          an external magnetic field, $\mathbf{H}_\text{SO}$ becomes different
-          for clockwise and anti-clockwise orbitals and in total the electron
-          experiences a non-zero $\mathbf{H}_\text{SO}$.
-          <br><br>
-
-          <img class="center" src="https://staff.aist.go.jp/v.zayets/SpinTransport/32/TimeInverseYesS.gif" alt="">
-
-          <h4>Type 3: Moderate spin-orbit interaction</h4>
-
-          Only conduction electrons experience this type of effect. The centrosymmetric
-          electrical field of the atomic nucleus is the source of the electrical
-          field. Electrical current breaks the time-reversal symmetry. <br><br>
-
-          This type of effect includes:
-
-          <ul>
-            <li>spin Hall effect</li>
-            <li>spin pumping</li>
-            <li>inverse spin Hall effect</li>
-            <li>spin damping</li>
-            <li>spin-orbit torque</li>
-          </ul>
-
-          <h3>Spin-Orbit interaction from the Dirac equations</h3>
-
-          Einstein's relativistic equation for the energy is,
-          $$E^2 = p^2c^2 - m_o^2c^4$$
-          which should describe the electric field as well.
-
-          The quantum-mechanical operator for the energy and the momentum are,
-          $$\bar{p} \rightarrow - i \hbar \nabla \text{ ;} \\ \bar{E} = i \hbar \frac{\partial}{\partial t}$$
-
-          Now, the relation between relativistic and quantum mechanics can found that,
-
-          $$\left( \nabla^2 - \frac{1}{c^2} \frac{\partial^2}{\partial t^2} - \frac{m_o^2 c^2}{\hbar^2}\right) \Psi(r,t) = 0 $$
-
-          This is called the Klein-Gordon equation. <br><br>
-
-          The wave equation should be 1st order differential equation with respect
-          to time and space. Dirac found that the Klein-Gordon equation can be
-          represented as a product of a 1st order differential equation and its
-          conjugate. Therefore, the Dirac equations describes the electrical field.
-
-          $$\left( A \partial_x + B \partial_y + C \partial_z + \frac{i}{c} D \partial_t - \frac{m_o c}{\hbar}\right) \Psi = 0 $$
-
-          Setting,
-
-          $$D = \gamma^0 \text{ ;} \qquad A = i \gamma^1 \text{ ;} \\ B = i \gamma^2 \text{ ;} \qquad C = i \gamma^3$$
-
-          $$\partial_0 = \frac{1}{c} \partial_t \text{ ;} \qquad \partial_1 = \partial_x \text{ ;} \\ \partial_2 = \partial_y \text{ ;} \qquad \partial_3 = \partial_z $$
-
-          where, $\gamma$ denotes the $(2 \times 2)$ sub-matrices taken from the Pauli matrices.
-
-          The Dirac equation,
-
-          $$i \hbar \gamma^\mu \partial_\mu \Psi - m_o c \Psi = 0$$
-          where, $\mu = 0,1,2,3$ <br><br>
-
-          The Dirac equation, which includes the gauge potential, is
-
-          $$ \gamma^\mu (i \hbar \partial_\mu - e A_\mu) \Psi - m_o c \Psi = 0$$
-
-          <h3>References</h3>
-
-          Dr. Vadym Zayets, "Spin-Orbit Interaction" - <a target="_blank" href="https://staff.aist.go.jp/v.zayets/spin3_32_SpinOrbit.html">https://staff.aist.go.jp/v.zayets/spin3_32_SpinOrbit.html</a>
-
-          <br><br>
-          <br><br>
-
+    <section id="academic">
+
+      <div class="introduction">
+        <div class="type">Article</div>
+        <div class="div-title">
+          <h2>Spin-Orbit Interaction</h2>
         </div>
+        Posted: 14 December 2020 <br>
+        Written by: Md. Abdus Sami Akanda
       </div>
-    </section>
 
+      <div class="academic-divs">
+
+        <h3>Introduction</h3>
+
+        In quantum physics, the spin-orbit interaction (also called spin-orbit
+        effect or spin-orbit coupling) is a relativistic interaction of a particle's
+        spin with its motion inside a potential. <br><br>
+
+        A key example of this phenomenon is the spin-orbit interaction leading to
+        shifts in an electron's atomic energy levels, due to electromagnetic
+        interaction between the electron's magnetic dipole, its orbital motion,
+        and the electrostatic field of the positively charged nucleus. This
+        phenomenon is detectable as a splitting of spectral lines, which can be
+        thought of as a Zeeman effect product of two relativistic effects: the
+        apparent magnetic field seen from the electron perspective and the magnetic
+        moment of the electron associated with its intrinsic spin. A similar effect,
+        due to the relationship between angular momentum and the strong nuclear
+        force, occurs for protons and neutrons moving inside the nucleus, leading
+        to a shift in their energy levels in the nucleus shell model. In the field
+        of spintronics, spin-orbit effects for electrons in semiconductors and other
+        materials are explored for technological applications. The spin-orbit
+        interaction is one cause of magnetocrystalline anisotropy and the spin Hall
+        effect.
+        <br><br>
+
+        <h3>Relativistic origin of the Spin-Orbit Interaction</h3>
+
+        According to the theory of relativity, a particle moving in an electrical
+        field experiences an effective magnetic field, which is directed perpendicularly
+        to the electrical field and the particle movement direction. The interaction of
+        this effective magnetic field with the electron spin is called Spin-Orbit
+        interaction. It is important to emphasize that the direction and magnitude
+        of the effective magnetic field do not depend either on the particle charge
+        or on the particle spin. <br><br>
+
+        According to this theory, the electric and magnetic field mutually
+        transformed into each other depending on the speed of an observer. For
+        example, if in a coordinate system of static observer there is only a
+        magnetic field, a movable observer will experience this field as both
+        an electrical field and a magnetic field. <br><br>
+
+        A particle moving in a static magnetic field experience an effective
+        electric field. The effective electrical field acts on the particle
+        charge (the Lorentz force, Hall effect) and forces the particle to move
+        along this field. <br><br>
+
+        A particle moving in a static electrical field experience an effective
+        magnetic field. The effective magnetic field acts on the particle magnetic
+        moment (spin-orbit interaction) and causes the precession of the magnetic
+        moment around the direction of the effective magnetic field. <br><br>
+
+        The electromagnetic field is a relativistic object and the Lorentz
+        transformation equations are written as,
+
+        $$\mathbf{E}_\mathrm{move} = \frac{\mathbf{E}_\mathrm{static} + \mathbf{v} \times \mathbf{H}_\mathrm{static}}{\sqrt{1 - \frac{v^2}{c^2}}} \text{ ;} \\ \mathbf{H}_\mathrm{move} = \frac{\mathbf{H}_\mathrm{static} - \frac{\mathbf{v}}{c^2} \times \mathbf{E}_\mathrm{static}}{\sqrt{1 - \frac{v^2}{c^2}}}$$
+
+        where, $\mathbf{E}_\mathrm{static}, \mathbf{H}_\mathrm{static}$ are the
+        electric and magnetic field in the static coordinate system and
+        $\mathbf{E}_\mathrm{move}, \mathbf{H}_\mathrm{move}$ are the elctric and
+        magnetic field in the coordinate system, which moves with a constant
+        velocity $\mathbf{v}$.
+
+        As a result, an electron, which moves in a static magnetic field
+        $\mathbf{H}_\text{static}$, experiences in own reference frame an
+        effective electrical field $\mathbf{E}_\text{Hall}$, which is called
+        the Hall field (Hall voltage). Similarly, when an electron moves in a
+        static electrical field $\mathbf{E}_\text{static}$, it experiences in
+        own reference frame an effective magnetic field $\mathbf{H}_\text{SO}$,
+        which is called the effective spin-orbit magnetic field. <br><br>
+
+        For example, when an electron moves in the $x$-direction,
+        $$v_x \neq 0 \qquad \text{;} \qquad v_y = 0 \qquad \text{;} \qquad v_z = 0$$
+
+        the effective electric field and the effective magnetic field are,
+        $$E_\text{Hall} = E_\text{y} = - \frac{v}{\sqrt{1 - \frac{v^2}{c^2}}} H_\text{z} \text{ ;} \\ H_\text{SO} = H_\text{y} = \frac{\frac{v}{c^2}}{\sqrt{1 - \frac{v^2}{c^2}}} E_\text{z}$$
+
+        For the non-relativistic case $(v << c)$:
+        $$\sqrt{1 - \frac{v^2}{c^2}} \simeq 1$$
+
+        The effective electric field and the effective magnetic field are then,
+        $$E_\text{Hall} = E_\text{y} = - v H_\text{z} \text{ ;} \\ H_\text{SO} = H_\text{y} = \frac{v}{c^2} E_\text{z}$$
+
+        <strong>Question:</strong> An electron always moves along the electrical
+        field (but not perpendicularly). Then, how it can experience the spin-orbit
+        interaction? <br>
+        <strong>Answer:</strong> The trajectory of an electron may be very different.
+        There are many cases when an electron moves perpendicularly to an electrical
+        field. For example, when the electron is orbiting around a nucleus. <br><br>
+
+        <strong>Question:</strong> Which parameter characterizes the spin-orbit
+        interaction? Is it a classical parameter or a quantum mechanical parameter?
+        <br>
+        <strong>Answer:</strong> There is only one cause of spin-orbit interaction.
+        It is the magnetic field $\mathbf{H}_\text{SO}$. All other parameters are
+        consequences of $\mathbf{H}_\text{SO}$. For example, the electron spin
+        aligns itself along $\mathbf{H}_\text{SO}$. It changes the energy of the
+        electron. The change in energy can be defined as the energy of the
+        spin-orbit interaction $E_\text{SO}$. If an additional external magnetic
+        field $\mathbf{H}_\text{ext}$ is applied, the electron spin is aligned along
+        the total magnetic field $\mathbf{H}_\text{SO} + \mathbf{H}_\text{ext}$ and
+        $E_\text{SO}$ has no physical meaning. <br><br>
+
+        <strong>Question:</strong> Since the spin-orbit magnetic field
+        $\mathbf{H}_\text{SO}$ is proportional to $1/c^2$, then it should
+        be negligibly small. Should we care about such a tiny effect? <br>
+        <strong>Answer:</strong> Yes. It is small, except for when
+        $\mathbf{E}_\text{static}$ is huge. For example, near the nucleus
+        $\mathbf{H}_\text{SO}$ is large. Any substantial spin-orbit interaction
+        is induced only by an electrical field of a nucleus. Other realistic
+        sources of the electrical field in a solid induce very weak spin-orbit
+        interaction. This field is very symmetric, and it cancels itself out in
+        a nucleus. External fields may break this symmetry. <br><br>
+
+        <strong>Question:</strong> Is spin-orbit interaction is a quantum
+        mechanical effect?<br>
+        <strong>Answer:</strong> No. The spin-orbit interaction affects both small
+        and large objects. It exists in the macro world as well.
+        <br><br>
+
+        <h3>Energy of Spin-Orbit interaction</h3>
+
+        <img class="center" src="https://staff.aist.go.jp/v.zayets/SpinTransport/32/soPrecessionS.gif" alt="">
+
+        There is a precession of electron spin $\mathbf{S}$ around magnetic
+        field $\mathbf{H}_\text{SO}$ of spin-orbit interaction until it is
+        aligned parallel to $\mathbf{H}_\text{SO}$. After the electron spin
+        is aligned, the energy of spin-orbit interaction becomes,
+
+        $$E_\text{SO} = \mu_\text{B} H_\text{SO}$$
+
+        where, $\mu_\text{B}$ is the Bohr magneton. <br><br>
+
+        The $\mathbf{H}_\text{SO}$ only interacts with the spin magnetic
+        moment, not with the orbital magnetic moment. <br><br>
+
+        <strong>Question:</strong> Why $\mathbf{H}_\text{SO}$ does not induce
+        the Lorentz force and cannot interact with the orbital magnetic moment?
+        <br>
+        <strong>Answer:</strong> $\mathbf{H}_\text{SO}$ has relativistic origin.
+        It appears only in the coordinate system which moves together with the
+        electron. The Lorentz force has the relativistic origin as well and it
+        is originated from the electrical field, which the electron experiences
+        when moves in a magnetic field. In the moving coordinate system, where
+        the electron experiences $\mathbf{H}_\text{SO}$, the electron does not
+        move and therefore experience no Lorentz force. The interaction of the
+        orbital moment with a magnetic field is due to the Lorentz force. <br><br>
+
+        Electron spin is aligned along due to the spin precession damping.
+        The spin precession damping is a complex mechanism, which involves
+        an external particle with a non-zero spin (e.g. a photon, a magnon).
+        It could take a relatively long time until the full alignment of
+        electron spin along $\mathbf{H}_\text{SO}$. <br><br>
+
+        <strong>Question:</strong> Is there any cases when the electron spin
+        is not aligned along $\mathbf{H}_\text{SO}$? <br>
+        <strong>Answer:</strong> There are many such cases. For example, the
+        conduction electrons in a metal. There are many conduction electrons,
+        which simultaneously overlap with each other. For this reason, the
+        scattering between quantum states of conduction electrons is very
+        frequent. The time between two consequent scattering is very short
+        $(\sim 1 \mathrm{\: ps})$. This time is not enough for the
+        complete alignment.
+        <br><br>
+
+        <h3>Magnitude of the Spin-Orbit interaction</h3>
+
+        Except for a few weak effects, all spin-orbital effects are induced
+        by an electrical field of an atomic nucleus and the electron movement
+        (rotation) in the close proximity of the nucleus. <br><br>
+
+        For a realistic spin-orbit interaction, the maximum value of drift
+        velocity of electron in a solid is $1 \times 10^7 \mathrm{\: cm/s}$
+        (GaAs, Si) <a target="_blank" href="https://en.wikipedia.org/wiki/Saturation_velocity">[Ref]</a>.
+        The electron cannot go faster, because above the saturation velocity
+        the electron intensively illuminates phonons. The maximum breakdown
+        voltage applicable to a semiconductor is $5 \times 10^5 \mathrm{\: cm/s}$
+        (a oxide). For higher voltage, the avalanche breakdown occurs. <br><br>
+
+        For these values, the effective magnetic field of the spin-orbit
+        interaction is only $0.5 \mathrm{\: Gauss}$. For comparison, Earth's
+        magnetic field is about $0.25-0.65 \mathrm{\: Gauss}$. <br><br>
+
+        For an electron rotating around the nucleus, the speed of the electron
+        is about $\sim 2.1 \times 10^6 \mathrm{\: m/s}$. The Coulomb electrical
+        field in H atom at the first orbital $(r = 0.053 \mathrm{\: nm})$ is
+        $5.1 \times 10^9 \mathrm{\: V/cm}$. <br><br>
+
+        For these values, the effective magnetic field of the spin-orbit
+        interaction is $125 \mathrm{\: kGauss} = 12.5 \mathrm{\: T}$.
+        <br><br>
+
+        <h3>Spin-Orbit interaction and orbital moment</h3>
+
+        Electron orbital can be represented as 2D electron rotation around a rotating axis.
+
+        <img class="center" src="https://staff.aist.go.jp/v.zayets/SpinTransport/32/OrbitFulls.gif" alt="">
+
+        <strong>Question:</strong> Is the spin-orbit interaction proportional to the orbital moment?
+        <br>
+        <strong>Answer:</strong> No. Even though there are common tendencies
+        between the spin-orbit interaction and the orbital moment. For example,
+        when the orbital moment is zero, the spin-orbit interaction is zero.
+        When the orbital moment changes its sign, the spin-orbit interaction
+        changes its sign as well. <br>
+        Even though "orbit" is a part of the name of the spin-orbit interaction,
+        the relation between orbital moment and $\mathbf{H}_\text{SO}$ is complex
+        and not straightforward.<br><br>
+
+        <strong>Question:</strong> How is it possible that an electron, while
+        rotating around a nucleus, does not experience the spin-orbit interaction?
+        <br>
+        <strong>Answer:</strong> It is because for the spherical orbit an electron
+        makes an equal number of rotations in two opposite directions. Since for
+        opposite rotation directions, the directions of the effective magnetic
+        field of the spin-orbit interaction are opposite, an electron does not
+        experience any spin-orbit interaction.
+        <br><br>
+
+        <h3>Types of Spin-Orbit interaction</h3>
+
+        It is convenient to divide effects related to the spin-orbit interaction
+        into 3 classes depending on the source of the electrical field and the
+        source of breaking of the time-reversal symmetry.
+
+        <ul>
+          <li>Type 1: Weak spin-orbit interaction</li>
+          <li>Type 2: Strong spin-orbit interaction</li>
+          <li>Type 3: Moderate spin-orbit interaction</li>
+        </ul>
+
+        <h4>Type 1: Weak spin-orbit interaction</h4>
+
+        Only the conduction electrons experience this type of spin-orbit effect.
+        The electrical field at an interface or electrical field of a Schottky
+        barrier is the sources of the electrical field for this type. An
+        electrical current flowing along with the interface and perpendicularly
+        to the interface electrical field breaks the time-reversal symmetry.
+        <br><br>
+
+        This type of effect includes:
+
+        <ul>
+          <li>spin Hall effect</li>
+          <li>anomalous spin Hall effect</li>
+          <li>anomalous magneto-resistance</li>
+          <li>rashba effect</li>
+        </ul>
+
+        <h4>Type 2: Strong spin-orbit interaction</h4>
+
+        Only localized electrons (e.g. d- or f- electrons) experience this type
+        of spin-orbit effect. The centrosymmetric electrical field of the atomic
+        nucleus is the source of this type of spin-orbit effect. An external
+        magnetic field is a source of breaking the time-reversal symmetry.
+        <br><br>
+
+        This type of effect includes:
+
+        <ul>
+          <li>perpendicular magnetic anisotropy</li>
+          <li>g-factor</li>
+          <li>magneto-elastic effect</li>
+          <li>voltage-controlled magnetic anisotropy</li>
+          <li>interface sensing</li>
+          <li>magnetic anisotropy</li>
+        </ul>
+
+        In absence of external magnetic field, a localized electron does
+        not experience any $\mathbf{H}_\text{SO}$. However, when an external
+        magnetic field $\mathbf{H}_\text{ext}$ is applied, it induces strong
+        $\mathbf{H}_\text{SO}$ parallel to $\mathbf{H}_\text{ext}$ and the
+        electron experiences a stronger total magnetic field
+        $\mathbf{H}_\text{total} = \mathbf{H}_\text{ext} + \mathbf{H}_\text{SO}$.
+        <br><br>
+
+        The orbital moment of the localized electrons is zero. Any 3D orbital
+        can be represented as the sum of two 2D orbitals of clockwise and
+        anti-clockwise electron rotation. Clockwise and anti-clockwise orbitals
+        are identical. As a result, the electron experience the same but opposite
+        $\mathbf{H}_\text{SO}$ for the clockwise and anti-clockwise orbitals.
+        <br><br>
+
+        When an external magnetic field is applied, the time-reversal symmetry
+        is broken. Since electron rotations in the clockwise and anti-clockwise
+        orbitals are opposite, the Lorentz force is the opposite. As a result,
+        the clockwise and anti-clockwise orbitals are deformed differently in
+        an external magnetic field, $\mathbf{H}_\text{SO}$ becomes different
+        for clockwise and anti-clockwise orbitals and in total the electron
+        experiences a non-zero $\mathbf{H}_\text{SO}$.
+
+        <img class="center" src="https://staff.aist.go.jp/v.zayets/SpinTransport/32/TimeInverseYesS.gif" alt="">
+
+        <h4>Type 3: Moderate spin-orbit interaction</h4>
+
+        Only conduction electrons experience this type of effect. The centrosymmetric
+        electrical field of the atomic nucleus is the source of the electrical
+        field. Electrical current breaks the time-reversal symmetry. <br><br>
+
+        This type of effect includes:
+
+        <ul>
+          <li>spin Hall effect</li>
+          <li>spin pumping</li>
+          <li>inverse spin Hall effect</li>
+          <li>spin damping</li>
+          <li>spin-orbit torque</li>
+        </ul>
+
+        <h3>Spin-Orbit interaction from the Dirac equations</h3>
+
+        Einstein's relativistic equation for the energy is,
+        $$E^2 = p^2c^2 - m_o^2c^4$$
+        which should describe the electric field as well.
+
+        The quantum-mechanical operator for the energy and the momentum are,
+        $$\bar{p} \rightarrow - i \hbar \nabla \text{ ;} \\ \bar{E} = i \hbar \frac{\partial}{\partial t}$$
+
+        Now, the relation between relativistic and quantum mechanics can found that,
+
+        $$\left( \nabla^2 - \frac{1}{c^2} \frac{\partial^2}{\partial t^2} - \frac{m_o^2 c^2}{\hbar^2}\right) \Psi(r,t) = 0 $$
+
+        This is called the Klein-Gordon equation. <br><br>
+
+        The wave equation should be 1st order differential equation with respect
+        to time and space. Dirac found that the Klein-Gordon equation can be
+        represented as a product of a 1st order differential equation and its
+        conjugate. Therefore, the Dirac equations describes the electrical field.
+
+        $$\left( A \partial_x + B \partial_y + C \partial_z + \frac{i}{c} D \partial_t - \frac{m_o c}{\hbar}\right) \Psi = 0 $$
+
+        Setting,
+
+        $$D = \gamma^0 \text{ ;} \qquad A = i \gamma^1 \text{ ;} \\ B = i \gamma^2 \text{ ;} \qquad C = i \gamma^3$$
+
+        $$\partial_0 = \frac{1}{c} \partial_t \text{ ;} \qquad \partial_1 = \partial_x \text{ ;} \\ \partial_2 = \partial_y \text{ ;} \qquad \partial_3 = \partial_z $$
+
+        where, $\gamma$ denotes the $(2 \times 2)$ sub-matrices taken from the Pauli matrices.
+
+        The Dirac equation,
+
+        $$i \hbar \gamma^\mu \partial_\mu \Psi - m_o c \Psi = 0$$
+        where, $\mu = 0,1,2,3$ <br><br>
+
+        The Dirac equation, which includes the gauge potential, is
+
+        $$ \gamma^\mu (i \hbar \partial_\mu - e A_\mu) \Psi - m_o c \Psi = 0$$
+        <br>
+
+        <h3>References</h3>
+
+        Dr. Vadym Zayets, "Spin-Orbit Interaction" - <a target="_blank" href="https://staff.aist.go.jp/v.zayets/spin3_32_SpinOrbit.html">https://staff.aist.go.jp/v.zayets/spin3_32_SpinOrbit.html</a>
+
+      </div>
+
+
+      <br>
+
+      <div id="academic-contact" class="social-div">
+
+        <div class="social">
+          <div onclick="goSocial('9')" class="social-item"><i class="fas fa-envelope"></i></div>
+          <div onclick="goSocial('0')" class="social-item"><i class="fab fa-researchgate"></i></div>
+          <div onclick="goSocial('8')" class="social-item"><i class="fa-solid fa-graduation-cap"></i></div>
+          <div onclick="goSocial('1')" class="social-item"><i class="fab fa-google"></i></div>
+          <div onclick="goSocial('2')" class="social-item"><i class="fab fa-linkedin"></i></div>
+          <div onclick="goSocial('3')" class="social-item"><i class="fab fa-orcid"></i></div>
+          <div onclick="goSocial('4')" class="social-item"><i class="fab fa-github"></i></div>
+          <div onclick="goSocial('5')" class="social-item"><i class="fab fa-facebook"></i></div>
+          <div onclick="goSocial('6')" class="social-item"><i class="fab fa-youtube"></i></div>
+          <div onclick="goSocial('7')" class="social-item"><i class="fab fa-soundcloud"></i></div>
+        </div>
+        <p>
+          Copyright @2017 Md Abdus Sami Akanda. All rights reserved.
+        </p>
+
+      </div>
+
+    </section>
 
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js" integrity="sha384-GxNFqL3r9uRJQhR+47eDxuPoNE7yLftQM8LcxzgS4HT73tp970WS/wV5p8UzCOmb" crossorigin="anonymous"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
