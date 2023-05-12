@@ -31,7 +31,6 @@ if (window.innerWidth >= 640) {
   });
 }
 
-
 var social = [
   'https://www.researchgate.net/profile/Md_Akanda2',
   'https://scholar.google.com/citations?user=hCntcSgAAAAJ&hl=en',
