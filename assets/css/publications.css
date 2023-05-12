@@ -108,6 +108,7 @@ input[type=number] {
 
   .academic-divs {
     background-color: rgba(104, 136, 111, 0.1);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
     padding: 30px 35px;
     margin: 0px 50px 30px 50px;
     border-radius: 20px;
@@ -238,6 +239,7 @@ input[type=number] {
   /* RESEARCH CSS */
   .academic-divs {
     background-color: rgba(104, 136, 111, 0.1);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
     padding: 10px 15px;
     margin: 0px 10px 10px 10px;
     border-radius: 10px;
