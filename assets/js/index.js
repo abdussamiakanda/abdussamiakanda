@@ -1,33 +1,36 @@
-function randomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-const myEl = document.querySelectorAll('.floating');
-const topPosition = [];
-const leftPosition = [];
-
-for (let i = 0; i < myEl.length; i++) {
-  let T = randomInt(100, 350);
-  let L = randomInt(5, 95)
-  myEl[i].style.top = T + 'px';
-  myEl[i].style.left = L + '%';
-  topPosition[i] = T;
-  leftPosition[i] = myEl[i].offsetLeft;
-}
-
-document.addEventListener('mousemove', function(event) {
-  const mouseX = event.clientX;
-  const mouseY = event.clientY;
-
-  for (let i = 0; i < myEl.length; i++) {
-
-    let elTop = topPosition[i] + ((50/window.innerHeight) * (mouseY - (window.innerHeight / 2)))
-    let elLeft = leftPosition[i] + ((50/window.innerWidth) * (mouseX - (window.innerWidth / 2)))
-
-    myEl[i].style.top = elTop + 'px';
-    myEl[i].style.left = elLeft + 'px';
+if (window.innerWidth >= 640) {
+  function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
-});
+  
+  const myEl = document.querySelectorAll('.floating');
+  const topPosition = [];
+  const leftPosition = [];
+  
+  for (let i = 0; i < myEl.length; i++) {
+    let T = randomInt(100, 350);
+    let L = randomInt(5, 95)
+    myEl[i].style.top = T + 'px';
+    myEl[i].style.left = L + '%';
+    topPosition[i] = T;
+    leftPosition[i] = myEl[i].offsetLeft;
+  }
+  
+  document.addEventListener('mousemove', function(event) {
+    const mouseX = event.clientX;
+    const mouseY = event.clientY;
+  
+    for (let i = 0; i < myEl.length; i++) {
+  
+      let elTop = topPosition[i] + ((50/window.innerHeight) * (mouseY - (window.innerHeight / 2)))
+      let elLeft = leftPosition[i] + ((50/window.innerWidth) * (mouseX - (window.innerWidth / 2)))
+  
+      myEl[i].style.top = elTop + 'px';
+      myEl[i].style.left = elLeft + 'px';
+    }
+  });
+}
+
 
 var social = [
   'https://www.researchgate.net/profile/Md_Akanda2',
