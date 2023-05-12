@@ -59,6 +59,14 @@ function showAcademic() {
   document.getElementById('back1').style.visibility = "visible";
   document.getElementById('back2').style.visibility = "hidden";
   window.scrollTo(0, 0);
+  document.getElementById('rightMenuOptions').innerHTML = `
+    <div onclick="goTo('#research')">Research</div>
+    <div onclick="goTo('#education')">Education</div>
+    <div onclick="goTo('#teaching')">Teaching Experience</div>
+    <div onclick="goTo('#skillset')">Skillset</div>
+    <div onclick="goTo('#work-experience')">Work Experience</div>
+    <div onclick="goTo('#awards')">Awards</div>
+  `;
 }
 
 function showPersonal() {
@@ -70,8 +78,27 @@ function showPersonal() {
   document.getElementById('back1').style.visibility = "hidden";
   document.getElementById('back2').style.visibility = "visible";
   window.scrollTo(0, 0);
+  document.getElementById('rightMenuOptions').innerHTML = `
+    <div onclick="goTo('#programming')">Programming</div>
+    <div onclick="goTo('#webdevelopment')">Web Development</div>
+    <div onclick="goTo('#scribbling')">Scribbling</div>
+    <div onclick="goTo('#gallary')">Gallary</div>
+    <div onclick="goTo('#posts')">Posts</div>
+  `;
 }
 
+function showMenu() {
+  let element = document.getElementById('rightMenuOptions');
+  if (window.getComputedStyle(element).getPropertyValue("display") === 'none'){
+    document.getElementById('rightMenuOptions').style.display = 'block';
+    document.getElementById('bars').classList.add('hide');
+    document.getElementById('times').classList.remove('hide');
+  } else {
+    document.getElementById('rightMenuOptions').style.display = 'none';
+    document.getElementById('bars').classList.remove('hide');
+    document.getElementById('times').classList.add('hide');
+  }
+}
 // function goToTo(path){
 //   window.location.assign(path);
 //   document.getElementById('moblie').classList.remove('hide');

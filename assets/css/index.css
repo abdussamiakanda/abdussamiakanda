@@ -1,4 +1,5 @@
 :root {
+  scroll-behavior: smooth;
 }
 p, h1, h2, h3, h4, h5, h6 {
   padding: 0px;
@@ -24,6 +25,10 @@ input::-webkit-inner-spin-button {
 }
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+.hide {
+  display: none;
 }
 
 @media screen and (min-width: 40em) {
@@ -70,14 +75,9 @@ input[type=number] {
     box-shadow: 0px 0px 10px rgba(0,0,0,0.25);
     cursor: pointer;
   }
-  .menu .head:hover {
-    width: 54px;
-    height: 54px;
-    margin: 0px 23px;
-    transition-duration: 0.3s;
-  }
   .menu .head:hover img{
-    transition-duration: 0.3s;
+    transform: rotateZ(360deg);
+    transition-duration: 1s;
   }
   .menu .head img {
     width: 40px;
@@ -118,12 +118,32 @@ input[type=number] {
     justify-content: center;
     font-size: 30px;
     cursor: pointer;
+    position: relative;
   }
-  .right-menu:hover {
-    width: 54px;
-    height: 54px;
-    margin: 0px 23px;
-    transition-duration: 0.3s;
+  .right-menu:hover i {
+    transform: rotateZ(360deg);
+    transition-duration: 1s;
+  }
+  .right-menu-options {
+    position: absolute;
+    top: 65px;
+    right: 0px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 4px;
+    display: none;
+  }
+  .right-menu .right-menu-options div {
+    padding: 5px 15px;
+    white-space: nowrap;
+  }
+  .right-menu .right-menu-options div:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
+    border-radius: 3px;
+    padding: 5px 15px;
   }
 
   /* BACKGROUND CSS */
@@ -176,6 +196,7 @@ input[type=number] {
     padding: 30px 35px;
     margin: 0px 50px 50px 50px;
     border-radius: 20px;
+    transition-duration: 0.5s;
   }
   .academic-divs:hover {
     background-color: rgb(241, 241, 241);
@@ -277,173 +298,232 @@ input[type=number] {
 @media screen and (min-width: 0em) and (max-width: 40em) {
   html{
     width:100%;
-    margin: 0px auto;
+    margin: 0px;
   }
   body{
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
-    background-color: var(--no1);
-    color: var(--no4);
+    background-color: rgb(241, 241, 241);
+    color: rgb(49, 49, 49);
     font-size: 14px;
-    margin: 0;
-    padding: 0;
     width:100%;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-     -khtml-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
-  }
-  ul{
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-  .moblie{
-    position: fixed;
-    bottom: 15px;
-    right: 15px;
-    font-size: 30px;
-    padding: 5px 14px 3px 14px;
-    z-index: 50;
-    background-color: white;
-    box-shadow: 0px 0px 5px black;
-    border-radius: 50%;
-  }
-  .moblie:hover{
-    color: white;
-    background-color: black;
-    box-shadow: 0px 0px 5px white;
-  }
-  .navigator{
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 110vh;
-    background: rgba(0,0,0,0.9);
-    color: white;
-    font-size: 17px;
-    text-align: center;
-    z-index: 100;
-  }
-  .cross{
-    font-size: 30px;
-    text-align: right;
-    padding: 0px 20px;
-  }
-  .cros{
-    cursor: pointer;
-    padding: 5px 10px;
-  }
-  .cros:hover{
-    background-color: rgba(255,255,255,0.1);
-    border-radius: 50%;
-  }
-  .menu-item{
-    padding: 4px 10px;
-    margin: 2px 0px;
-    cursor: pointer;
-    border-radius: 5px;
-    background-color: rgba(0,0,0,0.5);
-  }
-  .menu-item:hover{
-    background-color: rgba(255,255,255,0.7);
-    color: black;
-  }
-  .name{
-    font-size: 25px;
-    font-weight: 600;
-    margin: 15px 0px;
-  }
-  h3{
-    font-size: 20px;
-    font-weight: 600;
-    margin: 10px 0px;
-  }
-  .white{
-    background-color: white;
-    color: black;
-    padding: 10px 0px;
-  }
-  .white-inner{
-    padding: 10px;
+    padding: 0px;
     margin: 0px auto;
+    position: relative;
   }
-  .black{
-    background-color: #202020;
-    color: white;
-    padding: 10px 0px;
-  }
-  .black-inner{
-    padding: 10px;
-    margin: 0px auto;
-  }
-  .flex{
+
+  /* MENU CSS */
+
+  .menu {
+    position: fixed;
+    width: 100%;
     display: flex;
-    flex-direction: column;
-  }
-  .inners{
-    width: 100%;
-  }
-  .inner70{
-    width: 100%;
-  }
-  .inner30{
-    width: 100%;
-  }
-  .right{
-    text-align: center;
-  }
-  .resume{
-    margin: 20px 40px;
-  }
-  .main-photo{
-    width: 200px;
-    border-radius: 50%;
-  }
-  .gallery{
-    display: flex;
-    justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    top: -80px;
+    transition: 0.8s;
+    transition-delay: 1s;
+    transform: translateY(85px);
   }
-  .gallery img{
-    object-fit: cover;
-    width: 100px;
-    height: 100px;
-    margin: 5px;
+  .menu .head {
+    width: 50px;
+    height: 50px;
+    margin: 0px 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 100%;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.25);
     cursor: pointer;
   }
-  .gallery img:hover{
-    width: 95px;
-    height: 95px;
-    margin: 7.5px;
-    box-shadow:
-      0px 0px 15px rgba(255,255,255,0.5),
-      0px 0px 15px rgba(0,0,0,0.5);
+  .menu .head:hover img{
+    transform: rotateZ(360deg);
+    transition-duration: 1s;
   }
+  .menu .head img {
+    width: 35px;
+  }
+  .center-menu {
+    font-size: 16px;
+    padding: 3px;
+    border-radius: 50px;
+    background-color: rgb(241, 241, 241);
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .center-menu:hover {
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.4);
+  }
+  .center-menu .selected {
+    box-shadow: 0px 0px 2px rgba(0,0,0,0.5);
+    background-color: white;
+    border-radius: 50px;
+    transition: 0.5s;
+  }
+  .center-menu .menu-item {
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  .right-menu {
+    width: 50px;
+    height: 50px;
+    margin: 0px 6px;
+    background-color: white;
+    border-radius: 100%;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    cursor: pointer;
+    position: relative;
+  }
+  .right-menu:hover i {
+    transform: rotateZ(360deg);
+    transition-duration: 1s;
+  }
+  .right-menu-options {
+    position: absolute;
+    top: 55px;
+    right: 0px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 2px;
+    display: none;
+  }
+  .right-menu .right-menu-options div {
+    padding: 3px 10px;
+    white-space: nowrap;
+  }
+  .right-menu .right-menu-options div:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
+    border-radius: 3px;
+    padding: 3px 10px;
+  }
+
+  /* BACKGROUND CSS */
+
+  .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -10;
+    color: rgba(0,0,0,0.1);
+  }
+  .background div div {
+    font-size: 25px;
+    position: absolute;
+    transition: all 0.2s ease-out;
+  }
+
+  /* INTRODUCTION CSS */
+
+  .introduction {
+    padding: 100px 10px;
+    text-align: center;
+    margin: 0px auto;
+  }
+  .introduction .name {
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .colorful {
+    background-image: linear-gradient(141deg, #1affc6, #8075ff 28%, #ff7171 98%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .colorful2 {
+    background-image: linear-gradient(141deg, rgba(26, 255, 198, 0.2), rgba(128, 117, 255, 0.2) 28%, rgba(255, 113, 113, 0.2) 98%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* RESEARCH CSS */
+
+  .academic-divs {
+    background-color: rgba(104, 136, 111, 0.1);
+    padding: 10px 12px;
+    margin: 0px 10px 10px 10px;
+    border-radius: 12px;
+    transition-duration: 0.5s;
+  }
+  .academic-divs:hover {
+    background-color: rgb(241, 241, 241);
+    box-shadow: 0px 0px 10px rgba(104, 136, 111, 0.5);
+  }
+  .div-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .div-title span {
+    display: block;
+    font-size: 26px;
+    margin-bottom: 5px;
+  }
+  .links a {
+    display: inline-block;
+    color: rgb(49, 49, 49);
+    background-color: white;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.25);
+    border-radius: 8px;
+    padding: 5px 10px;
+    margin: 3px 0px;
+    padding-right: 20px;
+  }
+  .links a:hover {
+    padding: 5px 10px;
+    color: rgb(0, 0, 0);
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.4);
+    transition: 0.5s;
+  }
+  .links a:hover i {
+    padding-left: 10px;
+    transition: 0.5s;
+  }
+
+  /* SKILLS CSS */
+  
   .skills{
     padding: 10px 0px;
     width: 100%;
   }
   .skill{
     width: 100%;
-    background: #eee;
-    border-radius: 3px;
-    margin: 5px 0px;
+    background: rgba(0,0,0,0.1);
+    border-radius: 4px;
+    margin: 3px 0px;
+    font-size: 12px;
   }
   .percent{
-    font-size: 12px;
     padding: 5px 10px;
-    background-color: #006ba1;
+    background-color: rgba(0,0,0,0.2);
     border-radius: 3px;
+    font-size: 12px;
   }
-  .padding{
-    padding: 10px 0px;
+
+  /* AWARDS CSS */
+
+  .textwrap {
+    word-wrap: break-word;
   }
+
+
+
+  /* SOCIAL CSS */
+
   .social{
-    padding: 20px 0px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -451,73 +531,21 @@ input[type=number] {
   }
   .social-item{
     margin: 5px;
-    padding: 0px 3px;
-    font-size: 40px;
+    padding: 0px 5px;
+    font-size: 30px;
     cursor: pointer;
   }
   .social-item:hover{
-    color: red;
+    background-image: linear-gradient(141deg, #adf1e0, #2e1bff 28%, #18ff23 98%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
-  .imageview{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 110vh;
-    background-color: rgba(0,0,0,0.8);
-    z-index: 100;
+  .social-div p {
+    margin: 20px 0px;
+    text-align: center;
   }
-  .imageview img{
-    display: block;
-    max-height: 95vh;
-    max-width: 90%;
-    margin: 10px auto;
-    transform: translateY(50px);
-  }
-  .times{
-    color: white;
-    padding: 5px 9px;
-    font-size: 25px;
-    margin: 10px 20px;
-    border-radius: 50%;
-    float: right;
-    cursor: pointer;
-  }
-  .times:hover{
-    background-color: rgba(255,255,255,0.3);
-  }
-  .goleft{
-    position: fixed;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    color: white;
-    padding: 5px;
-    font-size: 35px;
-    cursor: pointer;
-    background-color: rgba(255,255,255,0.1);
-  }
-  .goleft:hover{
-    background-color: rgba(255,255,255,0.3);
-  }
-  .goright{
-    position: fixed;
-    top: 50%;
-    right: 0;
-    transform: translateY(-50%);
-    color: white;
-    padding: 5px;
-    font-size: 35px;
-    cursor: pointer;
-    background-color: rgba(255,255,255,0.1);
-  }
-  .goright:hover{
-    background-color: rgba(255,255,255,0.3);
-  }
-
-
-
 
 
 
@@ -529,14 +557,7 @@ input[type=number] {
   .katex-display{
     margin: 0px;
   }
-  .hide2{
-    display: none;
-  }
 
 
 
-}
-
-.hide{
-  display: none;
 }
