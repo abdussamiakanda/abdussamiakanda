@@ -50,9 +50,7 @@ function goSocial(no){
 
 function goTo(path){
   if (path[0] === '#') {
-    document.getElementById('menu-toggle').classList.toggle('active');
-    console.log(document.getElementById('rightMenuOptions').style.display,'block',path[0]);
-    document.getElementById('rightMenuOptions').style.display = 'none';
+    document.getElementById('menu-toggle-click').click;
   }
   window.location.assign(path);
 }
