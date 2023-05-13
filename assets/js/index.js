@@ -50,6 +50,10 @@ function goSocial(no){
 
 function goTo(path){
   window.location.assign(path);
+  if (path[0] === '#') {
+    document.getElementById('menu-toggle').classList.toggle('active');
+    document.getElementById('rightMenuOptions').style.display = 'none';
+  }
 }
 
 function showAcademic() {
