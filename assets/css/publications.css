@@ -58,6 +58,7 @@ input[type=number] {
     transition: 0.8s;
     transition-delay: 1s;
     transform: translateY(100px);
+    z-index: 100;
   }
   .menu .head {
     width: 60px;
@@ -188,6 +189,7 @@ input[type=number] {
     transition: 0.8s;
     transition-delay: 1s;
     transform: translateY(70px);
+    z-index: 100;
   }
   .menu .head {
     width: 50px;

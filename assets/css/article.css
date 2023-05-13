@@ -66,6 +66,7 @@ input[type=number] {
     transition: 0.8s;
     transition-delay: 1s;
     transform: translateY(100px);
+    z-index: 100;
   }
   .menu .head {
     width: 60px;
@@ -202,6 +203,13 @@ input[type=number] {
     margin: 0px auto;
     position: relative;
   }
+  code {
+    display: block;
+    background-color: rgba(0,0,0,0.1);
+    padding: 10px;
+    border-radius: 7px;
+    margin: 10px;
+  }
 
   /* MENU CSS */
 
@@ -216,6 +224,7 @@ input[type=number] {
     transition: 0.8s;
     transition-delay: 1s;
     transform: translateY(70px);
+    z-index: 100;
   }
   .menu .head {
     width: 50px;
