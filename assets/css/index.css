@@ -126,10 +126,6 @@ input[type=number] {
     transform: rotateZ(360deg);
     transition-duration: 1s;
   }
-  #menu-toggle {
-    display: inline-block;
-    cursor: pointer;
-  }
   
   .bar {
     width: 28px;
@@ -140,13 +136,13 @@ input[type=number] {
     transition: 0.5s;
   }
   
-  #menu-toggle.active .bar:nth-child(2) {
+  .active .bar:nth-child(2) {
     opacity: 0;
   }
-  #menu-toggle.active .bar:nth-child(1) {
+  .active .bar:nth-child(1) {
     transform: rotate(45deg) translate(7px, 7px);
   }
-  #menu-toggle.active .bar:nth-child(3) {
+  .active .bar:nth-child(3) {
     transform: rotate(-45deg) translate(7px, -7px);
   }
   
@@ -402,10 +398,6 @@ input[type=number] {
     transform: rotateZ(360deg);
     transition-duration: 1s;
   }
-  #menu-toggle {
-    display: inline-block;
-    cursor: pointer;
-  }
   
   .bar {
     width: 22px;
@@ -416,13 +408,13 @@ input[type=number] {
     transition: 0.5s;
   }
   
-  #menu-toggle.active .bar:nth-child(2) {
+  .active .bar:nth-child(2) {
     opacity: 0;
   }
-  #menu-toggle.active .bar:nth-child(1) {
+  .active .bar:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
   }
-  #menu-toggle.active .bar:nth-child(3) {
+  .active .bar:nth-child(3) {
     transform: rotate(-45deg) translate(5px, -5px);
   }
 

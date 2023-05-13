@@ -49,11 +49,12 @@ function goSocial(no){
 }
 
 function goTo(path){
-  window.location.assign(path);
   if (path[0] === '#') {
     document.getElementById('menu-toggle').classList.toggle('active');
+    console.log(document.getElementById('rightMenuOptions').style.display,'block',path[0]);
     document.getElementById('rightMenuOptions').style.display = 'none';
   }
+  window.location.assign(path);
 }
 
 function showAcademic() {
