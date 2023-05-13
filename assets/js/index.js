@@ -93,9 +93,9 @@ function showPersonal() {
   `;
 }
 
-const menuToggle = document.getElementById('menu-toggle');
+const menuToggle = document.getElementById('menu-toggle-click');
 menuToggle.addEventListener('click', function() {
-  this.classList.toggle('active');
+  document.getElementById('menu-toggle').classList.toggle('active');
   let element = document.getElementById('rightMenuOptions');
   if (window.getComputedStyle(element).getPropertyValue("display") === 'none'){
     document.getElementById('rightMenuOptions').style.display = 'block';
