@@ -49,10 +49,13 @@ input[type=number] {
   object-fit: cover;
   left: 50%;
   transform: translate3d(0, 0, 0);
-  animation: zoomin 1s ease;
+  animation: zoomin 0.8s ease;
   max-width: 95%;
   max-height: 95vh;
   margin: auto;
+}
+.gallery .full .content {
+  padding: 0px;
 }
 .byebye {
   opacity: 0;
@@ -71,7 +74,7 @@ input[type=number] {
   max-width: 100%;
   border-radius: 8px;
   box-shadow: 0 0 16px #333;
-  transition: all 1.5s ease;
+  transition: all 0.8s ease;
 }
 .gallery img:hover {
   box-shadow: 0 0 32px #333;
@@ -82,7 +85,7 @@ input[type=number] {
 .gallery .gallery-item {
   transition: grid-row-start 300ms linear;
   transition: transform 300ms ease;
-  transition: all 0.5s ease;
+  transition: all 0.8s ease;
   cursor: pointer;
 }
 .gallery .gallery-item:hover {
@@ -177,6 +180,35 @@ input[type=number] {
 
   .gallery {
     grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  }
+
+  .slider {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0px;
+    transform: translateY(-20px);
+    color: black;
+    font-size: 60px;
+    padding: 20px;
+    z-index: 90;
+    cursor: pointer;
+    text-shadow: 0px 0px 10px white;
+  }
+  .slider:hover {
+    background-color: rgba(0,0,0,0.25);
+    text-shadow: 0px 0px 15px white;
+    transition-duration: 0.3s;
+  }
+
+  .left-slider {
+    left: 0px;
+  }
+  .right-slider {
+    right: 0px;
   }
   
 
@@ -307,6 +339,34 @@ input[type=number] {
     grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
   }
   
+  .slider {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0px;
+    transform: translateY(-8px);
+    color: black;
+    font-size: 30px;
+    padding: 8px;
+    z-index: 90;
+    cursor: pointer;
+    text-shadow: 0px 0px 10px white;
+  }
+  .slider:hover {
+    background-color: rgba(0,0,0,0.25);
+    text-shadow: 0px 0px 15px white;
+    transition-duration: 0.3s;
+  }
+
+  .left-slider {
+    left: 0px;
+  }
+  .right-slider {
+    right: 0px;
+  }
 
 
   /* SOCIAL CSS */
@@ -351,76 +411,80 @@ input[type=number] {
 @-moz-keyframes zoomin {
   0% {
     max-width: 50%;
-    transform: rotate(-30deg);
     filter: blur(4px);
+    transform: rotateZ(-5deg);
   }
   30% {
-    filter: blur(4px);
-    transform: rotate(-80deg);
+    filter: blur(3px);
+    transform: rotateZ(5deg);
   }
   70% {
-    max-width: 50%;
-    transform: rotate(45deg);
+    max-width: 80%;
+    filter: blur(2px);
+    transform: rotateZ(-5deg);
   }
   100% {
     max-width: 100%;
-    transform: rotate(0deg);
+    transform: rotateZ(0deg);
   }
 }
 @-webkit-keyframes zoomin {
   0% {
     max-width: 50%;
-    transform: rotate(-30deg);
     filter: blur(4px);
+    transform: rotateZ(-5deg);
   }
   30% {
-    filter: blur(4px);
-    transform: rotate(-80deg);
+    filter: blur(3px);
+    transform: rotateZ(5deg);
   }
   70% {
-    max-width: 50%;
-    transform: rotate(45deg);
+    max-width: 80%;
+    filter: blur(2px);
+    transform: rotateZ(-5deg);
   }
   100% {
     max-width: 100%;
-    transform: rotate(0deg);
+    transform: rotateZ(0deg);
   }
 }
 @-o-keyframes zoomin {
   0% {
     max-width: 50%;
-    transform: rotate(-30deg);
     filter: blur(4px);
+    transform: rotateZ(-5deg);
   }
   30% {
-    filter: blur(4px);
-    transform: rotate(-80deg);
+    filter: blur(3px);
+    transform: rotateZ(5deg);
   }
   70% {
-    max-width: 50%;
-    transform: rotate(45deg);
+    max-width: 80%;
+    filter: blur(2px);
+    transform: rotateZ(-5deg);
   }
   100% {
     max-width: 100%;
-    transform: rotate(0deg);
+    transform: rotateZ(0deg);
   }
 }
 @keyframes zoomin {
   0% {
     max-width: 50%;
-    transform: rotate(-30deg);
     filter: blur(4px);
+    transform: rotateZ(-5deg);
   }
   30% {
-    filter: blur(4px);
-    transform: rotate(-80deg);
+    filter: blur(3px);
+    transform: rotateZ(5deg);
   }
   70% {
-    max-width: 50%;
-    transform: rotate(45deg);
+    max-width: 80%;
+    filter: blur(2px);
+    transform: rotateZ(-5deg);
   }
   100% {
     max-width: 100%;
-    transform: rotate(0deg);
+    transform: rotateZ(0deg);
   }
 }
