@@ -87,6 +87,7 @@ function showPersonal() {
     <div onclick="goTo('#programming')">Programming</div>
     <div onclick="goTo('#webdevelopment')">Web Development</div>
     <div onclick="goTo('#scribbling')">Scribbling</div>
+    <div onclick="goTo('#interests')">Interests</div>
     <div onclick="goTo('#gallary')">Gallary</div>
     <div onclick="goTo('#posts')">Posts</div>
   `;
