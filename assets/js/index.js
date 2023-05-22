@@ -93,51 +93,28 @@ function showPersonal() {
   `;
 }
 
-const menuToggle = document.getElementById('menu-toggle-click');
-menuToggle.addEventListener('click', function() {
-  document.getElementById('menu-toggle').classList.toggle('active');
-  let element = document.getElementById('rightMenuOptions');
-  if (window.getComputedStyle(element).getPropertyValue("display") === 'none'){
-    document.getElementById('rightMenuOptions').style.display = 'block';
-  } else {
+document.addEventListener("click", function(evt) {
+  let flyoutEl = document.getElementById('menu-toggle-click'),
+    targetEl = evt.target,
+    element = document.getElementById('rightMenuOptions');
+  do {
+    if(targetEl == flyoutEl) {
+      document.getElementById('menu-toggle').classList.toggle('active');
+      if (window.getComputedStyle(element).getPropertyValue("display") === 'none'){
+        document.getElementById('rightMenuOptions').style.display = 'block';
+      } else {
+        document.getElementById('rightMenuOptions').style.display = 'none';
+      }
+      return;
+    }
+    targetEl = targetEl.parentNode;
+  } while (targetEl);
+  if (window.getComputedStyle(element).getPropertyValue("display") === 'block'){
     document.getElementById('rightMenuOptions').style.display = 'none';
+    document.getElementById('menu-toggle').classList.toggle('active');
   }
 });
 
-// function goToTo(path){
-//   window.location.assign(path);
-//   document.getElementById('moblie').classList.remove('hide');
-//   document.getElementById('navigator').classList.add('hide');
-// }
-
-// function showMenu(){
-//   document.getElementById('moblie').classList.add('hide');
-//   document.getElementById('navigator').classList.remove('hide');
-// }
-
-// function hide(){
-//   document.getElementById('moblie').classList.remove('hide');
-//   document.getElementById('navigator').classList.add('hide');
-// }
-
-
-
-
-
-// function hideImageView(){
-//   document.getElementById('imageview').classList.add('hide');
-// }
-
-// var images = [
-//   'https://drive.google.com/uc?export=download&id=11vNrrxWdIBalmOtzHSl48G0By65oecql',
-//   'https://drive.google.com/uc?export=download&id=133aBeYfYveZ7RjXYSbxeoEgQBSsylW1Y',
-//   'https://drive.google.com/uc?export=download&id=11yBxD2JaudHfEYzv8LKKzp5jzKr9Ic_b',
-//   'https://drive.google.com/uc?export=download&id=1224-pji1P-GuBBEnUI8INAmcartUk3lU',
-//   'https://drive.google.com/uc?export=download&id=12WzAulmDTKUz68ZDErcEnAUguwaKvP7c',
-//   'https://drive.google.com/uc?export=download&id=12eEZ-A29ickJBB0EepKkvnR-1KpdZpg7',
-//   'https://drive.google.com/uc?export=download&id=12p1qyPDJjXqNx0_LbyKd4MBIMGo2dAVB',
-//   'https://drive.google.com/uc?export=download&id=12xeiThi3j6hf6qGRJfXjUiEoxB7CUUfg'
-// ]
 
 // var doodles = [
 //   'https://drive.google.com/uc?export=download&id=1xavCaAEFj40oPsrMPNGUQdGaK2FqPv_X',
@@ -147,69 +124,3 @@ menuToggle.addEventListener('click', function() {
 //   'https://drive.google.com/uc?export=download&id=13VYin15hHPmN7Y_ihVcz__vz_ZK0pTkp'
 // ]
 
-// function showIMG(type,id){
-//   document.getElementById('imageview').classList.remove('hide');
-//   if (type === 'img'){
-//     var imgEl = `
-//       <i onclick="hideImageView()" class="times fas fa-times"></i>
-//       <img src="${images[id]}" alt="">
-//     `
-//     if (id === '0'){
-//       imgEl += `
-//         <i onclick="showIMG('img','${parseInt(id)+1}')" class="goright fas fa-angle-right"></i>
-//       `
-//     }else if(id === '7'){
-//       imgEl += `
-//         <i onclick="showIMG('img','${parseInt(id)-1}')" class="goleft fas fa-angle-left"></i>
-//       `
-//     } else {
-//       imgEl += `
-//         <i onclick="showIMG('img','${parseInt(id)-1}')" class="goleft fas fa-angle-left"></i>
-//         <i onclick="showIMG('img','${parseInt(id)+1}')" class="goright fas fa-angle-right"></i>
-//       `
-//     }
-//     document.getElementById('imageview').innerHTML = imgEl;
-//   } else if (type === 'doodle'){
-//     var imgEl = `
-//       <i onclick="hideImageView()" class="times fas fa-times"></i>
-//       <img src="${doodles[id]}" alt="">
-//     `
-//     if (id === '0'){
-//       imgEl += `
-//         <i onclick="showIMG('doodle','${parseInt(id)+1}')" class="goright fas fa-angle-right"></i>
-//       `
-//     }else if(id === '4'){
-//       imgEl += `
-//         <i onclick="showIMG('doodle','${parseInt(id)-1}')" class="goleft fas fa-angle-left"></i>
-//       `
-//     } else {
-//       imgEl += `
-//         <i onclick="showIMG('doodle','${parseInt(id)-1}')" class="goleft fas fa-angle-left"></i>
-//         <i onclick="showIMG('doodle','${parseInt(id)+1}')" class="goright fas fa-angle-right"></i>
-//       `
-//     }
-//     document.getElementById('imageview').innerHTML = imgEl;
-//   }
-// }
-
-// document.addEventListener('contextmenu', function(e) {
-//   e.preventDefault();
-// });
-
-// document.onkeydown = function(e) {
-//   if(event.keyCode == 123) {
-//      return false;
-//   }
-//   if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
-//      return false;
-//   }
-//   if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
-//      return false;
-//   }
-//   if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
-//      return false;
-//   }
-//   if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
-//      return false;
-//   }
-// }
