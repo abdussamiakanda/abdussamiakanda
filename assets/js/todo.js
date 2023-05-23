@@ -2,6 +2,10 @@ var provider = new firebase.auth.GoogleAuthProvider();
 var database = firebase.database();
 var userdata = null;
 
+function goTo(path){
+  window.location.assign(path);
+}
+
 // MAIN FUNCTIONS
 
 function showAll() {
@@ -10,16 +14,13 @@ function showAll() {
 }
 
 function startWorking(user) {
-    document.title = 'Md Abdus Sami Akanda'
+  document.title = 'Md Abdus Sami Akanda'
   document.getElementById('top').innerHTML = `
     <div class="top-flex">
       <div class="title" onclick="showAll()">To Do</div>
-      <div class="search-input">
-        <span></span>
-        <input type="text" id="search-text" placeholder="Search log..." autocomplete="off" onkeydown="if(event.keyCode===13){showSearchResult();}" required/>
-      </div>
       <div class="top-buttons">
         <i class="fas fa-plus" onclick="showThings('new')"></i>
+        <i class="fas fa-chart-area" onclick="showThings('graphs')"></i>
         <i class="fas fa-clipboard" onclick="goTo('./logs')"></i>
         <i class="fas fa-sign-out-alt" onclick="GoogleLogout()"></i>
       </div>
@@ -28,17 +29,13 @@ function startWorking(user) {
   showThings('main');
 }
 
-function goTo(path){
-  window.location.assign(path);
-}
-
 function showThings(id){
   document.getElementById('login').classList.add('hide');
   document.getElementById('main').classList.add('hide');
   document.getElementById('new').classList.add('hide');
   document.getElementById('single').classList.add('hide');
   document.getElementById('edit').classList.add('hide');
-  document.getElementById('pin').classList.add('hide');
+  document.getElementById('graphs').classList.add('hide');
 
   document.getElementById(id).classList.remove('hide');
 }
@@ -49,76 +46,156 @@ function addToDo() {
     var dotime = document.getElementById("dotime").value;
     var importance = document.getElementById("importance").value;
     var repeat = document.getElementById("repeat").value;
+    var details = document.getElementById("details").value;
     var lid = moment().format("x");
-
-  if (title && importance && repeat) {
+    
+  if (title && importance !== 'false' && repeat !== 'false' && document.getElementById('suggestions').style.display === 'none') {
     database.ref("/todo/tasks/" + getID(dodate,dotime,lid)).update({
       title: title,
       importance: importance,
       done: 'no',
       repeat: repeat,
-      when: moment(getID(dodate,dotime,lid),"x").format("LT, DD MMMM YYYY"),
+      when: getWhen(dodate,dotime),
+      details: details,
     });
     showThings('main');
+    showMain();
     document.getElementById("title").value = '';
+    document.getElementById("dodate").value = '';
     document.getElementById("dotime").value = '';
-    document.getElementById("importance").value = '';
-    document.getElementById("repeat").value = '';
+    document.getElementById("importance").value = 'false';
+    document.getElementById("repeat").value = 'false';
+    document.getElementById("details").value = '';
   }
+}
+
+function getWhen(dodate,dotime) {
+  let key = '';
+  if (!dodate && !dotime) {
+    key = '';
+  } else if (dodate && !dotime) {
+    key = moment(dodate,"YYYY-MM-DD").format("DD MMMM YYYY");
+  } else if (!dodate && dotime) {
+    key = moment(dotime,"HH:mm").format("LT");
+  } else if (dodate && dotime) {
+    key = moment(dodate+" "+dotime,"YYYY-MM-DD HH:mm").format("LT, DD MMMM YYYY");
+  }
+  return key;
 }
 
 function getID(dodate,dotime,lid) {
     if (dodate && dotime) {
-        lid = moment(dodate+" "+dotime, "YYYY-MM-DD LT").format("x");
+        lid = moment(dodate+" "+dotime, "YYYY-MM-DD HH:mm").format("x");
     } else if (dodate && !dotime) {
         lid = moment(dodate+" "+moment().format("LT"), "YYYY-MM-DD LT").format("x");
     } else if (!dodate && dotime) {
-        lid = moment(moment().format("YYYY-MM-DD")+" "+dotime, "YYYY-MM-DD hh:mm").format("x");
+        lid = moment(moment().format("YYYY-MM-DD")+" "+dotime, "YYYY-MM-DD HH:mm").format("x");
     } else {
         lid = lid;
     }
     return lid;
 }
 
+document.getElementById('title').addEventListener("keyup", function(event) {
+  var title = document.getElementById("title").value;
+  document.getElementById('suggestions').style.display = 'flex';
+
+  database.ref("/todo/suggestions/").orderByKey().once("value").then((snap) => {
+    document.getElementById('suggest').innerHTML = '';
+    snap.forEach(function (childSnap) {
+      var keyword = childSnap.key;
+      if (keyword.toLowerCase().includes(title.toLowerCase())) {
+        document.getElementById('suggest').innerHTML += `<span onclick="handleKeyword('${keyword}')">${keyword}</span>`;
+      }
+    })
+  })
+  document.getElementById('addsugg').innerHTML = `<span onclick="addNewKeyword('${title}')">Add '${title}' to suggestions</span>`;
+
+  if (document.getElementById("title").value === '') {
+    document.getElementById('suggestions').style.display = 'none';
+  }
+});
+
+function showSuggestion() {
+  var title = document.getElementById("title2").value;
+  document.getElementById('suggestions2').style.display = 'flex';
+
+  database.ref("/todo/suggestions/").orderByKey().once("value").then((snap) => {
+    document.getElementById('suggest2').innerHTML = '';
+    snap.forEach(function (childSnap) {
+      var keyword = childSnap.key;
+      if (keyword.toLowerCase().includes(title.toLowerCase())) {
+        document.getElementById('suggest2').innerHTML += `<span onclick="handleKeyword2('${keyword}')">${keyword}</span>`;
+      }
+    })
+  })
+  document.getElementById('addsugg2').innerHTML = `<span onclick="addNewKeyword2('${title}')">Add '${title}' to suggestions</span>`;
+
+  if (document.getElementById("title2").value === '') {
+    document.getElementById('suggestions2').style.display = 'none';
+  }
+}
+
+function handleKeyword(key) {
+  document.getElementById("title").value = key;
+  document.getElementById('suggestions').style.display = 'none';
+}
+
+function addNewKeyword(key) {
+  database.ref("/todo/suggestions/").once("value").then((snapshot) => {
+    var ifkey = snapshot.child(key).exists();
+    if (ifkey) {
+      handleKeyword(key);
+    } else {
+      database.ref("/todo/suggestions/" + key).set(true);
+      handleKeyword(key);
+    }
+  })
+}
+
+function handleKeyword2(key) {
+  document.getElementById("title2").value = key;
+  document.getElementById('suggestions2').style.display = 'none';
+}
+
+function addNewKeyword2(key) {
+  database.ref("/todo/suggestions/").once("value").then((snapshot) => {
+    var ifkey = snapshot.child(key).exists();
+    if (ifkey) {
+      handleKeyword2(key);
+    } else {
+      database.ref("/todo/suggestions/" + key).set(true);
+      handleKeyword2(key);
+    }
+  })
+}
+
+var imp = ['Select Importance','Not important','Slightly important','Moderately important','Important','Very important']
 
 function showMain() {
   document.getElementById('main').innerHTML = '';
-  document.getElementById('pin').innerHTML = '';
-  database.ref("/life").orderByKey().limitToLast(50).once("value").then((snap) => {
+  database.ref("/todo/tasks/").orderByKey().once("value").then((snap) => {
     snap.forEach(function (childSnap) {
       var title = snap.child(childSnap.key + "/title").val();
-      var time = snap.child(childSnap.key + "/time").val();
-      var tags = snap.child(childSnap.key + "/tags").val();
-      var public = snap.child(childSnap.key + "/public").val();
-      var pin = snap.child(childSnap.key + "/pin").val();
-      tags = tags.replaceAll(',','</span><span>')
+      var importance = snap.child(childSnap.key + "/importance").val();
+      var repeat = snap.child(childSnap.key + "/repeat").val();
+      var when = snap.child(childSnap.key + "/when").val();
 
-      document.getElementById('main').innerHTML += `
+        document.getElementById('main').innerHTML += `
         <div class="item" onclick="showSingle('${childSnap.key}')" id="item-${childSnap.key}">
+          <div class="tick" onclick="event.stopPropagation();">
+            <i class="far fa-circle" onclick="itsDone('${childSnap.key}')"></i>
+          </div>
           <div class="item-info">
-            <span>${time} &#x2022; ${public === 'true' ? '<i class="fas fa-globe-asia"></i>' : '<i class="fas fa-user-lock"></i>'}</span>
             <b>${title}</b>
-            <div><span>${tags}</span></div>
+            <span>${when}</span>
+            <div><span>${imp[importance]}</span><span><i class="fas fa-redo"></i> ${repeat}</span></div>
           </div>
           <div class="item-edit" id="item-edit-${childSnap.key}" onclick="event.stopPropagation();">
             <i class="fas fa-edit" onclick="showEditBox('${childSnap.key}')"></i>
             <i class="fas fa-trash-alt" onclick="delPop('${childSnap.key}')"></i>
           </div>
         </div>`;
-      if (pin === 'yes') {
-        document.getElementById('pin').innerHTML += `
-          <div class="item" onclick="showSingle('${childSnap.key}')" id="item-${childSnap.key}">
-            <div class="item-info">
-              <span>${time} &#x2022; ${public === 'true' ? '<i class="fas fa-globe-asia"></i>' : '<i class="fas fa-user-lock"></i>'}</span>
-              <b>${title}</b>
-              <div><span>${tags}</span></div>
-            </div>
-            <div class="item-edit" id="item-edit-${childSnap.key}" onclick="event.stopPropagation();">
-              <i class="fas fa-edit" onclick="showEditBox('${childSnap.key}')"></i>
-              <i class="fas fa-trash-alt" onclick="delPop('${childSnap.key}')"></i>
-            </div>
-          </div>`;
-      }
     })
   })
 }
@@ -138,154 +215,163 @@ function delPop2(key) {
 }
 
 function delLife(key) {
-  database.ref('/life/'+key).remove();
-  database.ref('/public/'+key).remove();
+  database.ref('/todo/tasks/'+key).remove();
   document.getElementById('item-'+key).remove();
 }
 
 function delLife2(key) {
-  database.ref('/life/'+key).remove();
-  database.ref('/public/'+key).remove();
+  database.ref('/todo/tasks/'+key).remove();
   showThings('main');
   showMain();
 }
 
+
+// okksa
+
+
 function showEditBox(key) {
-  database.ref("/life/"+key).once("value").then((snap) => {
+  database.ref("/todo/tasks/"+key).once("value").then((snap) => {
     var title = snap.child("title").val();
+    var importance = snap.child("importance").val();
+    var repeat = snap.child("repeat").val();
+    var when = snap.child("when").val();
     var details = snap.child("details").val();
-    var tags = snap.child("tags").val();
-    var public = snap.child("public").val();
 
     document.getElementById('edit').innerHTML = `
-    <form class="new-entry" onSubmit="return false;">
-      <div>
-        <input
-        type="text"
-        id="title2"
-        placeholder="Enter title..."
-        autocomplete="off"
-        value="${title}"
-        required />
-      </div>
-      <div class="renderWindow">
-        <textarea id="details2" placeholder="Enter details..." onkeyup="processRender('2')" required>${details}</textarea>
-        <div class="renderbox" id="renderbox2"></div>
-      </div>
-      <div class="fixed">
+      <form class="new-entry" onSubmit="return false;">
+        <div class="input-title">
+          <input type="text" id="title2" placeholder="Edit Task..." autocomplete="off" value="${title}" onkeyup="showSuggestion()" required />
+          <div class="suggestions" id="suggestions2">
+            <div class="suggest" id="suggest2"></div>
+            <div class="addsugg" id="addsugg2"></div>
+          </div>
+        </div>
         <div>
-          <input
-          type="text"
-          id="tags2"
-          placeholder="Enter tags... (Comma separated)"
-          autocomplete="off"
-          value="${tags}"
-          required />
-          <select id="public2">
-            <option value="false" ${public === 'false' ? 'selected' : ''}>Private Log</option>
-            <option value="true" ${public === 'true' ? 'selected' : ''}>Public Log</option>
+          <input type="date" id="dodate2" autocomplete="off" value="${moment(when, 'LT, DD MMMM YYYY').format('YYYY-MM-DD')}"/>
+          <input type="time" id="dotime2" autocomplete="off" value="${moment(when, 'LT, DD MMMM YYYY').format('HH:mm')}"/>
+        </div>
+        <div>
+          <select id="importance2" required>
+            <option value="false" ${importance === 'false' ? 'selected': ''}>Select Importance</option>
+            <option value="1" ${importance === '1' ? 'selected': ''}>Not important</option>
+            <option value="2" ${importance === '2' ? 'selected': ''}>Slightly important</option>
+            <option value="3" ${importance === '3' ? 'selected': ''}>Moderately important</option>
+            <option value="4" ${importance === '4' ? 'selected': ''}>Important</option>
+            <option value="5" ${importance === '5' ? 'selected': ''}>Very important</option>
+          </select>
+          <select id="repeat2">
+            <option value="false" ${repeat === 'false' ? 'selected': ''}>Select Recurrence</option>
+            <option value="Once" ${repeat === 'Once' ? 'selected': ''}>Once</option>
+            <option value="Daily" ${repeat === 'Daily' ? 'selected': ''}>Daily</option>
+            <option value="Weekly" ${repeat === 'Weekly' ? 'selected': ''}>Weekly</option>
+            <option value="Monthly" ${repeat === 'Monthly' ? 'selected': ''}>Monthly</option>
+            <option value="Yearly" ${repeat === 'Yearly' ? 'selected': ''}>Yearly</option>
           </select>
         </div>
         <div>
-          <button type="submit" onclick="editEntry('${key}')">Edit This Entry</button>
+          <textarea id="details2" placeholder="Enter details...">${details ? details : ''}</textarea>
         </div>
-      </div>
-    </form>`;
+        <div class="fixed">
+          <div>
+            <button type="submit" onclick="editEntry('${key}')">Add New Task</button>
+          </div>
+        </div>
+      </form>`
   }).then((value) => {
     showThings('edit');
-    processTextAreaHeight();
   })
 }
 
 function showEditBox2(key) {
-  database.ref("/life/"+key).once("value").then((snap) => {
+  database.ref("/todo/tasks/"+key).once("value").then((snap) => {
     var title = snap.child("title").val();
+    var importance = snap.child("importance").val();
+    var repeat = snap.child("repeat").val();
+    var when = snap.child("when").val();
     var details = snap.child("details").val();
-    var tags = snap.child("tags").val();
-    var public = snap.child("public").val();
 
     document.getElementById('edit').innerHTML = `
-    <form class="new-entry" onSubmit="return false;">
-      <div>
-        <input
-        type="text"
-        id="title2"
-        placeholder="Enter title..."
-        autocomplete="off"
-        value="${title}"
-        required />
-      </div>
-      <div class="renderWindow">
-        <textarea id="details2" placeholder="Enter details..." onkeyup="processRender('2')" required>${details}</textarea>
-        <div class="renderbox" id="renderbox2"></div>
-      </div>
-      <div class="fixed">
+      <form class="new-entry" onSubmit="return false;">
+        <div class="input-title">
+          <input type="text" id="title2" placeholder="Edit Task..." autocomplete="off" value="${title}"  onkeyup="showSuggestion()" required />
+          <div class="suggestions" id="suggestions2">
+            <div class="suggest" id="suggest2"></div>
+            <div class="addsugg" id="addsugg2"></div>
+          </div>
+        </div>
         <div>
-          <input
-          type="text"
-          id="tags2"
-          placeholder="Enter tags... (Comma separated)"
-          autocomplete="off"
-          value="${tags}"
-          required />
-          <select id="public2">
-            <option value="false" ${public === 'false' ? 'selected' : ''}>Private Log</option>
-            <option value="true" ${public === 'true' ? 'selected' : ''}>Public Log</option>
+          <input type="date" id="dodate2" autocomplete="off" value="${moment(when, 'LT, DD MMMM YYYY').format('YYYY-MM-DD')}"/>
+          <input type="time" id="dotime2" autocomplete="off" value="${moment(when, 'LT, DD MMMM YYYY').format('HH:mm')}"/>
+        </div>
+        <div>
+          <select id="importance2" required>
+            <option value="false" ${importance === 'false' ? 'selected': ''}>Select Importance</option>
+            <option value="1" ${importance === '1' ? 'selected': ''}>Not important</option>
+            <option value="2" ${importance === '2' ? 'selected': ''}>Slightly important</option>
+            <option value="3" ${importance === '3' ? 'selected': ''}>Moderately important</option>
+            <option value="4" ${importance === '4' ? 'selected': ''}>Important</option>
+            <option value="5" ${importance === '5' ? 'selected': ''}>Very important</option>
+          </select>
+          <select id="repeat2">
+            <option value="false" ${repeat === 'false' ? 'selected': ''}>Select Recurrence</option>
+            <option value="Once" ${repeat === 'Once' ? 'selected': ''}>Once</option>
+            <option value="Daily" ${repeat === 'Daily' ? 'selected': ''}>Daily</option>
+            <option value="Weekly" ${repeat === 'Weekly' ? 'selected': ''}>Weekly</option>
+            <option value="Monthly" ${repeat === 'Monthly' ? 'selected': ''}>Monthly</option>
+            <option value="Yearly" ${repeat === 'Yearly' ? 'selected': ''}>Yearly</option>
           </select>
         </div>
         <div>
-          <button type="submit" onclick="editEntry2('${key}')">Edit This Entry</button>
+          <textarea id="details2" placeholder="Enter details...">${details ? details : ''}</textarea>
         </div>
-      </div>
-    </form>`;
+        <div class="fixed">
+          <div>
+            <button type="submit" onclick="editEntry2('${key}')">Add New Task</button>
+          </div>
+        </div>
+      </form>`
   }).then((value) => {
     showThings('edit');
-    processTextAreaHeight();
   })
 }
 
 
 function editEntry(key) {
   var title = document.getElementById("title2").value;
+  var dodate = document.getElementById("dodate2").value;
+  var dotime = document.getElementById("dotime2").value;
+  var importance = document.getElementById("importance2").value;
+  var repeat = document.getElementById("repeat2").value;
   var details = document.getElementById("details2").value;
-  var tags = document.getElementById("tags2").value;
-  var public = document.getElementById("public2").value;
-
-  if (title && details && tags) {
-    database.ref("/life/" + key).update({
-      title: title.replace(/(\r\n|\r|\n)/g, '<br><br>'),
+  
+  if (title && importance !== 'false' && repeat !== 'false') {
+    database.ref("/todo/tasks/" + key).update({
+      title: title,
+      importance: importance,
+      repeat: repeat,
+      when: getWhen(dodate,dotime),
       details: details,
-      tags:tags,
-      public:public,
     });
-    if (public === 'true') {
-      database.ref("/public/" + key).set(true);
-    } else if (public === 'false') {
-      database.ref('/public/'+key).remove();
-    }
-    showThings('main');
-    showMain();
+    showSingle(key);
   }
 }
 
 function editEntry2(key) {
   var title = document.getElementById("title2").value;
+  var dodate = document.getElementById("dodate2").value;
+  var dotime = document.getElementById("dotime2").value;
+  var importance = document.getElementById("importance2").value;
+  var repeat = document.getElementById("repeat2").value;
   var details = document.getElementById("details2").value;
-  var tags = document.getElementById("tags2").value;
-  var public = document.getElementById("public2").value;
-
-  if (title && details && tags) {
-    database.ref("/life/" + key).update({
-      title: title.replace(/(\r\n|\r|\n)/g, '<br><br>'),
+  
+  if (title && importance !== 'false' && repeat !== 'false') {
+    database.ref("/todo/tasks/" + key).update({
+      title: title,
+      importance: importance,
+      repeat: repeat,
+      when: getWhen(dodate,dotime),
       details: details,
-      tags:tags,
-      public:public,
     });
-    if (public === 'true') {
-      database.ref("/public/" + key).set(true);
-    } else if (public === 'false') {
-      database.ref('/public/'+key).remove();
-    }
     showSingle(key);
   }
 }
@@ -306,131 +392,92 @@ function noPop2(key) {
 
 
 function showSingle(id) {
-  database.ref("/life/"+id).once("value").then((snap) => {
+  database.ref("/todo/tasks/"+id).once("value").then((snap) => {
     var title = snap.child("title").val();
+    var importance = snap.child("importance").val();
+    var repeat = snap.child("repeat").val();
+    var when = snap.child("when").val();
     var details = snap.child("details").val();
-    var time = snap.child("time").val();
-    var tags = snap.child("tags").val();
-    var public = snap.child("public").val();
-    var pin = snap.child("pin").val();
-    tags = tags.replaceAll(',','</span><span>')
 
     document.getElementById('single').innerHTML = `
     <div class="single-item">
       <div class="single-item-flex">
+        <div class="tick">
+          <i class="far fa-circle"></i>
+        </div>
         <div class="item-info">
-          <em onclick="copy('${id}')">${id} <i class="fas fa-copy"></i></em>
-          <span>${time} &#x2022; ${public === 'true' ? `<i class="fas fa-globe-asia"></i> &#x2022; <i onclick="copy('https://abdussamiakanda.com/log?id=${id}')" class="share fas fa-share-alt-square"></i>` : '<i class="fas fa-user-lock"></i>'} &#x2022; 
-          ${pin === 'yes' ? `<i class="share fas fa-map-marker-alt" onclick="makePin('${id}','no')"></i>` : `<i class="share fas fa-map-marker" onclick="makePin('${id}','yes')"></i>`}</span>
+          <span>${when}</span>
           <b>${title}</b>
-          <p><span>${tags}</span></p>
+          <p><span>${imp[importance]}</span><span><i class="fas fa-redo"></i> ${repeat}</span></p>
         </div>
         <div class="item-edit" id="item-single-${snap.key}" onclick="event.stopPropagation();">
           <i class="fas fa-edit" onclick="showEditBox2('${snap.key}')"></i>
           <i class="fas fa-trash-alt" onclick="delPop2('${snap.key}')"></i>
         </div>
       </div>
-      <div class="details" id="deets">${marked.parse(details)}</div>
+      <div class="details" id="deets">${details ? details : ''}</div>
     </div>`;
-  }).then((value) => {
-    processSingle();
-    renderMath();
   })
   showThings('single');
 }
 
-function makePin(id,tag) {
-  if (tag === 'yes') {
-    database.ref("/life/"+id+"/pin").set('yes');
-  } else {
-    database.ref("/life/"+id+"/pin").set('no');
-  }
-  showSingle(id);
-}
+function itsDone(id) {
+  database.ref("/todo/tasks/"+id).once("value").then((snap) => {
+    var title = snap.child("title").val();
+    var importance = snap.child("importance").val();
+    var repeat = snap.child("repeat").val();
+    var when = snap.child("when").val();
+    var details = snap.child("details").val();
 
-function copy(id) {
-  navigator.clipboard.writeText(id);
-}
+    let time = moment(when, 'LT, DD MMMM YYYY').format('LT') === 'Invalid date' ? moment().format('LT') : moment(when, 'LT, DD MMMM YYYY').format('LT');
+    let tomorrow = moment().add(1, 'd').format('DD MMMM YYYY');
+    let nextweek = moment().add(1, 'w').format('DD MMMM YYYY');
+    let nextmonth = moment().add(1, 'M').format('DD MMMM YYYY');
+    let nextyear = moment().add(1, 'y').format('DD MMMM YYYY');
 
-function processRender(id) {
-  let textArea = '';
-  let details = '';
-  let objDiv = '';
-
-  if (id === '1'){
-    textArea = document.getElementById('details');
-    details = textArea.value;
-    objDiv = document.getElementById('renderbox');
-  } else if (id === '2') {
-    textArea = document.getElementById('details2');
-    details = textArea.value;
-    objDiv = document.getElementById('renderbox2')
-  }
-  objDiv.innerHTML = marked.parse(details);
-  objDiv.scrollTop = objDiv.scrollHeight - objDiv.clientHeight;
-  renderMath();
-
-  textArea.addEventListener("input", function (e) {
-    this.style.height = "auto";
-    this.style.height = this.scrollHeight + "px";
-    if (textArea.selectionEnd === textArea.value.length) {
-      window.scrollTo(0, document.body.scrollHeight);
-    } else {
-      textArea.scrollTo(0, textArea.selectionStart+200);
-    }
-    console.log(textArea.scrollTop,'event');
-  });
-  console.log(textArea.selectionStart,textArea.selectionEnd);
-}
-
-function processTextAreaHeight() {
-  document.getElementById('details2').style.height = "auto";
-  document.getElementById('details2').style.height = document.getElementById('details2').scrollHeight + "px";
-}
-
-function processSingle() {
-  const details = document.body;
-  const regex = /@\{(\d+)\}/g;
-  details.innerHTML = details.innerHTML.replace(regex, (match, number) => {
-    const id = parseInt(number, 10);
-    const customTag = `<i class="hyperlink fas fa-link" onclick="showSingle('${id}')"></i>`;
-    return customTag;
-  });
-}
-
-function showSearchResult() {
-  var searchInput = document.getElementById('search-text').value.toLowerCase().replaceAll(' ','');
-  document.getElementById('main').innerHTML = '';
-
-  database.ref("/life").orderByKey().once("value").then((snap) => {
-    snap.forEach(function (childSnap) {
-      var title = snap.child(childSnap.key + "/title").val();
-      var time = snap.child(childSnap.key + "/time").val();
-      var details = snap.child(childSnap.key + "/details").val();
-      var tags = snap.child(childSnap.key + "/tags").val();
-      var public = snap.child(childSnap.key + "/public").val();
-
-      if (title.toLowerCase().replaceAll(' ','').includes(searchInput) || time.toLowerCase().replaceAll(' ','').includes(searchInput) || details.toLowerCase().replaceAll(' ','').includes(searchInput) || tags.toLowerCase().replaceAll(' ','').includes(searchInput)) {
-        var tagsHtml = tags.replaceAll(',','</span><span>');
-
-        document.getElementById('main').innerHTML += `
-          <div class="item" onclick="showSingle('${childSnap.key}')" id="item-${childSnap.key}">
-            <div class="item-info">
-              <span>${time} &#x2022; ${public === 'true' ? '<i class="fas fa-globe-asia"></i>' : '<i class="fas fa-user-lock"></i>'}</span>
-              <b>${title}</b>
-              <div><span>${tagsHtml}</span></div>
-            </div>
-            <div class="item-edit" id="item-edit-${childSnap.key}" onclick="event.stopPropagation();">
-              <i class="fas fa-edit" onclick="showEditBox('${childSnap.key}')"></i>
-              <i class="fas fa-trash-alt" onclick="delPop('${childSnap.key}')"></i>
-            </div>
-          </div>`;
-      }
+    database.ref("/todo/done/" + id).update({
+      title: title,
+      importance: importance,
+      repeat: repeat,
+      when: when,
+      details: details,
     });
-    if (document.getElementById('main').innerHTML == '') {
-      document.getElementById('main').innerHTML = `<p class="no-result">No results found!</p>`;
-    }
-  });
-  showThings('main');
-}
 
+    if (repeat === 'Daily') {
+      database.ref("/todo/tasks/" + moment(time+" "+tomorrow, 'LT DD MMMM YYYY').format('x')).update({
+        title: title,
+        importance: importance,
+        repeat: repeat,
+        when: moment(time+" "+tomorrow, 'LT DD MMMM YYYY').format('LT, DD MMMM YYYY'),
+        details: details,
+      });
+    } else if (repeat === 'Weekly') {
+      database.ref("/todo/tasks/" + moment(time+" "+nextweek, 'LT DD MMMM YYYY').format('x')).update({
+        title: title,
+        importance: importance,
+        repeat: repeat,
+        when: moment(time+" "+nextweek, 'LT DD MMMM YYYY').format('LT, DD MMMM YYYY'),
+        details: details,
+      });
+    } else if (repeat === 'Monthly') {
+      database.ref("/todo/tasks/" + moment(time+" "+nextmonth, 'LT DD MMMM YYYY').format('x')).update({
+        title: title,
+        importance: importance,
+        repeat: repeat,
+        when: moment(time+" "+nextmonth, 'LT DD MMMM YYYY').format('LT, DD MMMM YYYY'),
+        details: details,
+      });
+    } else if (repeat === 'Yearly') {
+      database.ref("/todo/tasks/" + moment(time+" "+nextyear, 'LT DD MMMM YYYY').format('x')).update({
+        title: title,
+        importance: importance,
+        repeat: repeat,
+        when: moment(time+" "+nextyear, 'LT DD MMMM YYYY').format('LT, DD MMMM YYYY'),
+        details: details,
+      });
+    }
+  }).then((value) => {
+    database.ref("/todo/tasks/"+id).remove();
+    showMain();
+  })
+}

@@ -30,35 +30,41 @@
         </div>
 
         <div class="items hide" id="main"></div>
-
-        <div class="items hide" id="pin"></div>
+        <div class="items hide" id="graphs"></div>
 
         <div class="hide" id="new">
           <form class="new-entry" onSubmit="return false;">
-            <div>
-                <input type="text" id="title" placeholder="New Task..." autocomplete="off" required />
+            <div class="input-title">
+              <input type="text" id="title" placeholder="New Task..." autocomplete="off" required />
+              <div class="suggestions" id="suggestions">
+                <div class="suggest" id="suggest"></div>
+                <div class="addsugg" id="addsugg"></div>
+              </div>
             </div>
             <div>
-                <input type="date" id="dodate" placeholder="Select Date..." autocomplete="off" required />
-                <input type="time" id="dotime" placeholder="Select Time..." autocomplete="off" required />
+              <input type="date" id="dodate" placeholder="Select Date..." autocomplete="off"/>
+              <input type="time" id="dotime" placeholder="Select Time..." autocomplete="off"/>
             </div>
             <div>
-                <select id="importance" required>
-                    <option value="false" selected>Select Importance</option>
-                    <option value="1">Not important</option>
-                    <option value="2">Slightly important</option>
-                    <option value="3">Moderately important</option>
-                    <option value="4">Important</option>
-                    <option value="5">Very important</option>
-                </select>
-                <select id="repeat">
-                    <option value="false" selected>Select Recurrence</option>
-                    <option value="once">Once</option>
-                    <option value="daily">Daily</option>
-                    <option value="weekly">Weekly</option>
-                    <option value="monthly">Monthly</option>
-                    <option value="yearly">Yearly</option>
-                </select>
+              <select id="importance" required>
+                <option value="false" selected>Select Importance</option>
+                <option value="1">Not important</option>
+                <option value="2">Slightly important</option>
+                <option value="3">Moderately important</option>
+                <option value="4">Important</option>
+                <option value="5">Very important</option>
+              </select>
+              <select id="repeat">
+                <option value="false" selected>Select Recurrence</option>
+                <option value="Once">Once</option>
+                <option value="Daily">Daily</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Monthly">Monthly</option>
+                <option value="Yearly">Yearly</option>
+              </select>
+            </div>
+            <div>
+              <textarea id="details" placeholder="Enter details..."></textarea>
             </div>
             <div class="fixed">
               <div>
