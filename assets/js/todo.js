@@ -28,6 +28,10 @@ function startWorking(user) {
   showThings('main');
 }
 
+function goTo(path){
+  window.location.assign(path);
+}
+
 function showThings(id){
   document.getElementById('login').classList.add('hide');
   document.getElementById('main').classList.add('hide');
