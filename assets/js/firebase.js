@@ -31,7 +31,6 @@ function GoogleLogin() {
 
 function verifyUser(user) {
   if (user.email === 'abdussamiakanda@gmail.com') {
-    document.title = 'Logs of Md Abdus Sami Akanda'
     startWorking(user);
   } else {
     deleteEmail();

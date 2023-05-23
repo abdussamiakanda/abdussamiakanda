@@ -4,45 +4,28 @@ var userdata = null;
 
 // MAIN FUNCTIONS
 
-let processScroll = () => {
-  var docElem = document.documentElement;
-  var docBody = document.body;
-  var scrollTop = docElem['scrollTop'] || docBody['scrollTop'];
-  var scrollBottom = (docElem['scrollHeight'] || docBody['scrollHeight']) - window.innerHeight;
-  var scrollPercent = scrollTop / scrollBottom * 100 + '%';
-
-  document.getElementById('progressbar').style.setProperty('--scrollAmount',scrollPercent);
-}
-
-document.addEventListener('scroll', processScroll);
-
 function showAll() {
   showThings('main');
   showMain();
 }
 
 function startWorking(user) {
-  document.title = 'Logs of Md Abdus Sami Akanda'
+    document.title = 'Md Abdus Sami Akanda'
   document.getElementById('top').innerHTML = `
     <div class="top-flex">
-      <div class="title" onclick="showAll()">Logs of Sami</div>
+      <div class="title" onclick="showAll()">To Do</div>
       <div class="search-input">
         <span></span>
         <input type="text" id="search-text" placeholder="Search log..." autocomplete="off" onkeydown="if(event.keyCode===13){showSearchResult();}" required/>
       </div>
       <div class="top-buttons">
         <i class="fas fa-plus" onclick="showThings('new')"></i>
-        <i class="fas fa-thumbtack" onclick="showThings('pin')"></i>
-        <i class="fas fa-list-ul" onclick="goTo('./todo')"></i>
+        <i class="fas fa-clipboard" onclick="goTo('./logs')"></i>
         <i class="fas fa-sign-out-alt" onclick="GoogleLogout()"></i>
       </div>
     </div>`;
   showMain();
   showThings('main');
-}
-
-function goTo(path){
-  window.location.assign(path);
 }
 
 function showThings(id){
@@ -54,40 +37,45 @@ function showThings(id){
   document.getElementById('pin').classList.add('hide');
 
   document.getElementById(id).classList.remove('hide');
-
-  if (id === 'new') {
-    document.getElementById('renderbox').innerHTML = '';
-  } else if (id === 'edit') {
-    document.getElementById('renderbox2').innerHTML = '';
-  }
 }
 
-function addLog() {
-  var title = document.getElementById("title").value;
-  var details = document.getElementById("details").value;
-  var tags = document.getElementById("tags").value;
-  var public = document.getElementById("public").value;
-  var lid = moment().format("x");
+function addToDo() {
+    var title = document.getElementById("title").value;
+    var dodate = document.getElementById("dodate").value;
+    var dotime = document.getElementById("dotime").value;
+    var importance = document.getElementById("importance").value;
+    var repeat = document.getElementById("repeat").value;
+    var lid = moment().format("x");
 
-  if (title && details && tags) {
-    database.ref("/life/" + lid).update({
-      title: title.replace(/(\r\n|\r|\n)/g, '<br><br>'),
-      details: details,
-      tags:tags,
-      public:public,
-      pin:'no',
-      time: moment().format("LT, DD MMMM YYYY"),
+  if (title && importance && repeat) {
+    database.ref("/todo/tasks/" + getID(dodate,dotime,lid)).update({
+      title: title,
+      importance: importance,
+      done: 'no',
+      repeat: repeat,
+      when: moment(getID(dodate,dotime,lid),"x").format("LT, DD MMMM YYYY"),
     });
-    if (public === 'true') {
-      database.ref("/public/" + lid).set(true);
-    }
-    showThings('single');
-    showSingle(lid);
+    showThings('main');
     document.getElementById("title").value = '';
-    document.getElementById("details").value = '';
-    document.getElementById("tags").value = '';
+    document.getElementById("dotime").value = '';
+    document.getElementById("importance").value = '';
+    document.getElementById("repeat").value = '';
   }
 }
+
+function getID(dodate,dotime,lid) {
+    if (dodate && dotime) {
+        lid = moment(dodate+" "+dotime, "YYYY-MM-DD LT").format("x");
+    } else if (dodate && !dotime) {
+        lid = moment(dodate+" "+moment().format("LT"), "YYYY-MM-DD LT").format("x");
+    } else if (!dodate && dotime) {
+        lid = moment(moment().format("YYYY-MM-DD")+" "+dotime, "YYYY-MM-DD hh:mm").format("x");
+    } else {
+        lid = lid;
+    }
+    return lid;
+}
+
 
 function showMain() {
   document.getElementById('main').innerHTML = '';
@@ -201,7 +189,6 @@ function showEditBox(key) {
     </form>`;
   }).then((value) => {
     showThings('edit');
-    processRender('2');
     processTextAreaHeight();
   })
 }
@@ -249,7 +236,6 @@ function showEditBox2(key) {
     </form>`;
   }).then((value) => {
     showThings('edit');
-    processRender('2');
     processTextAreaHeight();
   })
 }
@@ -444,17 +430,3 @@ function showSearchResult() {
   showThings('main');
 }
 
-function renderMath() {
-  setTimeout(
-    function() {
-      renderMathInElement(document.body, {
-        delimiters: [
-            {left: '$$', right: '$$', display: true},
-            {left: '$', right: '$', display: false},
-            {left: '\\(', right: '\\)', display: false},
-            {left: '\\[', right: '\\]', display: true}
-        ],
-        throwOnError : false
-      });
-    }, 100);
-}
