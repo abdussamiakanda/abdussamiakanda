@@ -402,8 +402,8 @@ function showSingle(id) {
     document.getElementById('single').innerHTML = `
     <div class="single-item">
       <div class="single-item-flex">
-        <div class="tick">
-          <i class="far fa-circle"></i>
+        <div class="tick" onclick="event.stopPropagation();">
+          <i class="far fa-circle" onclick="itsDone('${childSnap.key}')"></i>
         </div>
         <div class="item-info">
           <span>${when}</span>
