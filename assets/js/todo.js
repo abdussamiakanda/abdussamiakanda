@@ -273,7 +273,7 @@ function showEditBox(key) {
         </div>
         <div class="fixed">
           <div>
-            <button type="submit" onclick="editEntry('${key}')">Add New Task</button>
+            <button type="submit" onclick="editEntry('${key}')">Edit Task</button>
           </div>
         </div>
       </form>`
@@ -326,7 +326,7 @@ function showEditBox2(key) {
         </div>
         <div class="fixed">
           <div>
-            <button type="submit" onclick="editEntry2('${key}')">Add New Task</button>
+            <button type="submit" onclick="editEntry2('${key}')">Edit Task</button>
           </div>
         </div>
       </form>`
