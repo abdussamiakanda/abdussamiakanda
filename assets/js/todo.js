@@ -403,7 +403,7 @@ function showSingle(id) {
     <div class="single-item">
       <div class="single-item-flex">
         <div class="tick" onclick="event.stopPropagation();">
-          <i class="far fa-circle" onclick="itsDone('${childSnap.key}')"></i>
+          <i class="far fa-circle" onclick="itsDone('${snap.key}')"></i>
         </div>
         <div class="item-info">
           <span>${when}</span>
