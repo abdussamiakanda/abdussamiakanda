@@ -415,7 +415,7 @@ function showSingle(id) {
           <i class="fas fa-trash-alt" onclick="delPop2('${snap.key}')"></i>
         </div>
       </div>
-      <div class="details" id="deets">${details ? details : ''}</div>
+      <div class="details" id="deets">${details ? marked.parse(details) : ''}</div>
     </div>`;
   })
   showThings('single');
