@@ -49,7 +49,7 @@ function startWorking(user) {
       </div>
       <div class="top-buttons">
         <i class="fas fa-plus" onclick="showThings('new')"></i>
-        <i class="fas fa-thumbtack" onclick="showThings('pin')"></i>
+        <i class="fas fa-infinity" onclick="showThings('pin')"></i>
         <i class="fas fa-sign-out-alt" onclick="GoogleLogout()"></i>
       </div>
     </div>`;
@@ -146,7 +146,7 @@ function showMain() {
       var pin = snap.child(childSnap.key + "/pin").val();
       tags = tags.replaceAll(',','</span><span>')
 
-      document.getElementById('main').innerHTML += `
+      document.getElementById('pin').innerHTML += `
         <div class="item" onclick="showSingle('${childSnap.key}')" id="item-${childSnap.key}">
           <div class="item-info">
             <span>${time} &#x2022; ${public === 'true' ? '<i class="fas fa-globe-asia"></i>' : '<i class="fas fa-user-lock"></i>'}</span>
@@ -159,7 +159,7 @@ function showMain() {
           </div>
         </div>`;
       if (pin === 'yes') {
-        document.getElementById('pin').innerHTML += `
+        document.getElementById('main').innerHTML += `
           <div class="item" onclick="showSingle('${childSnap.key}')" id="item-${childSnap.key}">
             <div class="item-info">
               <span>${time} &#x2022; ${public === 'true' ? '<i class="fas fa-globe-asia"></i>' : '<i class="fas fa-user-lock"></i>'}</span>
