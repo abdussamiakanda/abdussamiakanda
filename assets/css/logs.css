@@ -87,6 +87,66 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     justify-content: space-between;
   }
+  .top-flex .top-flex-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .top-flex .top-flex-left .dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 35px;
+    margin-left: -5px;
+    margin-right: 10px;
+    padding: 10px 5px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  .top-flex .top-flex-left .dots:hover {
+    background-color: rgba(255,255,255,0.2);
+    box-shadow: 0px 0px 5px rgba(255,255,255,0.3);
+  }
+  .dots-hover {
+    background-color: rgba(255,255,255,0.2);
+    box-shadow: 0px 0px 5px rgba(255,255,255,0.3);
+  }
+  .top-flex .top-flex-left .dots div {
+    background-color: white;
+    width: 5px;
+    height: 5px;
+    border-radius: 3px;
+    margin: 2px;
+  }
+  .top-flex .top-flex-left .all-apps {
+    position: absolute;
+    display: none;
+    top: 50px;
+    left: 0px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(0,0,0,0.7);
+    box-shadow: 0px 0px 5px rgba(255,255,255,0.5), 0px 0px 5px rgba(0,0,0,1);
+    font-size: 25px;
+    align-items: center;
+    justify-content: center;
+  }
+  .all-apps i {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+  }
+  .all-apps i:hover {
+    background-color: white;
+    color: black;
+  }
   .title {
     font-size: 20px;
     font-weight: bold;
@@ -470,6 +530,66 @@ h1, h2, h3, h4, h5, h6 {
     flex-direction: column;
     align-items: flex-start;
     user-select: none;
+  }
+  .top-flex .top-flex-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .top-flex .top-flex-left .dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 25px;
+    margin-left: -2px;
+    margin-right: 5px;
+    padding: 6px 5px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  .top-flex .top-flex-left .dots:hover {
+    background-color: rgba(255,255,255,0.2);
+    box-shadow: 0px 0px 5px rgba(255,255,255,0.3);
+  }
+  .dots-hover {
+    background-color: rgba(255,255,255,0.2);
+    box-shadow: 0px 0px 5px rgba(255,255,255,0.3);
+  }
+  .top-flex .top-flex-left .dots div {
+    background-color: white;
+    width: 4px;
+    height: 4px;
+    border-radius: 3px;
+    margin: 2px;
+  }
+  .top-flex .top-flex-left .all-apps {
+    position: absolute;
+    display: none;
+    top: 40px;
+    left: 0px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgba(0,0,0,0.9);
+    box-shadow: 0px 0px 5px rgba(255,255,255,0.5), 0px 0px 5px rgba(0,0,0,1);
+    font-size: 20px;
+    align-items: center;
+    justify-content: center;
+  }
+  .all-apps i {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+  }
+  .all-apps i:hover {
+    background-color: white;
+    color: black;
   }
   .title {
     font-size: 20px;

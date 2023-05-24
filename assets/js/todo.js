@@ -17,16 +17,61 @@ function startWorking(user) {
   document.title = 'Md Abdus Sami Akanda'
   document.getElementById('top').innerHTML = `
     <div class="top-flex">
-      <div class="title" onclick="showAll()">To Do</div>
+      <div class="top-flex-left">
+        <div id="dots" class="dots">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="all-apps" id="all-apps">
+          <i class="fas fa-clipboard" onclick="goToApp('logs')"></i>
+          <i class="fas fa-list-ul" onclick="goToApp('todo')"></i>
+        </div>
+        <div class="title" onclick="showAll()">To Do</div>
+      </div>
       <div class="top-buttons">
         <i class="fas fa-plus" onclick="showThings('new')"></i>
         <i class="fas fa-chart-area" onclick="showThings('graphs')"></i>
-        <i class="fas fa-clipboard" onclick="goTo('./logs')"></i>
         <i class="fas fa-sign-out-alt" onclick="GoogleLogout()"></i>
       </div>
     </div>`;
   showMain();
   showThings('main');
+}
+
+document.addEventListener("click", function(evt) {
+  let flyoutEl = document.getElementById('dots'),
+    targetEl = evt.target,
+    element = document.getElementById('all-apps');
+  do {
+    if(targetEl == flyoutEl) {
+      document.getElementById('dots').classList.toggle('dots-hover');
+      if (window.getComputedStyle(element).getPropertyValue("display") === 'none'){
+        document.getElementById('all-apps').style.display = 'flex';
+      } else {
+        document.getElementById('all-apps').style.display = 'none';
+      }
+      return;
+    }
+    targetEl = targetEl.parentNode;
+  } while (targetEl);
+  if (window.getComputedStyle(element).getPropertyValue("display") === 'flex'){
+    document.getElementById('all-apps').style.display = 'none';
+    document.getElementById('dots').classList.toggle('dots-hover');
+  }
+});
+
+function goToApp(url) {
+  document.getElementById('dots').click;
+  if (url !== 'todo') {
+    goTo('./'+url);
+  }
 }
 
 function showThings(id){
