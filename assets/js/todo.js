@@ -38,7 +38,7 @@ function startWorking(user) {
       </div>
       <div class="top-buttons">
         <i class="fas fa-plus" onclick="showThings('new')"></i>
-        <i class="fas fa-chart-area" onclick="showThings('graphs')"></i>
+        <i class="fas fa-chart-area" onclick="showGraphs()"></i>
         <i class="fas fa-sign-out-alt" onclick="GoogleLogout()"></i>
       </div>
     </div>`;
@@ -86,15 +86,20 @@ function showThings(id){
   document.getElementById(id).classList.remove('hide');
 }
 
+function showGraphs() {
+  showThings('graphs');
+  showStat(moment().format('YYYY'));
+}
+
 function addToDo() {
-    var title = document.getElementById("title").value;
-    var dodate = document.getElementById("dodate").value;
-    var dotime = document.getElementById("dotime").value;
-    var importance = document.getElementById("importance").value;
-    var repeat = document.getElementById("repeat").value;
-    var details = document.getElementById("details").value;
-    var lid = moment().format("x");
-    
+  var title = document.getElementById("title").value;
+  var dodate = document.getElementById("dodate").value;
+  var dotime = document.getElementById("dotime").value;
+  var importance = document.getElementById("importance").value;
+  var repeat = document.getElementById("repeat").value;
+  var details = document.getElementById("details").value;
+  var lid = moment().format("x");
+  
   if (title && importance !== 'false' && repeat !== 'false' && document.getElementById('suggestions').style.display === 'none') {
     database.ref("/todo/tasks/" + getID(dodate,dotime,lid)).update({
       title: title,
@@ -130,16 +135,16 @@ function getWhen(dodate,dotime) {
 }
 
 function getID(dodate,dotime,lid) {
-    if (dodate && dotime) {
-        lid = moment(dodate+" "+dotime, "YYYY-MM-DD HH:mm").format("x");
-    } else if (dodate && !dotime) {
-        lid = moment(dodate+" "+moment().format("LT"), "YYYY-MM-DD LT").format("x");
-    } else if (!dodate && dotime) {
-        lid = moment(moment().format("YYYY-MM-DD")+" "+dotime, "YYYY-MM-DD HH:mm").format("x");
-    } else {
-        lid = lid;
-    }
-    return lid;
+  if (dodate && dotime) {
+      lid = moment(dodate+" "+dotime, "YYYY-MM-DD HH:mm").format("x");
+  } else if (dodate && !dotime) {
+      lid = moment(dodate+" "+moment().format("LT"), "YYYY-MM-DD LT").format("x");
+  } else if (!dodate && dotime) {
+      lid = moment(moment().format("YYYY-MM-DD")+" "+dotime, "YYYY-MM-DD HH:mm").format("x");
+  } else {
+      lid = lid;
+  }
+  return lid;
 }
 
 document.getElementById('title').addEventListener("keyup", function(event) {
@@ -193,7 +198,7 @@ function addNewKeyword(key) {
     if (ifkey) {
       handleKeyword(key);
     } else {
-      database.ref("/todo/suggestions/" + key).set(true);
+      database.ref("/todo/suggestions/" + key).set(false);
       handleKeyword(key);
     }
   })
@@ -210,7 +215,7 @@ function addNewKeyword2(key) {
     if (ifkey) {
       handleKeyword2(key);
     } else {
-      database.ref("/todo/suggestions/" + key).set(true);
+      database.ref("/todo/suggestions/" + key).set(false);
       handleKeyword2(key);
     }
   })
@@ -522,8 +527,100 @@ function itsDone(id) {
         details: details,
       });
     }
+    handleStat(id);
   }).then((value) => {
     database.ref("/todo/tasks/"+id).remove();
     showMain();
   })
 }
+
+let monthdays = [0,31,28,31,30,31,30,31,31,30,31,30,31]
+
+function handleStat(id) {
+  database.ref("/todo/tasks/"+id).once("value").then((snap) => {
+    var title = snap.child("title").val();
+
+    database.ref("/todo/suggestions/").once("value").then((snap2) => {
+      var ifstat = snap2.child(title).val();
+      var year = moment().format('YYYY');
+      var month = moment().format('M');
+
+      database.ref("/todo/stats/"+year+"/"+month+"/").once("value").then((snap3) => {
+        var num = snap3.child(title).val();
+
+        if (ifstat && num < monthdays[parseInt(month)]) {
+          database.ref("/todo/stats/"+year+"/"+month+"/" + title).set(num+1);
+        }
+      })
+    })
+  })
+}
+
+let months = ['months','January','February','March','April','May','June','July','August','September','October','November','December']
+
+function showStat(year) {
+  document.getElementById('stats').innerHTML = `
+    <div class="column top">
+      <div class="category">Task Name</div>
+      <div class="month">January</div>
+      <div class="month">February</div>
+      <div class="month">March</div>
+      <div class="month">April</div>
+      <div class="month">May</div>
+      <div class="month">June</div>
+      <div class="month">July</div>
+      <div class="month">August</div>
+      <div class="month">September</div>
+      <div class="month">October</div>
+      <div class="month">November</div>
+      <div class="month">December</div>
+    </div>
+  `;
+  database.ref("/todo/suggestions/").orderByKey().once("value").then((snap) => {
+    snap.forEach(function (childSnap) {
+      var ifstat = snap.child(childSnap.key).val();
+      var title = childSnap.key.length < 22 ? childSnap.key : childSnap.key.substring(0, 23)+"..."
+      if (ifstat) {
+        database.ref("/todo/stats/"+year).once("value").then((snap3) => {
+          var text = "style='background-color: rgba(40, 184, 0, "
+
+          document.getElementById('stats').innerHTML += `
+            <div class="column data">
+              <div class="category">${title}</div>
+              <div class="month" ${snap3.child('1/'+childSnap.key).val() !== null ? text+snap3.child('1/'+childSnap.key).val()/monthdays[1]+")'" : ""}></div>
+              <div class="month" ${snap3.child('2/'+childSnap.key).val() !== null ? text+snap3.child('2/'+childSnap.key).val()/monthdays[2]+")'" : ""}></div>
+              <div class="month" ${snap3.child('3/'+childSnap.key).val() !== null ? text+snap3.child('3/'+childSnap.key).val()/monthdays[3]+")'" : ""}></div>
+              <div class="month" ${snap3.child('4/'+childSnap.key).val() !== null ? text+snap3.child('4/'+childSnap.key).val()/monthdays[4]+")'" : ""}></div>
+              <div class="month" ${snap3.child('5/'+childSnap.key).val() !== null ? text+snap3.child('5/'+childSnap.key).val()/monthdays[5]+")'" : ""}></div>
+              <div class="month" ${snap3.child('6/'+childSnap.key).val() !== null ? text+snap3.child('6/'+childSnap.key).val()/monthdays[6]+")'" : ""}></div>
+              <div class="month" ${snap3.child('7/'+childSnap.key).val() !== null ? text+snap3.child('7/'+childSnap.key).val()/monthdays[7]+")'" : ""}></div>
+              <div class="month" ${snap3.child('8/'+childSnap.key).val() !== null ? text+snap3.child('8/'+childSnap.key).val()/monthdays[8]+")'" : ""}></div>
+              <div class="month" ${snap3.child('9/'+childSnap.key).val() !== null ? text+snap3.child('9/'+childSnap.key).val()/monthdays[9]+")'" : ""}></div>
+              <div class="month" ${snap3.child('10/'+childSnap.key).val() !== null ? text+snap3.child('10/'+childSnap.key).val()/monthdays[10]+")'" : ""}></div>
+              <div class="month" ${snap3.child('11/'+childSnap.key).val() !== null ? text+snap3.child('11/'+childSnap.key).val()/monthdays[11]+")'" : ""}></div>
+              <div class="month" ${snap3.child('12/'+childSnap.key).val() !== null ? text+snap3.child('12/'+childSnap.key).val()/monthdays[12]+")'" : ""}></div>
+            </div>
+          `;
+        })
+      }
+    })
+  })
+  document.getElementById('graph-year').innerHTML = year;
+}
+
+function changeYear(key) {
+  var myDiv = document.getElementById("graph-year");
+  var year = parseInt(myDiv.innerHTML);
+  if (key === 'left') {
+    setTimeout(function() {
+      myDiv.innerHTML = year-1;
+      showStat(year-1);
+    }, 500);
+  } else if (key === 'right') {
+    setTimeout(function() {
+      myDiv.innerHTML = year+1;
+      showStat(year+1);
+    }, 500);
+  }
+}
+

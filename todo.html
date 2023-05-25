@@ -30,7 +30,14 @@
         </div>
 
         <div class="items hide" id="main"></div>
-        <div class="items hide" id="graphs"></div>
+        <div class="items hide" id="graphs">
+          <div class="graph" id="stats"></div>
+          <div class="navigate-year" id="navigator">
+            <i class="fas fa-chevron-left" onclick="changeYear('left')"></i>
+            <div id="graph-year"></div>
+            <i class="fas fa-chevron-right" onclick="changeYear('right')"></i>
+          </div>
+        </div>
 
         <div class="hide" id="new">
           <form class="new-entry" onSubmit="return false;">
@@ -74,18 +81,8 @@
           </form>
         </div>
         
-        
-
-
-
-
-
-
         <div class="hide" id="edit"></div>
-
         <div class="hide" id="single"></div>
-
-
 
       </div>
     </section>
