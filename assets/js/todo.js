@@ -556,8 +556,6 @@ function handleStat(id) {
   })
 }
 
-let months = ['months','January','February','March','April','May','June','July','August','September','October','November','December']
-
 function showStat(year) {
   document.getElementById('stats').innerHTML = `
     <div class="column top">
