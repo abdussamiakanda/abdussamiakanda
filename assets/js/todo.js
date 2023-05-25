@@ -32,7 +32,8 @@ function startWorking(user) {
         <div class="all-apps" id="all-apps">
           <i class="fas fa-home" onclick="goToApp('')"></i>
           <i class="fas fa-clipboard" onclick="goToApp('logs')"></i>
-          <i class="fas fa-list-ul" onclick="goToApp('todo')"></i>
+          <i class="fas fa-list-ul selected" onclick="goToApp('todo')"></i>
+          <i class="fas fa-link" onclick="goToApp('unl')"></i>
         </div>
         <div class="title" onclick="showAll()">To Do</div>
       </div>
