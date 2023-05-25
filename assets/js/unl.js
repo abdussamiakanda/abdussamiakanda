@@ -213,6 +213,7 @@ function showSearchResult() {
     snap.forEach(function (childSnap) {
       var title = snap.child(childSnap.key + "/title").val();
       var url = snap.child(childSnap.key + "/url").val();
+      var newurl = url.length > 30 ? url.substring(0, 30)+'...' : url;
 
       if (title.toLowerCase().replaceAll(' ','').includes(searchInput) || url.toLowerCase().replaceAll(' ','').includes(searchInput)) {
 
@@ -220,7 +221,7 @@ function showSearchResult() {
         <div class="item" onclick="goToLink('${url}')" id="item-${childSnap.key}">
           <div class="item-info">
             <b>${title}</b>
-            <div><span>${url}</span></div>
+            <div><span>${newurl}</span></div>
           </div>
           <div class="item-edit" id="item-edit-${childSnap.key}" onclick="event.stopPropagation();">
             <i class="fas fa-edit" onclick="showEditBox('${childSnap.key}')"></i>
