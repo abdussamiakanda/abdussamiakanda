@@ -82,7 +82,7 @@ document.addEventListener("click", function(evt) {
 
 function goToApp(url) {
   document.getElementById('dots').click;
-  if (url !== 'logs') {
+  if (url !== 'unl') {
     goTo('./'+url);
   }
 }
