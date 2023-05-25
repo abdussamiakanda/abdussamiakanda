@@ -1049,6 +1049,7 @@ h1, h2, h3, h4, h5, h6 {
   }
   .top {
     align-items: flex-end;
+    height: 100px;
   }
   .data {
     align-items: center;
@@ -1058,10 +1059,9 @@ h1, h2, h3, h4, h5, h6 {
   }
   .top .month {
     display: inline-block;
-    transform: rotate(-90deg) translateX(5px) translateY(98px);
+    transform: rotate(-90deg) translateX(5px) translateY(21px);
     transform-origin: left bottom;
     width: 20px;
-    height: 100px;
   }
   .data .category {
     width: 100px;
