@@ -115,6 +115,7 @@ function addLog() {
       url: url,
     });
     showThings('main');
+    showMain();
     document.getElementById("title").value = '';
     document.getElementById("url").value = '';
   }
