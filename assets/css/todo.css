@@ -697,7 +697,7 @@ h1, h2, h3, h4, h5, h6 {
     gap: 5px;
     position: absolute;
     right: 0%;
-    top: 0%;
+    top: 4px;
   }
   .top-buttons i {
     display: block;
