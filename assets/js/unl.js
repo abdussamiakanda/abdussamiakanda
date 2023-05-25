@@ -127,12 +127,13 @@ function showMain() {
     snap.forEach(function (childSnap) {
       var title = snap.child(childSnap.key + "/title").val();
       var url = snap.child(childSnap.key + "/url").val();
+      var newurl = url.length > 30 ? url.substring(0, 30)+'...' : url;
 
       document.getElementById('main').innerHTML += `
         <div class="item" onclick="goToLink('${url}')" id="item-${childSnap.key}">
           <div class="item-info">
             <b>${title}</b>
-            <div><span>${url}</span></div>
+            <div><span>${newurl}</span></div>
           </div>
           <div class="item-edit" id="item-edit-${childSnap.key}" onclick="event.stopPropagation();">
             <i class="fas fa-edit" onclick="showEditBox('${childSnap.key}')"></i>
