@@ -22,7 +22,7 @@ function showAll() {
 }
 
 function startWorking(user) {
-  document.title = 'University of Nebraska-Lincoln'
+  document.title = 'Important Links'
   document.getElementById('top').innerHTML = `
     <div class="top-flex">
       <div class="top-flex-left">
@@ -41,7 +41,7 @@ function startWorking(user) {
           <i class="fas fa-home" onclick="goToApp('')"></i>
           <i class="fas fa-clipboard" onclick="goToApp('logs')"></i>
           <i class="fas fa-list-ul" onclick="goToApp('todo')"></i>
-          <i class="fas fa-link selected" onclick="goToApp('unl')"></i>
+          <i class="fas fa-link selected" onclick="goToApp('links')"></i>
         </div>
         <div class="title" onclick="showAll()">Important Links</div>
       </div>
@@ -82,7 +82,7 @@ document.addEventListener("click", function(evt) {
 
 function goToApp(url) {
   document.getElementById('dots').click;
-  if (url !== 'unl') {
+  if (url !== 'links') {
     goTo('./'+url);
   }
 }
