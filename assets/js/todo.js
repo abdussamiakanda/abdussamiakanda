@@ -60,6 +60,10 @@ document.addEventListener("click", function(evt) {
         document.getElementById('all-apps').style.display = 'none';
       }
       return;
+    } else if (targetEl !== document.getElementById('suggestions') || targetEl !== document.getElementById('suggestions2')) {
+      document.getElementById('suggestions').style.display = 'none';
+      document.getElementById('suggestions2').style.display = 'none';
+      console.log('ok')
     }
     targetEl = targetEl.parentNode;
   } while (targetEl);
@@ -101,7 +105,7 @@ function addToDo() {
   var details = document.getElementById("details").value;
   var lid = moment().format("x");
   
-  if (title && importance !== 'false' && repeat !== 'false' && document.getElementById('suggestions').style.display === 'none') {
+  if (title && importance !== 'false' && repeat !== 'false') {
     database.ref("/todo/tasks/" + getID(dodate,dotime,lid)).update({
       title: title,
       importance: importance,
