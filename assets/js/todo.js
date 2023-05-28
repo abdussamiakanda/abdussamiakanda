@@ -619,9 +619,8 @@ function showStat(year) {
 
 function whatStat(key,value,year) {
   let newvalue = value === 'yes' ? 'no' : 'yes';
-  // database.ref("/todo/suggestions/"+key+'/stat').set(newvalue);
-  // showStat(year);
-  console.log(key,value,newvalue);
+  database.ref("/todo/suggestions/"+key+'/stat').set(newvalue);
+  showStat(year);
 }
 
 function changeYear(key) {
