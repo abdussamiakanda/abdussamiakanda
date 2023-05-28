@@ -22,7 +22,7 @@ function showAll() {
 }
 
 function startWorking(user) {
-  document.title = 'Important Links'
+  document.title = 'Important Links';
   document.getElementById('top').innerHTML = `
     <div class="top-flex">
       <div class="top-flex-left">

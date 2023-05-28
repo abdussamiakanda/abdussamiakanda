@@ -199,7 +199,9 @@ function addNewKeyword(key) {
     if (ifkey) {
       handleKeyword(key);
     } else {
-      database.ref("/todo/suggestions/" + key).set(false);
+      database.ref("/todo/suggestions/" + key).update({
+        stat: 'no',
+      });
       handleKeyword(key);
     }
   })
@@ -216,7 +218,9 @@ function addNewKeyword2(key) {
     if (ifkey) {
       handleKeyword2(key);
     } else {
-      database.ref("/todo/suggestions/" + key).set(false);
+      database.ref("/todo/suggestions/" + key).update({
+        stat: 'no',
+      });
       handleKeyword2(key);
     }
   })
@@ -540,24 +544,21 @@ let monthdays = [0,31,28,31,30,31,30,31,31,30,31,30,31]
 function handleStat(id) {
   database.ref("/todo/tasks/"+id).once("value").then((snap) => {
     var title = snap.child("title").val();
+    var year = moment().format('YYYY');
+    var month = moment().format('M');
 
-    database.ref("/todo/suggestions/").once("value").then((snap2) => {
-      var ifstat = snap2.child(title).val();
-      var year = moment().format('YYYY');
-      var month = moment().format('M');
+    database.ref("/todo/stats/"+year+"/"+month+"/").once("value").then((snap3) => {
+      var num = snap3.child(title).val();
 
-      database.ref("/todo/stats/"+year+"/"+month+"/").once("value").then((snap3) => {
-        var num = snap3.child(title).val();
-
-        if (ifstat && num < monthdays[parseInt(month)]) {
-          database.ref("/todo/stats/"+year+"/"+month+"/" + title).set(num+1);
-        }
-      })
+      if (num < monthdays[parseInt(month)]) {
+        database.ref("/todo/stats/"+year+"/"+month+"/" + title).set(num+1);
+      }
     })
   })
 }
 
 function showStat(year) {
+  document.getElementById('statmark').innerHTML = ``;
   document.getElementById('stats').innerHTML = `
     <div class="column top">
       <div class="category">Task Name</div>
@@ -577,9 +578,18 @@ function showStat(year) {
   `;
   database.ref("/todo/suggestions/").orderByKey().once("value").then((snap) => {
     snap.forEach(function (childSnap) {
-      var ifstat = snap.child(childSnap.key).val();
+      var ifstat = snap.child(childSnap.key+"/stat").val();
       var title = childSnap.key.length < 22 ? childSnap.key : childSnap.key.substring(0, 23)+"..."
-      if (ifstat) {
+      document.getElementById('statmark').innerHTML += `
+        <div class="statmarkitem">
+          <div class="stattitle">${childSnap.key}</div>
+          <label class="switch">
+            <input type="checkbox" ${ifstat === 'yes' ? 'checked' : ''}>
+            <span class="slider round" onclick="whatStat('${childSnap.key}','${ifstat}','${year}')"></span>
+          </label>
+        </div>
+      `;
+      if (ifstat === 'yes') {
         database.ref("/todo/stats/"+year).once("value").then((snap3) => {
           var text = "style='background-color: rgba(40, 184, 0, "
 
@@ -605,6 +615,13 @@ function showStat(year) {
     })
   })
   document.getElementById('graph-year').innerHTML = year;
+}
+
+function whatStat(key,value,year) {
+  let newvalue = value === 'yes' ? 'no' : 'yes';
+  // database.ref("/todo/suggestions/"+key+'/stat').set(newvalue);
+  // showStat(year);
+  console.log(key,value,newvalue);
 }
 
 function changeYear(key) {
