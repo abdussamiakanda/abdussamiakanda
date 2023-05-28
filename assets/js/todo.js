@@ -63,7 +63,6 @@ document.addEventListener("click", function(evt) {
     } else if (targetEl !== document.getElementById('suggestions') || targetEl !== document.getElementById('suggestions2')) {
       document.getElementById('suggestions').style.display = 'none';
       document.getElementById('suggestions2').style.display = 'none';
-      console.log('ok')
     }
     targetEl = targetEl.parentNode;
   } while (targetEl);
