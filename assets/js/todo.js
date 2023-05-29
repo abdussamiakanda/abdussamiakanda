@@ -61,7 +61,7 @@ function showDone() {
         document.getElementById('done').innerHTML += `
         <div class="item" style="align-items: flex-start; cursor: default;">
           <div class="tick">
-            <i class="far fa-check-circle"></i>
+            <i class="fas fa-check-circle"></i>
           </div>
           <div class="item-info">
             <b>${title}</b>
