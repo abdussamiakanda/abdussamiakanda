@@ -39,12 +39,40 @@ function startWorking(user) {
       </div>
       <div class="top-buttons">
         <i class="fas fa-plus" onclick="showThings('new')"></i>
+        <i class="fas fa-check-square" onclick="showDone()"></i>
         <i class="fas fa-chart-area" onclick="showGraphs()"></i>
         <i class="fas fa-sign-out-alt" onclick="GoogleLogout()"></i>
       </div>
     </div>`;
   showMain();
   showThings('main');
+}
+
+function showDone() {
+  document.getElementById('done').innerHTML = '';
+  database.ref("/todo/done/").orderByKey().once("value").then((snap) => {
+    snap.forEach(function (childSnap) {
+      var title = snap.child(childSnap.key + "/title").val();
+      var importance = snap.child(childSnap.key + "/importance").val();
+      var repeat = snap.child(childSnap.key + "/repeat").val();
+      var when = snap.child(childSnap.key + "/when").val();
+      var details = snap.child(childSnap.key + "/details").val();
+
+        document.getElementById('done').innerHTML += `
+        <div class="item" style="align-items: flex-start; cursor: default;">
+          <div class="tick">
+            <i class="far fa-check-circle"></i>
+          </div>
+          <div class="item-info">
+            <b>${title}</b>
+            <span>${when}</span>
+            <div><span>${imp[importance]}</span><span><i class="fas fa-redo"></i> ${repeat}</span></div>
+            <div>${details ? marked.parse(details) : ''}</div>
+          </div>
+        </div>`;
+    })
+  })
+  showThings('done');
 }
 
 document.addEventListener("click", function(evt) {
@@ -86,6 +114,7 @@ function showThings(id){
   document.getElementById('single').classList.add('hide');
   document.getElementById('edit').classList.add('hide');
   document.getElementById('graphs').classList.add('hide');
+  document.getElementById('done').classList.add('hide');
 
   document.getElementById(id).classList.remove('hide');
 }
