@@ -90,7 +90,9 @@ document.addEventListener("click", function(evt) {
       return;
     } else if (targetEl !== document.getElementById('suggestions') || targetEl !== document.getElementById('suggestions2')) {
       document.getElementById('suggestions').style.display = 'none';
-      document.getElementById('suggestions2').style.display = 'none';
+      if (document.getElementById('suggestions2')) {
+        document.getElementById('suggestions2').style.display = 'none';
+      }
     }
     targetEl = targetEl.parentNode;
   } while (targetEl);
