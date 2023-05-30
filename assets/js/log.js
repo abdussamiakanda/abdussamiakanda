@@ -95,13 +95,21 @@ function copy(id) {
 }
 
 function processSingle() {
-  const details = document.body;
+  const details = document.getElementById('deets');
   const regex = /@\{(\d+)\}/g;
   details.innerHTML = details.innerHTML.replace(regex, (match, number) => {
     const id = parseInt(number, 10);
-    const customTag = `<i class="hyperlink fas fa-link" onclick="goToSingle('${id}')"></i>`;
+    const customTag = `<i class="hyperlink fas fa-link" onclick="showSingle('${id}')"></i>`;
     return customTag;
   });
+      
+  if (details) {
+    var links = details.getElementsByTagName('a');
+    
+    for (var i = 0; i < links.length; i++) {
+      links[i].setAttribute('target', '_blank');
+    }
+  }
 }
 
 function goToSingle(id) {
