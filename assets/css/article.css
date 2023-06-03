@@ -147,25 +147,32 @@ input[type=number] {
     margin: 0px 0px 20px 0px;
   }
 
-  .list {
+  .curation h3 {
+    background-image: linear-gradient(141deg, #adf1e0, #2e1bff 28%, #18ff23 98%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .curation .list {
     display: flex;
     flex-wrap: wrap;
     align-items: stretch;
     justify-content: center;
     gap: 20px;
   }
-  .list .item {
+  .curation .list .item {
     width: 150px;
     border-radius: 10px;
     background-color: white;
     box-shadow: 0px 5px 10px rgba(0,0,0,0.5);
     cursor: pointer;
   }
-  .list .item:hover {
+  .curation .list .item:hover {
     box-shadow: 0px 5px 5px rgba(0,0,0,0.8);
     transition-duration: 0.4s;
   }
-  .list .item img {
+  .curation .list .item img {
     max-width: 150px;
     width: 150px;
     height: 150px;
@@ -175,11 +182,11 @@ input[type=number] {
     margin-right: 0px;
     border-radius: 10px 10px 0px 0px;
   }
-  .list .item div {
+  .curation .list .item div {
     padding: 5px;
     font-size: 15px;
   }
-  .list .item div span {
+  .curation .list .item div span {
     padding: 0px 5px;
     background-color: rgba(0,0,0,0.5);
     color: white;
