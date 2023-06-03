@@ -9,13 +9,17 @@ var social = [
    'https://soundcloud.com/abdussamiakanda',
    'https://khulna.academia.edu/AbdusSamiAkanda',
    'mailto:abdussamiakanda@gmail.com'
- ]
+]
  
- function goSocial(no){
-   window.open(social[no], '_blank').focus();
- }
+function goSocial(no){
+  window.open(social[no], '_blank').focus();
+}
  
- function goTo(path){
-   window.location.assign(path);
- }
+function goTo(path){
+  window.location.assign(path);
+}
  
+function goBlank(url){
+  window.open(url, '_blank').focus();
+}
+

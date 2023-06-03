@@ -9,15 +9,15 @@ var social = [
    'https://soundcloud.com/abdussamiakanda',
    'https://khulna.academia.edu/AbdusSamiAkanda',
    'mailto:abdussamiakanda@gmail.com'
- ]
+]
  
- function goSocial(no){
+function goSocial(no){
    window.open(social[no], '_blank').focus();
- }
+}
  
- function goTo(path){
-   window.location.assign(path);
- }
+function goTo(path){
+    window.location.assign(path);
+}
  
 document.addEventListener("DOMContentLoaded", function() {
     renderMathInElement(document.body, {
