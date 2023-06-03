@@ -148,7 +148,7 @@ input[type=number] {
   }
 
   .curation h3 {
-    background-image: linear-gradient(90deg, #FC466B 0%, #8075ff 58%, #3F5EFB 100%);
+    background-image: linear-gradient(90deg, #FC466B 0%, #8075ff 20%, #3F5EFB 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
