@@ -427,17 +427,17 @@ function processRender(id) {
   objDiv.scrollTop = objDiv.scrollHeight - objDiv.clientHeight;
   renderMath();
 
-  textArea.addEventListener("input", function (e) {
-    this.style.height = "auto";
-    this.style.height = this.scrollHeight + "px";
-    if (textArea.selectionEnd === textArea.value.length) {
-      window.scrollTo(0, document.body.scrollHeight);
-    } else {
-      textArea.scrollTo(0, textArea.selectionStart+200);
-    }
-    console.log(textArea.scrollTop,'event');
-  });
-  console.log(textArea.selectionStart,textArea.selectionEnd);
+  if (window.innerWidth > 600) {
+    textArea.addEventListener("input", function (e) {
+      this.style.height = "auto";
+      this.style.height = this.scrollHeight + "px";
+      if (textArea.selectionEnd === textArea.value.length) {
+        window.scrollTo(0, document.body.scrollHeight);
+      } else {
+        textArea.scrollTo(0, textArea.selectionStart+200);
+      }
+    });
+  }
 }
 
 function processTextAreaHeight() {
