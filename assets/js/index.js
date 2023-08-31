@@ -66,7 +66,7 @@ function showAcademic() {
   window.scrollTo(0, 0);
   document.getElementById('rightMenuOptions').innerHTML = `
     <div onclick="goTo('#research')">Research</div>
-    <div onclick="goTo('#teaching')">Teaching</div>
+    <div onclick="goTo('#teaching')">Teaching Experience</div>
     <div onclick="goTo('#education')">Education</div>
     <div onclick="goTo('#skillset')">Skillset</div>
     <div onclick="goTo('#co-curricular-activities')">Co-curricular Activities</div>
