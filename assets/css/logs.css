@@ -438,7 +438,8 @@ h1, h2, h3, h4, h5, h6 {
   .single-item .details table {
     margin: 5px;
   }
-  .single-item .details table thead {
+  .single-item .details table thead tr {
+    padding: 5px 10px;
     background-color: rgba(0,0,0,0.1);
   }
   .single-item img {
