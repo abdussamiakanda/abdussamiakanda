@@ -443,6 +443,7 @@ h1, h2, h3, h4, h5, h6 {
   }
   .single-item .details table tr th {
     margin: 0px 10px;
+    padding: 0px 10px;
     background-color: rgba(0,0,0,0.05);
   }
   .single-item .details table tr td {
