@@ -437,10 +437,11 @@ h1, h2, h3, h4, h5, h6 {
   }
   .single-item .details table {
     margin: 5px;
+    padding: 5px 10px;
     background-color: rgba(0,0,0,0.05);
   }
-  .single-item .details table thead tr {
-    padding: 5px 10px;
+  .single-item .details table tr td {
+    margin: 0px 5px;
   }
   .single-item img {
     display: block;
