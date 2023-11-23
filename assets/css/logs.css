@@ -439,7 +439,7 @@ h1, h2, h3, h4, h5, h6 {
     margin: 5px;
   }
   .single-item .details table thead {
-    background-color: rgba(0,0,0,0.05);
+    background-color: rgba(0,0,0,0.1);
   }
   .single-item img {
     display: block;
