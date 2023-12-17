@@ -151,6 +151,7 @@ input[type=number] {
     background-color: rgba(0,0,0,0.1);
     padding: 0px 5px;
     border-radius: 6px;
+    text-wrap: nowrap;
   }
 
   .curation h3 {
@@ -363,6 +364,7 @@ input[type=number] {
     background-color: rgba(0,0,0,0.1);
     padding: 0px 5px;
     border-radius: 6px;
+    text-wrap: nowrap;
   }
 
   /* SOCIAL CSS */
