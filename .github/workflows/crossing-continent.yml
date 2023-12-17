@@ -1,0 +1,23 @@
+name: Update Visitor Counter
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update_counter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Update Counter
+        run: |
+          count=$(($(cat crossing-continent.txt) + 1))
+          echo "$count" > crossing-continent.txt
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add crossing-continent.txt
+          git commit -m "Update visitor counter" || true
+          git push
