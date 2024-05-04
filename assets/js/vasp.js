@@ -200,7 +200,7 @@ function showEditBox(key) {
         value="${title}" />
       </div>
       <div class="renderWindow">
-        <textarea id="details2" placeholder="Enter details...">${details}</textarea>
+        <textarea id="details2" placeholder="Enter details..." onkeydown="formatTab(event, this)">${details}</textarea>
       </div>
       <div class="fixed">
         <div>
@@ -245,7 +245,7 @@ function showEditBox2(key) {
         value="${title}" />
       </div>
       <div class="renderWindow">
-        <textarea id="details2" placeholder="Enter details..." >${details}</textarea>
+        <textarea id="details2" placeholder="Enter details..." onkeydown="formatTab(event, this)">${details}</textarea>
       </div>
       <div class="fixed">
         <div>
@@ -469,7 +469,17 @@ function showSearchResult() {
   showThings('main');
 }
 
-
+function formatTab(event, textarea) {
+  if (event.key === "Tab") {
+    event.preventDefault();
+    
+    var end = textarea.selectionEnd;
+    
+    textarea.value = textarea.value.substring(0, start) + "\t" + textarea.value.substring(end);
+    
+    textarea.selectionStart = textarea.selectionEnd = start + 1;
+  }
+}
 
 function autoResizeById(id) {
     const bottomOffset = 100; // Manual px value
