@@ -442,7 +442,6 @@ function showSearchResult() {
       var time = snap.child(childSnap.key + "/time").val();
       var details = snap.child(childSnap.key + "/details").val();
       var tags = snap.child(childSnap.key + "/tags").val();
-      var public = snap.child(childSnap.key + "/public").val();
 
       if (title.toLowerCase().replaceAll(' ','').includes(searchInput) || time.toLowerCase().replaceAll(' ','').includes(searchInput) || details.toLowerCase().replaceAll(' ','').includes(searchInput) || tags.toLowerCase().replaceAll(' ','').includes(searchInput)) {
         var tagsHtml = tags.replaceAll(',','</span><span>');

@@ -347,7 +347,6 @@ h1, h2, h3, h4, h5, h6 {
 
   .item-info {
     flex: 1;
-    user-select: none;
   }
   .item-info em {
     font-style: normal;
@@ -808,7 +807,6 @@ h1, h2, h3, h4, h5, h6 {
 
   .item-info {
     flex: 1;
-    user-select: none;
   }
   .item-info em {
     font-style: normal;
