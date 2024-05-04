@@ -448,12 +448,12 @@ function showSearchResult() {
         var tagsHtml = tags.replaceAll(',','</span><span>');
 
         document.getElementById('main').innerHTML += `
-          <div class="item" onclick="showSingle('${childSnap.key}')" id="item-${childSnap.key}">
+          <div class="item" id="item-${childSnap.key}">
             <div class="item-info">
-              <span>${time} &#x2022; ${public === 'true' ? '<i class="fas fa-globe-asia"></i>' : '<i class="fas fa-user-lock"></i>'}</span>
               <b>${title}</b>
               <div><span>${tagsHtml}</span></div>
-            </div>
+              <div class="details" id="deets">${marked.parse(details)}</div>
+              </div>
             <div class="item-edit" id="item-edit-${childSnap.key}" onclick="event.stopPropagation();">
               <i class="fas fa-edit" onclick="showEditBox('${childSnap.key}')"></i>
               <i class="fas fa-trash-alt" onclick="delPop('${childSnap.key}')"></i>
