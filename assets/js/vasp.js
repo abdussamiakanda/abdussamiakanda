@@ -223,6 +223,7 @@ function showEditBox(key) {
   }).then((value) => {
     showThings('edit');
     processTextAreaHeight();
+    autoResizeById("details2");
   })
 }
 
@@ -267,6 +268,7 @@ function showEditBox2(key) {
   }).then((value) => {
     showThings('edit');
     processTextAreaHeight();
+    autoResizeById("details2");
   })
 }
 
@@ -466,6 +468,41 @@ function showSearchResult() {
   });
   showThings('main');
 }
+
+
+
+function autoResizeById(id) {
+    const bottomOffset = 100; // Manual px value
+    const textarea = document.getElementById(id);
+
+    function autoResize() {
+        textarea.style.height = "auto";
+        textarea.style.height = `${textarea.scrollHeight}px`;
+
+        // Calculate the position of the caret
+        const cursorPosition = textarea.selectionEnd;
+        const text = textarea.value.substring(0, cursorPosition);
+        const lines = text.split("\n").length;
+
+        // Estimate the height of the cursor
+        const lineHeight = parseInt(getComputedStyle(textarea).lineHeight, 10);
+        const cursorHeight = lines * lineHeight;
+
+        // Get the bounding rectangle of the textarea
+        const bounding = textarea.getBoundingClientRect();
+
+        // Check if the cursor is below the visible area
+        if (bounding.bottom - cursorHeight <= bottomOffset) {
+            window.scrollBy(0, document.body.scrollHeight);
+        }
+    }
+
+    textarea.addEventListener("input", autoResize);
+    autoResize(); // Adjust on initial load
+}
+
+// Initialize for specific textareas
+autoResizeById("details");
 
 function renderMath() {
   setTimeout(
