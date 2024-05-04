@@ -273,7 +273,7 @@ h1, h2, h3, h4, h5, h6 {
     display: inline-block;
   }
   .new-entry textarea {
-    font-family: "Poppins", sans-serif;
+    font-family: monospace;
     box-shadow: 0px 1px 5px rgba(0,0,0,0.3);
     display: block;
     resize: none;
@@ -733,7 +733,7 @@ h1, h2, h3, h4, h5, h6 {
   }
   .new-entry textarea {
     flex: 1;
-    font-family: "Poppins", sans-serif;
+    font-family: monospace;
     box-shadow: 0px 1px 3px rgba(0,0,0,0.3);
     display: block;
     resize: none;
