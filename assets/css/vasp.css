@@ -356,14 +356,14 @@ h1, h2, h3, h4, h5, h6 {
   }
   .item {
     padding: 5px 5px 5px 10px;
-    box-shadow: 0px 0px 1px rgba(0,0,0,0.3);
+    box-shadow: 0px 0px 2px rgba(0,0,0,0.3);
     border-radius: 5px;
-    margin: 5px 0px;
+    margin: 10px 0px;
     display: flex;
     justify-content: center;
   }
   .item:hover {
-    box-shadow: 0px 0px 2px rgba(0,0,0,0.6);
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.6);
   }
   .item-del {
     box-shadow: 0px 0px 5px rgba(255,0,0,0.8);
@@ -431,10 +431,11 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 12px;
     color: #28b800;
   }
-  .single-item div div b {
+  .single-item div div h1 {
     display: block;
     font-size: 25px;
     margin: 10px 0px;
+    color: chocolate;
   }
   .single-item div div p {
     margin: 0px;
@@ -444,11 +445,11 @@ h1, h2, h3, h4, h5, h6 {
   .single-item div div p span {
     display: inline-block;
     font-size: 12px;
-    padding: 2px 8px;
+    padding: 1px 8px;
     margin-right: 5px;
     border-radius: 5px;
-    color: white;
-    background-color: rgba(0,0,0,0.3);
+    color: rgba(4, 0, 255, 0.582);
+    border: 1px solid rgb(255, 168, 168);
   }
   .single-item-flex {
     display: flex;
@@ -825,7 +826,7 @@ h1, h2, h3, h4, h5, h6 {
     padding: 5px;
     box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
     border-radius: 5px;
-    margin: 3px 0px;
+    margin: 5px 0px;
     cursor: pointer;
     display: flex;
     align-items: center;

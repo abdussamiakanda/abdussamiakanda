@@ -22,7 +22,7 @@ function showAll() {
 }
 
 function startWorking(user) {
-  document.title = 'Logs of Md Abdus Sami Akanda'
+  document.title = 'VASP Documentation'
   document.getElementById('top').innerHTML = `
     <div class="top-flex">
       <div class="top-flex-left">
@@ -122,7 +122,7 @@ function addLog() {
       database.ref("/public/" + lid).set(true);
     }
     showThings('single');
-    showMain();
+    showSingle(lid);
     document.getElementById("title").value = '';
     document.getElementById("details").value = '';
     document.getElementById("tags").value = '';
@@ -147,6 +147,7 @@ function showMain() {
             <div class="details" id="deets">${marked.parse(details)}</div>
           </div>
           <div class="item-edit" id="item-edit-${childSnap.key}" onclick="event.stopPropagation();">
+            <i class="fas fa-eye" onclick="showSingle('${childSnap.key}')"></i>
             <i class="fas fa-edit" onclick="showEditBox('${childSnap.key}')"></i>
             <i class="fas fa-trash-alt" onclick="delPop('${childSnap.key}')"></i>
           </div>
@@ -291,8 +292,8 @@ function editEntry(key) {
     } else if (public === 'false') {
       database.ref('/public/'+key).remove();
     }
-    showThings('main');
-    showMain();
+    showThings('single');
+    showSingle(key);
   }
 }
 
@@ -337,20 +338,14 @@ function showSingle(id) {
   database.ref("/vasp/"+id).once("value").then((snap) => {
     var title = snap.child("title").val();
     var details = snap.child("details").val();
-    var time = snap.child("time").val();
     var tags = snap.child("tags").val();
-    var public = snap.child("public").val();
-    var pin = snap.child("pin").val();
     tags = tags.replaceAll(',','</span><span>')
 
     document.getElementById('single').innerHTML = `
     <div class="single-item">
       <div class="single-item-flex">
         <div class="item-info">
-          <em onclick="copy('${id}')">${id} <i class="fas fa-copy"></i></em>
-          <span>${time} &#x2022; ${public === 'true' ? `<i class="fas fa-globe-asia"></i> &#x2022; <i onclick="copy('https://abdussamiakanda.com/log?id=${id}')" class="share fas fa-share-alt-square"></i>` : '<i class="fas fa-user-lock"></i>'} &#x2022; 
-          ${pin === 'yes' ? `<i class="share fas fa-map-marker-alt" onclick="makePin('${id}','no')"></i>` : `<i class="share fas fa-map-marker" onclick="makePin('${id}','yes')"></i>`}</span>
-          <b>${title}</b>
+          <h1>${title}</h1>
           <p><span>${tags}</span></p>
         </div>
         <div class="item-edit" id="item-single-${snap.key}" onclick="event.stopPropagation();">
