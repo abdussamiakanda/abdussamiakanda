@@ -450,7 +450,7 @@ function showSearchResult() {
         document.getElementById('main').innerHTML += `
           <div class="item" id="item-${childSnap.key}">
             <div class="item-info">
-              <b>${title}</b>
+              <h1>${title}</h1>
               <div><span>${tagsHtml}</span></div>
               <div class="details" id="deets">${marked.parse(details)}</div>
               </div>
