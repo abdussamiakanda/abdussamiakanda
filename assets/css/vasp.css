@@ -41,13 +41,21 @@ h1, h2, h3, h4, h5, h6 {
     display: none;
   }
   code {
+    display: inline-block;
+    background-color: rgba(0,0,0,0.1);
+    font-family: monospace;
+    font-size: 100%;
+    padding: 1px 10px;
+    border-radius: 5px;
+  }
+  pre code {
     background-color: rgba(0,0,0,0.1);
     font-family: monospace;
     font-size: 100%;
     display: block;
     padding: 5px 10px;
     margin: 10px 0px;
-    border-radius: 3px;
+    border-radius: 5px;
   }
   .white{
     background-color: white;
@@ -504,6 +512,16 @@ h1, h2, h3, h4, h5, h6 {
     display: none;
   }
   code {
+    display: inline-block;
+    background-color: rgba(0,0,0,0.1);
+    font-family: monospace;
+    font-size: 100%;
+    display: block;
+    padding: 0px 5px;
+    margin: 5px 0px;
+    border-radius: 3px;
+  }
+  pre code {
     background-color: rgba(0,0,0,0.1);
     font-family: monospace;
     font-size: 100%;
