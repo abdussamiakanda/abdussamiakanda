@@ -158,6 +158,7 @@ function showMain() {
 
 function delPop(key) {
   document.getElementById('item-edit-'+key).innerHTML = `
+    <i class="fas fa-eye" onclick="showSingle('${key}')"></i>
     <i class="fas fa-check" onclick="delvasp('${key}')"></i>
     <i class="fas fa-times" onclick="noPop('${key}')"></i>`;
 
@@ -322,6 +323,7 @@ function editEntry2(key) {
 
 function noPop(key) {
   document.getElementById('item-edit-'+key).innerHTML = `
+    <i class="fas fa-eye" onclick="showSingle('${key}')"></i>
     <i class="fas fa-edit" onclick="showEditBox('${key}')"></i>
     <i class="fas fa-trash-alt" onclick="delPop('${key}')"></i>`;
   document.getElementById('item-'+key).classList.remove('item-del');
