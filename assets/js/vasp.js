@@ -197,11 +197,10 @@ function showEditBox(key) {
         id="title2"
         placeholder="Enter title..."
         autocomplete="off"
-        value="${title}"
-        required />
+        value="${title}" />
       </div>
       <div class="renderWindow">
-        <textarea id="details2" placeholder="Enter details..." onkeyup="processRender('2')" required>${details}</textarea>
+        <textarea id="details2" placeholder="Enter details...">${details}</textarea>
       </div>
       <div class="fixed">
         <div>
@@ -210,8 +209,7 @@ function showEditBox(key) {
           id="tags2"
           placeholder="Enter tags... (Comma separated)"
           autocomplete="off"
-          value="${tags}"
-          required />
+          value="${tags}" />
           <select id="public2">
             <option value="false" ${public === 'false' ? 'selected' : ''}>Private Log</option>
             <option value="true" ${public === 'true' ? 'selected' : ''}>Public Log</option>
@@ -243,11 +241,10 @@ function showEditBox2(key) {
         id="title2"
         placeholder="Enter title..."
         autocomplete="off"
-        value="${title}"
-        required />
+        value="${title}" />
       </div>
       <div class="renderWindow">
-        <textarea id="details2" placeholder="Enter details..." onkeyup="processRender('2')" required>${details}</textarea>
+        <textarea id="details2" placeholder="Enter details..." >${details}</textarea>
       </div>
       <div class="fixed">
         <div>
@@ -256,8 +253,7 @@ function showEditBox2(key) {
           id="tags2"
           placeholder="Enter tags... (Comma separated)"
           autocomplete="off"
-          value="${tags}"
-          required />
+          value="${tags}" />
           <select id="public2">
             <option value="false" ${public === 'false' ? 'selected' : ''}>Private Log</option>
             <option value="true" ${public === 'true' ? 'selected' : ''}>Public Log</option>
