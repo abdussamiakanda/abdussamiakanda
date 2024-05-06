@@ -43,7 +43,7 @@ h1, h2, h3, h4, h5, h6 {
   code {
     display: inline-block;
     background-color: rgba(0,0,0,0.05);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.8);
     font-family: monospace;
     font-size: 100%;
     padding: 1px 4px;
@@ -52,7 +52,7 @@ h1, h2, h3, h4, h5, h6 {
   }
   pre code {
     background-color: rgba(0,0,0,0.1);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.8);
     font-family: monospace;
     font-size: 100%;
     display: block;
