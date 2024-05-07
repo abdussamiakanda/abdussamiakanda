@@ -508,6 +508,59 @@ function autoResizeById(id) {
     autoResize(); // Adjust on initial load
 }
 
+
+function addCopyButton(codeElement) {
+  if (codeElement.nextSibling && codeElement.nextSibling.tagName === 'I' && codeElement.nextSibling.classList.contains('copy')) {
+    return;
+  }
+
+  const button = document.createElement('i');
+  button.className = 'fa-regular fa-copy copy';
+
+  button.addEventListener('click', function(event) {
+    navigator.clipboard.writeText(codeElement.textContent).then(() => {
+      button.className = 'fa-solid fa-check copy';
+      setTimeout(() => {
+        button.className = 'fa-regular fa-copy copy';
+      }, 2000);
+    }).catch(err => {
+      console.error('Failed to copy text: ', err);
+    });
+    event.stopPropagation();
+  });
+
+  if (codeElement.parentNode) {
+    codeElement.parentNode.insertBefore(button, codeElement.nextSibling);
+  }
+}
+
+const observer = new MutationObserver(mutations => {
+  for (const mutation of mutations) {
+    for (const node of mutation.addedNodes) {
+      if (node.tagName === 'CODE' && node.parentNode && node.parentNode.tagName === 'PRE') {
+        addCopyButton(node);
+      }
+      if (node.tagName === 'PRE' && node.querySelector('code')) {
+        addCopyButton(node.querySelector('code'));
+      }
+      if (node.querySelectorAll) {
+        const codes = node.querySelectorAll('pre code');
+        codes.forEach(code => addCopyButton(code));
+      }
+    }
+  }
+});
+
+observer.observe(document.body, {
+  childList: true,
+  subtree: true
+});
+
+
+
+
+
+
 // Initialize for specific textareas
 autoResizeById("details");
 
