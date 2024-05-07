@@ -64,7 +64,7 @@ h1, h2, h3, h4, h5, h6 {
   }
   .copy {
     cursor: pointer;
-    padding: 5px;
+    padding: 3px;
     border: none;
     color: rgba(0, 0, 0, 0.7);
     background-color: rgba(0, 0, 0, 0.1);
