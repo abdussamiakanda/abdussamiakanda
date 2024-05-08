@@ -453,6 +453,7 @@ function showSearchResult() {
               <div class="details" id="deets">${marked.parse(details)}</div>
               </div>
             <div class="item-edit" id="item-edit-${childSnap.key}" onclick="event.stopPropagation();">
+              <i class="fas fa-eye" onclick="showSingle('${childSnap.key}')"></i>
               <i class="fas fa-edit" onclick="showEditBox('${childSnap.key}')"></i>
               <i class="fas fa-trash-alt" onclick="delPop('${childSnap.key}')"></i>
             </div>
