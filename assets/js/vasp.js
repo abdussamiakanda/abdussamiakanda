@@ -153,7 +153,9 @@ function showMain() {
           </div>
         </div>`;
     })
-  })
+  }).then((value) => {
+    replaceVaspLinks();
+  });
 }
 
 function delPop(key) {
@@ -360,6 +362,7 @@ function showSingle(id) {
   }).then((value) => {
     processSingle();
     renderMath();
+    replaceVaspLinks();
   })
   showThings('single');
 }
@@ -463,8 +466,10 @@ function showSearchResult() {
     if (document.getElementById('main').innerHTML == '') {
       document.getElementById('main').innerHTML = `<p class="no-result">No results found!</p>`;
     }
+  }).then((value) => {
+    replaceVaspLinks();
+    showThings('main');
   });
-  showThings('main');
 }
 
 function formatTab(event, textarea) {
@@ -557,6 +562,54 @@ observer.observe(document.body, {
   subtree: true
 });
 
+
+function replaceVaspLinks() {
+  function replaceInNode(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const vaspRegex = /\\vasp{([^}]+)}/g;
+      if (vaspRegex.test(node.nodeValue)) {
+        const newContent = node.nodeValue.replace(vaspRegex, (match, text) => {
+          return `<a href="https://www.vasp.at/wiki/index.php/${encodeURIComponent(text)}" target="_blank">${text}</a>`;
+        });
+        const newNode = document.createElement('div');
+        newNode.innerHTML = newContent;
+        while (newNode.firstChild) {
+          node.parentNode.insertBefore(newNode.firstChild, node);
+        }
+        node.parentNode.removeChild(node);
+      }
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      Array.from(node.childNodes).forEach(replaceInNode);
+    }
+  }
+
+  function processNode(node) {
+    if (node.nodeType === Node.TEXT_NODE && /#/.test(node.nodeValue)) {
+      let parts = node.nodeValue.split(/(#.*$)/gm);
+      if (parts.length > 1) {
+        node.nodeValue = '';
+        
+        parts.forEach(part => {
+            if (part.startsWith('#')) {
+                const span = document.createElement('span');
+                span.className = 'comment';
+                span.textContent = part;
+                node.parentNode.insertBefore(span, node);
+            } else {
+                const textNode = document.createTextNode(part);
+                node.parentNode.insertBefore(textNode, node);
+            }
+        });
+        node.parentNode.removeChild(node);
+      }
+    } else if (node.nodeType === Node.ELEMENT_NODE && node.nodeName !== 'SCRIPT' && node.nodeName !== 'STYLE') {
+      Array.from(node.childNodes).forEach(processNode);
+    }
+  }
+
+  replaceInNode(document.body);
+  processNode(document.body);
+}
 
 
 

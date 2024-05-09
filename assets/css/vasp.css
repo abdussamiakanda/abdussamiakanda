@@ -1,6 +1,7 @@
 :root {
 }
-a:visited {
+a {
+  color: rgb(0, 0, 255);
   text-decoration: none;
 }
 input,select{
@@ -454,6 +455,24 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 5px;
     color: rgba(4, 0, 255, 0.582);
     border: 1px solid rgb(255, 168, 168);
+  }
+  .item div div .comment {
+    display: inline-block;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 15px;
+    padding: 0px;
+    margin-right: 0px;
+    border-radius: 0;
+    border: none;
+  }
+  .comment {
+    display: inline-block;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 15px;
+    padding: 0px;
+    margin-right: 0px;
+    border-radius: 0;
+    border: none;
   }
   .single-item div div span {
     display: block;
