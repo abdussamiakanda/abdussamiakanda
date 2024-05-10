@@ -140,22 +140,18 @@ function showMain() {
       tags = tags.replaceAll(',','</span><span>')
 
       document.getElementById('main').innerHTML += `
-        <div class="item" id="item-${childSnap.key}">
+        <div class="item" id="item-${childSnap.key}" onclick="showSingle('${childSnap.key}')">
           <div class="item-info">
             <h1>${title}</h1>
             <div><span>${tags}</span></div>
-            <div class="details" id="deets">${marked.parse(details)}</div>
           </div>
           <div class="item-edit" id="item-edit-${childSnap.key}" onclick="event.stopPropagation();">
-            <i class="fas fa-eye" onclick="showSingle('${childSnap.key}')"></i>
             <i class="fas fa-edit" onclick="showEditBox('${childSnap.key}')"></i>
             <i class="fas fa-trash-alt" onclick="delPop('${childSnap.key}')"></i>
           </div>
         </div>`;
     })
-  }).then((value) => {
-    replaceVaspLinks();
-  });
+  })
 }
 
 function delPop(key) {
@@ -449,14 +445,12 @@ function showSearchResult() {
         var tagsHtml = tags.replaceAll(',','</span><span>');
 
         document.getElementById('main').innerHTML += `
-          <div class="item" id="item-${childSnap.key}">
+          <div class="item" id="item-${childSnap.key}" onclick="showSingle('${childSnap.key}')">
             <div class="item-info">
               <h1>${title}</h1>
               <div><span>${tagsHtml}</span></div>
-              <div class="details" id="deets">${marked.parse(details)}</div>
               </div>
             <div class="item-edit" id="item-edit-${childSnap.key}" onclick="event.stopPropagation();">
-              <i class="fas fa-eye" onclick="showSingle('${childSnap.key}')"></i>
               <i class="fas fa-edit" onclick="showEditBox('${childSnap.key}')"></i>
               <i class="fas fa-trash-alt" onclick="delPop('${childSnap.key}')"></i>
             </div>
@@ -467,7 +461,6 @@ function showSearchResult() {
       document.getElementById('main').innerHTML = `<p class="no-result">No results found!</p>`;
     }
   }).then((value) => {
-    replaceVaspLinks();
     showThings('main');
   });
 }
@@ -492,19 +485,13 @@ function autoResizeById(id) {
         textarea.style.height = "auto";
         textarea.style.height = `${textarea.scrollHeight}px`;
 
-        // Calculate the position of the caret
         const cursorPosition = textarea.selectionEnd;
         const text = textarea.value.substring(0, cursorPosition);
         const lines = text.split("\n").length;
-
-        // Estimate the height of the cursor
         const lineHeight = parseInt(getComputedStyle(textarea).lineHeight, 10);
         const cursorHeight = lines * lineHeight;
-
-        // Get the bounding rectangle of the textarea
         const bounding = textarea.getBoundingClientRect();
 
-        // Check if the cursor is below the visible area
         if (bounding.bottom - cursorHeight <= bottomOffset) {
             window.scrollBy(0, document.body.scrollHeight);
         }
