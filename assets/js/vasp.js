@@ -59,24 +59,31 @@ function startWorking(user) {
 }
 
 document.addEventListener("click", function(evt) {
-  let flyoutEl = document.getElementById('dots'),
-    targetEl = evt.target,
-    element = document.getElementById('all-apps');
+  const flyoutEl = document.getElementById('dots');
+  const element = document.getElementById('all-apps');
+  let targetEl = evt.target;
+
+  if (!flyoutEl || !element) {
+    console.error('Required elements are missing');
+    return;
+  }
+
   do {
-    if(targetEl == flyoutEl) {
-      document.getElementById('dots').classList.toggle('dots-hover');
-      if (window.getComputedStyle(element).getPropertyValue("display") === 'none'){
-        document.getElementById('all-apps').style.display = 'flex';
+    if (targetEl === flyoutEl) {
+      flyoutEl.classList.toggle('dots-hover');
+      if (window.getComputedStyle(element).getPropertyValue("display") === 'none') {
+        element.style.display = 'flex';
       } else {
-        document.getElementById('all-apps').style.display = 'none';
+        element.style.display = 'none';
       }
       return;
     }
     targetEl = targetEl.parentNode;
   } while (targetEl);
-  if (window.getComputedStyle(element).getPropertyValue("display") === 'flex'){
-    document.getElementById('all-apps').style.display = 'none';
-    document.getElementById('dots').classList.toggle('dots-hover');
+
+  if (window.getComputedStyle(element).getPropertyValue("display") === 'flex') {
+    element.style.display = 'none';
+    flyoutEl.classList.toggle('dots-hover');
   }
 });
 
@@ -503,13 +510,19 @@ function autoResizeById(id) {
 
 
 function addCopyButton(codeElement) {
+  if (!codeElement) {
+    console.error('codeElement is not defined or null');
+    return;
+  }
+
   if (codeElement.nextSibling && codeElement.nextSibling.tagName === 'I' && codeElement.nextSibling.classList.contains('copy')) {
+    console.log('Copy button already exists');
     return;
   }
 
   const button = document.createElement('i');
   button.className = 'fa-regular fa-copy copy';
-
+  
   button.addEventListener('click', function(event) {
     navigator.clipboard.writeText(codeElement.textContent).then(() => {
       button.className = 'fa-solid fa-check copy';
@@ -519,29 +532,27 @@ function addCopyButton(codeElement) {
     }).catch(err => {
       console.error('Failed to copy text: ', err);
     });
+
     event.stopPropagation();
   });
 
   if (codeElement.parentNode) {
     codeElement.parentNode.insertBefore(button, codeElement.nextSibling);
+  } else {
+    console.error('codeElement does not have a parent node');
   }
 }
 
 const observer = new MutationObserver(mutations => {
-  for (const mutation of mutations) {
-    for (const node of mutation.addedNodes) {
-      if (node.tagName === 'CODE' && node.parentNode && node.parentNode.tagName === 'PRE') {
-        addCopyButton(node);
+  mutations.forEach(mutation => {
+    mutation.addedNodes.forEach(node => {
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        if (node.tagName === 'PRE' && node.querySelector('code')) {
+          addCopyButton(node.querySelector('code'));
+        }
       }
-      if (node.tagName === 'PRE' && node.querySelector('code')) {
-        addCopyButton(node.querySelector('code'));
-      }
-      if (node.querySelectorAll) {
-        const codes = node.querySelectorAll('pre code');
-        codes.forEach(code => addCopyButton(code));
-      }
-    }
-  }
+    });
+  });
 });
 
 observer.observe(document.body, {
@@ -598,11 +609,6 @@ function replaceVaspLinks() {
   processNode(document.body);
 }
 
-
-
-
-
-// Initialize for specific textareas
 autoResizeById("details");
 
 function renderMath() {
