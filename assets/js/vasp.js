@@ -39,7 +39,8 @@ function startWorking(user) {
         </div>
         <div class="all-apps" id="all-apps">
           <i class="fas fa-home" onclick="goToApp('')"></i>
-          <i class="fas fa-clipboard selected" onclick="goToApp('logs')"></i>
+          <i class="fas fa-clipboard" onclick="goToApp('logs')"></i>
+          <i class="fa-solid fa-v selected" onclick="goToApp('vasp')"></i>
           <i class="fas fa-list-ul" onclick="goToApp('todo')"></i>
           <i class="fas fa-link" onclick="goToApp('links')"></i>
         </div>
@@ -89,7 +90,7 @@ document.addEventListener("click", function(evt) {
 
 function goToApp(url) {
   document.getElementById('dots').click;
-  if (url !== 'logs') {
+  if (url !== 'vasp') {
     goTo('./'+url);
   }
 }
