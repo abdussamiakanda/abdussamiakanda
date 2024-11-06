@@ -838,9 +838,9 @@ main {
 .verse-arabic {
     font-family: 'Noto Naskh Arabic', serif;
     font-size: 28px;
-    line-height: 2;
+    line-height: 1;
+    margin-bottom: 5px;
     color: #292929;
-    margin-bottom: 16px;
     text-align: right;
     direction: rtl;
     padding: 8px 0;
