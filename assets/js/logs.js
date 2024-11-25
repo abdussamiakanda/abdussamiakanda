@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         return `
-            <button class="edit-btn" onclick="editPost('${postId}')">
+            <button class="edit-btn" onclick="editPost('${postId}'); return false;">
                 <i class="fas fa-edit"></i> Edit
             </button>
             <button class="delete-btn" onclick="event.stopPropagation(); deletePost('${postId}')">
@@ -145,25 +145,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     ...post
                 }))
                 .sort((a, b) => b.createdAt - a.createdAt);
-
-            let hasVisiblePosts = false;
+                
             postsArray.forEach(post => {
                 displayPost(post);
-                hasVisiblePosts = true;
             });
-
-            // If no visible posts (all private and not owned by current user)
-            if (!hasVisiblePosts) {
-                postsContainer.innerHTML = `
-                    <div class="no-results-message">
-                        <div class="no-results-content">
-                            <i class="fas fa-lock"></i>
-                            <h3>No posts available</h3>
-                            <p>There are no public posts to display at this time.</p>
-                        </div>
-                    </div>
-                `;
-            }
         });
     }
 
@@ -182,24 +167,21 @@ document.addEventListener('DOMContentLoaded', function() {
         postElement.innerHTML = `
             <div class="post-preview-content">
                 <div class="post-meta">
-                    <div class="post-author">
-                        <img src="${post.authorPhoto}" alt="${post.authorName}" class="author-avatar">
-                        <span class="author-name">${post.authorName}</span>
-                    </div>
                     <span class="post-date">${post.time}</span>
                 </div>
                 <h2 class="post-title" onclick="showSinglePost('${post.id}')">${post.title}</h2>
                 <p class="post-excerpt">${contentPreview}</p>
                 <div class="post-footer">
                     <div class="post-tags">
-                        ${tags.slice(0, 3).map(tag => `<span class="tag">${tag}</span>`).join('')}
-                        ${tags.length > 3 ? `<span class="tag">+${tags.length - 3}</span>` : ''}
+                        ${tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                     </div>
                     <div class="post-actions">
-                        ${post.isPublic ? 
-                            '<span class="visibility-badge">Public</span>' : 
-                            '<span class="visibility-badge private">Private</span>'}
-                        ${createPostActions(post.id, post.authorId)}
+                        <button class="edit-btn" onclick="editPost('${post.id}')">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button class="delete-btn" onclick="event.stopPropagation(); deletePost('${post.id}')">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
                         <button class="read-more-btn" onclick="showSinglePost('${post.id}')">
                             Read
                         </button>
@@ -319,36 +301,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (userEmail) userEmail.textContent = user.email;
     }
 
-    // Function to create verse block for saving
-    function createVerseBlock(reference, verse) {
-        return `
-            <div class="verse-block" data-verse-ref="${reference}">
-                <div class="verse-text">${verse}</div>
-                <div class="verse-reference">${reference}</div>
-            </div>
-        `;
-    }
-
-    // Function to process content and replace verse tags for saving
-    async function processVerseReferences(content) {
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = content;
-        
-        // Update the verse pattern to include optional language tag
-        const versePattern = /v\[(\d+:\d+(?:-\d+)?(?:\[\w+\])?)\]/g;
-        let processedContent = tempDiv.innerHTML;
-        const matches = [...processedContent.matchAll(versePattern)];
-
-        for (const match of matches) {
-            const [fullMatch, reference] = match;
-            const verseData = await fetchVerses(reference);
-            const verseBlock = createVersePreview(reference, verseData);
-            processedContent = processedContent.replace(fullMatch, verseBlock);
-        }
-
-        return processedContent;
-    }
-
     // Auth State Observer
     auth.onAuthStateChanged((user) => {
         if (user) {
@@ -366,62 +318,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add edit functionality
     window.editPost = async function(postId) {
-        const postRef = database.ref('life').child(postId);
-        
         try {
-            const snapshot = await postRef.once('value');
+            const snapshot = await database.ref('life').child(postId).once('value');
             const post = snapshot.val();
-            if (!post) {
-                console.error('Post not found');
-                return;
-            }
+            if (!post) throw new Error('Post not found');
 
-            // Switch to editor view
+            // Set the editor fields with the post data
+            document.getElementById('postTitle').value = post.title;
+            document.getElementById('postContent').innerHTML = post.details;
+            document.getElementById('postTags').value = post.tags;
+            editorView.dataset.editingPostId = postId; // Store the post ID for editing
+
+            // Show the editor view
             postsView.classList.add('hide');
-            if (document.querySelector('.single-post-view')) {
-                document.querySelector('.single-post-view').remove();
-            }
             editorView.classList.remove('hide');
 
-            // First, clean any existing previews from the content
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = post.content;
-            const existingPreviews = tempDiv.querySelectorAll('.verse-preview');
-            existingPreviews.forEach(preview => preview.remove());
-            
-            // Process verse tags
-            if (tempDiv.innerHTML.includes('v[')) {
-                // Update the verse pattern to match exactly the same as above
-                const versePattern = /v\[(\d+:\d+(?:-\d+)?(?:\[\w+\])?)\]/g;
-                const matches = [...tempDiv.innerHTML.matchAll(versePattern)];
-                
-                for (const match of matches) {
-                    const [fullMatch, reference] = match;
-                    try {
-                        const verseData = await fetchVerses(reference);
-                        const preview = createVersePreview(reference, verseData);
-                        tempDiv.innerHTML = tempDiv.innerHTML.replace(fullMatch, fullMatch + preview);
-                    } catch (error) {
-                        console.error('Error fetching verse:', error);
-                    }
-                }
-            }
-
-            // Populate editor with processed content
-            document.getElementById('postTitle').value = post.title || '';
-            document.getElementById('postContent').innerHTML = tempDiv.innerHTML;
-            document.getElementById('postTags').value = post.tags ? post.tags.join(', ') : '';
-            document.getElementById('postVisibility').value = post.isPublic ? 'public' : 'private';
-
-            // Add post ID to editor for updating
-            editorView.dataset.editingPostId = postId;
-
-            // Set the lastContent in initEditor to prevent immediate reprocessing
-            const editor = document.getElementById('postContent');
-            editor.dataset.lastContent = editor.innerHTML;
-            
-            // Initialize editor
-            initEditor();
+            // Initialize the editor
+            initEditor(); // Call the initEditor function here
         } catch (error) {
             console.error('Error loading post for edit:', error);
             alert('Error loading post. Please try again.');
@@ -439,35 +352,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
             postsView.classList.add('hide');
             
-            // Create a temporary div for content processing
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = post.content;
-            
-            // Remove any existing verse previews first
-            const existingPreviews = tempDiv.querySelectorAll('.verse-preview');
-            existingPreviews.forEach(preview => preview.remove());
-            
-            // Now process verse tags
-            const versePattern = /v\[(\d+:\d+(?:-\d+)?(?:\[(\w+)\])?)\]/g;
-            const matches = [...tempDiv.innerHTML.matchAll(versePattern)];
-            
-            for (const match of matches) {
-                const [fullMatch, reference] = match;
-                try {
-                    const verseData = await fetchVerses(reference);
-                    const preview = createVersePreview(reference, verseData);
-                    tempDiv.innerHTML = tempDiv.innerHTML.replace(fullMatch, preview);
-                } catch (error) {
-                    console.error('Error fetching verse:', error);
-                }
-            }
-
-            // Create the single post view
             const singlePostView = document.createElement('div');
             singlePostView.id = 'singlePostView';
             singlePostView.className = 'single-post-view';
-            
-            const tags = post.tags || [];
+
+            const tags = post.tags ? post.tags.split(',').map(tag => tag.trim()) : [];
             
             singlePostView.innerHTML = `
                 <div class="single-post-container">
@@ -476,21 +365,22 @@ document.addEventListener('DOMContentLoaded', function() {
                             <i class="fas fa-arrow-left"></i> Back to posts
                         </button>
                         <div class="post-actions">
-                            ${createPostActions(postId, post.authorId)}
+                            <button class="edit-btn" onclick="editPost('${postId}')">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="delete-btn" onclick="deletePost('${postId}')">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
                         </div>
                     </div>
                     <div class="post-meta">
-                        <div class="post-author">
-                            <img src="${post.authorPhoto}" alt="${post.authorName}" class="author-avatar">
-                            <span class="author-name">${post.authorName}</span>
-                        </div>
-                        <span class="post-date">${formatDate(post.createdAt)}</span>
+                        <span class="post-date">${post.time}</span>
                     </div>
                     <h1 class="post-title">${post.title}</h1>
                     <div class="post-tags">
                         ${tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                     </div>
-                    <div class="post-content">${tempDiv.innerHTML}</div>
+                    <div class="post-content">${post.details}</div>
                 </div>
             `;
             
@@ -500,6 +390,15 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             document.body.appendChild(singlePostView);
+
+            // Render Markdown
+            const contentElement = singlePostView.querySelector('.post-content');
+            contentElement.innerHTML = marked(contentElement.innerHTML);
+
+            // Render LaTeX
+            if (typeof MathJax !== 'undefined') {
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub, contentElement]);
+            }
         } catch (error) {
             console.error('Error loading post:', error);
             alert('Error loading post. Please try again.');
@@ -527,30 +426,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add delete post function
     window.deletePost = function(postId) {
-        if (!auth.currentUser) {
-            alert("Please sign in to delete posts");
-            return;
-        }
-
         if (confirm('Are you sure you want to delete this post? This action cannot be undone.')) {
-            const postRef = database.ref('posts/' + postId);
+            const postRef = database.ref('life/' + postId);
             
-            postRef.once('value')
-                .then((snapshot) => {
-                    const post = snapshot.val();
-                    
-                    // Check if user owns the post
-                    if (post.authorId !== auth.currentUser.uid) {
-                        alert("You can only delete your own posts");
-                        return;
-                    }
-
-                    // Delete the post
-                    return postRef.remove();
-                })
+            postRef.remove()
                 .then(() => {
                     console.log('Post deleted successfully');
-                    showPosts(); // Return to posts list
+                    showPosts();
                 })
                 .catch((error) => {
                     console.error('Error deleting post:', error);
@@ -636,18 +518,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     window.publishPost = async function() {
         if (!auth.currentUser) {
-            alert("Please sign in to publish posts");
+            alert("Please sign in to continue");
             return;
         }
 
         const title = document.getElementById('postTitle').value.trim();
         const content = document.getElementById('postContent').innerHTML.trim();
-        const tags = document.getElementById('postTags').value
-            .split(',')
-            .map(tag => tag.trim())
-            .filter(tag => tag.length > 0);
+        const tags = document.getElementById('postTags').value.trim();
         const visibility = document.getElementById('postVisibility').value;
-        const isPublic = visibility === 'public';
 
         if (!title || !content) {
             alert("Please fill in both title and content");
@@ -657,8 +535,8 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
             const now = new Date();
             const timeString = now.toLocaleString('en-US', {
-                hour: '2-digit',
-                minute: '2-digit',
+                hour: 'numeric',
+                minute: 'numeric',
                 hour12: true,
                 day: 'numeric',
                 month: 'long',
@@ -668,31 +546,21 @@ document.addEventListener('DOMContentLoaded', function() {
             const postData = {
                 title,
                 details: content,
-                tags: tags.join(', '),
-                time: timeString,
-                isPublic,
-                authorId: auth.currentUser.uid,
-                authorName: auth.currentUser.displayName,
-                authorPhoto: auth.currentUser.photoURL,
-                createdAt: Date.now(),
-                updatedAt: Date.now()
+                tags,
+                time: timeString
             };
 
-            // Check if we're editing an existing post
             const editingPostId = editorView.dataset.editingPostId;
             let postRef;
 
             if (editingPostId) {
-                // Update existing post
                 postRef = database.ref('life/' + editingPostId);
                 await postRef.update(postData);
             } else {
-                // Create new post
                 postRef = database.ref('life').push();
                 await postRef.set(postData);
             }
 
-            // Clear editor and show posts
             clearEditor();
             showPosts();
         } catch (error) {
@@ -700,153 +568,14 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Error publishing post. Please try again.');
         }
     }
+
+    function initEditor() {
+        // Add any necessary initialization for the editor here
+        const editor = document.getElementById('postContent');
+        
+        // Example: Set focus on the editor when it is opened
+        editor.focus();
+        
+        // You can add more initialization logic as needed
+    }
 });
-
-// Move these functions outside DOMContentLoaded to make them globally available
-window.updateToolbarState = function() {
-    const toolbar = document.querySelector('.editor-toolbar');
-    
-    toolbar.querySelectorAll('button').forEach(button => {
-        const command = button.getAttribute('data-command');
-        
-        switch(command) {
-            case 'bold':
-            case 'italic':
-                const state = document.queryCommandState(command);
-                button.classList.toggle('active', state);
-                break;
-                
-            case 'h2':
-                const isH2 = document.queryCommandValue('formatBlock').toLowerCase() === 'h2';
-                button.classList.toggle('active', isH2);
-                break;
-                
-            case 'quote':
-                const isQuote = document.queryCommandValue('formatBlock').toLowerCase() === 'blockquote';
-                button.classList.toggle('active', isQuote);
-                break;
-                
-            case 'link':
-                const isLink = document.queryCommandState('createLink');
-                button.classList.toggle('active', isLink);
-                break;
-        }
-    });
-};
-
-window.handleToolbarClick = function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    const editor = document.getElementById('postContent');
-    const command = this.getAttribute('data-command');
-    
-    editor.focus();
-    const selection = window.getSelection();
-    const range = selection.getRangeAt(0);
-    
-    switch(command) {
-        case 'bold':
-            document.execCommand('bold', false, null);
-            break;
-            
-        case 'italic':
-            document.execCommand('italic', false, null);
-            break;
-            
-        case 'h2':
-            const parentBlock = range.commonAncestorContainer.parentElement;
-            const isH2 = parentBlock.tagName === 'H2';
-            document.execCommand('formatBlock', false, isH2 ? 'p' : 'h2');
-            break;
-            
-        case 'quote':
-            const blockParent = range.commonAncestorContainer.parentElement;
-            const isQuote = blockParent.tagName === 'BLOCKQUOTE';
-            document.execCommand('formatBlock', false, isQuote ? 'p' : 'blockquote');
-            break;
-            
-        case 'link':
-            const isLink = document.queryCommandState('createLink');
-            if (isLink) {
-                document.execCommand('unlink', false, null);
-            } else {
-                const url = prompt('Enter the URL:');
-                if (url) {
-                    document.execCommand('createLink', false, url);
-                    // Make links open in new tab
-                    const links = editor.getElementsByTagName('a');
-                    for (let link of links) {
-                        link.target = '_blank';
-                        link.rel = 'noopener noreferrer';
-                    }
-                }
-            }
-            break;
-    }
-    
-    // Update button states after formatting
-    updateToolbarState();
-};
-
-function updateToolbarState() {
-    const toolbar = document.querySelector('.editor-toolbar');
-    const selection = window.getSelection();
-    
-    if (!selection.rangeCount) return;
-    
-    const range = selection.getRangeAt(0);
-    const parentBlock = range.commonAncestorContainer.parentElement;
-    
-    toolbar.querySelectorAll('button').forEach(button => {
-        const command = button.getAttribute('data-command');
-        
-        switch(command) {
-            case 'bold':
-                button.classList.toggle('active', document.queryCommandState('bold'));
-                break;
-                
-            case 'italic':
-                button.classList.toggle('active', document.queryCommandState('italic'));
-                break;
-                
-            case 'h2':
-                button.classList.toggle('active', parentBlock.tagName === 'H2');
-                break;
-                
-            case 'quote':
-                button.classList.toggle('active', parentBlock.tagName === 'BLOCKQUOTE');
-                break;
-                
-            case 'link':
-                button.classList.toggle('active', document.queryCommandState('createLink'));
-                break;
-        }
-    });
-}
-
-function initializeEditor() {
-    const editor = document.getElementById('postContent');
-    const toolbar = document.querySelector('.editor-toolbar');
-    
-    // Remove existing listeners
-    toolbar.querySelectorAll('button').forEach(button => {
-        const newButton = button.cloneNode(true);
-        button.parentNode.replaceChild(newButton, button);
-    });
-    
-    // Add new listeners
-    toolbar.querySelectorAll('button').forEach(button => {
-        button.addEventListener('click', handleToolbarClick);
-    });
-    
-    // Monitor selection changes
-    editor.addEventListener('keyup', updateToolbarState);
-    editor.addEventListener('mouseup', updateToolbarState);
-    editor.addEventListener('focus', updateToolbarState);
-    
-    // Initialize editor with a paragraph
-    if (editor.innerHTML.trim() === '') {
-        editor.innerHTML = '<p><br></p>';
-    }
-}

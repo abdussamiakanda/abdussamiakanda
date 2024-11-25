@@ -17,7 +17,6 @@ body {
     font-family: 'Poppins', sans-serif;
     color: var(--text-color);
     background: var(--bg-color);
-    overflow-y: hidden;
 }
 
 /* Navigation */
@@ -814,13 +813,13 @@ main {
 }
 
 .single-post-view .post-title {
-    font-size: 36px;
+    font-size: 30px;
     margin-bottom: 24px;
     cursor: default;
 }
 
 .single-post-view .post-content {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.8;
     color: #292929;
     margin-bottom: 32px;
@@ -975,4 +974,83 @@ main {
 .editor-content i,
 .editor-content em {
     font-style: italic;
+}
+
+/* General Styles */
+.post-content {
+    line-height: 1.6;
+    margin: 20px 0;
+}
+
+/* Headings */
+.post-content h1 {
+    font-size: 2em;
+    margin: 0.5em 0;
+}
+
+.post-content h2 {
+    font-size: 1.75em;
+    margin: 0.5em 0;
+}
+
+.post-content h3 {
+    font-size: 1.5em;
+    margin: 0.5em 0;
+}
+
+/* Paragraphs */
+.post-content p {
+    margin: 0.5em 0;
+}
+
+/* Lists */
+.post-content ul,
+.post-content ol {
+    margin: 0.5em 0 0.5em 20px; /* Indent lists */
+}
+
+.post-content li {
+    margin: 0.25em 0;
+}
+
+/* Blockquotes */
+.post-content blockquote {
+    border-left: 4px solid #ccc;
+    padding-left: 10px;
+    margin: 1em 0;
+    font-style: italic;
+}
+
+/* Code Blocks */
+.post-content pre {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: 10px;
+    overflow-x: auto; /* Allow horizontal scrolling */
+    border-radius: 4px;
+}
+
+.post-content code {
+    background-color: #f8f8f8;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-family: 'Courier New', Courier, monospace; /* Monospace font for code */
+}
+
+/* Links */
+.post-content a {
+    color: #007bff; /* Bootstrap primary color */
+    text-decoration: none;
+}
+
+.post-content a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Images */
+.post-content img {
+    max-width: 100%; /* Responsive images */
+    height: auto;
+    display: block;
+    margin: 10px 0; /* Space around images */
 }
