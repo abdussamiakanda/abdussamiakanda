@@ -63,7 +63,6 @@ body {
     position: relative;
     margin-left: 20px;
     transition: all 0.3s ease;
-    opacity: 0;
     transform: translateY(-10px);
 }
 
@@ -351,7 +350,12 @@ main {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+}
+
+.post-tags-single {
     margin-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 10px;
 }
 
 .tag {
@@ -782,7 +786,6 @@ main {
 
 /* Posts Container Grid */
 .posts-container {
-    max-width: 800px;
     margin: 0 auto;
     padding: 20px;
     width: 100%;
@@ -801,7 +804,7 @@ main {
 }
 
 .single-post-container {
-    padding-top: 40px;
+    padding-top: 20px;
     padding-bottom: 40px;
 }
 
@@ -809,12 +812,11 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 32px;
+    margin-bottom: 20px;
 }
 
 .single-post-view .post-title {
     font-size: 30px;
-    margin-bottom: 24px;
     cursor: default;
 }
 
@@ -886,6 +888,37 @@ main {
     .single-post-view .post-title {
         font-size: 28px;
     }
+}
+
+.post-reference {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    background-color: rgba(26, 137, 23, 0.1);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    margin: 0 2px;
+    cursor: pointer;
+}
+
+.post-reference:hover {
+    color: black;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+}
+
+.post-reference i {
+    font-size: 14px;
+}
+
+/* Add a subtle animation when clicking */
+.post-reference:active {
+    transform: translateY(0);
+    box-shadow: none;
 }
 
 /* Make sure the preview is non-editable */
@@ -984,17 +1017,32 @@ main {
 
 /* Headings */
 .post-content h1 {
-    font-size: 2em;
+    font-size: 1.5em;
     margin: 0.5em 0;
 }
 
 .post-content h2 {
-    font-size: 1.75em;
+    font-size: 1.35em;
     margin: 0.5em 0;
 }
 
 .post-content h3 {
-    font-size: 1.5em;
+    font-size: 1.2em;
+    margin: 0.5em 0;
+}
+
+.post-content h4 {
+    font-size: 1.1em;
+    margin: 0.5em 0;
+}
+
+.post-content h5 {
+    font-size: 1.05em;
+    margin: 0.5em 0;
+}
+
+.post-content h6 {
+    font-size: 1em;
     margin: 0.5em 0;
 }
 
@@ -1006,7 +1054,7 @@ main {
 /* Lists */
 .post-content ul,
 .post-content ol {
-    margin: 0.5em 0 0.5em 20px; /* Indent lists */
+    margin: 0.5em 0 0.5em 30px; /* Indent lists */
 }
 
 .post-content li {
@@ -1027,13 +1075,25 @@ main {
     border: 1px solid #ddd;
     padding: 10px;
     overflow-x: auto; /* Allow horizontal scrolling */
-    border-radius: 4px;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+.post-content pre code {
+    background-color: #f8f8f8;
+    padding: 2px 4px;
+    border: none;
+    border-radius: 8px;
+    color: #000000;
+    font-family: 'Courier New', Courier, monospace; /* Monospace font for code */
 }
 
 .post-content code {
     background-color: #f8f8f8;
     padding: 2px 4px;
-    border-radius: 4px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    color: #000000;
     font-family: 'Courier New', Courier, monospace; /* Monospace font for code */
 }
 
@@ -1053,4 +1113,79 @@ main {
     height: auto;
     display: block;
     margin: 10px 0; /* Space around images */
+}
+
+.visibility-badge {
+    background-color: #f0f0f0;
+    color: #666;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    margin-left: 8px;
+}
+
+/* Table Styles */
+.post-content table {
+    min-width: 300px;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 10px auto;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.post-content th {
+    background-color: #fafafa;
+    font-weight: 600;
+    text-align: left;
+    padding: 5px 10px;
+    border-bottom: 2px solid #e0e0e0;
+    color: #333;
+    font-size: 0.95em;
+}
+
+.post-content td {
+    padding: 5px 10px;
+    border-bottom: 1px solid #e0e0e0;
+    color: #444;
+    font-size: 0.95em;
+}
+
+.post-content td:last-child {
+    border-right: none;
+}
+
+.post-content tr:last-child td {
+    border-bottom: none;
+}
+
+/* Zebra striping for better readability */
+.post-content tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+/* Hover effect with smooth transition */
+.post-content tr {
+    transition: background-color 0.2s ease;
+}
+
+.post-content tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Responsive tables */
+@media screen and (max-width: 768px) {
+    .post-content table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .post-content th,
+    .post-content td {
+        padding: 10px 14px;
+    }
 }

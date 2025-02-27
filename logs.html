@@ -5,7 +5,7 @@
     <meta name="visibility" content="visible">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Qur'an</title>
+    <title>LOGS - Md Abdus Sami Akanda</title>
     
     <!-- Fonts -->
     <meta property="og:image" content="./../assets/image/icon.png"/>
@@ -26,14 +26,14 @@
         <div class="nav-container">
             <div class="nav-left">
                 <div class="logo">LOGS</div>
-                <div class="search-box hide" id="searchBox">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Search..." id="searchInput">
-                </div>
+            </div>
+            <div class="search-box hide" id="searchBox">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search..." id="searchInput">
             </div>
             <div class="nav-right">
                 <!-- Write button hidden by default -->
-                <button class="write-btn hide" onclick="showEditor()">
+                <button class="write-btn hide" id="writeBtn" onclick="showEditor()">
                     <i class="fas fa-pen"></i> Write
                 </button>
                 
@@ -115,10 +115,8 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
     
     <!-- Custom JS -->
-    <script src="assets/js/logs.js"></script>
-    <!-- Include marked.js for Markdown rendering -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/2.1.3/marked.min.js"></script>
-
+    <script type="module" src="assets/js/logs.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/lib/marked.min.js"></script>
     <!-- Include MathJax for LaTeX rendering -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_HTML"></script>
 </body>
