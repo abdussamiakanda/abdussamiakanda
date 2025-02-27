@@ -525,6 +525,22 @@ function formatContent(content) {
         .replace(/&nbsp;/g, ' ')      // Replace &nbsp; with space
         .trim();                      // Trim extra spaces
 
+    // Handle code blocks first (```)
+    processedContent = processedContent.replace(
+        /```([\s\S]*?)```/g,
+        (match, code) => {
+            // Remove first newline if it exists and trim
+            code = code.replace(/^\n/, '').trim();
+            return `<pre><code>${code}</code></pre>`;
+        }
+    );
+
+    // Handle inline code (`)
+    processedContent = processedContent.replace(
+        /`([^`]+)`/g,
+        (match, code) => `<code>${code.trim()}</code>`
+    );
+
     // Process tables - match entire tables including headers and separators
     processedContent = processedContent.replace(
         /(\|[^\n]*\|\n\|[^\n]*\|\n\|[^\n]*\|(\n\|[^\n]*\|)*)/g,
