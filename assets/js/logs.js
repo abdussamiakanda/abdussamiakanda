@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <p class="post-excerpt">${contentPreview}</p>
                 <div class="post-footer">
                     <div class="post-tags">
-                         <span class="tag ${post.public ? 'public' : 'private'}">${post.public ? 'Public' : 'Private'}</span>
+                        <span class="tag ${post.public ? 'public' : 'private'}">${post.public ? 'Public' : 'Private'}</span>
                         ${tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                     </div>
                     <div class="post-actions">
@@ -347,10 +347,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="post-meta">
                         <span class="post-date">${post.time}</span>
                         <span class="post-id" onclick="copyIdToClipboard('clipId','${postId}')"><i class="fas fa-copy" id="clipId-${postId}"></i> ${postId}</span>
-
                     </div>
                     <h1 class="post-title">${post.title}</h1>
                     <div class="post-tags post-tags-single">
+                        <span class="tag ${post.public ? 'public' : 'private'}">${post.public ? 'Public' : 'Private'}</span>
                         ${post.tags ? post.tags.split(',').map(tag => `<span class="tag">${tag}</span>`).join('') : ''}
                     </div>
                     <div class="post-content" id="postContentDetails">${await formatContent(post.details)}</div>
