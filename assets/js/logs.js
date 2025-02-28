@@ -83,6 +83,11 @@ document.addEventListener('DOMContentLoaded', function() {
             searchBox.classList.add('hide');
         }
 
+        const singlePostView = document.getElementById('singlePostView');
+        if (singlePostView) {
+            singlePostView.remove();
+        }
+
         if (userAvatar) {
             userAvatar.style.display = 'none';
         }
@@ -102,6 +107,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (searchBox) {
             searchBox.classList.remove('hide');
             searchBox.classList.add('show');
+            searchInput.value = '';
+            searchInput.classList.remove('hide');
         }
 
         if (userAvatar) {
