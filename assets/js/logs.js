@@ -360,7 +360,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <span class="tag ${post.public ? 'public' : 'private'}">${post.public ? 'Public' : 'Private'}</span>
                         ${post.tags ? post.tags.split(',').map(tag => `<span class="tag">${tag}</span>`).join('') : ''}
                     </div>
-                    <div class="post-content" id="postContentDetails">${await formatContent(post.details)}</div>
+                    <div class="post-content" id="postContentDetails">${await formatContent(post.details.replaceAll('<br>','\n'))}</div>
                 </div>
             `;
             
