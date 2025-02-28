@@ -138,7 +138,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
             Object.entries(posts)
                 .map(([id, post]) => ({id, ...post}))
-                .sort((a, b) => b.time - a.time)
+                .sort((a, b) => {
+                    // Parse both date formats
+                    const parseDate = (timeStr) => {
+                        // Try "Month Day, Year at Time" format first
+                        let date = new Date(timeStr.replace(' at ', ' '));
+                        
+                        // If invalid, try "Time, Day Month Year" format
+                        if (isNaN(date.getTime())) {
+                            const [time, datePart] = timeStr.split(', ');
+                            const [day, month, year] = datePart.split(' ');
+                            date = new Date(`${month} ${day}, ${year} ${time}`);
+                        }
+                        
+                        return date.getTime();
+                    };
+                    
+                    return parseDate(b.time) - parseDate(a.time);
+                })
                 .forEach(post => {
                     displayPost(post);
                 });
@@ -162,11 +179,13 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="post-preview-content">
                 <div class="post-meta">
                     <span class="post-date">${post.time}</span>
+                    <span class="post-id" onclick="copyIdToClipboard('copyId','${post.id}')"><i class="fas fa-copy" id="copyId-${post.id}"></i> ${post.id}</span>
                 </div>
                 <h2 class="post-title" onclick="showSinglePost('${post.id}')">${post.title}</h2>
                 <p class="post-excerpt">${contentPreview}</p>
                 <div class="post-footer">
                     <div class="post-tags">
+                         <span class="tag ${post.public ? 'public' : 'private'}">${post.public ? 'Public' : 'Private'}</span>
                         ${tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                     </div>
                     <div class="post-actions">
@@ -327,6 +346,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                     <div class="post-meta">
                         <span class="post-date">${post.time}</span>
+                        <span class="post-id" onclick="copyIdToClipboard('clipId','${postId}')"><i class="fas fa-copy" id="clipId-${postId}"></i> ${postId}</span>
+
                     </div>
                     <h1 class="post-title">${post.title}</h1>
                     <div class="post-tags post-tags-single">
@@ -513,6 +534,17 @@ document.addEventListener('DOMContentLoaded', function() {
         await initEditor();
     }
 });
+
+// Copy ID to Clipboard Function
+window.copyIdToClipboard = function(tag,id) {
+    navigator.clipboard.writeText(id);
+    document.getElementById(tag + '-' + id).classList.remove('fa-copy');
+    document.getElementById(tag + '-' + id).classList.add('fa-check');
+    setTimeout(() => {
+        document.getElementById(tag + '-' + id).classList.add('fa-copy');
+        document.getElementById(tag + '-' + id).classList.remove('fa-check');
+    }, 2000);
+}
 
 function formatContent(content) {
     if (!content) return '';
