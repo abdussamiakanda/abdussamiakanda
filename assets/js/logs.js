@@ -440,7 +440,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 const postData = {
                     title: titleValue,
-                    details: contentValue.replace(/<div>/g, '\n').replace(/<\/div>/g, ''),
+                    details: contentValue.replaceAll(/<div>/g, '\n').replace(/<\/div>/g, '').replaceAll('\n','<br>'),
                     tags: tagsValue,
                     time: timeString,
                     createdAt: now.getTime(),
