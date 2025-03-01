@@ -306,6 +306,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('postTitle').value = post.title;
             document.getElementById('postContent').innerHTML = post.details;
             document.getElementById('postTags').value = post.tags || '';
+            document.getElementById('postVisibility').value = post.public ? 'public' : 'private';
             editorView.dataset.editingPostId = postId; // Store the post ID for editing
 
             // Show the editor view
@@ -400,6 +401,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const editor = document.getElementById('postContent');
         const title = document.getElementById('postTitle');
         const tags = document.getElementById('postTags');
+        const visibility = document.getElementById('postVisibility');
         
         // Initialize editor if needed
         if (editor) {
@@ -421,6 +423,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const titleValue = title.value.trim();
             const contentValue = editor.innerHTML;
             const tagsValue = tags.value.trim();
+            const visibilityValue = visibility.value.trim() === 'public' ? true : false;
 
             if (!titleValue || !contentValue) {
                 alert("Please fill in both title and content");
@@ -443,6 +446,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     details: contentValue.replaceAll(/<div>/g, '\n').replace(/<\/div>/g, '').replaceAll('\n','<br>'),
                     tags: tagsValue,
                     time: timeString,
+                    public: visibilityValue,
                     createdAt: now.getTime(),
                     authorId: auth.currentUser.uid
                 };
@@ -492,10 +496,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const title = document.getElementById('postTitle');
         const editor = document.getElementById('postContent');
         const tags = document.getElementById('postTags');
+        const visibility = document.getElementById('postVisibility');
         
         if (title) title.value = '';
         if (editor) editor.innerHTML = 'Tell your story...';
         if (tags) tags.value = '';
+        if (visibility) visibility.value = '';
         
         // Clear any editing state
         delete editorView.dataset.editingPostId;
