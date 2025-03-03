@@ -137,7 +137,6 @@ body {
 /* Main Content */
 main {
     margin-top: var(--nav-height);
-    height: 100vh - var(--nav-height);
     padding: 40px 20px;
 }
 
@@ -146,7 +145,6 @@ main {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    height: calc(100vh - var(--nav-height));
     overflow-y: auto;
 }
 
