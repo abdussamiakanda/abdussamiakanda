@@ -499,7 +499,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const visibility = document.getElementById('postVisibility');
         
         if (title) title.value = '';
-        if (editor) editor.innerHTML = 'Tell your story...';
+        if (editor) {
+            editor.innerHTML = '';
+            editor.placeholder = 'Tell your story...';
+        }
         if (tags) tags.value = '';
         if (visibility) visibility.value = '';
         
