@@ -1,0 +1,121 @@
+:root {
+  --font-family: 'Poppins', sans-serif;
+  --bg-color: #f9fafb;
+  --text-color: #1f2937;
+  --primary-color: #2563eb;
+  --primary-text-color: #ffffff;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background: var(--primary-color);
+  color: var(--primary-text-color);
+  padding: 1rem;
+  text-align: center;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: var(--primary-text-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+main {
+  flex: 1;
+  width: min(90%, 900px);
+  margin: 2rem auto;
+}
+
+footer {
+  background: var(--primary-color);
+  color: var(--primary-text-color);
+  text-align: center;
+  padding: 1rem;
+  margin-top: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 1rem;
+  line-height: 1.25;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+ul {
+  margin-bottom: 1rem;
+  padding-left: 1.25rem;
+}
+
+a {
+  color: var(--primary-color);
+}
+
+a:hover {
+  color: #1e40af;
+}
+
+/* Navigation menu redesign */
+.menu {
+  background: var(--primary-color);
+  color: var(--primary-text-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+}
+
+.menu .head,
+.menu .right-menu {
+  cursor: pointer;
+}
+
+.center-menu {
+  display: flex;
+  gap: 1rem;
+}
+
+.center-menu .menu-item {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+}
+
+.center-menu .menu-item.selected {
+  background: var(--primary-text-color);
+  color: var(--primary-color);
+}
+
+.menu .head img {
+  width: 40px;
+  height: 40px;
+}
