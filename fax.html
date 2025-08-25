@@ -27,14 +27,23 @@
     .ok { color:#86efac; }
     .err { color:#fca5a5; }
     .tiny { font-size:12px; color:#94a3b8; }
-    .live { margin-top: 18px; font-size: 13px; }
+    .live { margin-top: 18px; font-size: 13px; white-space: pre-wrap; }
     code { background:#0b1220; padding:2px 6px; border-radius:6px; }
+    .authbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; gap:10px; }
+    .authinfo { font-size:14px; color:#cbd5e1; overflow:auto; }
   </style>
 </head>
 <body>
 <div class="wrap">
   <div class="card">
     <h1><code>Task2Printer</code></h1>
+    <div class="authbar">
+      <div class="authinfo" id="authInfo">Signed out</div>
+      <div style="display:flex; gap:8px;">
+        <button id="btnSignIn">Sign in with Google</button>
+        <button id="btnSignOut" style="display:none;">Sign out</button>
+      </div>
+    </div>
     <p>Choose “Plain Text” for a single line message, or “Event” for a structured payload.</p>
 
     <div class="tabs">
@@ -50,7 +59,7 @@
           <textarea id="plainText" placeholder="e.g. Print this quick note"></textarea>
         </div>
         <div class="row">
-          <button id="sendPlain">Send Plain Text</button>
+          <button id="sendPlain" disabled>Send Plain Text</button>
           <button id="clearPlain" type="button">Clear</button>
         </div>
       </div>
@@ -79,7 +88,7 @@
           <textarea id="eventDesc" placeholder="e.g. Daily sync with quick updates."></textarea>
         </div>
         <div class="row">
-          <button id="sendEvent">Send Event</button>
+          <button id="sendEvent" disabled>Send Event</button>
           <button id="clearEvent" type="button">Clear</button>
         </div>
       </div>
@@ -93,7 +102,7 @@
 
 <!-- Firebase SDKs (v9+ modular) -->
 <script type="module">
-  // 1) Fill these with your project’s values
+  // 1) Your Firebase config (already filled)
   const firebaseConfig = {
     apiKey: "AIzaSyD2FLUPlMF4tVFBPtIea1AUzM6RgWeaZ1o",
     authDomain: "life-abdussamiakanda.firebaseapp.com",
@@ -105,16 +114,27 @@
     measurementId: "G-S411V27PLT"
   };
 
-  // 2) Firebase imports (CDN, ES modules)
+  // 2) Firebase imports
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
   import { getDatabase, ref, push, serverTimestamp, onValue, limitToLast, query } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-database.js";
+  import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
 
   // 3) Init
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
+  // UI elements
   const statusPlain = document.getElementById("statusPlain");
   const statusEvent = document.getElementById("statusEvent");
   const liveInfo    = document.getElementById("liveInfo");
+  const btnSignIn   = document.getElementById("btnSignIn");
+  const btnSignOut  = document.getElementById("btnSignOut");
+  const authInfo    = document.getElementById("authInfo");
+
+  const btnSendPlain = document.getElementById("sendPlain");
+  const btnSendEvent = document.getElementById("sendEvent");
 
   // 4) Tabs
   const tabPlain = document.getElementById("tab-plain");
@@ -132,14 +152,41 @@
   tabPlain.onclick = () => setTab("plain");
   tabEvent.onclick = () => setTab("event");
 
-  // 5) Helpers
+  // 5) Auth
+  btnSignIn.onclick = async () => {
+    try { await signInWithPopup(auth, provider); }
+    catch (e) { alert(e.message || String(e)); }
+  };
+  btnSignOut.onclick = async () => {
+    try { await signOut(auth); }
+    catch (e) { alert(e.message || String(e)); }
+  };
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const name  = user.displayName || "Anonymous";
+      const email = user.email || "(no email)";
+      authInfo.textContent = `Signed in as ${name} <${email}>`;
+      btnSignIn.style.display = "none";
+      btnSignOut.style.display = "";
+      btnSendPlain.disabled = false;
+      btnSendEvent.disabled = false;
+    } else {
+      authInfo.textContent = "Signed out";
+      btnSignIn.style.display = "";
+      btnSignOut.style.display = "none";
+      btnSendPlain.disabled = true;
+      btnSendEvent.disabled = true;
+    }
+  });
+
+  // 6) Helpers
   const fmtOk  = (msg) => `<span class="ok">✔ ${msg}</span>`;
   const fmtErr = (msg) => `<span class="err">✖ ${msg}</span>`;
 
   function isoFromDateTime(dateStr, timeStr) {
     if (!dateStr && !timeStr) return null;
     try {
-      // If both provided, combine; else return the provided piece
       if (dateStr && timeStr) {
         const dt = new Date(`${dateStr}T${timeStr}`);
         if (!Number.isNaN(dt.getTime())) return dt.toISOString();
@@ -157,14 +204,25 @@
     return null;
   }
 
+  function requireUser() {
+    const u = auth.currentUser;
+    if (!u) throw new Error("Please sign in first.");
+    return u;
+  }
+
+  // 7) Write functions
   async function sendPlain() {
     statusPlain.innerHTML = "";
     const text = document.getElementById("plainText").value.trim();
     if (!text) { statusPlain.innerHTML = fmtErr("Please enter some text."); return; }
+    let user;
+    try { user = requireUser(); } catch (e) { statusPlain.innerHTML = fmtErr(e.message || String(e)); return; }
 
     try {
       const newRef = ref(db, "todo/new");
-      const res = await push(newRef, text);
+      const res = await push(newRef, {
+        text
+      });
       statusPlain.innerHTML = fmtOk(`Posted as plain text.`);
       document.getElementById("plainText").value = "";
     } catch (e) {
@@ -175,13 +233,15 @@
   async function sendEvent() {
     statusEvent.innerHTML = "";
     const name = document.getElementById("eventName").value.trim();
-    const date = document.getElementById("eventDate").value; // yyyy-mm-dd
-    const time = document.getElementById("eventTime").value; // HH:MM (24h)
+    const date = document.getElementById("eventDate").value;
+    const time = document.getElementById("eventTime").value;
     const desc = document.getElementById("eventDesc").value.trim();
 
     if (!name) { statusEvent.innerHTML = fmtErr("Event Name is required."); return; }
+    let user;
+    try { user = requireUser(); } catch (e) { statusEvent.innerHTML = fmtErr(e.message || String(e)); return; }
 
-    const iso = isoFromDateTime(date, time); // nullable; your printer script can parse
+    const iso = isoFromDateTime(date, time);
     const payload = {
       event: name,
       datetime: iso || (date || time || null),
@@ -192,7 +252,7 @@
     try {
       const newRef = ref(db, "todo/new");
       const res = await push(newRef, payload);
-      statusEvent.innerHTML = fmtOk(`Event posted (key: ${res.key}).`);
+      statusEvent.innerHTML = fmtOk(`Event posted.`);
       document.getElementById("eventName").value = "";
       document.getElementById("eventDate").value = "";
       document.getElementById("eventTime").value = "";
@@ -215,18 +275,6 @@
     document.getElementById("eventDesc").value = "";
     statusEvent.innerHTML = "";
   };
-
-  // 6) Show the last few posts (optional)
-  const lastQ = query(ref(db, "todo/new"), limitToLast(5));
-  onValue(lastQ, (snap) => {
-    const val = snap.val();
-    if (!val) { liveInfo.textContent = "No recent posts yet."; return; }
-    const rows = Object.entries(val).map(([k,v]) => {
-      const short = (typeof v === "string") ? v : (v?.event || JSON.stringify(v));
-      return `• ${k}: ${short}`;
-    });
-    liveInfo.textContent = "Recent: \n" + rows.join("\n");
-  });
 </script>
 </body>
 </html>
