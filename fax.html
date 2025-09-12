@@ -9,7 +9,7 @@
     :root { --bg:#0f172a; --card:#111827; --fg:#e5e7eb; --muted:#94a3b8; --acc:#60a5fa; }
     * { box-sizing: border-box; }
     body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; background:var(--bg); color:var(--fg); }
-    .wrap { max-width: 760px; margin: 40px auto; padding: 0 16px; }
+    .wrap { max-width: 860px; margin: 40px auto; padding: 0 16px; }
     .card { background:var(--card); border:1px solid #1f2937; border-radius:14px; padding:20px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
     h1 { margin:0 0 12px; font-size: 22px; text-align: center; }
     p  { margin: 6px 0 14px; color: var(--muted); }
@@ -28,28 +28,26 @@
     .ok { color:#86efac; }
     .err { color:#fca5a5; }
     .tiny { font-size:12px; color:#94a3b8; }
-    .live { margin-top: 18px; font-size: 13px; white-space: pre-wrap; }
-    code { background:#0b1220; padding:2px 6px; border-radius:6px; }
-    .authbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; gap:10px; }
-    .authinfo { font-size:14px; color:#cbd5e1; overflow:auto; }
+    .preview { display:flex; align-items:center; gap:10px; }
+    .preview img { max-height:96px; max-width:100%; border-radius:8px; border:1px solid #1f2937; background:#0b1220; }
   </style>
 </head>
 <body>
 <div class="wrap">
   <div class="card">
     <h1><code>Task2Printer</code></h1>
-    <div class="authbar">
+    <div class="authbar" style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;">
       <div class="authinfo" id="authInfo">Signed out</div>
       <div style="display:flex; gap:8px;">
         <button id="btnSignIn">Sign in with Google</button>
         <button id="btnSignOut" style="display:none;">Sign out</button>
       </div>
     </div>
-    <p>Choose “Plain Text” for a single line message, or “Event” for a structured payload.</p>
 
     <div class="tabs">
       <div class="tab active" id="tab-plain">Plain Text</div>
       <div class="tab" id="tab-event">Event</div>
+      <div class="tab" id="tab-image">Image</div>
     </div>
 
     <!-- Plain Text -->
@@ -93,17 +91,37 @@
           <button id="clearEvent" type="button">Clear</button>
         </div>
       </div>
-      <div class="tiny">Date/time is sent as ISO (local) string; your printer script formats AM/PM.</div>
       <div class="status" id="statusEvent"></div>
     </div>
 
-    <div class="live tiny" id="liveInfo"></div>
+    <!-- Image (file only, no extra fields) -->
+    <div id="pane-image" style="display:none;">
+      <div class="grid">
+        <div class="row">
+          <div>
+            <label for="imgFile">Choose an image (sent inline)</label>
+            <input id="imgFile" type="file" accept="image/*" />
+          </div>
+        </div>
+
+        <div class="preview">
+          <img id="imgPreview" alt="Preview" style="display:none;" />
+          <div class="tiny">Preview appears after choosing a file.</div>
+        </div>
+
+        <div class="row">
+          <button id="sendImage" disabled>Send Image</button>
+          <button id="clearImage" type="button">Clear</button>
+        </div>
+      </div>
+      <div class="status" id="statusImage"></div>
+    </div>
   </div>
 </div>
 
 <!-- Firebase SDKs (v9+ modular) -->
 <script type="module">
-  // 1) Your Firebase config (already filled)
+  // 1) Firebase config
   const firebaseConfig = {
     apiKey: "AIzaSyD2FLUPlMF4tVFBPtIea1AUzM6RgWeaZ1o",
     authDomain: "life-abdussamiakanda.firebaseapp.com",
@@ -115,9 +133,9 @@
     measurementId: "G-S411V27PLT"
   };
 
-  // 2) Firebase imports
+  // 2) Imports (Auth + Database)
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
-  import { getDatabase, ref, push, serverTimestamp, onValue, limitToLast, query } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-database.js";
+  import { getDatabase, ref, push, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-database.js";
   import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
 
   // 3) Init
@@ -126,42 +144,40 @@
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
 
-  // UI elements
-  const statusPlain = document.getElementById("statusPlain");
-  const statusEvent = document.getElementById("statusEvent");
-  const liveInfo    = document.getElementById("liveInfo");
-  const btnSignIn   = document.getElementById("btnSignIn");
-  const btnSignOut  = document.getElementById("btnSignOut");
-  const authInfo    = document.getElementById("authInfo");
-
+  // UI refs
+  const statusPlain  = document.getElementById("statusPlain");
+  const statusEvent  = document.getElementById("statusEvent");
+  const statusImage  = document.getElementById("statusImage");
+  const btnSignIn    = document.getElementById("btnSignIn");
+  const btnSignOut   = document.getElementById("btnSignOut");
+  const authInfo     = document.getElementById("authInfo");
   const btnSendPlain = document.getElementById("sendPlain");
   const btnSendEvent = document.getElementById("sendEvent");
+  const btnSendImage = document.getElementById("sendImage");
 
-  // 4) Tabs
-  const tabPlain = document.getElementById("tab-plain");
-  const tabEvent = document.getElementById("tab-event");
+  // Tabs
+  const tabPlain  = document.getElementById("tab-plain");
+  const tabEvent  = document.getElementById("tab-event");
+  const tabImage  = document.getElementById("tab-image");
   const panePlain = document.getElementById("pane-plain");
   const paneEvent = document.getElementById("pane-event");
+  const paneImage = document.getElementById("pane-image");
 
   function setTab(which) {
-    const isPlain = which === "plain";
-    tabPlain.classList.toggle("active", isPlain);
-    tabEvent.classList.toggle("active", !isPlain);
-    panePlain.style.display = isPlain ? "" : "none";
-    paneEvent.style.display = isPlain ? "none" : "";
+    tabPlain.classList.toggle("active", which === "plain");
+    tabEvent.classList.toggle("active", which === "event");
+    tabImage.classList.toggle("active", which === "image");
+    panePlain.style.display = which === "plain" ? "" : "none";
+    paneEvent.style.display = which === "event" ? "" : "none";
+    paneImage.style.display = which === "image" ? "" : "none";
   }
   tabPlain.onclick = () => setTab("plain");
   tabEvent.onclick = () => setTab("event");
+  tabImage.onclick = () => setTab("image");
 
-  // 5) Auth
-  btnSignIn.onclick = async () => {
-    try { await signInWithPopup(auth, provider); }
-    catch (e) { alert(e.message || String(e)); }
-  };
-  btnSignOut.onclick = async () => {
-    try { await signOut(auth); }
-    catch (e) { alert(e.message || String(e)); }
-  };
+  // Auth
+  btnSignIn.onclick = async () => { try { await signInWithPopup(auth, provider); } catch (e) { alert(e.message || String(e)); } };
+  btnSignOut.onclick = async () => { try { await signOut(auth); } catch (e) { alert(e.message || String(e)); } };
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -172,102 +188,117 @@
       btnSignOut.style.display = "";
       btnSendPlain.disabled = false;
       btnSendEvent.disabled = false;
+      btnSendImage.disabled = false;
     } else {
       authInfo.textContent = "Signed out";
       btnSignIn.style.display = "";
       btnSignOut.style.display = "none";
       btnSendPlain.disabled = true;
       btnSendEvent.disabled = true;
+      btnSendImage.disabled = true;
     }
   });
 
-  // 6) Helpers
-  const fmtOk  = (msg) => `<span class="ok">✔ ${msg}</span>`;
-  const fmtErr = (msg) => `<span class="err">✖ ${msg}</span>`;
+  // Helpers
+  const fmtOk  = (m) => `<span class="ok">✔ ${m}</span>`;
+  const fmtErr = (m) => `<span class="err">✖ ${m}</span>`;
 
   function isoFromDateTime(dateStr, timeStr) {
     if (!dateStr && !timeStr) return null;
     try {
       if (dateStr && timeStr) {
-        const dt = new Date(`${dateStr}T${timeStr}`);
-        if (!Number.isNaN(dt.getTime())) return dt.toISOString();
+        const dt = new Date(`${dateStr}T${timeStr}`); if (!Number.isNaN(dt.getTime())) return dt.toISOString();
       }
       if (dateStr) {
-        const dt = new Date(`${dateStr}T00:00`);
-        if (!Number.isNaN(dt.getTime())) return dt.toISOString();
+        const dt = new Date(`${dateStr}T00:00`); if (!Number.isNaN(dt.getTime())) return dt.toISOString();
       }
       if (timeStr) {
         const today = new Date();
-        const stub = new Date(`${today.toISOString().slice(0,10)}T${timeStr}`);
-        if (!Number.isNaN(stub.getTime())) return stub.toISOString();
+        const stub = new Date(`${today.toISOString().slice(0,10)}T${timeStr}`); if (!Number.isNaN(stub.getTime())) return stub.toISOString();
       }
     } catch {}
     return null;
   }
+  const requireUser = () => { if (!auth.currentUser) throw new Error("Please sign in first."); return auth.currentUser; };
 
-  function requireUser() {
-    const u = auth.currentUser;
-    if (!u) throw new Error("Please sign in first.");
-    return u;
-  }
-
-  // 7) Write functions
+  // Plain
   async function sendPlain() {
     statusPlain.innerHTML = "";
     const text = document.getElementById("plainText").value.trim();
     if (!text) { statusPlain.innerHTML = fmtErr("Please enter some text."); return; }
-    let user;
-    try { user = requireUser(); } catch (e) { statusPlain.innerHTML = fmtErr(e.message || String(e)); return; }
-
+    try { requireUser(); } catch (e) { statusPlain.innerHTML = fmtErr(e.message || String(e)); return; }
     try {
-      const newRef = ref(db, "todo/new");
-      const res = await push(newRef, {
-        text
-      });
-      statusPlain.innerHTML = fmtOk(`Posted as plain text.`);
+      await push(ref(db, "todo/new"), { text });
+      statusPlain.innerHTML = fmtOk("Posted as plain text.");
       document.getElementById("plainText").value = "";
-    } catch (e) {
-      statusPlain.innerHTML = fmtErr(e.message || String(e));
-    }
+    } catch (e) { statusPlain.innerHTML = fmtErr(e.message || String(e)); }
   }
 
+  // Event
   async function sendEvent() {
     statusEvent.innerHTML = "";
     const name = document.getElementById("eventName").value.trim();
     const date = document.getElementById("eventDate").value;
     const time = document.getElementById("eventTime").value;
     const desc = document.getElementById("eventDesc").value.trim();
-
     if (!name) { statusEvent.innerHTML = fmtErr("Event Name is required."); return; }
-    let user;
-    try { user = requireUser(); } catch (e) { statusEvent.innerHTML = fmtErr(e.message || String(e)); return; }
+    try { requireUser(); } catch (e) { statusEvent.innerHTML = fmtErr(e.message || String(e)); return; }
 
     const iso = isoFromDateTime(date, time);
-    const payload = {
-      event: name,
-      datetime: iso || (date || time || null),
-      description: desc || null,
-      created_at: serverTimestamp()
-    };
-
+    const payload = { event: name, datetime: iso || (date || time || null), description: desc || null, created_at: serverTimestamp() };
     try {
-      const newRef = ref(db, "todo/new");
-      const res = await push(newRef, payload);
-      statusEvent.innerHTML = fmtOk(`Event posted.`);
+      await push(ref(db, "todo/new"), payload);
+      statusEvent.innerHTML = fmtOk("Event posted.");
       document.getElementById("eventName").value = "";
       document.getElementById("eventDate").value = "";
       document.getElementById("eventTime").value = "";
       document.getElementById("eventDesc").value = "";
-    } catch (e) {
-      statusEvent.innerHTML = fmtErr(e.message || String(e));
-    }
+    } catch (e) { statusEvent.innerHTML = fmtErr(e.message || String(e)); }
   }
 
+  // Image (file -> data URL only)
+  const imgFile = document.getElementById("imgFile");
+  const imgPrev = document.getElementById("imgPreview");
+
+  imgFile.addEventListener("change", () => {
+    const f = imgFile.files?.[0];
+    if (!f) { imgPrev.src = ""; imgPrev.style.display = "none"; return; }
+    const reader = new FileReader();
+    reader.onload = (e) => { imgPrev.src = e.target.result; imgPrev.style.display = ""; };
+    reader.readAsDataURL(f);
+  });
+
+  async function sendImage() {
+    statusImage.innerHTML = "";
+    try { requireUser(); } catch (e) { statusImage.innerHTML = fmtErr(e.message || String(e)); return; }
+
+    const f = imgFile.files?.[0];
+    if (!f) { statusImage.innerHTML = fmtErr("Choose an image file."); return; }
+
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      try {
+        const dataUrl = e.target.result; // "data:image/png;base64,...."
+        await push(ref(db, "todo/new"), { image: dataUrl, created_at: serverTimestamp() });
+        statusImage.innerHTML = fmtOk("Image posted.");
+        resetImageForm();
+      } catch (err) {
+        statusImage.innerHTML = fmtErr(err.message || String(err));
+      }
+    };
+    reader.onerror = () => { statusImage.innerHTML = fmtErr("Failed to read file."); };
+    reader.readAsDataURL(f);
+  }
+
+  function resetImageForm() {
+    imgFile.value = "";
+    imgPrev.src = "";
+    imgPrev.style.display = "none";
+  }
+
+  // Bind
   document.getElementById("sendPlain").onclick = sendPlain;
-  document.getElementById("clearPlain").onclick = () => {
-    document.getElementById("plainText").value = "";
-    statusPlain.innerHTML = "";
-  };
+  document.getElementById("clearPlain").onclick = () => { document.getElementById("plainText").value = ""; statusPlain.innerHTML = ""; };
   document.getElementById("sendEvent").onclick = sendEvent;
   document.getElementById("clearEvent").onclick = () => {
     document.getElementById("eventName").value = "";
@@ -276,6 +307,8 @@
     document.getElementById("eventDesc").value = "";
     statusEvent.innerHTML = "";
   };
+  document.getElementById("sendImage").onclick = sendImage;
+  document.getElementById("clearImage").onclick = resetImageForm;
 </script>
 </body>
 </html>
