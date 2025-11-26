@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "life-abdussamiakanda"
+  },
+  "targets": {
+    "life-abdussamiakanda": {
+      "hosting": {
+        "abdussamiakanda": [
+          "abdussamiakanda"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
