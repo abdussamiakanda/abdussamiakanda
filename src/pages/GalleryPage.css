@@ -1,0 +1,205 @@
+.gallery-page-main {
+  background: linear-gradient(135deg, 
+    var(--bg-accent-light) 0%, 
+    var(--bg-dark) 20%, 
+    rgba(215, 192, 151, 0.3) 40%,
+    var(--bg-dark) 60%,
+    rgba(231, 222, 175, 0.15) 80%,
+    var(--bg-dark) 100%
+  );
+  background-size: 200% 200%;
+  animation: gradientMove 25s ease infinite;
+  position: relative;
+  min-height: 100vh;
+}
+
+.gallery-page-main::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(215, 192, 151, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(231, 222, 175, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(206, 126, 90, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.gallery-page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  padding-top: 6rem;
+  position: relative;
+  z-index: 1;
+}
+
+.back-link {
+  display: block !important;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 500;
+  position: relative;
+  padding: 0.5rem 0;
+  width: fit-content;
+  clear: both;
+}
+
+.back-link::before {
+  content: '←';
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-block;
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+.back-link:hover {
+  color: var(--text-primary);
+  transform: translateX(-8px);
+}
+
+.back-link:hover::before {
+  transform: translateX(-6px);
+}
+
+.gallery-page-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-color) 0%, var(--btn-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(215, 192, 151, 0.15);
+  letter-spacing: -0.01em;
+  position: relative;
+  display: inline-block;
+  text-transform: none;
+}
+
+.gallery-page-title::before {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-color), var(--btn-accent));
+  border-radius: 2px;
+}
+
+.empty-message {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+.gallery-page-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.gallery-page-item {
+  background: var(--bg-card);
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: none;
+  border: 1px solid rgba(215, 192, 151, 0.25);
+  border-left: 3px solid var(--accent-color);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.gallery-page-item:hover {
+  border-left-width: 4px;
+  box-shadow: -4px 0 0 var(--accent-color), 0 2px 8px rgba(215, 192, 151, 0.15);
+  transform: translateX(4px);
+  background: var(--bg-card);
+}
+
+.gallery-page-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.gallery-page-image-wrapper {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.1);
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gallery-page-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: var(--transition);
+}
+
+.gallery-page-item:hover .gallery-page-image-wrapper img {
+  transform: scale(1.05);
+}
+
+.gallery-placeholder {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(215, 192, 151, 0.1);
+  color: var(--text-secondary);
+  padding: 2rem;
+  text-align: center;
+}
+
+.gallery-page-title-text {
+  padding: 1.25rem;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .gallery-page-container {
+    padding: 2rem 1rem;
+    padding-top: 6rem; /* Account for fixed header on mobile */
+  }
+
+  .back-link {
+    position: relative;
+    z-index: 1;
+  }
+
+  .gallery-page-title {
+    font-size: 2rem;
+  }
+
+  .gallery-page-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+}
+

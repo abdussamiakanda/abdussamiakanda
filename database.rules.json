@@ -1,0 +1,43 @@
+{
+  "rules": {
+    "website": {
+      ".read": true,
+      ".write": "auth != null",
+      "research": {
+        ".indexOn": ["startDate"],
+        "publications": {
+          ".indexOn": ["createdAt"]
+        },
+        "speeches": {
+          ".indexOn": ["date", "createdAt"]
+        },
+        "notes": {
+          ".indexOn": ["createdAt"]
+        }
+      },
+      "teaching": {
+        ".indexOn": ["startDate"],
+        "courses": {
+          ".indexOn": ["createdAt"]
+        }
+      },
+      "education": {
+        ".indexOn": ["startDate"]
+      },
+      "skills": {
+        ".indexOn": ["name"]
+      },
+      "activities": {
+        ".indexOn": ["startDate"]
+      },
+      "awards": {
+        ".indexOn": ["date"]
+      },
+      "personal": {
+        "projects": {
+          ".indexOn": ["startDate", "date"]
+        }
+      }
+    }
+  }
+}

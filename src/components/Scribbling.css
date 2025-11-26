@@ -1,0 +1,134 @@
+.scribbling-entries {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .scribbling-entries {
+    grid-template-columns: 1fr;
+  }
+}
+
+.scribbling-entry {
+  padding: 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid rgba(215, 192, 151, 0.25);
+  border-radius: 0;
+  border-left: 3px solid var(--accent-color);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: none;
+  position: relative;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.scribbling-entry:hover {
+  border-left-color: var(--accent-color);
+  border-left-width: 4px;
+  box-shadow: -4px 0 0 var(--accent-color), 0 2px 8px rgba(215, 192, 151, 0.15);
+  transform: translateX(4px);
+  background: var(--bg-card);
+}
+
+.scribbling-entry-title-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.scribbling-entry-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.scribbling-entry-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.scribbling-entry-tag {
+  font-size: 0.75rem;
+  color: var(--accent-color);
+  padding: 0.25rem 0.75rem;
+  background: rgba(215, 192, 151, 0.15);
+  border: 1px solid rgba(215, 192, 151, 0.3);
+  border-radius: 12px;
+  text-transform: capitalize;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.scribbling-entry-date {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+.scribbling-entry-description {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  flex: 1;
+}
+
+.scribbling-entry-link-text {
+  color: var(--accent-color);
+  font-weight: 500;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.scribbling-entry:hover .scribbling-entry-link-text {
+  color: var(--accent-color);
+  opacity: 0.8;
+}
+
+.loading-tags {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 2rem;
+}
+
+.scribbling-view-all {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.scribbling-view-all-link {
+  color: var(--secondary-color);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid transparent;
+  display: inline-block;
+}
+
+.scribbling-view-all-link:hover {
+  color: var(--primary-color);
+  border-bottom-color: var(--secondary-color);
+  transform: translateX(5px);
+}
+

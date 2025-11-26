@@ -1,0 +1,221 @@
+.research-list {
+  display: grid;
+  gap: 2rem;
+}
+
+.research-item {
+  background: var(--bg-card);
+  padding: 1.5rem;
+  border-radius: 0;
+  box-shadow: none;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-left: 3px solid var(--text-primary);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: visible;
+  animation: slideUp 0.4s ease-out backwards;
+}
+
+.research-item:nth-child(1) { animation-delay: 0.05s; }
+.research-item:nth-child(2) { animation-delay: 0.1s; }
+.research-item:nth-child(3) { animation-delay: 0.15s; }
+.research-item:nth-child(n+4) { animation-delay: 0.2s; }
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.research-item:hover {
+  border-left-color: var(--text-primary);
+  border-left-width: 4px;
+  box-shadow: -4px 0 0 var(--text-primary), 0 2px 8px rgba(0, 0, 0, 0.08);
+  transform: translateX(4px);
+  background: var(--bg-card);
+}
+
+.research-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.research-institution {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.research-role {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  font-weight: 600;
+  background: transparent;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.research-item:hover .research-role {
+  border-color: var(--text-primary);
+  background: var(--text-primary);
+  color: var(--bg-card);
+}
+
+.research-dates {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 1.25rem;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.research-description {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  opacity: 0.85;
+  font-style: italic;
+}
+
+.research-links {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.research-link {
+  color: var(--text-primary);
+  font-weight: 500;
+  padding: 0.4rem 0.8rem;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.research-link:hover {
+  background: var(--text-primary);
+  border-color: var(--text-primary);
+  color: var(--bg-card);
+}
+
+.research-metadata {
+  margin-top: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.research-works {
+  margin-bottom: 2rem;
+}
+
+.research-profiles {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.research-metadata-label {
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.75rem;
+}
+
+.research-works-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.research-works-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  padding: 0.4rem 0.8rem;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.research-works-link:hover {
+  color: var(--bg-card);
+  background: var(--text-primary);
+  border-color: var(--text-primary);
+  transform: translateX(2px);
+}
+
+.research-works-link .arrow {
+  transition: var(--transition);
+}
+
+.research-works-link:hover .arrow {
+  transform: translateX(5px);
+}
+
+.research-profiles-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin-bottom: 0.75rem;
+}
+
+.profile-separator {
+  color: var(--text-secondary);
+  margin: 0 0.25rem;
+}
+
+.research-profile-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid transparent;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.research-profile-link:hover {
+  color: var(--text-primary);
+  border-bottom-color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+  .research-item {
+    padding: 1.25rem;
+  }
+
+  .research-header {
+    flex-direction: column;
+  }
+
+  .research-institution {
+    font-size: 1.5rem;
+  }
+}

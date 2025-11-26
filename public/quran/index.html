@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="visibility" content="visible">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Qur'an</title>
+    
+    <!-- Fonts -->
+    <meta property="og:image" content="./../assets/image/quran.png"/>
+    <link rel="shortcut icon" href="./../assets/image/quran.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./../assets/css/quran.css">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="logo">QUR'AN</div>
+                <div class="search-box hide" id="searchBox">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search..." id="searchInput">
+                </div>
+            </div>
+            <div class="nav-right">
+                <!-- Write button hidden by default -->
+                <button class="write-btn hide" onclick="showEditor()">
+                    <i class="fas fa-pen"></i> Write
+                </button>
+                
+                <!-- User menu hidden by default -->
+                <div class="user-menu hide" id="userMenu">
+                    <img src="" alt="Profile" id="userAvatar">
+                    <div class="user-menu-dropdown">
+                        <div class="user-info">
+                            <div class="user-name" id="userName"></div>
+                            <div class="user-email" id="userEmail"></div>
+                        </div>
+                        <button class="logout-btn" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Login button visible by default -->
+                <button class="login-btn" id="loginBtn" onclick="GoogleLogin()">
+                    <i class="fab fa-google"></i> Sign in with Google
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Login View -->
+        <div class="login-view" id="loginView">
+            <h1>Welcome to My Qur'an Study</h1>
+            <p>
+              “And those who strive in Our (cause),<br>
+              We will certainly guide them to our Paths:<br>
+              For verily Allah is with those who do right” [Quran, 29:69]
+            </p>
+            <button class="login-btn-large" onclick="GoogleLogin()">
+                <i class="fab fa-google"></i>
+                Sign in with Google
+            </button>
+        </div>
+
+        <!-- Posts List -->
+        <div class="posts-view hide" id="postsView">
+            <div class="posts-container" id="postsContainer">
+                <!-- Posts will be dynamically added here -->
+            </div>
+        </div>
+
+        <!-- Editor View -->
+        <div class="editor-view hide" id="editorView">
+            <div class="editor-container">
+                <input type="text" class="editor-title" placeholder="Title" id="postTitle">
+                <input type="text" class="editor-tags" placeholder="Add tags (comma separated)" id="postTags">
+                <div class="editor-content" contenteditable="true" id="postContent" 
+                     data-placeholder="Tell your story..."></div>
+                <div class="editor-footer">
+                    <div class="editor-footer-content">
+                        <div class="editor-footer-left">
+                            <button class="cancel-btn" onclick="cancelEdit()">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
+                        </div>
+                        <div class="editor-footer-right">
+                            <select id="postVisibility" class="visibility-select">
+                                <option value="private">Private</option>
+                                <option value="public">Public</option>
+                            </select>
+                            <button class="publish-btn" onclick="publishPost()">Publish</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="./../assets/js/quran.js"></script>
+</body>
+</html>

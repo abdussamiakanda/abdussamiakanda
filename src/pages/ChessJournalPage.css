@@ -1,0 +1,651 @@
+/* Prevent emoji rendering for chess pieces on mobile */
+.chess-journal-page-main *,
+.chess-journal-page-main {
+  font-variant-emoji: text;
+}
+
+.chess-journal-page-main {
+  background: linear-gradient(135deg, 
+    var(--bg-accent-light) 0%, 
+    var(--bg-dark) 20%, 
+    rgba(215, 192, 151, 0.3) 40%,
+    var(--bg-dark) 60%,
+    rgba(231, 222, 175, 0.15) 80%,
+    var(--bg-dark) 100%
+  );
+  background-size: 200% 200%;
+  animation: gradientMove 25s ease infinite;
+  position: relative;
+  min-height: 100vh;
+}
+
+.chess-journal-page-main::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(215, 192, 151, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(231, 222, 175, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(206, 126, 90, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.chess-journal-page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  padding-top: 6rem;
+  position: relative;
+  z-index: 1;
+}
+
+.back-link {
+  display: block !important;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 500;
+  position: relative;
+  padding: 0.5rem 0;
+  width: fit-content;
+  clear: both;
+}
+
+.back-link::before {
+  content: '←';
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-block;
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+.back-link:hover {
+  color: var(--text-primary);
+  transform: translateX(-8px);
+}
+
+.back-link:hover::before {
+  transform: translateX(-6px);
+}
+
+.chess-journal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+.chess-journal-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-color) 0%, var(--btn-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(215, 192, 151, 0.15);
+  letter-spacing: -0.01em;
+  position: relative;
+  display: inline-block;
+  text-transform: none;
+}
+
+.chess-journal-title::before {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-color), var(--btn-accent));
+  border-radius: 2px;
+}
+
+.add-entry-btn {
+  padding: 0.75rem 1.5rem;
+  background: var(--btn-primary);
+  border: 1px solid var(--btn-primary);
+  border-radius: 0;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-entry-btn:hover {
+  background: #b83d3d;
+  border-color: #b83d3d;
+  transform: translateY(-1px);
+}
+
+.empty-message {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  padding: 3rem 1rem;
+}
+
+.journal-header-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.journal-search-container {
+  flex: 1;
+  min-width: 250px;
+  max-width: 400px;
+}
+
+.journal-search-input {
+  width: 100%;
+  max-width: 500px;
+  padding: 0.875rem 1.25rem;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.journal-search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: none;
+  background: #ffffff;
+}
+
+.journal-search-input::placeholder {
+  color: var(--text-secondary);
+}
+
+.chess-journal-entries {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.notes-list {
+  align-items: stretch;
+}
+
+.notes-list > div {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.note-item-link {
+  height: 100%;
+  flex: 1;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.note-item {
+  background: var(--bg-card);
+  padding: 1.5rem;
+  border-radius: 0;
+  box-shadow: none;
+  border: 1px solid rgba(215, 192, 151, 0.25);
+  border-left: 3px solid var(--accent-color);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.note-item:hover,
+.note-item-link:hover {
+  border-left-color: var(--accent-color);
+  border-left-width: 4px;
+  box-shadow: -4px 0 0 var(--accent-color), 0 2px 8px rgba(215, 192, 151, 0.15);
+  transform: translateX(4px);
+  background: var(--bg-card);
+}
+
+.note-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.4;
+}
+
+.note-date {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  opacity: 0.9;
+  margin: 0 0 1rem 0;
+}
+
+.note-description {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+.note-link-text {
+  color: var(--accent-color);
+  font-weight: 500;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.note-item-link:hover .note-link-text {
+  color: var(--accent-color);
+  opacity: 0.8;
+}
+
+.chess-journal-entry {
+  background: var(--bg-card);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  padding: 2rem;
+  box-shadow: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.chess-journal-entry:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  gap: 1rem;
+}
+
+.entry-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  flex: 1;
+  letter-spacing: -0.01em;
+}
+
+.entry-date {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.delete-entry-btn {
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  color: var(--text-secondary);
+  font-size: 1.5rem;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.delete-entry-btn:hover {
+  background: var(--text-primary);
+  color: #ffffff;
+  border-color: var(--text-primary);
+}
+
+.entry-content {
+  color: var(--text-primary);
+  line-height: 1.7;
+}
+
+.entry-markdown {
+  margin-bottom: 1.5rem;
+}
+
+.entry-markdown:last-child {
+  margin-bottom: 0;
+}
+
+.entry-markdown p {
+  margin: 1rem 0;
+}
+
+.entry-markdown h1,
+.entry-markdown h2,
+.entry-markdown h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.entry-markdown code {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0;
+  font-size: 0.9em;
+  color: var(--text-primary);
+}
+
+.entry-markdown pre {
+  background: rgba(0, 0, 0, 0.02);
+  padding: 1rem;
+  border-radius: 0;
+  overflow-x: auto;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.entry-markdown pre code {
+  background: transparent;
+  padding: 0;
+  color: var(--text-primary);
+}
+
+/* Editor Modal */
+.editor-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.editor-modal {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  max-width: 700px;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.editor-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.editor-modal-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.close-editor-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 0;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.close-editor-btn:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--text-primary);
+}
+
+.close-editor-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.editor-modal-content {
+  padding: 1.5rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.editor-field {
+  margin-bottom: 1.5rem;
+}
+
+.editor-field label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.editor-field input,
+.editor-field textarea {
+  width: 100%;
+  padding: 0.75rem;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.editor-field input:focus,
+.editor-field textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: none;
+}
+
+.editor-field input:disabled,
+.editor-field textarea:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.editor-field textarea {
+  resize: vertical;
+  min-height: 200px;
+  font-family: 'Courier New', monospace;
+}
+
+.editor-hint {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.editor-hint code {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.15rem 0.3rem;
+  border-radius: 0;
+  font-size: 0.9em;
+  color: var(--text-primary);
+}
+
+.editor-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.cancel-btn,
+.save-btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.cancel-btn {
+  background: transparent;
+  border-color: rgba(0, 0, 0, 0.1);
+  color: var(--text-primary);
+}
+
+.cancel-btn:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.save-btn {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #ffffff;
+}
+
+.save-btn:hover:not(:disabled) {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+.cancel-btn:disabled,
+.save-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .chess-journal-page-container {
+    padding: 2rem 1rem;
+    padding-top: 6rem; /* Account for fixed header on mobile */
+  }
+
+  .back-link {
+    position: relative;
+    z-index: 1;
+  }
+
+  .chess-journal-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .chess-journal-title {
+    font-size: 2rem;
+  }
+
+  .note-item {
+    padding: 1.25rem;
+  }
+
+  .note-title {
+    font-size: 2rem;
+  }
+
+  .add-entry-btn {
+    width: 100%;
+  }
+
+  .journal-header-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .journal-search-container {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .journal-search-input {
+    max-width: 100%;
+  }
+
+  .chess-journal-entry {
+    padding: 1.5rem;
+  }
+
+  .entry-header {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .entry-title {
+    font-size: 1.5rem;
+  }
+
+  .editor-modal {
+    max-height: 95vh;
+  }
+
+  .editor-modal-content {
+    padding: 1rem;
+  }
+
+  .editor-modal-footer {
+    flex-direction: column-reverse;
+  }
+
+  .cancel-btn,
+  .save-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .chess-journal-page-container {
+    padding: 1.5rem 1rem;
+    padding-top: 6rem;
+  }
+
+  .chess-journal-title {
+    font-size: 1.75rem;
+  }
+
+  .note-item {
+    padding: 1rem;
+  }
+
+  .note-title {
+    font-size: 2rem;
+  }
+}
+

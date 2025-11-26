@@ -1,0 +1,160 @@
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import Header from '../components/Header';
+import SEO from '../components/SEO';
+import Footer from '../components/Footer';
+import { getPersonalProjects } from '../services/dataService';
+import './ProjectsPage.css';
+
+function ProjectsPage() {
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadProjects();
+  }, []);
+
+  const loadProjects = async () => {
+    setLoading(true);
+    try {
+      const data = await getPersonalProjects();
+      setProjects(data || []);
+    } catch (error) {
+      console.error('Error loading projects:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const formatDate = (timestamp) => {
+    if (!timestamp) return '';
+    const date = typeof timestamp === 'number' 
+      ? new Date(timestamp * 1000) 
+      : new Date(timestamp);
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  };
+
+  const areDatesSame = (date1, date2) => {
+    if (!date1 || !date2) return false;
+    const d1 = typeof date1 === 'number' ? new Date(date1 * 1000) : new Date(date1);
+    const d2 = typeof date2 === 'number' ? new Date(date2 * 1000) : new Date(date2);
+    return d1.toDateString() === d2.toDateString();
+  };
+
+  if (loading) {
+    return (
+      <div className="app">
+        <Header />
+        <div className="loading-container">
+          <div className="loader"></div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="app">
+      <SEO 
+        title="Projects"
+        description="Personal projects showcasing technical skills, development expertise, and creative solutions."
+        url="/projects"
+      />
+      <Header />
+      <main className="projects-page-main">
+        <div className="projects-page-container">
+          <Link to="/" className="back-link">Back to Home</Link>
+          <div style={{ clear: 'both' }}></div>
+          <h1 className="projects-page-title">Projects</h1>
+          
+          {projects.length === 0 ? (
+            <div className="empty-message">No projects available yet.</div>
+          ) : (
+            <div className="projects-list">
+              {projects.map((project) => (
+                <div key={project.id} className="project-item">
+                  <div className="project-header">
+                    <h3 className="project-title">{project.title}</h3>
+                    {(project.startDate || project.endDate) && (
+                      <span className="project-date">
+                        {project.startDate && project.endDate && areDatesSame(project.startDate, project.endDate) 
+                          ? formatDate(project.startDate)
+                          : (
+                            <>
+                              {project.startDate && formatDate(project.startDate)}
+                              {project.startDate && project.endDate ? ' - ' : ''}
+                              {project.endDate ? formatDate(project.endDate) : project.startDate ? ' (Ongoing)' : ''}
+                            </>
+                          )
+                        }
+                      </span>
+                    )}
+                  </div>
+                  
+                  {project.description && (
+                    <p className="project-description">{project.description}</p>
+                  )}
+                  
+                  {project.technologies && project.technologies.length > 0 && (
+                    <div className="project-technologies">
+                      {project.technologies.map((tech, index) => (
+                        <span key={index} className="tech-tag">{tech}</span>
+                      ))}
+                    </div>
+                  )}
+                  
+                  <div className="project-links">
+                    {project.website && (
+                      <a 
+                        href={project.website} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="project-link"
+                      >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                          <polyline points="15 3 21 3 21 9"></polyline>
+                          <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                        Website
+                      </a>
+                    )}
+                    {project.demo && (
+                      <a 
+                        href={`/demo/${project.demo}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-link"
+                      >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                        Demo
+                      </a>
+                    )}
+                    {project.github && (
+                      <a 
+                        href={project.github} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="project-link"
+                      >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                        </svg>
+                        GitHub
+                      </a>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </main>
+      <Footer />
+    </div>
+  );
+}
+
+export default ProjectsPage;
+

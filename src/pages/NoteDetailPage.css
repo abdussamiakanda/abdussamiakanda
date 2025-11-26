@@ -1,0 +1,452 @@
+.note-detail-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  padding-top: 6rem;
+  background: linear-gradient(135deg, 
+    var(--bg-accent-light) 0%, 
+    var(--bg-dark) 20%, 
+    rgba(215, 192, 151, 0.3) 40%,
+    var(--bg-dark) 60%,
+    rgba(231, 222, 175, 0.15) 80%,
+    var(--bg-dark) 100%
+  );
+  background-size: 200% 200%;
+  animation: gradientMove 25s ease infinite;
+  position: relative;
+  min-height: 100vh;
+}
+
+.note-detail-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(215, 192, 151, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(231, 222, 175, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(206, 126, 90, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.note-detail-container > * {
+  position: relative;
+  z-index: 1;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 500;
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+.back-link::before {
+  content: '←';
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-block;
+  font-weight: 600;
+}
+
+.back-link:hover {
+  color: var(--text-primary);
+  transform: translateX(-8px);
+}
+
+.back-link:hover::before {
+  transform: translateX(-6px);
+}
+
+.note-content {
+  background: var(--bg-card);
+  padding: 3rem;
+  border-radius: 0;
+  box-shadow: none;
+  border: 1px solid rgba(215, 192, 151, 0.25);
+  border-left: 3px solid var(--accent-color);
+}
+
+.note-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.note-title-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.note-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.note-tag {
+  font-size: 0.75rem;
+  color: var(--accent-color);
+  padding: 0.25rem 0.75rem;
+  background: rgba(215, 192, 151, 0.15);
+  border: 1px solid rgba(215, 192, 151, 0.3);
+  border-radius: 12px;
+  text-transform: capitalize;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.hobby-emoji {
+  font-size: 3rem;
+  line-height: 1;
+  margin-right: 0.75rem;
+  display: inline;
+  vertical-align: middle;
+}
+
+.note-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.note-date {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.note-date-icon {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.note-author {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.note-author-icon {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.note-description {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  font-style: italic;
+}
+
+.note-description p {
+  margin-bottom: 1rem;
+}
+
+.note-description p:last-child {
+  margin-bottom: 0;
+}
+
+.note-markdown {
+  color: var(--text-primary);
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+.note-markdown h1,
+.note-markdown h2,
+.note-markdown h3,
+.note-markdown h4,
+.note-markdown h5,
+.note-markdown h6 {
+  color: var(--text-primary);
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  letter-spacing: -0.01em;
+}
+
+.note-markdown h1 {
+  font-size: 2rem;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.15);
+  padding-bottom: 0.5rem;
+}
+
+.note-markdown h2 {
+  font-size: 1.75rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 0.4rem;
+}
+
+.note-markdown h3 {
+  font-size: 1.5rem;
+}
+
+.note-markdown p {
+  margin-bottom: 1.5rem;
+}
+
+.note-markdown ul,
+.note-markdown ol {
+  margin-bottom: 1.5rem;
+  padding-left: 2rem;
+}
+
+.note-markdown li {
+  margin-bottom: 0.5rem;
+}
+
+.note-markdown code {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+  color: var(--text-primary);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.note-markdown pre {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  border-radius: 0;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: 3px solid var(--text-primary);
+}
+
+.note-markdown pre code {
+  background: none;
+  padding: 0;
+  border: none;
+  color: var(--text-primary);
+}
+
+.note-markdown hr {
+  border: none;
+  border-top: 2px solid rgba(0, 0, 0, 0.15);
+  margin: 2.5rem 0;
+  position: relative;
+}
+
+.note-markdown hr::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 2px;
+  background: var(--text-primary);
+}
+
+.note-markdown blockquote {
+  border-left: 3px solid var(--text-primary);
+  padding-left: 1.5rem;
+  margin-left: 0;
+  margin-bottom: 1.5rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.note-markdown a {
+  color: var(--text-primary);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.note-markdown a:hover {
+  color: var(--text-primary);
+  border-bottom-color: var(--text-primary);
+  opacity: 0.7;
+}
+
+.note-markdown img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
+
+.note-markdown table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+.note-markdown th,
+.note-markdown td {
+  padding: 0.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.note-markdown th {
+  background: rgba(0, 0, 0, 0.05);
+  font-weight: 600;
+}
+
+/* LaTeX styling */
+.note-markdown .katex {
+  font-size: 1.1em;
+}
+
+.note-markdown .katex-display {
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.note-external-link,
+.note-external-links {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.note-external-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.external-link {
+  color: var(--text-primary);
+  font-weight: 500;
+  padding: 0.4rem 0.8rem;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.external-link:hover {
+  background: var(--text-primary);
+  border-color: var(--text-primary);
+  color: var(--bg-card);
+}
+
+.external-link-icon {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.external-link:hover .external-link-icon {
+  opacity: 1;
+  transform: translate(2px, -2px);
+}
+
+.note-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  gap: 2rem;
+}
+
+.nav-link {
+  flex: 1;
+  padding: 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-left: 3px solid var(--text-primary);
+  border-radius: 0;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+  overflow: visible;
+}
+
+.nav-link:hover {
+  border-left-width: 4px;
+  box-shadow: -4px 0 0 var(--text-primary), 0 2px 8px rgba(0, 0, 0, 0.08);
+  transform: translateX(4px);
+  background: var(--bg-card);
+}
+
+.nav-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.nav-title {
+  font-size: 1rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.nav-next {
+  text-align: right;
+}
+
+.error-message {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .note-detail-container {
+    padding: 2rem 1rem;
+    padding-top: 6rem; /* Account for fixed header on mobile */
+  }
+
+  .back-link {
+    position: relative;
+    z-index: 1;
+  }
+
+  .note-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .note-title {
+    font-size: 2rem;
+  }
+
+  .note-navigation {
+    flex-direction: column;
+  }
+
+  .nav-link {
+    text-align: left !important;
+  }
+}
+

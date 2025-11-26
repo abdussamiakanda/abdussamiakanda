@@ -1,0 +1,120 @@
+.subsection {
+  margin-bottom: 4rem;
+}
+
+.subsection:last-child {
+  margin-bottom: 0;
+}
+
+.subsection-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 2.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  letter-spacing: -0.01em;
+  position: relative;
+  display: inline-block;
+  animation: fadeInLeft 0.8s ease-out;
+  text-transform: none;
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.subsection-title::before {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: var(--text-primary);
+  border-radius: 1px;
+}
+
+/* Developer section subsection styles */
+.section-wrapper.developer .subsection-title {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  border-bottom-color: rgba(0, 126, 110, 0.15);
+}
+
+.section-wrapper.developer .subsection-title::before {
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  width: 80px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+/* Personal section subsection styles */
+.section-wrapper.personal .subsection-title {
+  background: linear-gradient(135deg, var(--accent-color) 0%, var(--btn-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  border-bottom-color: rgba(215, 192, 151, 0.15);
+}
+
+.section-wrapper.personal .subsection-title::before {
+  background: linear-gradient(90deg, var(--accent-color), var(--btn-accent));
+  width: 80px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+@keyframes expandLine {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes shimmer-line {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+
+.subsection-content {
+  /* Content styles handled by child components */
+}
+
+.empty-message {
+  color: var(--text-secondary);
+  font-style: italic;
+  text-align: center;
+  padding: 3rem;
+  opacity: 0.6;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+@media (max-width: 768px) {
+  .subsection {
+    margin-bottom: 3rem;
+  }
+
+  .subsection-title {
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+    letter-spacing: 1px;
+  }
+}

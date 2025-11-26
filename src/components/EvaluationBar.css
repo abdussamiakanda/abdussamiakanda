@@ -1,0 +1,125 @@
+.evaluation-bar-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 32px;
+  max-width: 32px;
+  align-self: center;
+  height: 100%;
+}
+
+.evaluation-bar-bar {
+  position: relative;
+  width: 32px;
+  height: 100%;
+  min-height: 400px;
+  background: rgba(60, 60, 60, 0.8);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.evaluation-bar-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 0 0 4px 4px;
+  transition: height 0.3s ease;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 0.5rem;
+}
+
+.evaluation-bar-fill.evaluation-bar-fill-top {
+  bottom: auto;
+  top: 0;
+  border-radius: 4px 4px 0 0;
+  align-items: flex-start;
+  padding-bottom: 0;
+  padding-top: 0.5rem;
+}
+
+.evaluation-bar-score {
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.evaluation-bar-score-loading {
+  animation: evaluation-bar-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes evaluation-bar-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.evaluation-bar-score-on-white {
+  color: rgba(0, 0, 0, 0.9);
+  text-shadow: 
+    0 0 4px rgba(255, 255, 255, 0.8),
+    0 0 8px rgba(255, 255, 255, 0.6),
+    0 1px 2px rgba(255, 255, 255, 0.9);
+  mix-blend-mode: normal;
+}
+
+.evaluation-bar-score-on-dark {
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 
+    0 0 4px rgba(0, 0, 0, 0.9),
+    0 0 8px rgba(0, 0, 0, 0.7),
+    0 1px 2px rgba(0, 0, 0, 0.95),
+    0 -1px 2px rgba(0, 0, 0, 0.95),
+    1px 0 2px rgba(0, 0, 0, 0.95),
+    -1px 0 2px rgba(0, 0, 0, 0.95);
+  mix-blend-mode: normal;
+}
+
+.evaluation-bar-fill-default .evaluation-bar-score {
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 
+    0 0 4px rgba(0, 0, 0, 0.9),
+    0 0 8px rgba(0, 0, 0, 0.7),
+    0 1px 2px rgba(0, 0, 0, 0.95),
+    0 -1px 2px rgba(0, 0, 0, 0.95),
+    1px 0 2px rgba(0, 0, 0, 0.95),
+    -1px 0 2px rgba(0, 0, 0, 0.95);
+}
+
+@media (max-width: 768px) {
+  .evaluation-bar-container {
+    min-height: 300px;
+  }
+  
+  .evaluation-bar-bar {
+    width: 28px;
+    min-height: 300px;
+  }
+
+  .evaluation-bar-score {
+    font-size: 0.7rem;
+    padding-bottom: 0.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .evaluation-bar-container {
+    min-height: 250px;
+  }
+  
+  .evaluation-bar-bar {
+    width: 24px;
+    min-height: 250px;
+  }
+
+  .evaluation-bar-score {
+    font-size: 0.65rem;
+    padding-bottom: 0.3rem;
+  }
+}

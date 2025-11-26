@@ -1,0 +1,73 @@
+.curations-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.curations-tag {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(215, 192, 151, 0.3);
+  border-radius: 16px;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.125rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.curations-tag::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--accent-color), var(--btn-accent));
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.curations-tag::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.curations-tag:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 8px 30px rgba(215, 192, 151, 0.2),
+    0 2px 8px rgba(215, 192, 151, 0.1);
+  border-color: var(--accent-color);
+  background: linear-gradient(135deg, var(--bg-card) 0%, rgba(231, 222, 175, 0.15) 100%);
+}
+
+.curations-tag:hover::before {
+  opacity: 1;
+  width: 4px;
+}
+
+.curations-tag:hover::after {
+  opacity: 1;
+  height: 2px;
+}
+
+.loading-tags {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 2rem;
+}
+

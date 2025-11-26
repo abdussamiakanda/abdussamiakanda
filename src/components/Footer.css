@@ -1,0 +1,236 @@
+.footer {
+  background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 4rem 0 2rem;
+  margin-top: 6rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--primary-color) 50%, 
+    transparent 100%
+  );
+  opacity: 0.6;
+  animation: glow-scan 3s ease-in-out infinite;
+}
+
+@keyframes glow-scan {
+  0%, 100% {
+    opacity: 0.3;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.footer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 30% 0%, rgba(0, 0, 0, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 70% 100%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+  animation: pulse-footer 8s ease-in-out infinite;
+}
+
+@keyframes pulse-footer {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-social {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 900px;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  padding: 0.875rem 1.5rem;
+  border-radius: 12px;
+  transition: var(--transition-smooth);
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  position: relative;
+  overflow: hidden;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.social-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(0, 0, 0, 0.1), 
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.social-link:hover::before {
+  left: 100%;
+}
+
+.social-link:hover {
+  transform: translateY(-3px) scale(1.05);
+  background: var(--bg-card);
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-glow);
+  color: var(--text-primary);
+}
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  min-width: 1.5rem;
+  min-height: 1.5rem;
+  color: var(--primary-color);
+  flex-shrink: 0;
+  transition: var(--transition-smooth);
+  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.3));
+}
+
+.social-link:hover .social-icon {
+  color: var(--primary-light);
+  transform: scale(1.15) rotate(5deg);
+  filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.6));
+}
+
+.social-icon svg {
+  width: 1.3rem;
+  height: 1.3rem;
+  display: block;
+}
+
+.social-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.9;
+}
+
+.social-link:hover .social-label {
+  opacity: 1;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.footer-copyright {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  text-align: center;
+  margin: 0;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  opacity: 0.7;
+  position: relative;
+}
+
+.footer-copyright::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    var(--primary-color) 50%, 
+    transparent
+  );
+  opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 3rem 0 1.5rem;
+    margin-top: 4rem;
+  }
+
+  .footer-content {
+    padding: 0 1rem;
+    gap: 2rem;
+  }
+
+  .footer-social {
+    gap: 1rem;
+  }
+
+  .social-link {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.8125rem;
+    border-radius: 10px;
+  }
+
+  .social-icon {
+    font-size: 1.1rem;
+    min-width: 1.25rem;
+    min-height: 1.25rem;
+  }
+
+  .social-icon svg {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .social-label {
+    font-size: 0.75rem;
+  }
+
+  .footer-copyright {
+    font-size: 0.75rem;
+    padding-top: 1.5rem;
+  }
+}
