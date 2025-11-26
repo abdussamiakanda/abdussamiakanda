@@ -3,12 +3,8 @@
 </h1>
 
 <h4 align="center">
-  Researcher • Physicist • Web Developer • Programmer • Teacher • Guitarist
+  Researcher • Physicist • Web Developer • Programmer • Hobbyist
 </h4>
-
-<p align="center">
-  <em>I am a Researcher, Student, Learner, Physicist, Web Developer, Programmer, Teacher, Guitarist, Bookworm, Back-Bencher.</em>
-</p>
 
 <p align="center">
   <img src="https://komarev.com/ghpvc/?username=abdussamiakanda&label=Profile%20Views&color=blue&style=plastic" alt="Sami's profile views" />
@@ -18,28 +14,25 @@
 
 <p align="center">
   <a href="https://abdussamiakanda.com">
-    <img src="https://img.shields.io/badge/Website-abdussamiakanda.com-0b7285?style=for-the-badge" />
+    <img src="https://img.shields.io/badge/Website-0b7285?style=for-the-badge" />
   </a>
   <a href="https://github.com/abdussamiakanda">
-    <img src="https://img.shields.io/badge/GitHub-abdussamiakanda-24292e?style=for-the-badge&logo=github&logoColor=white" />
+    <img src="https://img.shields.io/badge/GitHub-24292e?style=for-the-badge&logo=github&logoColor=white" />
   </a>
-  <!-- Add your real profiles later if you want
-  <a href="https://www.linkedin.com/in/your-linkedin">
+  <a href="https://www.linkedin.com/in/abdussamiakanda">
     <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />
   </a>
-  <a href="https://twitter.com/your-twitter">
-    <img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" />
+  <a href="https://researchgate.net/profile/Md-Abdus-Sami-Akanda-2">
+    <img src="https://img.shields.io/badge/Researchgate-00BD9D?style=for-the-badge&logo=twitter&logoColor=white" />
   </a>
-  -->
 </p>
 
 ---
 
 ### 🧑‍🔬 About Me
 
-- 🔭 I’m currently working on **Spintronics** research and simulations.
+- 🔭 I’m currently working on several react projects, while trying to learn it.
 - 🧪 I love building tools around **theoretical & computational physics**.
-- 🌱 I’m learning more about **advanced physics**, **web development**, and **programming best practices**.
 - 👯 I’m looking to collaborate on **fun web projects**, especially around **research tools** and **chess**.
 - 💬 Ask me about **physics**, **research workflows**, or **science + web dev**.
 - 🎧 Fun fact: I love listening to **Rabindra Sangeet**.
@@ -62,7 +55,7 @@
   <img src="https://img.shields.io/badge/HTML5-05122A?style=flat&logo=html5" />
   <img src="https://img.shields.io/badge/CSS3-05122A?style=flat&logo=css3" />
   <img src="https://img.shields.io/badge/React-05122A?style=flat&logo=react" />
-  <img src="https://img.shields.io/badge/Next.js-05122A?style=flat&logo=nextdotjs" />
+  <!-- <img src="https://img.shields.io/badge/Next.js-05122A?style=flat&logo=nextdotjs" /> -->
   <img src="https://img.shields.io/badge/TailwindCSS-05122A?style=flat&logo=tailwindcss" />
 
   <!-- Backend / Tools -->
@@ -96,9 +89,8 @@
 
 ### 🔭 What's Going On Recently...
 
-- 🧲 Working on **Spintronics** and related simulations.
-- 💻 Building and maintaining **web tools** for research, learning, and community projects.
-- 🌱 Deepening my understanding of **quantum mechanics**, **computational methods**, and **modern web frameworks**.
+- 💻 Building and maintaining **chess community hub** for Bangladeshi chess players.
+- 🌱 Deepening my understanding of **modern web frameworks**.
 - 👯 Open to collaborating on:
   - Physics / research-related web apps
   - Learning tools for students
@@ -115,7 +107,5 @@
 <p>
   • Website: <a href="https://abdussamiakanda.com">abdussamiakanda.com</a><br/>
   • GitHub: <a href="https://github.com/abdussamiakanda">@abdussamiakanda</a><br/>
-  <!-- Add your email / other socials if you want
-  • Email: <a href="mailto:you@example.com">you@example.com</a><br/>
-  -->
+  • Email: <a href="mailto:abdussamiakanda@gmail.com">abdussamiakanda@gmail.com</a><br/>
 </p>
