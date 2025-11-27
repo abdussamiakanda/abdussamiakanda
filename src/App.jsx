@@ -11,6 +11,7 @@ import NoteDetailPage from './pages/NoteDetailPage';
 import PostsPage from './pages/PostsPage';
 import PostDetailPage from './pages/PostDetailPage';
 import ProjectsPage from './pages/ProjectsPage';
+import CaseStudyPage from './pages/CaseStudyPage';
 import GalleryPage from './pages/GalleryPage';
 import HobbiesPage from './pages/HobbiesPage';
 import ChessPage from './pages/ChessPage';
@@ -40,6 +41,7 @@ function App() {
         <Route path="/posts" element={<PostsPage />} />
         <Route path="/posts/:slug" element={<PostDetailPage />} />
         <Route path="/projects" element={<ProjectsPage />} />
+        <Route path="/projects/case/:slug" element={<CaseStudyPage />} />
         <Route path="/gallery" element={<GalleryPage />} />
         <Route path="/hobbies" element={<HobbiesPage />} />
         <Route path="/hobbies/chess" element={<ChessPage />} />

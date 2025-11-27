@@ -74,7 +74,7 @@ function Header() {
   };
 
   return (
-    <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
+    <header className={`header ${isScrolled ? 'scrolled' : ''} ${activeSection ? `section-${activeSection}` : ''}`}>
       <nav className="nav">
         <div className="nav-brand" onClick={() => navigate('/')}>
           <span className="brand-name">MASA</span>

@@ -298,6 +298,18 @@
   box-shadow: 0 4px 12px rgba(0, 126, 110, 0.3);
 }
 
+.project-link-case-study {
+  background: transparent;
+  border-color: var(--btn-primary);
+  color: var(--btn-primary);
+  font-weight: 600;
+}
+
+.project-link-case-study:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(211, 78, 78, 0.3);
+}
+
 @media (max-width: 768px) {
   .projects-page-container {
     padding: 2rem 1rem;

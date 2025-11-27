@@ -10,6 +10,7 @@ function PersonalProjectsEditor() {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
+    overview: '',
     technologies: [],
     startDate: '',
     endDate: '',
@@ -67,6 +68,7 @@ function PersonalProjectsEditor() {
       const dataToSave = {
         title: formData.title.trim(),
         description: formData.description.trim() || null,
+        overview: formData.overview.trim() || null,
         technologies: Array.isArray(formData.technologies) ? formData.technologies.filter(t => t.trim() !== '') : [],
         startDate: formData.startDate || null,
         endDate: formData.endDate || null,
@@ -98,6 +100,7 @@ function PersonalProjectsEditor() {
     setFormData({
       title: item.title || '',
       description: item.description || '',
+      overview: item.overview || '',
       technologies: item.technologies || [],
       startDate: timestampToDateString(item.startDate),
       endDate: timestampToDateString(item.endDate),
@@ -124,6 +127,7 @@ function PersonalProjectsEditor() {
     setFormData({
       title: '',
       description: '',
+      overview: '',
       technologies: [],
       startDate: '',
       endDate: '',
@@ -264,7 +268,21 @@ function PersonalProjectsEditor() {
             value={formData.description}
             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
             rows="4"
+            placeholder="Short description of the project"
           />
+        </div>
+        <div className="form-group">
+          <label>Case Study Overview (Markdown)</label>
+          <textarea
+            value={formData.overview}
+            onChange={(e) => setFormData({ ...formData, overview: e.target.value })}
+            rows="12"
+            placeholder="Write a detailed case study in Markdown format. This will be displayed on the case study page. Leave empty if this project doesn't have a case study."
+            style={{ fontFamily: 'monospace', fontSize: '0.9rem' }}
+          />
+          <small style={{ color: 'var(--text-secondary)', display: 'block', marginTop: '0.5rem' }}>
+            Projects with overview content will have a case study page accessible at /projects/case/[project-name]
+          </small>
         </div>
         <div className="form-row">
           <div className="form-group">
@@ -376,7 +394,19 @@ function PersonalProjectsEditor() {
                 onDragStart={(e) => handleDragStart(e, index)}
                 onDragEnd={handleDragEnd}
               >☰</span>
-              <h4>{item.title}</h4>
+              <h4>
+                {item.title}
+                {item.overview && (
+                  <span style={{ 
+                    marginLeft: '0.5rem', 
+                    fontSize: '0.75rem', 
+                    color: 'var(--primary-color)',
+                    fontWeight: 'normal'
+                  }}>
+                    (Case Study)
+                  </span>
+                )}
+              </h4>
               <div className="item-actions">
                 <button onClick={() => handleEdit(item)} className="btn btn-small">Edit</button>
                 <button onClick={() => handleDelete(item.id)} className="btn btn-small btn-danger">Delete</button>

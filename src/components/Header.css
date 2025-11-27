@@ -5,7 +5,7 @@
   right: 0;
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(30px) saturate(180%);
-  border-bottom: 1px solid rgba(0, 126, 110, 0.08);
+  border-bottom: 1px solid rgba(211, 78, 78, 0.15);
   z-index: 1000;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
@@ -14,7 +14,7 @@
 .header.scrolled {
   background: rgba(255, 255, 255, 0.95);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  border-bottom-color: rgba(0, 126, 110, 0.15);
+  border-bottom-color: rgba(211, 78, 78, 0.25);
   padding: 0;
 }
 
@@ -36,7 +36,7 @@
 .nav-brand {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--btn-primary);
   letter-spacing: 0.05em;
   text-transform: uppercase;
   transition: all 0.3s ease;
@@ -44,7 +44,8 @@
 }
 
 .nav-brand:hover {
-  color: var(--primary-color);
+  color: var(--btn-primary);
+  opacity: 0.8;
   transform: translateY(-1px);
 }
 
@@ -60,7 +61,7 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--primary-color);
+  background: var(--btn-primary);
   transition: width 0.3s ease;
 }
 
@@ -103,7 +104,7 @@
   transform: translateX(-50%);
   width: 0;
   height: 2px;
-  background: var(--primary-color);
+  background: var(--btn-primary);
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 2px;
 }
@@ -115,14 +116,14 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 126, 110, 0.05);
+  background: rgba(211, 78, 78, 0.08);
   opacity: 0;
   transition: opacity 0.3s ease;
   border-radius: 6px;
 }
 
 .nav-menu button:hover {
-  color: var(--primary-color);
+  color: var(--btn-primary);
   transform: translateY(-1px);
 }
 
@@ -135,9 +136,9 @@
 }
 
 .nav-menu button.active {
-  color: var(--primary-color);
+  color: var(--btn-primary);
   font-weight: 600;
-  background: rgba(0, 126, 110, 0.08);
+  background: rgba(211, 78, 78, 0.12);
 }
 
 .nav-menu button.active::before {
@@ -216,4 +217,152 @@
     font-size: 1rem;
     padding: 0.35rem 0.65rem;
   }
+}
+
+/* Section-specific colors */
+/* Brand name always stays red */
+.header.section-about .nav-brand,
+.header.section-developer .nav-brand,
+.header.section-academic .nav-brand,
+.header.section-personal .nav-brand {
+  color: var(--btn-primary);
+}
+
+/* About section - red/coral */
+.header.section-about {
+  border-bottom-color: rgba(211, 78, 78, 0.15);
+}
+
+.header.section-about.scrolled {
+  border-bottom-color: rgba(211, 78, 78, 0.25);
+}
+
+.header.section-about .nav-brand:hover {
+  color: var(--btn-primary);
+}
+
+.header.section-about .brand-name::after {
+  background: var(--btn-primary);
+}
+
+.header.section-about .nav-menu button::before {
+  background: var(--btn-primary);
+}
+
+.header.section-about .nav-menu button::after {
+  background: rgba(211, 78, 78, 0.08);
+}
+
+.header.section-about .nav-menu button:hover {
+  color: var(--btn-primary);
+}
+
+.header.section-about .nav-menu button.active {
+  color: var(--btn-primary);
+  background: rgba(211, 78, 78, 0.12);
+}
+
+/* Developer section - primary/secondary gradient (teal/green) */
+.header.section-developer {
+  border-bottom-color: rgba(0, 126, 110, 0.15);
+}
+
+.header.section-developer.scrolled {
+  border-bottom-color: rgba(0, 126, 110, 0.25);
+}
+
+.header.section-developer .nav-brand:hover {
+  color: var(--btn-primary);
+  opacity: 0.8;
+}
+
+.header.section-developer .brand-name::after {
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+}
+
+.header.section-developer .nav-menu button::before {
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+}
+
+.header.section-developer .nav-menu button::after {
+  background: rgba(0, 126, 110, 0.08);
+}
+
+.header.section-developer .nav-menu button:hover {
+  color: var(--primary-color);
+}
+
+.header.section-developer .nav-menu button.active {
+  color: var(--primary-color);
+  background: linear-gradient(135deg, rgba(0, 126, 110, 0.12), rgba(115, 175, 111, 0.12));
+}
+
+/* Academic section - black and white */
+.header.section-academic {
+  border-bottom-color: rgba(0, 0, 0, 0.15);
+}
+
+.header.section-academic.scrolled {
+  border-bottom-color: rgba(0, 0, 0, 0.25);
+}
+
+.header.section-academic .nav-brand:hover {
+  color: var(--btn-primary);
+  opacity: 0.8;
+}
+
+.header.section-academic .brand-name::after {
+  background: var(--text-primary);
+}
+
+.header.section-academic .nav-menu button::before {
+  background: var(--text-primary);
+}
+
+.header.section-academic .nav-menu button::after {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.header.section-academic .nav-menu button:hover {
+  color: var(--text-primary);
+}
+
+.header.section-academic .nav-menu button.active {
+  color: var(--text-primary);
+  background: rgba(0, 0, 0, 0.12);
+}
+
+/* Personal section - accent colors (golden/beige) */
+.header.section-personal {
+  border-bottom-color: rgba(215, 192, 151, 0.15);
+}
+
+.header.section-personal.scrolled {
+  border-bottom-color: rgba(215, 192, 151, 0.25);
+}
+
+.header.section-personal .nav-brand:hover {
+  color: var(--btn-primary);
+  opacity: 0.8;
+}
+
+.header.section-personal .brand-name::after {
+  background: linear-gradient(90deg, var(--accent-color), var(--btn-accent));
+}
+
+.header.section-personal .nav-menu button::before {
+  background: linear-gradient(90deg, var(--accent-color), var(--btn-accent));
+}
+
+.header.section-personal .nav-menu button::after {
+  background: rgba(215, 192, 151, 0.08);
+}
+
+.header.section-personal .nav-menu button:hover {
+  color: var(--btn-accent);
+}
+
+.header.section-personal .nav-menu button.active {
+  color: var(--btn-accent);
+  background: linear-gradient(135deg, rgba(215, 192, 151, 0.12), rgba(206, 126, 90, 0.12));
 }

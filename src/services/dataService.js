@@ -979,17 +979,41 @@ export const getPersonalProjects = async () => {
         createdAt: data[id].createdAt || parseInt(id.slice(-13)) || 0
       }));
       items.sort((a, b) => {
-        if (a.order !== undefined && b.order !== undefined) {
+        // If order is set, respect manual ordering (but only if both have order or one has order)
+        // If order is explicitly set to null/undefined, ignore it and use date sorting
+        const aHasOrder = a.order !== undefined && a.order !== null;
+        const bHasOrder = b.order !== undefined && b.order !== null;
+        
+        if (aHasOrder && bHasOrder) {
           return a.order - b.order;
         }
-        if (a.order !== undefined) return -1;
-        if (b.order !== undefined) return 1;
-        if (a.createdAt !== b.createdAt) {
-          return b.createdAt - a.createdAt;
+        if (aHasOrder) return -1;
+        if (bHasOrder) return 1;
+        
+        // Otherwise, sort by: ongoing projects first (by startDate newest first), then finished projects (by endDate newest first)
+        // Ongoing = project without endDate (endDate is null/undefined/empty)
+        const aHasEndDate = a.endDate != null && a.endDate !== '' && a.endDate !== 0;
+        const bHasEndDate = b.endDate != null && b.endDate !== '' && b.endDate !== 0;
+        
+        // If both are ongoing (no endDate), sort by start date (newest first)
+        if (!aHasEndDate && !bHasEndDate) {
+          const aStartDate = a.startDate ? (typeof a.startDate === 'number' ? a.startDate : new Date(a.startDate).getTime() / 1000) : 0;
+          const bStartDate = b.startDate ? (typeof b.startDate === 'number' ? b.startDate : new Date(b.startDate).getTime() / 1000) : 0;
+          return bStartDate - aStartDate; // newest first (descending order)
         }
-        const aDate = a.date || a.startDate || 0;
-        const bDate = b.date || b.startDate || 0;
-        return bDate - aDate;
+        
+        // If only one is ongoing, ongoing project comes first
+        if (!aHasEndDate && bHasEndDate) {
+          return -1; // a is ongoing, b is finished - a comes first
+        }
+        if (aHasEndDate && !bHasEndDate) {
+          return 1; // a is finished, b is ongoing - b comes first
+        }
+        
+        // Both have end dates (both finished), sort by end date (newest first)
+        const aEndDate = typeof a.endDate === 'number' ? a.endDate : new Date(a.endDate).getTime() / 1000;
+        const bEndDate = typeof b.endDate === 'number' ? b.endDate : new Date(b.endDate).getTime() / 1000;
+        return bEndDate - aEndDate; // newest first
       });
       return items;
     }
