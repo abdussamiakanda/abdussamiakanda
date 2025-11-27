@@ -174,6 +174,21 @@
   box-shadow: 0 4px 12px rgba(0, 126, 110, 0.3);
 }
 
+.project-link-case-study {
+  background: var(--btn-primary);
+  border-color: var(--btn-primary);
+  color: white;
+  font-weight: 600;
+}
+
+.project-link-case-study:hover {
+  background: transparent;
+  border-color: var(--btn-primary);
+  color: var(--btn-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(211, 78, 78, 0.3);
+}
+
 .empty-message {
   text-align: center;
   color: var(--text-secondary);
