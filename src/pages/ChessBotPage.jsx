@@ -9,7 +9,7 @@ import { seoConfig } from '../utils/seoConfig';
 import './ChessPage.css';
 import './ChessBotPage.css';
 
-const API_URL = 'https://abdussamiakanda.pythonanywhere.com/chessbot/move';
+const API_URL = import.meta.env.VITE_CHESSBOT_API_URL;
 
 async function getBotMove(moves) {
   try {
