@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { getSkills, addSkill, updateSkill, deleteSkill, updateSkillOrder } from '../../services/dataService';
 import './ProfileEditor.css';
 
@@ -9,10 +9,12 @@ function SkillsEditor() {
   const [dragOverIndex, setDragOverIndex] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
-    percentage: 0
+    percentage: 0,
+    logo: ''
   });
   const [loading, setLoading] = useState(false);
   const [loadingItems, setLoadingItems] = useState(true);
+  const [loadingLogo, setLoadingLogo] = useState(false);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -43,8 +45,14 @@ function SkillsEditor() {
       // Prepare data for Realtime Database
       const dataToSave = {
         name: formData.name.trim(),
-        percentage: parseInt(formData.percentage) || 0
+        percentage: parseInt(formData.percentage) || 0,
+        logo: formData.logo.trim() || null
       };
+      
+      // Remove null/empty logo
+      if (!dataToSave.logo) {
+        delete dataToSave.logo;
+      }
       
       console.log('Saving skill data:', dataToSave);
 
@@ -68,7 +76,8 @@ function SkillsEditor() {
     setEditing(item);
     setFormData({
       name: item.name || '',
-      percentage: item.percentage || 0
+      percentage: item.percentage || 0,
+      logo: item.logo || item.icon || ''
     });
   };
 
@@ -88,9 +97,206 @@ function SkillsEditor() {
     setEditing(null);
     setFormData({
       name: '',
-      percentage: 0
+      percentage: 0,
+      logo: ''
     });
   };
+
+  // Mapping of common skill names to Simple Icons names
+  const iconNameMap = {
+    'c programming': 'c',
+    'c++': 'cplusplus',
+    'c#': 'csharp',
+    'javascript': 'javascript',
+    'typescript': 'typescript',
+    'python': 'python',
+    'java': 'java',
+    'html': 'html5',
+    'css': 'css3',
+    'react': 'react',
+    'react.js': 'react',
+    'reactjs': 'react',
+    'vue': 'vuedotjs',
+    'vue.js': 'vuedotjs',
+    'angular': 'angular',
+    'node.js': 'nodedotjs',
+    'nodejs': 'nodedotjs',
+    'express': 'express',
+    'flask': 'flask',
+    'django': 'django',
+    'firebase': 'firebase',
+    'supabase': 'supabase',
+    'mongodb': 'mongodb',
+    'postgresql': 'postgresql',
+    'mysql': 'mysql',
+    'git': 'git',
+    'github': 'github',
+    'gitlab': 'gitlab',
+    'docker': 'docker',
+    'kubernetes': 'kubernetes',
+    'aws': 'amazonaws',
+    'azure': 'microsoftazure',
+    'gcp': 'googlecloud',
+    'blender': 'blender',
+    'latex': 'latex',
+    'originpro': 'origin',
+    'mumax3': 'max',
+  };
+
+  // Normalize skill name to icon name format
+  const normalizeIconName = (name) => {
+    const lowerName = name.toLowerCase().trim();
+    
+    // Check mapping first
+    if (iconNameMap[lowerName]) {
+      return iconNameMap[lowerName];
+    }
+    
+    // Try variations
+    const variations = [
+      lowerName.replace(/\.js$/, '').replace(/\./g, '').replace(/\s+/g, ''),
+      lowerName.replace(/\s+/g, ''),
+      lowerName.replace(/\s+/g, '-'),
+      lowerName.replace(/\./g, '').replace(/\s+/g, ''),
+      lowerName.replace(/\.js$/, '').replace(/\s+/g, ''),
+      lowerName.replace(/\s+/g, '').replace(/programming$/, ''),
+    ];
+    
+    return variations[0]; // Return first variation as default
+  };
+
+  // Check if SVG/image URL exists by loading it
+  const checkImageExists = (url) => {
+    return new Promise((resolve) => {
+      // For Simple Icons, we need to fetch the SVG
+      fetch(url, { 
+        method: 'GET',
+        mode: 'no-cors' // This allows the request but we can't read the response
+      })
+      .then(() => {
+        // If no error, assume it exists (no-cors mode)
+        // Try loading as image to verify
+        const img = new Image();
+        img.onload = () => resolve(true);
+        img.onerror = () => resolve(false);
+        img.src = url;
+        setTimeout(() => resolve(false), 2000);
+      })
+      .catch(() => resolve(false));
+    });
+  };
+
+  // Fetch logo automatically from Simple Icons
+  const fetchLogo = async (skillName) => {
+    if (!skillName || skillName.trim() === '') return;
+    
+    setLoadingLogo(true);
+    try {
+      const lowerName = skillName.toLowerCase().trim();
+      
+      // Try mapped name first
+      let iconName = iconNameMap[lowerName];
+      
+      // If no mapping, try normalized name
+      if (!iconName) {
+        iconName = normalizeIconName(skillName);
+      }
+      
+      // Try multiple variations
+      const variations = [
+        iconName,
+        lowerName.replace(/\.js$/, '').replace(/\./g, '').replace(/\s+/g, ''),
+        lowerName.replace(/\s+/g, ''),
+        lowerName.replace(/\s+/g, '-'),
+        lowerName.replace(/\./g, '').replace(/\s+/g, ''),
+        lowerName.replace(/\.js$/, '').replace(/\s+/g, ''),
+      ];
+
+      // Remove duplicates
+      const uniqueVariations = [...new Set(variations.filter(v => v))];
+
+      for (const variation of uniqueVariations) {
+        // Simple Icons CDN URL
+        const simpleIconsUrl = `https://cdn.simpleicons.org/${variation}`;
+        
+        // Try to load the image (suppress console errors)
+        try {
+          const img = new Image();
+          const loadPromise = new Promise((resolve) => {
+            let resolved = false;
+            img.onload = () => {
+              if (!resolved) {
+                resolved = true;
+                resolve(true);
+              }
+            };
+            img.onerror = () => {
+              if (!resolved) {
+                resolved = true;
+                resolve(false);
+              }
+            };
+            // Set a timeout
+            setTimeout(() => {
+              if (!resolved) {
+                resolved = true;
+                resolve(false);
+              }
+            }, 2000);
+            
+            // Start loading
+            img.src = simpleIconsUrl;
+          });
+          
+          const exists = await loadPromise;
+          if (exists) {
+            setFormData(prev => ({ ...prev, logo: simpleIconsUrl }));
+            setLoadingLogo(false);
+            return;
+          }
+        } catch (e) {
+          // Silently continue to next variation
+          continue;
+        }
+      }
+
+      // If no logo found, show message
+      setLoadingLogo(false);
+      alert('Logo not found. You can manually enter a logo URL.');
+    } catch (error) {
+      console.error('Error fetching logo:', error);
+      setLoadingLogo(false);
+    }
+  };
+
+  // Auto-fetch logo when name changes (debounced)
+  const fetchTimeoutRef = useRef(null);
+  
+  const handleNameChange = (e) => {
+    const newName = e.target.value;
+    setFormData({ ...formData, name: newName });
+    
+    // Clear previous timeout
+    if (fetchTimeoutRef.current) {
+      clearTimeout(fetchTimeoutRef.current);
+    }
+    
+    // Auto-fetch logo if name is being entered (not editing existing) and no logo set
+    if (!editing && newName.length > 2 && !formData.logo) {
+      fetchTimeoutRef.current = setTimeout(() => {
+        fetchLogo(newName);
+      }, 800);
+    }
+  };
+  
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (fetchTimeoutRef.current) {
+        clearTimeout(fetchTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleDragStart = (e, index) => {
     e.stopPropagation();
@@ -212,7 +418,7 @@ function SkillsEditor() {
           <input
             type="text"
             value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            onChange={handleNameChange}
             required
           />
         </div>
@@ -226,6 +432,54 @@ function SkillsEditor() {
             onChange={(e) => setFormData({ ...formData, percentage: e.target.value })}
             required
           />
+        </div>
+        <div className="form-group">
+          <label>
+            Logo URL
+            <button
+              type="button"
+              onClick={() => fetchLogo(formData.name)}
+              disabled={loadingLogo || !formData.name}
+              style={{
+                marginLeft: '0.5rem',
+                padding: '0.25rem 0.75rem',
+                fontSize: '0.875rem',
+                background: 'var(--primary-color)',
+                color: 'white',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: loadingLogo || !formData.name ? 'not-allowed' : 'pointer',
+                opacity: loadingLogo || !formData.name ? 0.6 : 1
+              }}
+            >
+              {loadingLogo ? 'Fetching...' : 'Auto-fetch'}
+            </button>
+          </label>
+          <input
+            type="url"
+            value={formData.logo}
+            onChange={(e) => setFormData({ ...formData, logo: e.target.value })}
+            placeholder="https://cdn.simpleicons.org/react or leave empty"
+          />
+          {formData.logo && (
+            <div style={{ marginTop: '0.5rem' }}>
+              <img
+                src={formData.logo}
+                alt="Logo preview"
+                style={{
+                  maxWidth: '50px',
+                  maxHeight: '50px',
+                  border: '1px solid var(--glass-border)',
+                  borderRadius: '4px',
+                  padding: '4px',
+                  background: 'white'
+                }}
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                }}
+              />
+            </div>
+          )}
         </div>
         <button type="submit" disabled={loading} className="btn btn-primary">
           {loading ? 'Saving...' : editing ? 'Update' : 'Add Skill'}
@@ -267,7 +521,23 @@ function SkillsEditor() {
                 onDragStart={(e) => handleDragStart(e, index)}
                 onDragEnd={handleDragEnd}
               >☰</span>
-              <h4>{item.name} - {item.percentage}%</h4>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                {item.logo || item.icon ? (
+                  <img
+                    src={item.logo || item.icon}
+                    alt={item.name}
+                    style={{
+                      width: '32px',
+                      height: '32px',
+                      objectFit: 'contain'
+                    }}
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                    }}
+                  />
+                ) : null}
+                <h4>{item.name} - {item.percentage}%</h4>
+              </div>
               <div className="item-actions">
                 <button onClick={() => handleEdit(item)} className="btn btn-small">Edit</button>
                 <button onClick={() => handleDelete(item.id)} className="btn btn-small btn-danger">Delete</button>
