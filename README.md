@@ -76,9 +76,7 @@
 ### 📈 GitHub Stats
 
 <p align="center">
-  <a href="https://github.com/abdussamiakanda">
-    <img src="https://github-readme-stats.vercel.app/api?username=abdussamiakanda&show_icons=true&theme=dark&line_height=27" alt="Sami's GitHub stats" />
-  </a>
+  <img src="https://github-readme-stats.vercel.app/api?username=abdussamiakanda&show_icons=true&theme=dark&line_height=27" alt="Sami's GitHub stats" />
 </p>
 
 <p align="center">
@@ -95,7 +93,7 @@
   - Physics / research-related web apps
   - Learning tools for students
   - Chess or analytics-based projects
-- 🥅 2025 Goals:
+- 🥅 2026 Goals:
   - Publish more **research work** and simulations.
   - Ship more **open-source tools**.
   - Grow as a **developer–researcher hybrid**.
