@@ -40,6 +40,23 @@ const components = {
     return <img alt={alt} loading="lazy" {...props} />;
   },
   pre: CodeBlock,
+  // A paragraph that is only an image becomes a <figure>; one that starts
+  // with **Figure:** / **Fig. 2.** is styled as that figure's caption.
+  p: (all) => {
+    const { node, children, ...props } = all;
+    const kids = (node?.children ?? []).filter((c) => !(c.type === 'text' && !c.value.trim()));
+    if (kids.length === 1 && kids[0].tagName === 'img') return <figure className="md-figure">{children}</figure>;
+    const first = kids[0];
+    const label = first?.tagName === 'strong' ? first.children?.[0]?.value ?? '' : '';
+    if (/^(figure|fig\.?)(\s*\d+)?\s*[:.]?$/i.test(label.trim())) {
+      return (
+        <p className="figure-caption" {...props}>
+          {children}
+        </p>
+      );
+    }
+    return <p {...props}>{children}</p>;
+  },
 };
 
 // Markdown with KaTeX and highlighted code. `raw` skips the legacy newline
