@@ -102,7 +102,9 @@ export default function CommandPalette({ open, onClose }) {
       fullWidth
       maxWidth="sm"
       slotProps={{
-        paper: { sx: { borderRadius: '22px', overflow: 'hidden', alignSelf: 'flex-start', mt: { xs: 8, sm: '14vh' } } },
+        // Centred on screen; the results area has a fixed height (below) so the
+        // panel keeps its size and the input stays put while you type.
+        paper: { sx: { borderRadius: '22px', overflow: 'hidden' } },
         // The dialog focuses its own container after opening, which beats
         // autoFocus; move focus to the search field once it has settled.
         transition: { onEntered: () => inputRef.current?.focus() },
@@ -122,7 +124,7 @@ export default function CommandPalette({ open, onClose }) {
         />
         <kbd className="hidden rounded-md border border-line px-1.5 py-0.5 font-mono text-[0.65rem] text-ink-3 sm:block">ESC</kbd>
       </div>
-      <div ref={listRef} className="max-h-[55vh] overflow-y-auto p-2" role="listbox">
+      <div ref={listRef} className="h-[min(26rem,55vh)] overflow-y-auto p-2" role="listbox">
         {results.length === 0 && <p className="px-4 py-10 text-center text-sm text-ink-3">No matches for “{query}”.</p>}
         {results.map((item, i) => {
           const showGroup = item.group !== lastGroup;

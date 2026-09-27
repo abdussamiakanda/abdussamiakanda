@@ -8,6 +8,14 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="theme-color" content="#070a0b" />
 
+    <!-- CSS layer order, declared before any stylesheet loads. MUI (Emotion)
+         styles go in the "mui" layer, which must sit above Tailwind's base
+         reset. Declaring it here keeps the order in production builds, where
+         the CSS minifier would otherwise merge it away and leave "mui" last. -->
+    <style>
+      @layer theme, base, mui, components, utilities;
+    </style>
+
     <!-- Apply the saved colour theme before first paint to avoid a flash. -->
     <script>
       (function () {
