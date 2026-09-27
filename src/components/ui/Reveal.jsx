@@ -1,4 +1,5 @@
-import { motion, useReducedMotion } from 'motion/react';
+import { useRef } from 'react';
+import { motion, useInView, useReducedMotion } from 'motion/react';
 import { EASE } from '../../lib/motion';
 
 // Fades and lifts children into place the first time they scroll into view.
@@ -43,18 +44,25 @@ export function Stagger({ as = 'div', stagger = 0.07, delay = 0, className = '',
 }
 
 // Masked line-by-line reveal for display headings.
+//
+// Visibility is observed on the heading itself, not on the sliding lines: a
+// line starts translated below its overflow-hidden mask, and
+// IntersectionObserver counts that clipping, so a line would never register
+// as "in view" and would stay hidden forever.
 export function LineReveal({ lines, className = '', lineClassName = '', delay = 0, as = 'h2', animateOnMount = false }) {
   const reduced = useReducedMotion();
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, amount: 0.3 });
   const Tag = as;
-  const trigger = animateOnMount ? { animate: { y: '0%' } } : { whileInView: { y: '0%' }, viewport: { once: true, amount: 0.6 } };
+  const shown = animateOnMount || inView;
   return (
-    <Tag className={className}>
+    <Tag ref={ref} className={className}>
       {lines.map((line, i) => (
         <span key={i} className="-mx-[0.1em] -mb-[0.1em] block overflow-hidden px-[0.1em] pb-[0.1em]">
           <motion.span
             className={`block ${lineClassName}`}
             initial={reduced ? false : { y: '110%' }}
-            {...trigger}
+            animate={shown || reduced ? { y: '0%' } : { y: '110%' }}
             transition={{ duration: 1.1, ease: EASE, delay: delay + i * 0.08 }}
           >
             {line}

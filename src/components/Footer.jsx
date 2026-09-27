@@ -146,7 +146,7 @@ function Footer() {
             <button
               type="button"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="inline-flex items-center gap-2 text-ink-2 transition-colors hover:text-ink"
+              className="inline-flex items-center gap-2 uppercase tracking-[0.1em] text-ink-2 transition-colors hover:text-ink"
             >
               Back to top <FiArrowUp />
             </button>
