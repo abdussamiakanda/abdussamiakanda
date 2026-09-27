@@ -88,15 +88,9 @@ function Footer() {
       <div className="shell">
         <div className="grid gap-12 border-t border-line py-12 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-5">
-            <Link to="/" className="inline-flex items-center gap-3" aria-label="Home">
-              <span className="grid h-9 w-9 place-items-center rounded-full border border-line-strong">
-                <span className="relative block h-[18px] w-[2px] rounded-full bg-gradient-to-b from-up to-down">
-                  <span className="absolute -top-[3px] left-1/2 h-[6px] w-[6px] -translate-x-1/2 rounded-full bg-up" />
-                </span>
-              </span>
-              <span className="font-display text-2xl leading-none text-ink">
-                Sami <span className="italic text-ink-2">Akanda</span>
-              </span>
+            <Link to="/" className="inline-flex items-baseline font-display text-3xl leading-none text-ink" aria-label="Home">
+              Sami&nbsp;<span className="italic text-ink-2">Akanda</span>
+              <span className="text-up">.</span>
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-ink-2">
               Physicist (MS, University of Nebraska–Lincoln). Researcher and academic instructor in condensed matter physics.

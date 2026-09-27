@@ -74,6 +74,7 @@ function ChessPage() {
       seo={{ title: hobby?.title || 'Chess', description: seoConfig.chess.description, keywords: seoConfig.chess.keywords }}
     >
       <PageHeader
+        back={{ to: '/hobbies', label: 'Hobbies' }}
         eyebrow="Hobbies · Chess"
         title="Sixty-four"
         italic="squares."

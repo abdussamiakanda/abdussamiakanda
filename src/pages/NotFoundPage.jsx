@@ -29,9 +29,20 @@ function NotFoundPage() {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-bg via-bg/40 to-bg/70" />
         <div className="shell relative pt-24">
           <p className="eyebrow mb-6">Error · 404 · Unbound state</p>
-          <h1 ref={digitsRef} className="flex font-display text-[clamp(8rem,30vw,22rem)] leading-[0.8] tracking-[-0.05em] text-ink" style={{ perspective: 800 }}>
+          {/* Line height 1 keeps the serif's full glyph height; each digit gets
+              a little padding because gradient text only paints inside its box,
+              which would otherwise shave off the italic 0's slant. */}
+          <h1
+            ref={digitsRef}
+            className="flex items-baseline gap-[0.02em] font-display text-[clamp(7rem,28vw,20rem)] leading-none text-ink"
+            style={{ perspective: 800 }}
+          >
             {['4', '0', '4'].map((d, i) => (
-              <span key={i} data-digit className={`inline-block ${i === 1 ? 'italic text-gradient-spin' : ''}`}>
+              <span
+                key={i}
+                data-digit
+                className={`inline-block py-[0.04em] ${i === 1 ? '-mx-[0.04em] px-[0.12em] italic text-gradient-spin' : ''}`}
+              >
                 {d}
               </span>
             ))}

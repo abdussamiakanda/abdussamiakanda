@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'motion/react';
+import { FiArrowLeft } from 'react-icons/fi';
 import Header from './Header';
 import Footer from './Footer';
 import SEO from './SEO';
@@ -27,10 +29,19 @@ export default function Page({ seo, loading = false, children, className = '', h
   );
 }
 
-// Masthead for inner pages: eyebrow, oversized title, lede and a count.
-export function PageHeader({ eyebrow, title, italic, lede, count, countLabel = 'entries', children }) {
+// Masthead for inner pages: optional back link, eyebrow, oversized title,
+// lede and a count. `back` is { to, label }, styled like the article pages.
+export function PageHeader({ back, eyebrow, title, italic, lede, count, countLabel = 'entries', children }) {
   return (
     <header className="shell pb-14 pt-36 md:pb-20 md:pt-44">
+      {back && (
+        <Reveal className="mb-10">
+          <Link to={back.to} className="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.12em] text-ink-2 hover:text-ink">
+            <FiArrowLeft className="transition-transform group-hover:-translate-x-1" />
+            {back.label}
+          </Link>
+        </Reveal>
+      )}
       <Reveal className="eyebrow mb-8 flex items-center gap-3">
         <span className="h-px w-8 bg-up" />
         {eyebrow}

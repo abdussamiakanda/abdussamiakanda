@@ -18,7 +18,6 @@ export const PRIMARY_NAV = [
       { label: 'Courses', to: '/courses', hint: 'Lectures I have taught' },
       { label: 'Gallery', to: '/gallery', hint: 'Moments, framed' },
       { label: 'Hobbies', to: '/hobbies', hint: 'Chess and other diversions' },
-      { label: 'Chess', to: '/hobbies/chess', hint: 'Games, journal, bot' },
     ],
   },
 ];

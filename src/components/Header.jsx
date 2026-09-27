@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion, useMotionValueEvent, useScroll, useSpring } from 'motion/react';
-import { animate } from 'animejs';
 import Drawer from '@mui/material/Drawer';
 import Tooltip from '@mui/material/Tooltip';
 import { FiSearch, FiSun, FiMoon, FiChevronDown, FiX, FiArrowUpRight } from 'react-icons/fi';
@@ -15,22 +14,13 @@ const EASE = [0.16, 1, 0.3, 1];
 let hasEnteredOnce = false;
 
 // Logo mark: a single spin needle that flips (anime.js) on hover.
+// Wordmark logo, shown at every screen size. The green full stop echoes the
+// hero heading.
 function Mark() {
-  const needle = useRef(null);
-  const flip = () => {
-    if (!needle.current) return;
-    animate(needle.current, { rotate: '+=180', duration: 900, ease: 'outElastic(1, .55)' });
-  };
   return (
-    <Link to="/" onMouseEnter={flip} onFocus={flip} className="group flex items-center gap-3" aria-label="Home — Md Abdus Sami Akanda">
-      <span className="relative grid h-9 w-9 place-items-center rounded-full border border-line-strong transition-colors group-hover:border-up">
-        <span ref={needle} className="relative block h-[18px] w-[2px] rounded-full bg-gradient-to-b from-up to-down">
-          <span className="absolute -top-[3px] left-1/2 h-[6px] w-[6px] -translate-x-1/2 rounded-full bg-up" />
-        </span>
-      </span>
-      <span className="hidden font-display text-[1.35rem] leading-none tracking-tight text-ink sm:block">
-        Sami <span className="italic text-ink-2">Akanda</span>
-      </span>
+    <Link to="/" className="group flex shrink-0 items-baseline font-display text-[1.45rem] leading-none tracking-tight text-ink" aria-label="Home — Md Abdus Sami Akanda">
+      Sami&nbsp;<span className="italic text-ink-2 transition-colors duration-300 group-hover:text-ink">Akanda</span>
+      <span className="text-up transition-transform duration-300 group-hover:translate-x-0.5">.</span>
     </Link>
   );
 }
@@ -98,6 +88,7 @@ function Header({ showProgress = true }) {
     hasEnteredOnce = true;
   }, []);
   const [palette, setPalette] = useState(false);
+  const [themeTip, setThemeTip] = useState(false);
   const [hovered, setHovered] = useState(null);
 
   const { scrollY, scrollYProgress } = useScroll();
@@ -175,10 +166,20 @@ function Header({ showProgress = true }) {
                 <span className="hidden md:inline">Search</span>
                 <kbd className="hidden rounded border border-line px-1 font-mono text-[0.62rem] text-ink-3 md:inline">⌘K</kbd>
               </button>
-              <Tooltip title={mode === 'dark' ? 'Light mode' : 'Dark mode'} arrow>
+              {/* Controlled so a click closes it: otherwise it would flip its
+                  label under the cursor and linger through the theme reveal. */}
+              <Tooltip
+                title={mode === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+                arrow
+                placement="bottom"
+                open={themeTip}
+                onOpen={() => setThemeTip(true)}
+                onClose={() => setThemeTip(false)}
+              >
                 <button
                   type="button"
                   onClick={(e) => {
+                    setThemeTip(false);
                     // Spread the new theme out from the centre of this button.
                     const r = e.currentTarget.getBoundingClientRect();
                     toggle({ x: r.left + r.width / 2, y: r.top + r.height / 2 });

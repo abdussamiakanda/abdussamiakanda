@@ -43,18 +43,28 @@ const buildMuiTheme = (mode) => {
     },
     components: {
       MuiPaper: { styleOverrides: { root: { backgroundImage: 'none', border: `1px solid ${p.line}` } } },
+      // A quiet card that matches the site's surfaces, rather than an
+      // inverted block: same font as the UI, hairline border, soft shadow.
       MuiTooltip: {
+        defaultProps: { enterDelay: 350, enterNextDelay: 150, disableInteractive: true },
         styleOverrides: {
           tooltip: {
-            background: p.ink,
-            color: p.bg,
-            fontFamily: "'Geist Mono', monospace",
-            fontSize: '0.7rem',
-            letterSpacing: '0.04em',
+            backgroundColor: p.paper,
+            color: p.ink,
+            border: `1px solid ${p.line}`,
+            boxShadow: mode === 'dark' ? '0 8px 24px rgba(0,0,0,0.45)' : '0 8px 24px rgba(10,22,20,0.12)',
+            fontFamily: "'Geist', ui-sans-serif, system-ui, sans-serif",
+            fontSize: '0.75rem',
+            fontWeight: 500,
+            lineHeight: 1.3,
+            letterSpacing: 0,
             padding: '6px 10px',
-            borderRadius: 8,
+            borderRadius: 10,
           },
-          arrow: { color: p.ink },
+          arrow: {
+            color: p.paper,
+            '&::before': { border: `1px solid ${p.line}` },
+          },
         },
       },
       MuiBackdrop: {

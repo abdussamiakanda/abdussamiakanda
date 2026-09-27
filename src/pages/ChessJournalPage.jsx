@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
 import Dialog from '@mui/material/Dialog';
-import { FiArrowLeft, FiEdit2, FiPlus, FiSearch, FiTrash2, FiX } from 'react-icons/fi';
+import { FiEdit2, FiPlus, FiSearch, FiTrash2, FiX } from 'react-icons/fi';
 import { auth } from '../firebase/config';
 import Page, { PageHeader } from '../components/Page';
 import IndexList from '../components/IndexList';
@@ -127,11 +127,8 @@ function ChessJournalPage() {
   return (
     <Page loading={loading} seo={{ title: 'Chess journal', description: 'Annotated chess games and notes, with replayable positions.', url: '/hobbies/chess/journal' }}>
       <PageHeader
-        eyebrow={
-          <Link to="/hobbies/chess" className="inline-flex items-center gap-2 hover:text-ink">
-            <FiArrowLeft /> Chess · Journal
-          </Link>
-        }
+        back={{ to: '/hobbies/chess', label: 'Chess' }}
+        eyebrow="Chess · Journal"
         title="Chess"
         italic="journal."
         count={entries.length}
