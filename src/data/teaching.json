@@ -1,0 +1,27 @@
+[
+  {
+    "id": "teach_unl",
+    "institution": "University of Nebraska-Lincoln",
+    "role": "Graduate Teaching Assistant",
+    "startDate": 1692057600,
+    "endDate": 1764547200,
+    "subjects": [
+      "General Physics Labs",
+      "Physics Recitations"
+    ],
+    "order": 1
+  },
+  {
+    "id": "teach_udvash",
+    "institution": "Udvash Academic & Admission Care",
+    "role": "Mathematics Advisor",
+    "startDate": 1527379200,
+    "endDate": 1562716800,
+    "subjects": [
+      "Calculus",
+      "Coordinate Geometry",
+      "Algebra & Trigonometry"
+    ],
+    "order": 2
+  }
+]

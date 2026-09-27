@@ -1,89 +1,55 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../components/Header';
-import SEO from '../components/SEO';
-import Footer from '../components/Footer';
+import { motion } from 'motion/react';
+import { FiArrowUpRight } from 'react-icons/fi';
+import Page, { PageHeader } from '../components/Page';
+import TiltCard from '../components/TiltCard';
+import { EmptyState } from '../components/ui/primitives';
+import { Stagger } from '../components/ui/Reveal';
+import { staggerItem } from '../lib/motion';
+import useAsync from '../lib/useAsync';
 import { getHobbies, generateSlug } from '../services/dataService';
-import './HobbiesPage.css';
+import { hobbyRoute } from '../lib/siteMap';
+import ChessCardArt from '../components/chess/ChessCardArt';
 
 function HobbiesPage() {
-  const [hobbies, setHobbies] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    loadHobbies();
-  }, []);
-
-  const loadHobbies = async () => {
-    setLoading(true);
-    try {
-      const data = await getHobbies();
-      setHobbies(data || []);
-    } catch (error) {
-      console.error('Error loading hobbies:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  if (loading) {
-    return (
-      <div className="app">
-        <Header />
-        <div className="loading-container">
-          <div className="loader"></div>
-        </div>
-      </div>
-    );
-  }
+  const { data: hobbies, loading } = useAsync(getHobbies, [], []);
+  const list = hobbies.filter((h) => h?.title);
 
   return (
-    <div className="app">
-      <SEO 
-        title="Hobbies"
-        description="Explore my hobbies and interests, including chess and other activities."
-        url="/hobbies"
-      />
-      <Header />
-      <main className="hobbies-page-main">
-        <div className="hobbies-page-container">
-          <Link to="/" className="back-link">Back to Home</Link>
-          <div style={{ clear: 'both' }}></div>
-          <h1 className="hobbies-page-title">Hobbies</h1>
-          
-          {hobbies.length === 0 ? (
-            <div className="empty-message">No hobbies available yet.</div>
-          ) : (
-            <div className="hobbies-list">
-              {hobbies.map(hobby => {
-                if (!hobby || !hobby.title) {
-                  return null;
-                }
-                const slug = generateSlug(hobby.title);
-                const route = hobby.route || `/hobbies/${slug}`;
-                // Special handling for chess
-                const isChess = slug === 'chess' || (hobby.title && hobby.title.toLowerCase() === 'chess');
-                const finalRoute = isChess ? '/hobbies/chess' : route;
-                
-                return (
-                  <Link 
-                    key={hobby.id} 
-                    to={finalRoute}
-                    className="hobby-list-item hobby-list-link"
-                  >
-                    <div className="hobby-list-emoji">{hobby.emoji || '🎯'}</div>
-                    <h3 className="hobby-list-title">{hobby.title}</h3>
+    <Page loading={loading} seo={{ title: 'Hobbies', description: 'Chess and other diversions.', url: '/hobbies' }}>
+      <PageHeader eyebrow="Hobbies · Off the clock" title="Off the" italic="clock." count={list.length} countLabel="pursuits" lede="What fills the hours between simulations." />
+      <section className="shell">
+        {list.length === 0 ? (
+          <EmptyState>No hobbies listed yet.</EmptyState>
+        ) : (
+          <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {list.map((hobby, i) => (
+              <motion.div key={hobby.id} variants={staggerItem}>
+                <TiltCard className="h-full">
+                  <Link to={hobbyRoute(hobby, generateSlug)} className="group flex aspect-[4/5] flex-col justify-between overflow-hidden rounded-3xl border border-line bg-surface p-8">
+                    <div className="flex items-start justify-between">
+                      <span className="font-mono text-xs text-ink-3">H/{String(i + 1).padStart(2, '0')}</span>
+                      <span className="grid h-11 w-11 place-items-center rounded-full border border-line text-ink-2 transition-all duration-500 group-hover:rotate-45 group-hover:border-up group-hover:bg-up group-hover:text-on-up">
+                        <FiArrowUpRight />
+                      </span>
+                    </div>
+                    {generateSlug(hobby.title) === 'chess' ? (
+                      <ChessCardArt className="w-3/5 self-center transition-transform duration-700 ease-out-expo group-hover:scale-105" />
+                    ) : (
+                      <span className="text-[7rem] leading-none transition-transform duration-700 ease-out-expo group-hover:scale-110" aria-hidden="true">
+                        {hobby.emoji || '◎'}
+                      </span>
+                    )}
+                    <h2 className="font-display text-5xl text-ink">{hobby.title}</h2>
                   </Link>
-                );
-              })}
-            </div>
-          )}
-        </div>
-      </main>
-      <Footer />
-    </div>
+                </TiltCard>
+              </motion.div>
+            ))}
+          </Stagger>
+        )}
+      </section>
+    </Page>
   );
 }
 
 export default HobbiesPage;
-

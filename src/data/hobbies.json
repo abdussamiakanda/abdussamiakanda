@@ -1,0 +1,9 @@
+[
+  {
+    "id": "hobby_chess",
+    "title": "Chess",
+    "emoji": "👑",
+    "route": "/hobbies/chess",
+    "order": 1
+  }
+]

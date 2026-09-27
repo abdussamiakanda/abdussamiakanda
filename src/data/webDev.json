@@ -1,0 +1,29 @@
+{
+  "description": "I have dedicated over eight years to studying and honing my skills in web design. Throughout this time, I have acquired proficiency in several areas such as SEO, HTML, CSS, JavaScript, SQL, PHP, and WordPress. I have put my knowledge into practice by designing websites for various projects and schools.",
+  "projects": [
+    {
+      "id": "web_fermion",
+      "name": "Fermion Physics Club",
+      "description": "Official website designed for the Fermion Physics Club at Khulna University.",
+      "url": "https://fermionku.com/"
+    },
+    {
+      "id": "web_filmfreak",
+      "name": "FilmFreak",
+      "description": "A web application for movie suggestions and details.",
+      "url": "https://filmfreak.netlify.app/"
+    },
+    {
+      "id": "web_uno",
+      "name": "UNO Online",
+      "description": "Interactive web game implementation of the popular UNO card game.",
+      "url": "https://playuno.netlify.app/"
+    },
+    {
+      "id": "web_tictactoe",
+      "name": "Tic-Tac-Toe",
+      "description": "A clean, playable Tic-Tac-Toe game web app.",
+      "url": "https://playtictac.netlify.app/"
+    }
+  ]
+}

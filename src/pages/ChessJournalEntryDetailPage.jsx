@@ -1,265 +1,168 @@
-import { useEffect, useState } from 'react';
-import React from 'react';
-import { useParams, Link } from 'react-router-dom';
-import Header from '../components/Header';
-import SEO from '../components/SEO';
-import Footer from '../components/Footer';
-import { getChessJournalEntryBySlug, getChessJournalEntries, generateSlug } from '../services/dataService';
-import ReactMarkdown from 'react-markdown';
-import remarkMath from 'remark-math';
-import rehypeKatex from 'rehype-katex';
-import 'katex/dist/katex.min.css';
-import ChessJournalBoard from '../components/ChessJournalBoard';
-import { FaCalendarAlt, FaUser } from 'react-icons/fa';
-import './ChessJournalEntryDetailPage.css';
+import { useCallback, useMemo } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
+import Page from '../components/Page';
+import GameReplay from '../components/chess/GameReplay';
+import Markdown from '../components/ui/Markdown';
+import { Button, Chip } from '../components/ui/primitives';
+import { LineReveal, Reveal } from '../components/ui/Reveal';
+import useAsync from '../lib/useAsync';
+import { formatDate } from '../lib/format';
+import { kingSquares, loadGame } from '../lib/chess/pgn';
+import { generateSlug, getChessJournalEntries } from '../services/dataService';
+
+// Splits entry content into markdown and \Chess{...PGN...} segments.
+function segments(content = '') {
+  const parts = [];
+  let last = 0;
+  for (const m of content.matchAll(/\\Chess\{([\s\S]*?)\}/g)) {
+    if (m.index > last) parts.push({ type: 'md', text: content.slice(last, m.index) });
+    parts.push({ type: 'game', pgn: m[1].trim() });
+    last = m.index + m[0].length;
+  }
+  if (last < content.length) parts.push({ type: 'md', text: content.slice(last) });
+  return parts;
+}
+
+// PGN dates look like "2024.03.17"; "??" parts are unknown.
+const pgnDate = (d = '') => {
+  const [y, m, day] = d.split('.');
+  if (!/^\d{4}$/.test(y)) return null;
+  if (!/^\d+$/.test(m ?? '')) return y;
+  const date = new Date(Date.UTC(+y, +m - 1, /^\d+$/.test(day ?? '') ? +day : 1));
+  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', ...(/^\d+$/.test(day ?? '') ? { day: 'numeric' } : {}), timeZone: 'UTC' });
+};
+
+function EmbeddedGame({ pgn, index }) {
+  const { moves, headers } = useMemo(() => loadGame(pgn), [pgn]);
+  const result = headers.Result;
+  const resultMarks = useCallback(
+    (fen) => {
+      const k = kingSquares(fen);
+      if (result === '1-0') return { [k.w]: 'win', [k.b]: 'loss' };
+      if (result === '0-1') return { [k.w]: 'loss', [k.b]: 'win' };
+      if (result === '1/2-1/2') return { [k.w]: 'draw', [k.b]: 'draw' };
+      return {};
+    },
+    [result],
+  );
+
+  if (!moves.length) {
+    return <p className="rounded-2xl border border-dashed border-line-strong px-5 py-6 text-sm text-ink-3">This game’s PGN couldn’t be read.</p>;
+  }
+
+  const players = headers.White || headers.Black ? `${headers.White ?? '?'} vs ${headers.Black ?? '?'}` : null;
+  const date = pgnDate(headers.Date);
+
+  return (
+    <figure className="not-prose my-10 rounded-3xl border border-line bg-bg-2 p-4 md:p-6">
+      <figcaption className="mb-4 flex flex-wrap items-center gap-2">
+        <span className="font-mono text-xs text-ink-3">Game {index}</span>
+        {players && <span className="font-display text-2xl text-ink">{players}</span>}
+        <span className="ml-auto flex flex-wrap gap-2">
+          {headers.Event && headers.Event !== '?' && <Chip>{headers.Event}</Chip>}
+          {date && <Chip>{date}</Chip>}
+          {result && result !== '*' && <Chip tone="up">{result.replace('1/2', '½').replace('1/2', '½')}</Chip>}
+        </span>
+      </figcaption>
+      <GameReplay id={`journal-game-${index}`} moves={moves} resultMarks={resultMarks} keys="focus" />
+      <p className="mt-3 text-xs text-ink-3">Click the board, then use ← → to step through the moves.</p>
+    </figure>
+  );
+}
 
 function ChessJournalEntryDetailPage() {
   const { slug } = useParams();
-  const [entry, setEntry] = useState(null);
-  const [allEntries, setAllEntries] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { data: entries, loading } = useAsync(getChessJournalEntries, [], []);
 
-  useEffect(() => {
-    loadEntry();
-    loadAllEntries();
-  }, [slug]);
+  if (loading) return <Page loading />;
 
-  const loadEntry = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const data = await getChessJournalEntryBySlug(slug);
-      if (data) {
-        setEntry(data);
-      } else {
-        setError('Entry not found');
-      }
-    } catch (error) {
-      console.error('Error loading entry:', error);
-      setError('Failed to load entry');
-    } finally {
-      setLoading(false);
-    }
-  };
+  const i = entries.findIndex((e) => generateSlug(e.title) === slug);
+  const entry = entries[i];
 
-  const loadAllEntries = async () => {
-    try {
-      const data = await getChessJournalEntries();
-      setAllEntries(data || []);
-    } catch (error) {
-      console.error('Error loading entries:', error);
-    }
-  };
-
-  const formatDate = (timestamp) => {
-    if (!timestamp) return '';
-    const date = typeof timestamp === 'number' 
-      ? new Date(timestamp * 1000) 
-      : new Date(timestamp);
-    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-  };
-
-  // Custom markdown renderer that detects \Chess{...} blocks
-  const processMarkdown = (content) => {
-    if (!content) return [{ type: 'markdown', content: '' }];
-    
-    const chessPattern = /\\Chess\{([\s\S]*?)\}/g;
-    const parts = [];
-    let lastIndex = 0;
-    let match;
-    
-    while ((match = chessPattern.exec(content)) !== null) {
-      if (match.index > lastIndex) {
-        parts.push({
-          type: 'markdown',
-          content: content.substring(lastIndex, match.index)
-        });
-      }
-      
-      parts.push({
-        type: 'chess',
-        pgn: match[1].trim()
-      });
-      
-      lastIndex = match.index + match[0].length;
-    }
-    
-    if (lastIndex < content.length) {
-      parts.push({
-        type: 'markdown',
-        content: content.substring(lastIndex)
-      });
-    }
-    
-    if (parts.length === 0) {
-      return [{ type: 'markdown', content }];
-    }
-    
-    return parts;
-  };
-
-  // Find current entry index and get next/prev
-  const currentIndex = allEntries.findIndex(e => generateSlug(e.title) === slug);
-  const nextEntry = currentIndex > 0 ? allEntries[currentIndex - 1] : null;
-  const prevEntry = currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1] : null;
-
-  if (loading) {
+  if (!entry) {
     return (
-      <div className="app">
-        <Header />
-        <div className="loading-container">
-          <div className="loader"></div>
+      <Page seo={{ title: 'Entry not found' }}>
+        <div className="shell flex min-h-[70vh] flex-col items-start justify-center pt-32">
+          <p className="eyebrow mb-4">Chess journal</p>
+          <h1 className="font-display text-6xl text-ink md:text-8xl">
+            Lost in the <span className="italic text-ink-2">endgame.</span>
+          </h1>
+          <Button to="/hobbies/chess/journal" variant="ghost" icon="right" className="mt-10">
+            Back to the journal
+          </Button>
         </div>
-      </div>
+      </Page>
     );
   }
 
-  if (error || !entry) {
-    return (
-      <div className="app">
-        <Header />
-        <main className="chess-journal-entry-detail-main">
-          <div className="chess-journal-entry-detail-container">
-            <Link to="/hobbies/chess/journal" className="back-link">Back to Journal</Link>
-            <div style={{ clear: 'both' }}></div>
-            <div className="error-message">{error || 'Entry not found'}</div>
-          </div>
-        </main>
-      </div>
-    );
-  }
-
-  const processedParts = processMarkdown(entry.content || '');
+  // Entries are newest-first: "next" is the newer neighbour.
+  const next = i > 0 ? entries[i - 1] : null;
+  const prev = i < entries.length - 1 ? entries[i + 1] : null;
+  // Number the embedded games in reading order.
+  let n = 0;
+  const parts = segments(entry.content).map((p) => (p.type === 'game' ? { ...p, index: ++n } : p));
 
   return (
-    <div className="app">
-      <SEO 
-        title={entry.title}
-        description={`Chess journal entry: ${entry.title}`}
-        url={`/hobbies/chess/journal/${slug}`}
-        type="article"
-      />
-      <Header />
-      <main className="chess-journal-entry-detail-main">
-        <div className="chess-journal-entry-detail-container">
-          <Link to="/hobbies/chess/journal" className="back-link">Back to Journal</Link>
-          <div style={{ clear: 'both' }}></div>
-          
-          <article className="chess-journal-entry-content">
-            <header className="chess-journal-entry-header">
-              <h1 className="chess-journal-entry-title">{entry.title}</h1>
-              <div className="chess-journal-entry-meta">
-                <span className="chess-journal-entry-author">
-                  <FaUser className="chess-journal-entry-author-icon" />
-                  {entry.author || 'Md Abdus Sami Akanda'}
-                </span>
-                {entry.date && (
-                  <time className="chess-journal-entry-date">
-                    <FaCalendarAlt className="chess-journal-entry-date-icon" />
-                    {formatDate(entry.date)}
-                  </time>
-                )}
-              </div>
-            </header>
+    <Page seo={{ title: entry.title, description: `Chess journal: ${entry.title}`, url: `/hobbies/chess/journal/${slug}`, ogType: 'article' }}>
+      <article>
+        <header className="shell pb-10 pt-36 md:pt-44">
+          <Reveal className="mb-10">
+            <Link to="/hobbies/chess/journal" className="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.12em] text-ink-2 hover:text-ink">
+              <FiArrowLeft className="transition-transform group-hover:-translate-x-1" /> Chess journal
+            </Link>
+          </Reveal>
+          <p className="eyebrow">
+            {entry.author || 'Md Abdus Sami Akanda'}
+            {entry.date && ` · ${formatDate(entry.date)}`}
+          </p>
+          <LineReveal
+            as="h1"
+            animateOnMount
+            lines={[entry.title]}
+            className="mt-6 max-w-5xl font-display text-[clamp(2.6rem,7vw,6rem)] leading-[0.95] tracking-[-0.025em] text-ink"
+          />
+        </header>
 
-            <div className="chess-journal-entry-markdown">
-              {processedParts.map((part, index) => {
-                if (part.type === 'chess') {
-                  return (
-                    <ChessJournalBoard key={`chess-${index}`} pgn={part.pgn} />
-                  );
-                } else {
-                  return (
-                    <div key={`markdown-${index}`}>
-                      <ReactMarkdown
-                        remarkPlugins={[
-                          [remarkMath, {
-                            delimiters: [
-                              { left: '$$', right: '$$', display: true, asciiMath: false },
-                              { left: '$', right: '$', display: false, asciiMath: false },
-                              { left: '\\[', right: '\\]', display: true },
-                              { left: '\\(', right: '\\)', display: false }
-                            ]
-                          }]
-                        ]}
-                        rehypePlugins={[
-                          [
-                            rehypeKatex,
-                            {
-                              throwOnError: false,
-                              errorColor: '#cc0000',
-                              strict: false,
-                              fleqn: false,
-                              trust: true,
-                              onError: (error, code) => {
-                                console.error('LaTeX rendering error:', error.name || error);
-                                console.error('Error message:', error.message || error);
-                                if (code) {
-                                  console.error('LaTeX code that failed:', code);
-                                }
-                                return true;
-                              }
-                            }
-                          ]
-                        ]}
-                        components={{
-                          p: ({ node, children, ...props }) => {
-                            const hasMath = React.Children.toArray(children).some(
-                              child => typeof child === 'object' && child?.props?.className?.includes('math')
-                            );
-                            return <p {...props}>{children}</p>;
-                          },
-                          em: ({ node, children, ...props }) => {
-                            if (node?.parent?.type === 'math') {
-                              return children;
-                            }
-                            return <em {...props}>{children}</em>;
-                          },
-                          strong: ({ node, children, ...props }) => {
-                            if (node?.parent?.type === 'math') {
-                              return children;
-                            }
-                            return <strong {...props}>{children}</strong>;
-                          },
-                          br: () => <br />
-                        }}
-                      >
-                        {(() => {
-                          let processed = part.content;
-                          processed = processed.replace(/\\n\\n/g, '\n\n');
-                          processed = processed.replace(/\\n/g, '  \n');
-                          processed = processed.replace(/([^\n])\n([^\n])/g, '$1  \n$2');
-                          return processed;
-                        })()}
-                      </ReactMarkdown>
-                    </div>
-                  );
-                }
-              })}
-            </div>
-
-            <nav className="chess-journal-entry-navigation">
-              {prevEntry && (
-                <Link to={`/hobbies/chess/journal/${generateSlug(prevEntry.title)}`} className="chess-journal-entry-nav-link">
-                  <span className="chess-journal-entry-nav-label">Previous</span>
-                  <span className="chess-journal-entry-nav-title">{prevEntry.title}</span>
-                </Link>
-              )}
-              {nextEntry && (
-                <Link to={`/hobbies/chess/journal/${generateSlug(nextEntry.title)}`} className="chess-journal-entry-nav-link chess-journal-entry-nav-next">
-                  <span className="chess-journal-entry-nav-label">Next</span>
-                  <span className="chess-journal-entry-nav-title">{nextEntry.title}</span>
-                </Link>
-              )}
-            </nav>
-          </article>
+        <div className="shell">
+          <div className="mx-auto max-w-4xl">
+            {parts.map((part, k) =>
+              part.type === 'game' ? (
+                <EmbeddedGame key={k} pgn={part.pgn} index={part.index} />
+              ) : (
+                <Markdown key={k} className="reading mx-auto max-w-[68ch]">
+                  {part.text}
+                </Markdown>
+              ),
+            )}
+          </div>
         </div>
-      </main>
-      <Footer />
-    </div>
+
+        {(prev || next) && (
+          <nav className="shell mt-24 grid gap-px overflow-hidden rounded-3xl border border-line bg-line md:grid-cols-2" aria-label="More entries">
+            {[prev, next].map((e, k) =>
+              e ? (
+                <Link
+                  key={e.id}
+                  to={`/hobbies/chess/journal/${generateSlug(e.title)}`}
+                  className={`group flex flex-col gap-4 bg-bg p-8 transition-colors hover:bg-surface md:p-10 ${k === 1 ? 'md:items-end md:text-right' : ''}`}
+                >
+                  <span className="eyebrow flex items-center gap-2">
+                    {k === 0 && <FiArrowLeft className="transition-transform group-hover:-translate-x-1" />}
+                    {k === 0 ? 'Previous' : 'Next'}
+                    {k === 1 && <FiArrowRight className="transition-transform group-hover:translate-x-1" />}
+                  </span>
+                  <span className="font-display text-3xl leading-tight text-ink">{e.title}</span>
+                </Link>
+              ) : (
+                <div key={k} className="hidden bg-bg md:block" />
+              ),
+            )}
+          </nav>
+        )}
+      </article>
+    </Page>
   );
 }
 
 export default ChessJournalEntryDetailPage;
-

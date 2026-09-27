@@ -1,85 +1,80 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FaExternalLinkAlt } from 'react-icons/fa';
-import Header from '../components/Header';
-import SEO from '../components/SEO';
-import Footer from '../components/Footer';
-import { getPublications } from '../services/dataService';
-import './PublicationsPage.css';
+import { useMemo, useState } from 'react';
+import { FiSearch } from 'react-icons/fi';
+import Page, { PageHeader } from '../components/Page';
+import PublicationItem from '../components/PublicationItem';
+import FilterTabs from '../components/ui/FilterTabs';
+import { Button, EmptyState } from '../components/ui/primitives';
+import { Reveal } from '../components/ui/Reveal';
+import useAsync from '../lib/useAsync';
+import { parseJournal } from '../lib/academic';
+import { getPublications, getResearchMetadata } from '../services/dataService';
 
 function PublicationsPage() {
-  const [publications, setPublications] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { data, loading } = useAsync(
+    async () => {
+      const [pubs, meta] = await Promise.all([getPublications(), getResearchMetadata()]);
+      return { pubs: pubs ?? [], links: meta?.profileLinks ?? [] };
+    },
+    [],
+    { pubs: [], links: [] },
+  );
+  const [year, setYear] = useState('All');
+  const [query, setQuery] = useState('');
 
-  useEffect(() => {
-    loadPublications();
-  }, []);
+  const years = useMemo(() => [...new Set(data.pubs.map((p) => p.year).filter(Boolean))].sort((a, b) => b - a), [data.pubs]);
+  const q1 = data.pubs.filter((p) => parseJournal(p.journal).quartile === 'Q1').length;
+  const inReview = data.pubs.filter((p) => p.status).length;
 
-  const loadPublications = async () => {
-    setLoading(true);
-    try {
-      const data = await getPublications();
-      setPublications(data || []);
-    } catch (error) {
-      console.error('Error loading publications:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  if (loading) {
-    return (
-      <div className="app">
-        <Header />
-        <div className="loading-container">
-          <div className="loader"></div>
-        </div>
-      </div>
-    );
-  }
+  const shown = data.pubs.filter((p) => {
+    if (year !== 'All' && p.year !== year) return false;
+    if (!query) return true;
+    return `${p.title} ${p.authors} ${p.journal} ${p.description}`.toLowerCase().includes(query.toLowerCase());
+  });
 
   return (
-    <div className="app">
-      <SEO 
+    <Page loading={loading} seo={{ title: 'Publications', description: 'Peer-reviewed publications in magnetism and spintronics.', url: '/publications' }}>
+      <PageHeader
+        eyebrow="Publications · Peer reviewed"
         title="Publications"
-        description="Research publications, papers, and academic works."
-        url="/publications"
-      />
-      <Header />
-      <main>
-        <div className="publications-page-container">
-          <Link to="/" className="back-link">Back to Home</Link>
-          <h1 className="publications-page-title">Publications</h1>
-          
-          {publications.length === 0 ? (
-            <div className="empty-message">No publications available yet.</div>
-          ) : (
-            <div className="publications-list">
-              {publications.map(publication => (
-                <div key={publication.id} className="publication-item">
-                  <h3 className="publication-title">{publication.title}</h3>
-                  <div className="publication-meta">
-                    {publication.authors && <span className="publication-authors">{publication.authors}</span>}
-                    {publication.journal && <span className="publication-journal">{publication.journal}</span>}
-                    {publication.year && <span className="publication-year">{publication.year}</span>}
-                  </div>
-                  {publication.description && <p className="publication-description">{publication.description}</p>}
-                  {publication.url && (
-                    <a href={publication.url} target="_blank" rel="noopener noreferrer" className="publication-link">
-                      View Publication
-                      <FaExternalLinkAlt className="publication-link-icon" />
-                    </a>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
+        count={data.pubs.length}
+        countLabel="papers"
+        lede={`Journal articles on magnetization dynamics, domain-wall motion and magnetization switching: ${q1} in Q1 venues${inReview ? `, plus ${inReview} under review` : ''}.`}
+      >
+        <Reveal delay={0.3} className="mt-10 flex flex-wrap gap-3">
+          {data.links.map((l) => (
+            <Button key={l.url} href={l.url} variant="ghost">
+              {l.label}
+            </Button>
+          ))}
+        </Reveal>
+      </PageHeader>
+
+      <section className="shell">
+        <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <FilterTabs id="pub-year" options={['All', ...years]} value={year} onChange={setYear} />
+          <label className="flex h-11 items-center gap-3 rounded-full border border-line px-4 focus-within:border-ink md:w-80">
+            <FiSearch className="text-ink-3" />
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Filter by title, author, journal"
+              className="w-full bg-transparent text-sm text-ink outline-none placeholder:text-ink-3"
+            />
+          </label>
         </div>
-      </main>
-      <Footer />
-    </div>
+
+        {shown.length === 0 ? (
+          <EmptyState>No publications match.</EmptyState>
+        ) : (
+          <div className="border-t border-line">
+            {shown.map((pub) => (
+              <PublicationItem key={pub.id} pub={pub} index={data.pubs.length - data.pubs.indexOf(pub)} />
+            ))}
+          </div>
+        )}
+      </section>
+    </Page>
   );
 }
 
 export default PublicationsPage;
-

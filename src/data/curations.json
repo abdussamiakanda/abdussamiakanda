@@ -1,0 +1,187 @@
+[
+  {
+    "id": "curation_movie_1",
+    "title": "The Judge (2014)",
+    "tag": "movies",
+    "group": "Movies that I watch when feeling down",
+    "genres": [
+      "Crime",
+      "Drama"
+    ],
+    "imageUrl": "https://image.tmdb.org/t/p/w500/tefUxj4Gg9hgQNgfEYd7kJQrIlD.jpg",
+    "description": "Crime, Drama",
+    "url": "",
+    "order": 0
+  },
+  {
+    "id": "curation_movie_2",
+    "title": "My Girl (1991)",
+    "tag": "movies",
+    "group": "Movies that I watch when feeling down",
+    "genres": [
+      "Drama",
+      "Comedy"
+    ],
+    "imageUrl": "https://image.tmdb.org/t/p/w500/qyJJNHteA7BUwQSey05t7qP4vRV.jpg",
+    "description": "Drama, Comedy",
+    "url": "",
+    "order": 1
+  },
+  {
+    "id": "curation_movie_3",
+    "title": "The Truman Show (1998)",
+    "tag": "movies",
+    "group": "Classic Movies",
+    "genres": [
+      "Drama",
+      "Comedy"
+    ],
+    "imageUrl": "https://image.tmdb.org/t/p/w500/vuza0WqY239yBXOadKlGwJsZJFE.jpg",
+    "description": "Drama, Comedy",
+    "url": "",
+    "order": 2
+  },
+  {
+    "id": "curation_movie_4",
+    "title": "Life Is Beautiful (1997)",
+    "tag": "movies",
+    "group": "Classic Movies",
+    "genres": [
+      "Drama",
+      "Comedy"
+    ],
+    "imageUrl": "https://image.tmdb.org/t/p/w500/mfnkSeeVOBVheuyn2lo4tfmOPQb.jpg",
+    "description": "Drama, Comedy",
+    "url": "",
+    "order": 3
+  },
+  {
+    "id": "curation_movie_5",
+    "title": "Se7en (1995)",
+    "tag": "movies",
+    "group": "Classic Movies",
+    "genres": [
+      "Thriller",
+      "Crime",
+      "Mystery"
+    ],
+    "imageUrl": "https://image.tmdb.org/t/p/w500/6yoghtyTpznpBik8EngEmJskVUO.jpg",
+    "description": "Thriller, Crime, Mystery",
+    "url": "",
+    "order": 4
+  },
+  {
+    "id": "curation_movie_6",
+    "title": "The Usual Suspects (1995)",
+    "tag": "movies",
+    "group": "Classic Movies",
+    "genres": [
+      "Crime",
+      "Drama",
+      "Thriller"
+    ],
+    "imageUrl": "https://image.tmdb.org/t/p/w500/bUPmtQzrRhzqYySeiMpv7GurAfm.jpg",
+    "description": "Crime, Drama, Thriller",
+    "url": "",
+    "order": 5
+  },
+  {
+    "id": "curation_movie_7",
+    "title": "Léon: The Professional (1994)",
+    "tag": "movies",
+    "group": "Classic Movies",
+    "genres": [
+      "Action",
+      "Drama",
+      "Crime"
+    ],
+    "imageUrl": "https://image.tmdb.org/t/p/w500/yI6X2cCM5YPJtxMhUd3dPGqDAhw.jpg",
+    "description": "Action, Drama, Crime",
+    "url": "",
+    "order": 6
+  },
+  {
+    "id": "curation_movie_8",
+    "title": "The Shawshank Redemption (1994)",
+    "tag": "movies",
+    "group": "Classic Movies",
+    "genres": [
+      "Drama",
+      "Crime"
+    ],
+    "imageUrl": "https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",
+    "description": "Drama, Crime",
+    "url": "",
+    "order": 7
+  },
+  {
+    "id": "curation_movie_9",
+    "title": "Forrest Gump (1994)",
+    "tag": "movies",
+    "group": "Classic Movies",
+    "genres": [
+      "Romance",
+      "Comedy",
+      "Drama"
+    ],
+    "imageUrl": "https://image.tmdb.org/t/p/w500/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg",
+    "description": "Romance, Comedy, Drama",
+    "url": "",
+    "order": 8
+  },
+  {
+    "id": "curation_movie_10",
+    "title": "What's Eating Gilbert Grape (1993)",
+    "tag": "movies",
+    "group": "Classic Movies",
+    "genres": [
+      "Romance",
+      "Drama"
+    ],
+    "imageUrl": "https://image.tmdb.org/t/p/w500/8FxWgsfDNosewo7H65oE4QkOb7g.jpg",
+    "description": "Romance, Drama",
+    "url": "",
+    "order": 9
+  },
+  {
+    "id": "curation_movie_11",
+    "title": "The Silence of the Lambs (1991)",
+    "tag": "movies",
+    "group": "Classic Movies",
+    "genres": [
+      "Thriller",
+      "Drama",
+      "Crime"
+    ],
+    "imageUrl": "https://image.tmdb.org/t/p/w500/uS9m8OBk1A8eM9I042bx8XXpqAq.jpg",
+    "description": "Thriller, Drama, Crime",
+    "url": "",
+    "order": 10
+  },
+  {
+    "id": "curation_movie_12",
+    "title": "One Flew Over the Cuckoo's Nest (1975)",
+    "tag": "movies",
+    "group": "Classic Movies",
+    "genres": [
+      "Drama"
+    ],
+    "imageUrl": "https://image.tmdb.org/t/p/w500/3jcbDmRFiQ83drXNOvRDeKHxS0C.jpg",
+    "description": "Drama",
+    "url": "",
+    "order": 11
+  },
+  {
+    "id": "curation_movie_13",
+    "title": "12 Angry Men (1957)",
+    "tag": "movies",
+    "group": "Classic Movies",
+    "genres": [
+      "Drama"
+    ],
+    "imageUrl": "https://image.tmdb.org/t/p/w500/ow3wq89wM8qd5X7hWKxiRfsFf9C.jpg",
+    "description": "Drama",
+    "url": "",
+    "order": 12
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "id": "proj_gitlatex",
+    "title": "GitLaTeX",
+    "category": "software",
+    "startDate": 1772755200,
+    "endDate": null,
+    "description": "A local, Git-native LaTeX editor that runs in the browser. Monaco editing with LaTeX-aware autocomplete and spell checking, one-click multi-pass PDF builds, and Git clone, diff and push, all on your own machine. Install with pip install gitlatex.",
+    "technologies": [
+      "Python",
+      "Flask",
+      "GitPython",
+      "JavaScript",
+      "Monaco Editor",
+      "LaTeX"
+    ],
+    "overview": "GitLaTeX is a local, Git-native LaTeX editor that runs in the browser: write in a Monaco editor, compile to PDF, and push to GitHub, without Overleaf, a subscription, or your files ever leaving your own machine. Your `.tex` files are plain files on disk, and your history is plain Git.\n\n```bash\npip install gitlatex\ngitlatex\n```\n\nIt opens at `http://localhost:5000`. Clone a repository or create a folder, and start writing; changes save as you type.\n\n### Why build it\n\nOverleaf is excellent until you want your files on your own disk, your own Git remote, and no upload limits. GitLaTeX keeps the same shape of workflow (editor, live PDF, one-click compile) but runs everything locally against a real repository, so unpublished work never leaves your machine.\n\n### Editor\n\n- Built on **Monaco**, the editor behind VS Code, with LaTeX and BibTeX highlighting in light and dark themes.\n- **Autocomplete** for 150+ commands and 50+ environments. Inside `\\ref{}` and `\\cite{}` it completes from the project's own labels and `.bib` keys, showing each entry's title, author and year.\n- A **document outline** that follows the cursor, and matched `\\begin`/`\\end` colouring so an unclosed environment is obvious.\n\n### LaTeX-aware spell checking\n\n- Skips comments, math, verbatim blocks and the arguments of `\\ref`, `\\cite`, `\\url` and friends, so only prose is checked.\n- Built for papers: coinages like *nanowire* or *anti-symmetric* resolve against their parts instead of being flagged, with a personal dictionary that persists across projects.\n\n### Compiling\n\n- **One click to PDF**, shown beside the editor, with `pdflatex`, `xelatex` or `lualatex`.\n- **Full multi-pass builds**: `biber` or `bibtex` runs when needed and the engine reruns until references settle, so no more compiling three times to clear `??`.\n- Errors and warnings are parsed from the log into a **clickable problems list** that jumps to the line.\n- An optional **remote compiler API** lets it build on a web service, so no TeX distribution is needed locally.\n\n### Git\n\n- Status, diff, pull and push from the toolbar; push stages, commits and pushes in one action.\n- A **version history** panel with per-file changes, and side-by-side diffs between any two commits.\n\n### How it's built\n\nA **Flask** server with a strict split: `services/` holds the logic (LaTeX runs and log parsing, spell checking on symspellpy, Git through GitPython, the project index for autocomplete) and knows nothing about HTTP, while `routes/` holds thin blueprints in front of it. The front end is plain **ES modules** loaded directly by the browser, so there is **no build step**: edit a file, reload the page.\n\nBuilt and maintained with [Md Atiqur Rahman](https://github.com/revolutionibus). Released under the ISC license.",
+    "website": "https://pypi.org/project/gitlatex/",
+    "demo": "",
+    "github": "https://github.com/abdussamiakanda/gitlatex",
+    "order": 0
+  },
+  {
+    "id": "proj_nanowire",
+    "title": "Micromagnetic Nanowire Domain Wall Simulator",
+    "startDate": 1627776000,
+    "endDate": 1664582400,
+    "description": "Simulated and analyzed domain wall motion in magnetic nanowires under thermal gradients, investigating shape anisotropy effects.",
+    "technologies": [
+      "Python",
+      "MuMax3",
+      "OriginLab",
+      "MATLAB"
+    ],
+    "overview": "In this project, we studied the role of shape anisotropy on thermal gradient-driven domain wall dynamics in magnetic nanowires. Using MuMax3 for micromagnetic simulations and Python for parsing spatial spin states, we mapped domain wall speeds and localized pinning behaviors. The results contributed to our publication in Modern Physics Letters B (2023).",
+    "website": "",
+    "demo": "",
+    "github": "https://github.com/abdussamiakanda",
+    "order": 1,
+    "category": "research"
+  }
+]

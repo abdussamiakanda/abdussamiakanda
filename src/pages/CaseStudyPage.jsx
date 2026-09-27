@@ -1,216 +1,106 @@
-import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import Header from '../components/Header';
-import SEO from '../components/SEO';
-import Footer from '../components/Footer';
+import { Link, useParams } from 'react-router-dom';
+import { FiArrowLeft, FiGithub, FiPlay, FiArrowUpRight } from 'react-icons/fi';
+import Page from '../components/Page';
+import Markdown from '../components/ui/Markdown';
+import { Button, Chip } from '../components/ui/primitives';
+import { LineReveal, Reveal } from '../components/ui/Reveal';
+import useAsync from '../lib/useAsync';
+import { formatRange, siteLabel } from '../lib/format';
 import { getPersonalProjects, generateSlug } from '../services/dataService';
-import ReactMarkdown from 'react-markdown';
-import { FaCalendarAlt, FaTag, FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
-import './CaseStudyPage.css';
 
 function CaseStudyPage() {
   const { slug } = useParams();
-  const [caseStudy, setCaseStudy] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    loadCaseStudy();
+  const { data: project, loading } = useAsync(async () => {
+    const projects = await getPersonalProjects();
+    return projects.find((p) => generateSlug(p.title) === slug) ?? null;
   }, [slug]);
 
-  const loadCaseStudy = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const projects = await getPersonalProjects();
-      const project = projects.find(p => generateSlug(p.title) === slug);
-      
-      if (!project) {
-        setError('Case study not found');
-        setLoading(false);
-        return;
-      }
+  if (loading) return <Page loading />;
 
-      // Check if project has overview data
-      if (!project.overview || project.overview.trim() === '') {
-        setError('This project does not have a case study');
-        setLoading(false);
-        return;
-      }
-
-      setCaseStudy(project);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error loading case study:', error);
-      setError('Failed to load case study');
-      setLoading(false);
-    }
-  };
-
-  const formatDate = (timestamp) => {
-    if (!timestamp) return '';
-    const date = typeof timestamp === 'number' 
-      ? new Date(timestamp * 1000) 
-      : new Date(timestamp);
-    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-  };
-
-  const areDatesSame = (date1, date2) => {
-    if (!date1 || !date2) return false;
-    const d1 = typeof date1 === 'number' ? new Date(date1 * 1000) : new Date(date1);
-    const d2 = typeof date2 === 'number' ? new Date(date2 * 1000) : new Date(date2);
-    return d1.toDateString() === d2.toDateString();
-  };
-
-  if (loading) {
+  if (!project || !project.overview?.trim()) {
     return (
-      <div className="app">
-        <Header />
-        <div className="loading-container">
-          <div className="loader"></div>
+      <Page seo={{ title: 'Case study not found' }}>
+        <div className="shell flex min-h-[70vh] flex-col items-start justify-center pt-32">
+          <p className="eyebrow mb-4">Case study</p>
+          <h1 className="font-display text-6xl text-ink md:text-8xl">
+            Not written <span className="italic text-ink-2">yet.</span>
+          </h1>
+          <p className="mt-6 text-ink-2">{project ? 'This project does not have a case study.' : 'That project could not be found.'}</p>
+          <Button to="/projects" variant="ghost" icon="right" className="mt-10">
+            Browse all projects
+          </Button>
         </div>
-      </div>
+      </Page>
     );
   }
 
-  if (error || !caseStudy) {
-    return (
-      <div className="app">
-        <Header />
-        <main className="case-study-main">
-          <div className="case-study-container">
-            <Link to="/projects" className="back-link">Back to Projects</Link>
-            <div style={{ clear: 'both' }}></div>
-            <div className="error-container">
-              <div className="error-icon">
-                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                  <polyline points="14 2 14 8 20 8"></polyline>
-                  <line x1="16" y1="13" x2="8" y2="13"></line>
-                  <line x1="16" y1="17" x2="8" y2="17"></line>
-                  <polyline points="10 9 9 9 8 9"></polyline>
-                </svg>
-              </div>
-              <h2 className="error-title">Case Study Not Found</h2>
-              <p className="error-description">
-                {error || "The case study you're looking for doesn't exist or hasn't been created yet."}
-              </p>
-              <div className="error-actions">
-                <Link to="/projects" className="error-btn">
-                  Browse All Projects
-                </Link>
-              </div>
-            </div>
-          </div>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
+  const facts = [
+    { label: 'Timeline', value: formatRange(project.startDate, project.endDate, { style: 'long', ongoing: 'Ongoing' }) },
+    { label: 'Stack', value: project.technologies?.join(', ') },
+  ].filter((f) => f.value);
 
   return (
-    <div className="app">
-      <SEO 
-        title={caseStudy.title}
-        description={caseStudy.description || `Case study: ${caseStudy.title}`}
-        url={`/projects/case/${slug}`}
-        type="article"
-      />
-      <Header />
-      <main className="case-study-main">
-        <div className="case-study-container">
-          <Link to="/projects" className="back-link">Back to Projects</Link>
-          <div style={{ clear: 'both' }}></div>
-          
-          <article className="case-study-content">
-            <header className="case-study-header">
-              <div className="case-study-title-wrapper">
-                <h1 className="case-study-title">{caseStudy.title}</h1>
-                <div className="case-study-meta">
-                  {(caseStudy.startDate || caseStudy.endDate) && (
-                    <time className="case-study-date">
-                      <FaCalendarAlt className="case-study-date-icon" />
-                      {caseStudy.startDate && caseStudy.endDate && areDatesSame(caseStudy.startDate, caseStudy.endDate) 
-                        ? formatDate(caseStudy.startDate)
-                        : (
-                          <>
-                            {caseStudy.startDate && formatDate(caseStudy.startDate)}
-                            {caseStudy.startDate && caseStudy.endDate ? ' - ' : ''}
-                            {caseStudy.endDate ? formatDate(caseStudy.endDate) : caseStudy.startDate ? ' (Ongoing)' : ''}
-                          </>
-                        )
-                      }
-                    </time>
-                  )}
-                </div>
-              </div>
-              {caseStudy.description && (
-                <p className="case-study-description">{caseStudy.description}</p>
-              )}
-              {caseStudy.technologies && caseStudy.technologies.length > 0 && (
-                <div className="case-study-technologies">
-                  {caseStudy.technologies.map((tech, index) => (
-                    <span key={index} className="tech-tag">{tech}</span>
-                  ))}
-                </div>
-              )}
-              <div className="case-study-links">
-                {caseStudy.website && (
-                  <a 
-                    href={caseStudy.website} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="case-study-link"
-                  >
-                    <FaExternalLinkAlt />
-                    Website
-                  </a>
-                )}
-                {caseStudy.demo && (
-                  <a 
-                    href={`/demo/${caseStudy.demo}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="case-study-link"
-                  >
-                    <FaExternalLinkAlt />
-                    Demo
-                  </a>
-                )}
-                {caseStudy.github && (
-                  <a 
-                    href={caseStudy.github} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="case-study-link"
-                  >
-                    <FaGithub />
-                    GitHub
-                  </a>
-                )}
-              </div>
-            </header>
+    <Page seo={{ title: project.title, description: project.description || `Case study: ${project.title}`, url: `/projects/case/${slug}`, ogType: 'article' }}>
+      <article>
+        <header className="shell pb-16 pt-36 md:pt-44">
+          <Reveal className="mb-10">
+            <Link to="/projects" className="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.12em] text-ink-2 hover:text-ink">
+              <FiArrowLeft className="transition-transform group-hover:-translate-x-1" /> Projects
+            </Link>
+          </Reveal>
+          <p className="eyebrow mb-6">Case study</p>
+          <LineReveal
+            as="h1"
+            animateOnMount
+            lines={[project.title]}
+            className="max-w-6xl font-display text-[clamp(2.6rem,7vw,6.5rem)] leading-[0.95] tracking-[-0.025em] text-ink"
+          />
+          {project.description && (
+            <Reveal delay={0.2} className="mt-8 max-w-3xl text-xl text-ink-2">
+              {project.description}
+            </Reveal>
+          )}
 
-            {caseStudy.overview && (
-              <div className="case-study-markdown">
-                <ReactMarkdown
-                  components={{
-                    a: ({ node, children, ...props }) => {
-                      return <a {...props} target="_blank" rel="noopener noreferrer">{children}</a>;
-                    }
-                  }}
-                >
-                  {caseStudy.overview}
-                </ReactMarkdown>
+          <Reveal delay={0.3} className="mt-14 grid gap-px overflow-hidden rounded-3xl border border-line bg-line md:grid-cols-3">
+            {facts.map((f) => (
+              <div key={f.label} className="bg-bg p-6">
+                <p className="eyebrow mb-2">{f.label}</p>
+                <p className="text-ink">{f.value}</p>
               </div>
-            )}
-          </article>
+            ))}
+            <div className="flex flex-wrap items-center gap-2 bg-bg p-6">
+              {project.website && (
+                <Button href={project.website} variant="ghost">
+                  {siteLabel(project.website)}
+                </Button>
+              )}
+              {project.demo && (
+                <a href={`/demo/${project.demo}`} target="_blank" rel="noopener noreferrer" className="inline-flex h-11 items-center gap-2 rounded-full border border-line-strong px-4 text-sm text-ink">
+                  <FiPlay /> Demo
+                </a>
+              )}
+              {project.github && (
+                <a href={project.github} target="_blank" rel="noopener noreferrer" className="inline-flex h-11 items-center gap-2 rounded-full border border-line-strong px-4 text-sm text-ink">
+                  <FiGithub /> GitHub <FiArrowUpRight />
+                </a>
+              )}
+            </div>
+          </Reveal>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {project.technologies?.map((t) => (
+              <Chip key={t}>{t}</Chip>
+            ))}
+          </div>
+        </header>
+
+        <div className="shell">
+          <Markdown raw className="reading mx-auto max-w-[68ch]">
+            {project.overview}
+          </Markdown>
         </div>
-      </main>
-      <Footer />
-    </div>
+      </article>
+    </Page>
   );
 }
 
 export default CaseStudyPage;
-

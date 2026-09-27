@@ -1,0 +1,90 @@
+[
+  {
+    "id": "course_comsol_qiskit",
+    "kind": "Course",
+    "title": "Quantum Mechanics & Quantum Computing: COMSOL & Qiskit",
+    "organizer": "Instructed by Dr. Mahdy Rahman Chowdhury, Associate Professor, North South University, Dhaka, Bangladesh",
+    "start": "2022-06-03",
+    "end": "2022-09-09"
+  },
+  {
+    "id": "course_espinred_2021",
+    "kind": "Course",
+    "title": "2021 ESpinRed School on Spintronics",
+    "organizer": "Organised by Dr. Fernando Bartolomé, INMA, CSIC - University of Zaragoza, Spanish Network on Spintronics, Spain",
+    "start": "2021-05-17",
+    "end": "2021-05-31"
+  },
+  {
+    "id": "ws_spintronics_seminar",
+    "kind": "Seminar series",
+    "title": "Online Spintronics Seminar Series",
+    "organizer": "Organised by Prof. Kirill Belashchenko (UNL), USA and Prof. Xin Fan (DU), USA",
+    "start": "2020-03-27",
+    "end": "2025-12-12"
+  },
+  {
+    "id": "ws_ictp_communication",
+    "kind": "Workshop",
+    "title": "Professional and Communications Training for Scientists",
+    "organizer": "Organized by Kelsey Calhoun, ICTP, Trieste, Italy",
+    "start": "2021-05-23",
+    "end": "2022-05-27"
+  },
+  {
+    "id": "ws_ictp_ml_materials",
+    "kind": "Workshop",
+    "title": "Young Researchers' Workshop on Machine Learning for Materials",
+    "organizer": "Organized by Prof. Sandro Scandolo, ICTP, Trieste, Italy",
+    "start": "2021-05-09",
+    "end": "2022-05-13"
+  },
+  {
+    "id": "ws_ictp_spin_orbitronics",
+    "kind": "Workshop",
+    "title": "2D Materials for Spin-Orbitronics",
+    "organizer": "Organized by Prof. Nadia Binggeli, ICTP, Trieste, Italy",
+    "start": "2021-05-03",
+    "end": "2021-05-05"
+  },
+  {
+    "id": "ws_teslas_gift",
+    "kind": "Workshop",
+    "title": "2nd Workshop on Classical Electromagnetism: Tesla's Gift",
+    "organizer": "Organized by Community of Physics, Dhaka, Bangladesh",
+    "start": "2020-10-18",
+    "end": "2020-10-18"
+  },
+  {
+    "id": "ws_mumax3",
+    "kind": "Workshop",
+    "title": "MuMax3 Workshop",
+    "organizer": "Instructed by Dr. Jonathan Leliaert and Dr. Jeroen Mulkers, DyNaMat group, Ghent University, Belgium",
+    "start": "2020-08-31",
+    "end": "2020-09-14"
+  },
+  {
+    "id": "ws_ku_career",
+    "kind": "Seminar",
+    "title": "Research and How to Build Up an Academic Career by it",
+    "organizer": "Organized by Khulna University, Khulna, Bangladesh",
+    "start": "2019-10-17",
+    "end": "2019-10-17"
+  },
+  {
+    "id": "ws_einsteins_insight",
+    "kind": "Workshop",
+    "title": "1st Workshop on Differential Geometry: Einstein's Insight",
+    "organizer": "Organized by Community of Physics, Dhaka, Bangladesh",
+    "start": "2019-06-15",
+    "end": "2019-06-21"
+  },
+  {
+    "id": "ws_kuet_weather",
+    "kind": "Conference",
+    "title": "Weather Forecasting and Advances in Physics",
+    "organizer": "Organised by Khulna University of Engineering & Technology, Khulna, Bangladesh",
+    "start": "2018-05-11",
+    "end": "2018-05-11"
+  }
+]

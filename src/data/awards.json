@@ -1,0 +1,72 @@
+[
+  {
+    "id": "aw_stem_2022",
+    "title": "Best Paper Award",
+    "description": "International Conference on STEM and the Fourth Industrial Revolution (ICSTEM4IR 2022)",
+    "date": 1656806400,
+    "featuredIn": "",
+    "featuredInUrl": "",
+    "website": "https://conference.ku.ac.bd/icstem4ir",
+    "order": 1
+  },
+  {
+    "id": "aw_upc_2021",
+    "title": "Silver Medal Rank",
+    "description": "The 2021 University Physics Competition (Online)",
+    "date": 1642204800,
+    "featuredIn": "",
+    "featuredInUrl": "",
+    "website": "http://www.uphysicsc.com/2021_UPC_Results.pdf",
+    "order": 2
+  },
+  {
+    "id": "aw_itpo_2021",
+    "title": "16th Position",
+    "description": "International Theoretical Physics Olympiad (Online)",
+    "date": 1629004800,
+    "featuredIn": "",
+    "featuredInUrl": "",
+    "website": "http://thworldcup.com/contest2021",
+    "order": 3
+  },
+  {
+    "id": "aw_upc_2020",
+    "title": "Silver Medal Rank",
+    "description": "The 2020 University Physics Competition (Online)",
+    "date": 1610668800,
+    "featuredIn": "",
+    "featuredInUrl": "",
+    "website": "http://www.uphysicsc.com/2020_UPC_Results.pdf",
+    "order": 4
+  },
+  {
+    "id": "aw_ortvay_2020",
+    "title": "11th Position, 3rd Year Category",
+    "description": "The 23rd International Rudolf Ortvay Problem Solving Contest in Physics (Online)",
+    "date": 1607990400,
+    "featuredIn": "",
+    "featuredInUrl": "",
+    "website": "https://ortvay.elte.hu/2020/Ortvay2020EN.pdf",
+    "order": 5
+  },
+  {
+    "id": "aw_itpo_2020",
+    "title": "21st Position",
+    "description": "International Theoretical Physics Olympiad (Online)",
+    "date": 1586908800,
+    "featuredIn": "",
+    "featuredInUrl": "",
+    "website": "http://thworldcup.com/contest2020",
+    "order": 6
+  },
+  {
+    "id": "aw_upc_2019",
+    "title": "Silver Medal Rank",
+    "description": "The 2019 University Physics Competition (Online)",
+    "date": 1579046400,
+    "featuredIn": "Bangla Tribune",
+    "featuredInUrl": "https://www.banglatribune.com/my-campus/news/605514/%E0%A6%86%E0%A6%A8%E0%A7%8D%E0%A6%A4%E0%A6%B0%E0%A7%8D%E0%A6%9C%E0%A6%BE%E0%A6%A4%E0%A6%BF%E0%A6%95-%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%A4%E0%A6%BF%E0%A6%AF%E0%A7%8B%E0%A6%97%E0%A6%BF%E0%A6%A4%E0%A6%BE%E0%A7%9F-%E0%A6%96%E0%A7%81%E0%A6%AC%E0%A6%BF-%E0%A6%B6%E0%A6%BF%E0%A6%95%E0%A7%8D%E0%A6%B7%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%A5%E0%A7%80%E0%A6%B0-%E0%A6%9C%E0%A7%9F",
+    "website": "http://www.uphysicsc.com/2019_UPC_Results.pdf",
+    "order": 7
+  }
+]

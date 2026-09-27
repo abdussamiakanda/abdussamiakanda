@@ -9,7 +9,7 @@ function SkillsEditor() {
   const [dragOverIndex, setDragOverIndex] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
-    percentage: 0,
+    category: '',
     logo: ''
   });
   const [loading, setLoading] = useState(false);
@@ -45,7 +45,7 @@ function SkillsEditor() {
       // Prepare data for Realtime Database
       const dataToSave = {
         name: formData.name.trim(),
-        percentage: parseInt(formData.percentage) || 0,
+        category: formData.category.trim(),
         logo: formData.logo.trim() || null
       };
       
@@ -76,7 +76,7 @@ function SkillsEditor() {
     setEditing(item);
     setFormData({
       name: item.name || '',
-      percentage: item.percentage || 0,
+      category: item.category || '',
       logo: item.logo || item.icon || ''
     });
   };
@@ -97,7 +97,7 @@ function SkillsEditor() {
     setEditing(null);
     setFormData({
       name: '',
-      percentage: 0,
+      category: '',
       logo: ''
     });
   };
@@ -423,15 +423,20 @@ function SkillsEditor() {
           />
         </div>
         <div className="form-group">
-          <label>Percentage (0-100)</label>
+          <label>Category</label>
           <input
-            type="number"
-            min="0"
-            max="100"
-            value={formData.percentage}
-            onChange={(e) => setFormData({ ...formData, percentage: e.target.value })}
+            type="text"
+            list="skill-categories"
+            value={formData.category}
+            onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+            placeholder="e.g. Programming & Web Development"
             required
           />
+          <datalist id="skill-categories">
+            {[...new Set(items.map((i) => i.category).filter(Boolean))].map((c) => (
+              <option key={c} value={c} />
+            ))}
+          </datalist>
         </div>
         <div className="form-group">
           <label>
@@ -536,7 +541,7 @@ function SkillsEditor() {
                     }}
                   />
                 ) : null}
-                <h4>{item.name} - {item.percentage}%</h4>
+                <h4>{item.name}{item.category ? ` · ${item.category}` : ''}</h4>
               </div>
               <div className="item-actions">
                 <button onClick={() => handleEdit(item)} className="btn btn-small">Edit</button>

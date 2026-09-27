@@ -1,0 +1,49 @@
+{
+  "name": "Md Abdus Sami Akanda",
+  "greeting": "Hi, my name is",
+  "description": "I am a physicist with an MS in Physics from the University of Nebraska-Lincoln, where I also taught as a Graduate Teaching Assistant. My research lies in condensed matter physics: spintronics, magnetization and domain-wall dynamics, spin waves and the Landau-Lifshitz-Gilbert equation, exploring how the spin of electrons can be used to build new electronic devices. I am passionate about teaching and about sharing my love for physics.",
+  "cvUrl": "/CV_Md_Abdus_Sami_Akanda.pdf",
+  "resumeUrl": "/CV_Md_Abdus_Sami_Akanda.pdf",
+  "socialLinks": [
+    {
+      "platform": "Email",
+      "url": "mailto:abdussamiakanda@gmail.com"
+    },
+    {
+      "platform": "Google Scholar",
+      "url": "https://scholar.google.com/citations?user=hCntcSgAAAAJ&hl=en"
+    },
+    {
+      "platform": "ResearchGate",
+      "url": "https://www.researchgate.net/profile/Md_Akanda2"
+    },
+    {
+      "platform": "LinkedIn",
+      "url": "https://www.linkedin.com/in/abdussamiakanda"
+    },
+    {
+      "platform": "GitHub",
+      "url": "https://github.com/abdussamiakanda"
+    },
+    {
+      "platform": "ORCID",
+      "url": "https://orcid.org/0000-0002-6742-2158"
+    },
+    {
+      "platform": "Academia",
+      "url": "https://khulna.academia.edu/AbdusSamiAkanda"
+    },
+    {
+      "platform": "YouTube",
+      "url": "https://www.youtube.com/channel/UC7yhrEJBWA5JTERVBmWNRUQ"
+    },
+    {
+      "platform": "Facebook",
+      "url": "https://www.facebook.com/mdabdussami.akanda/"
+    },
+    {
+      "platform": "SoundCloud",
+      "url": "https://soundcloud.com/abdussamiakanda"
+    }
+  ]
+}

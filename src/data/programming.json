@@ -1,0 +1,18 @@
+{
+  "description": "After gaining knowledge in web design, programming became a natural interest for me. I started with C in 2018 and C++ in 2019, and now use Python and MATLAB for computational research alongside MuMax3 and COMSOL for micromagnetic simulation. You can follow the projects on my GitHub.",
+  "githubUrl": "https://github.com/abdussamiakanda",
+  "projects": [
+    {
+      "id": "prog_gitlatex",
+      "name": "gitlatex",
+      "description": "A local, Git-native LaTeX editor in the browser: edit, compile to PDF and push to GitHub. On PyPI.",
+      "url": "https://pypi.org/project/gitlatex/"
+    },
+    {
+      "id": "prog_grefornoobs",
+      "name": "grefornoobs",
+      "description": "A Python package published on PyPI for beginners to study or perform GRE prep.",
+      "url": "https://pypi.org/project/grefornoobs/"
+    }
+  ]
+}

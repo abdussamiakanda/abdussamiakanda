@@ -13,7 +13,7 @@ const SEO = ({
   
   useEffect(() => {
     // Update document title
-    document.title = title;
+    document.title = title === 'Md Abdus Sami Akanda' ? title : `${title} — Md Abdus Sami Akanda`;
     
     // Update meta description
     const metaDescription = document.querySelector('meta[name="description"]');

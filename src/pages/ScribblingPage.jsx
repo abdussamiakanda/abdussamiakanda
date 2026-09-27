@@ -1,93 +1,60 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import Header from '../components/Header';
-import SEO from '../components/SEO';
-import Footer from '../components/Footer';
+import { useMemo, useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
+import Page, { PageHeader } from '../components/Page';
+import IndexList from '../components/IndexList';
+import FilterTabs from '../components/ui/FilterTabs';
+import { EmptyState } from '../components/ui/primitives';
+import useAsync from '../lib/useAsync';
+import { yearOf } from '../lib/format';
 import { getScribblingEntries, generateSlug, getSlugTitle } from '../services/dataService';
-import './ScribblingPage.css';
 
 function ScribblingPage() {
-  const [entries, setEntries] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { data: entries, loading } = useAsync(() => getScribblingEntries(), [], []);
+  const [tag, setTag] = useState('All');
 
-  useEffect(() => {
-    loadEntries();
-  }, []);
+  const tags = useMemo(() => {
+    const counts = entries.reduce((acc, e) => ({ ...acc, [e.tag || 'Other']: (acc[e.tag || 'Other'] ?? 0) + 1 }), {});
+    return [{ value: 'All', label: 'All', count: entries.length }, ...Object.entries(counts).map(([value, count]) => ({ value, label: value.endsWith('y') ? `${value.slice(0, -1)}ies` : `${value}s`, count }))];
+  }, [entries]);
 
-  const loadEntries = async () => {
-    setLoading(true);
-    try {
-      const data = await getScribblingEntries();
-      setEntries(data || []);
-    } catch (error) {
-      console.error('Error loading entries:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const formatDate = (timestamp) => {
-    if (!timestamp) return '';
-    const date = typeof timestamp === 'number' 
-      ? new Date(timestamp * 1000) 
-      : new Date(timestamp);
-    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-  };
-
-  if (loading) {
-    return (
-      <div className="app">
-        <Header />
-        <div className="loading-container">
-          <div className="loader"></div>
-        </div>
-      </div>
-    );
-  }
+  const shown = tag === 'All' ? entries : entries.filter((e) => (e.tag || 'Other') === tag);
 
   return (
-    <div className="app">
-      <SEO 
+    <Page loading={loading} seo={{ title: 'Scribbling', description: 'Poems, stories and creative writing.', url: '/scribbling' }}>
+      <PageHeader
+        eyebrow="Scribbling · Verse & prose"
         title="Scribbling"
-        description="Collection of poems, stories, drawings, and creative works."
-        url="/scribbling"
-      />
-      <Header />
-      <main className="scribbling-page-main">
-        <div className="scribbling-page-container">
-          <Link to="/" className="back-link">Back to Home</Link>
-          <div style={{ clear: 'both' }}></div>
-          <h1 className="scribbling-page-title">Scribbling</h1>
-          
-          {entries.length === 0 ? (
-            <div className="empty-message">No entries available yet.</div>
-          ) : (
-            <div className="scribbling-list">
-              {entries.map(entry => (
-                <Link key={entry.id} to={`/scribbling/${generateSlug(getSlugTitle(entry))}`} className="scribbling-item scribbling-item-link">
-                  <div className="scribbling-title-wrapper">
-                    <h3 className="scribbling-title">{entry.title}</h3>
-                    <div className="scribbling-meta">
-                      {entry.tag && (
-                        <span className="scribbling-tag">
-                          {entry.tag}
-                        </span>
-                      )}
-                      {entry.date && <span className="scribbling-date">{formatDate(entry.date)}</span>}
-                    </div>
-                  </div>
-                  {entry.description && <p className="scribbling-description">{entry.description}</p>}
-                  <span className="scribbling-link-text">Read →</span>
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
-      </main>
-      <Footer />
-    </div>
+        italic="in the margins."
+        count={entries.length}
+        countLabel="pieces"
+        lede="Poems and short stories, mostly in Bangla — written between problem sets."
+      >
+        {tags.length > 2 && <FilterTabs id="scrib" options={tags} value={tag} onChange={setTag} className="mt-12" />}
+      </PageHeader>
+      <section className="shell">
+        {shown.length === 0 ? (
+          <EmptyState>Nothing written here yet.</EmptyState>
+        ) : (
+          <AnimatePresence mode="wait">
+            <motion.div key={tag} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}>
+              <IndexList
+                items={shown.map((e) => ({
+                  key: e.id,
+                  to: `/scribbling/${generateSlug(getSlugTitle(e))}`,
+                  title: e.title,
+                  subtitle: e.englishTitle && e.englishTitle !== e.title ? e.englishTitle : null,
+                  description: e.description,
+                  tag: tag === 'All' ? e.tag : null,
+                  meta: yearOf(e.date) ?? '',
+                  image: e.imageUrl,
+                }))}
+              />
+            </motion.div>
+          </AnimatePresence>
+        )}
+      </section>
+    </Page>
   );
 }
 
 export default ScribblingPage;
-

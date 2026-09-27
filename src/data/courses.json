@@ -1,0 +1,162 @@
+[
+  {
+    "id": "course_classical-mechanics",
+    "title": "Classical Mechanics",
+    "slug": "classical-mechanics",
+    "imageUrl": "/images/courses/classical-mechanics.webp",
+    "startDate": 1643241600,
+    "endDate": null,
+    "instructor": "Md. Abdus Sami Akanda",
+    "language": "Bangla",
+    "url": "",
+    "description": "This course serves as a comprehensive introduction to the foundations of classical mechanics, from the modern point of view of 21st-century theoretical physics. It develops the intuition of the students focusing on both physical and mathematical formalism of classical phenomena.",
+    "overview": "This course serves as a comprehensive introduction to the foundations of classical mechanics, from the modern point of view of 21st-century theoretical physics. It develops the intuition of the students focusing on both physical and mathematical formalism of classical phenomena. It is focused more on Lagrangian mechanics than Newtonian mechanics.\n\nLectures of this course will be given every week, from 10:00 pm to 11:30 pm starting from 27 January 2022. The course is taught online under [Fermion Physics Club](https://fermionku.com) via Google Meet.\nThe live lectures are recorded. Registered students will receive information about the class times via emails.",
+    "outline": "To download PDF, [click here](https://drive.google.com/uc?export=download&id=12DN3UsUvFCMJ6egc3-quDHCXePN8iYoU)\n\n- The equations of motion\n\n- Generalised co-ordinates\n- The principle of least action\n- Galileo’s relativity principle\n- The Lagrangian for a free particle\n- The Lagrangian for a system of particles\n\n- Conservation laws\n\n- Energy\n- Momentum\n- Centre of mass\n- Angular momentum\n- Mechanical similarity\n\n- Integration of the equations of motion\n\n- Motion in one dimension\n- Determination of the potential energy from the period of oscillation\n- The reduced mass\n- Motion in a central field\n- Kepler’s problem\n\n- Collisions between particles\n\n- Disintegration of particles\n- Elastic collisions\n- Scattering\n- Rutherford’s formula\n- Small-angle scattering\n\n- Small oscillations\n\n- Free oscillations in one dimension\n- Forced oscillations\n- Oscillations of systems with more than one degree of freedom\n- Vibrations of molecules\n- Damped oscillations\n- Forced oscillations under friction\n- Parametric resonance\n- Anharmonic oscillations\n- Resonance in non-linear oscillations\n- Motion in a rapidly oscillating field\n\n- Motion of a rigid body\n\n- Angular velocity\n- The inertia tensor\n- Angular momentum of a rigid body\n- The equations of motion of a rigid body\n- Eulerian angles\n- Euler’s equations\n- The asymmetrical top\n- Rigid bodies in contact\n- Motion in a non-inertial frame of reference\n\n- The canonical equations\n\n- Hamilton’s equations\n- The Routhian\n- Poisson brackets\n- The action as a function of the co-ordinates\n- Maupertuis’ principle\n- Canonical transformations\n- Liouville’s theorem\n- The Hamilton-Jacobi equation\n- Separation of the variables\n- Adiabatic invariants\n- General properties of motion in s dimensions",
+    "order": 0,
+    "resources": [
+      {
+        "group": "Book References",
+        "title": "Mechanics by L. D. Landau & E. M. Lifshitz",
+        "url": "https://drive.google.com/uc?export=download&id=1ccGCXbCB2Y4928SYThfB23D0eOTqa6Bv"
+      },
+      {
+        "group": "Lecture Notes",
+        "title": "Mechanics Lecture - Chapter 1",
+        "url": "https://drive.google.com/uc?export=download&id=1RYnE94i9IHLz4q26-0oXeNEnDNLlMZoH"
+      },
+      {
+        "group": "Lecture Notes",
+        "title": "Mechanics Lecture - Chapter 2",
+        "url": "https://drive.google.com/uc?export=download&id=1644d4TO7jqKAU4k0dbk6dJsxT3FYw1TM"
+      }
+    ]
+  },
+  {
+    "id": "course_introduction-to-latex",
+    "title": "Introduction to LaTeX",
+    "slug": "introduction-to-latex",
+    "imageUrl": "/images/courses/introduction-to-latex.webp",
+    "startDate": 1606780800,
+    "endDate": 1617235200,
+    "instructor": "Md. Abdus Sami Akanda",
+    "language": "English",
+    "url": "https://fermionku.com/course/introduction-to-latex/",
+    "description": "LaTeX is widely used in academia for the communication and publication of scientific documents in many fields, including mathematics, statistics, computer science, engineering, physics, economics, linguistics, quantitative psychology, philosophy, and political science. It also has a prominent role in the preparation…",
+    "overview": "LaTeX is widely used in academia for the communication and publication of scientific documents in many fields, including mathematics, statistics, computer science, engineering, physics, economics, linguistics, quantitative psychology, philosophy, and political science. It also has a prominent role in the preparation and publication of books and articles that contain complex multilingual materials, such as Sanskrit and Greek. LaTeX uses the TeX typesetting program for formatting its output and is itself written in the TeX macro language.\n\nLectures of this course were recorded as a YouTube playlist starting from December 2020.",
+    "outline": "To download PDF, [click here](https://drive.google.com/uc?export=download&id=1WP1SRU66X_DynSMvm62oiVPiacm_Nw8v)\n\n- Introduction\n\n- What is LaTeX?\n- Before You Start\n\n- Document Structure\n\n- Essentials\n- Creating a Title\n- Sections\n- Labelling\n- Table of Contents\n- Typesetting Text\n- Font Effects\n- Colored Text\n- Font Sizes\n- Lists\n- Comments & Spacing\n- Special Characters\n\n- Tables\n- Figures\n- Equations\n\n- Inserting Equations\n- Mathematical Symbols\n\n- Inserting References\n\n- Introduction\n- The BibTeX file\n- Inserting the bibliography\n- Citing",
+    "order": 1,
+    "resources": [
+      {
+        "group": "Book References",
+        "title": "LaTeX for beginners",
+        "url": "https://drive.google.com/uc?export=download&id=1ieO2zyNOTxlk3Ko9LmDMsrhIRoTV5oY7"
+      }
+    ],
+    "playlist": "PLR5r8DDZi7Z0oxVVB9zTwbqQN5kpgTUcD"
+  },
+  {
+    "id": "course_special-relativity",
+    "title": "Special Relativity",
+    "slug": "special-relativity",
+    "imageUrl": "/images/courses/special-relativity.webp",
+    "startDate": 1601510400,
+    "endDate": 1601510400,
+    "instructor": "Md. Abdus Sami Akanda",
+    "language": "Bangla",
+    "url": "https://fermionku.com/course/special-relativity/",
+    "description": "In physics, the special theory of relativity, or special relativity for short, is a scientific theory regarding the relationship between space and time. In Albert Einstein’s original treatment, the theory is based on two postulates: The laws of physics are invariant (that is, identical) in all inertial frames of ref…",
+    "overview": "In physics, the special theory of relativity, or special relativity for short, is a scientific theory regarding the relationship between space and time. In Albert Einstein’s original treatment, the theory is based on two postulates:\n\n- The laws of physics are invariant (that is, identical) in all inertial frames of reference (that is, frames of reference with no acceleration).\n- The speed of light in vacuum is the same for all observers, regardless of the motion of the light source or observer.\n\nLectures of this course were given every Friday from 8:00 pm to 9:30 pm, starting from October 2020 to October 2020. The course was taught online under [Fermion Physics Club](https://fermionku.com) via Zoom, due to the COVID-19 pandemic.\nThe live lectures were recorded and uploaded to YouTube. Students received information about how to attend the classes via messenger group.",
+    "outline": "The course outline is not available for this course.",
+    "order": 2,
+    "resources": [
+      {
+        "group": "Book References",
+        "title": "Special Relativity by David W. Hogg",
+        "url": "https://drive.google.com/uc?export=download&id=13XAtermUjJEdIDBWH-QfhKDSiTb1z8Aw"
+      },
+      {
+        "group": "Lecture Notes",
+        "title": "Special Relativity",
+        "url": "https://drive.google.com/uc?export=download&id=1mm2zRysDdri_QyLyoMoQ9codep0izP1D"
+      }
+    ],
+    "playlist": "PLR5r8DDZi7Z0kwxh0dXTc4aK3nPXRJ7fY"
+  },
+  {
+    "id": "course_calculus",
+    "title": "Calculus",
+    "slug": "calculus",
+    "imageUrl": "/images/courses/calculus.webp",
+    "startDate": 1591142400,
+    "endDate": 1593388800,
+    "instructor": "Md. Abdus Sami Akanda",
+    "language": "Bangla",
+    "url": "https://fermionku.com/course/calculus",
+    "description": "Calculus, originally called infinitesimal calculus or “the calculus of infinitesimals”, is the mathematical study of continuous change, in the same way, that geometry is the study of shape and algebra is the study of generalizations of arithmetic operations. It has two major branches, differential calculus and integ…",
+    "overview": "Calculus, originally called infinitesimal calculus or “the calculus of infinitesimals”, is the mathematical study of continuous change, in the same way, that geometry is the study of shape and algebra is the study of generalizations of arithmetic operations.\nIt has two major branches, differential calculus and integral calculus; the former concerns instantaneous rates of change, and the slopes of curves, while integral calculus concerns the accumulation of quantities and areas under or between curves. These two branches are related to each other by the fundamental theorem of calculus, and they make use of the fundamental notions of convergence of infinite sequences and infinite series to a well-defined limit.\n\nLectures of this course were given every Friday from 8:00 pm to 9:30 pm, starting from 3 June 2020 to 29 June 2020. The course was taught online under [Fermion Physics Club](https://fermionku.com) via Zoom, due to the COVID-19 pandemic.\nThe live lectures were recorded and uploaded to YouTube. Students received information about how to attend the classes via messenger group.",
+    "outline": "To download PDF, [click here](https://drive.google.com/uc?export=download&id=1x6D9j8JwAOJNTIgQOOcNOXA_LOrqI-yQ)\n\n- BEFORE CALCULUS\n\n- Functions\n- New Functions from Old\n- Families of Functions\n- Inverse Functions; Inverse Trigonometric Functions\n- Exponential and Logarithmic Functions\n\n- LIMITS AND CONTINUITY\n\n- Limits (An Intuitive Approach)\n- Computing Limits\n- Limits at Infinity; End Behavior of a Function\n- Continuity\n- Continuity of Trigonometric, Exponential, and Inverse Functions\n\n- THE DERIVATIVE\n\n- Tangent Lines and Rates of Change\n- The Derivative Function\n- Introduction to Techniques of Differentiation\n- The Product and Quotient Rules\n- The Chain Rule\n\n- ORDINARY DIFFERENTIATION\n\n- Derivatives of Trigonometric Functions\n- Derivatives of Logarithmic Functions\n- Derivatives of Exponential and Inverse Trigonometric Functions\n- Local Linear Approximation; Differentials\n- L’Hôpital’s Rule; Indeterminate Forms\n\n- APPLICATIONS OF DIFFERENTIATION\n\n- Absolute Maxima and Minima\n- Applied Maximum and Minimum Problems\n- Rectilinear Motion\n- Newton’s Method\n- Rolle’s Theorem\n- Mean-Value Theorem\n\n- INTEGRATION\n\n- An Overview of the Area Problem\n- The Indefinite Integral\n- Integration by Substitution\n- The Definition of Area as a Limit; Sigma Notation\n- The Definite Integral\n- The Fundamental Theorem of Calculus\n- Average Value of a Function and its Applications\n- Evaluating Definite Integrals by Substitution\n- Logarithmic and Other Functions Defined by Integrals\n\n- PRINCIPLES OF INTEGRAL EVALUATION\n\n- An Overview of Integration Methods\n- Integration by Parts\n- Integrating Trigonometric Functions\n- Integrating Rational Functions by Partial Fractions\n- Improper Integrals",
+    "order": 3,
+    "resources": [
+      {
+        "group": "Book References",
+        "title": "Calculus by Howard Anton, Irl C. Bivens & Stephen Davis",
+        "url": "https://drive.google.com/uc?export=download&id=15RR-4fDhPSk2pR42H68QwcmtqRQIIgSk"
+      },
+      {
+        "group": "Book References",
+        "title": "Calculus by James Stewart",
+        "url": "https://drive.google.com/uc?export=download&id=1WtuKfwXjWWlkD3Z0CFp5rE5Yp-fWHTkX"
+      },
+      {
+        "group": "Lecture Notes",
+        "title": "Differential calculus",
+        "url": "https://drive.google.com/uc?export=download&id=1U6rvS8yX4G6nNx1J_aMf2nisgcqMK8iB"
+      }
+    ],
+    "playlist": "PLR5r8DDZi7Z2Je3cFiMXjIQEohWWVCdvB"
+  },
+  {
+    "id": "course_electromagnetic-theory",
+    "title": "Electromagnetic Theory",
+    "slug": "electromagnetic-theory",
+    "imageUrl": "/images/courses/electromagnetic-theory.webp",
+    "startDate": 1590969600,
+    "endDate": 1593561600,
+    "instructor": "Md. Abdus Sami Akanda",
+    "language": "Bangla",
+    "url": "https://www.abdussamiakanda.com/course/electromagnetic-theory/",
+    "description": "Electromagnetism is a branch of physics involving the study of electromagnetic force, a type of physical interaction that occurs between electrically charged particles. The electromagnetic force is one of the four fundamental interactions (commonly called forces) in nature, together with the strong interaction, the…",
+    "overview": "Electromagnetism is a branch of physics involving the study of electromagnetic force, a type of physical interaction that occurs between electrically charged particles. The electromagnetic force is one of the four fundamental interactions (commonly called forces) in nature, together with the strong interaction, the weak interaction, and gravitation. Electromagnetic phenomena are defined in terms of the electromagnetic force, sometimes called the Lorentz force, which includes both electricity and magnetism as different manifestations of the same phenomenon. The electromagnetic force plays a major role in determining the internal properties of most objects encountered in daily life. The electromagnetic attraction between atomic nuclei and their orbital electrons holds atoms together. Electromagnetic forces are responsible for the chemical bonds between atoms which create molecules, and intermolecular forces. The electromagnetic force governs all chemical processes, which arise from interactions between the electrons of neighboring atoms. Electromagnetism is very widely used in modern technology, and electromagnetic theory is the basis of electric power engineering and electronics including digital technology.\n\nLectures of this course were given every Friday from 8:00 pm to 9:30 pm, starting from June 2020 to July 2020. The course was taught online under [Fermion Physics Club](https://fermionku.com) via Zoom, due to the COVID-19 pandemic.\nThe live lectures were recorded and uploaded to YouTube. Students received information about how to attend the classes via messenger group.",
+    "outline": "To download PDF, [click here](https://drive.google.com/uc?export=download&id=1fALq5g3IwYUT4To8yiTIW4O8pssgbeRO)\n\n- ELECTROMAGNETIC FIELD EQUATIONS\n\n- Review of Maxwell’s equations in the vacuum and in matter\n- Integral and differential formulation\n- Vector and scalar potentials\n- Gauge invariance\n- Lorenz and Coulomb gauge\n- Lorentz Force in terms of potential\n- Poynting theorem and Energy-Momentum conservation for electromagnetic fields and charges\n\n- BOUNDARY VALUE PROBLEMS IN ELECTROSTATICS\n\n- Poisson equation and Laplace equation\n- Uniqueness of the solution with Dirichlet of Neumann equation\n- Method of image charges\n- Solution of Laplace equation in two and three dimensions in Cartesian, cylindrical and spherical coordinates\n- Associated Legendre polynomials and spherical harmonics\n- Multiple expansion of the potential due to a localized charge distribution\n- Dipole and quadrupole moments\n- Field inside dielectrics\n- Boundary value problems involving dielectrics\n\n- PROPAGATION OF ELECTROMAGNETIC WAVES IN ISOTROPIC MEDIA\n\n- Boundary conditions on the field vectors\n- Reflection and refraction of electromagnetic waves\n- Total internal reflection\n\n- PROPAGATION OF ELECTROMAGNETIC WAVES IN CONDUCTING MEDIA\n\n- Nature of metallic boundary conditions\n- Metallic reflection\n- Normal incidence\n- Oblique incidence\n- Propagation between parallel conducting plates\n- Propagation through ionized media\n- Waveguides\n- Cavity resonators",
+    "order": 4,
+    "resources": [
+      {
+        "group": "Book References",
+        "title": "A student’s guide to Maxwell’s equations by Daniel Fleisch",
+        "url": "https://drive.google.com/uc?export=download&id=1WvDMBtF-PPw0yd4QgbVtwG5NRWdqla8D"
+      },
+      {
+        "group": "Lecture Notes",
+        "title": "Electromagnetic Theory Lecture Notes",
+        "url": "https://drive.google.com/uc?export=download&id=1KvPvveWQZUFm7QT4DAseFDL9mQLkcem-"
+      }
+    ],
+    "playlist": "PLR5r8DDZi7Z1ImJHRcVdfkpKWudbRyT2g"
+  },
+  {
+    "id": "course_electricity-magnetism",
+    "title": "Electricity & Magnetism",
+    "slug": "electricity-magnetism",
+    "imageUrl": "/images/courses/electricity-magnetism.webp",
+    "startDate": 1585699200,
+    "endDate": 1588291200,
+    "instructor": "Md. Abdus Sami Akanda",
+    "language": "Bangla",
+    "url": "https://fermionku.com/course/electricity-magnetism/",
+    "description": "Everything around us is driven by electricity and magnetism. The universe exists because of electricity and magnetism.",
+    "overview": "Everything around us is driven by electricity and magnetism. The universe exists because of electricity and magnetism. This course serves as a comprehensive introduction to the foundations of electricity and magnetism. It develops the intuition of the students focusing on both physical and mathematical formalism of electric and magnetic phenomena. This course focused more on physics than mathematics.\n\nLectures of this course were given every Friday from 8:00 pm to 9:30 pm, starting from April 2020 to May 2020. The course was taught online under [Fermion Physics Club](https://fermionku.com) via Zoom, due to the COVID-19 pandemic.\nThe live lectures were recorded and uploaded to YouTube. Students received information about how to attend the classes via messenger group.",
+    "outline": "The course outline is not available for this course.",
+    "order": 5,
+    "playlist": "PLR5r8DDZi7Z1qyPVCMCf1BaSpnypw321t"
+  }
+]

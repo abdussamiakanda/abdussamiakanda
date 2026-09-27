@@ -1,0 +1,67 @@
+[
+  {
+    "id": "pub_review_mtj",
+    "title": "Alternating current triggered exchange-mediated picosecond switching of cylindrical magnetic tunnel junctions",
+    "authors": "M. A. Jasem, Y. D. Liu, M. T. Islam, M. A. S. Akanda, X. R. Wang, and T. Min",
+    "journal": "Journal of Applied Physics",
+    "year": "2026",
+    "status": "Under Review",
+    "description": "",
+    "url": ""
+  },
+  {
+    "id": "pub_review_localized_gradient",
+    "title": "Localized thermal gradient driven domain wall dynamics in ferromagnetic nanowire",
+    "authors": "M. A. J. Pikul, M. A. S. Akanda, and M. T. Islam",
+    "journal": "Physica B: Condensed Matter",
+    "year": "2026",
+    "status": "Under Review",
+    "description": "",
+    "url": ""
+  },
+  {
+    "id": "pub_1",
+    "title": "Thermal effect on microwave pulse-driven magnetization switching of Stoner particle",
+    "authors": "S. Chowdhury, M. A. S. Akanda, M. A. J. Pikul, M. T. Islam, and T. Min",
+    "journal": "Physica Scripta, Institute of Physics (Q2; IF: 2.9)",
+    "year": "2023",
+    "description": "We investigate the cosine-chirped microwave pulse (cosine CMP)-driven magnetization switching of a nanoparticle or stoner particle at a finite temperature in the framework of the stochastic Landau–Lifshitz-Gilbert equation. Numerical results reveal that the ultrafast and efficient magnetization switching is robust even at room temperature, and hence we estimate the maximal temperature at which the magnetization switching is still valid. The maximal temperature increases with the enlargement (by increasing cross-sectional area) of the nanoparticle/stoner particle volume to a certain value, and afterward, the maximal temperature decreases with the further increment of the nanoparticle size. Initially, the shape anisotropy (approximated by the easy-plane) coefficient does not become dominant although the stoner particle volume increases, which plays a role in increasing thermal stability (maximal temperature), and later the shape anisotropy field becomes dominant, which opposes the uniaxial anisotropy, i.e., reduces the energy barrier, which reduces the maximal temperature. For smaller volumes, the parameters of cosine CMP show a decreasing trend with temperature. The initial frequency requirement significantly decreases with shape anisotropy. Therefore, these findings might be useful to realize cosine CMP-driven fast and energy-efficient magnetization switching in device applications.",
+    "url": "https://doi.org/10.1088/1402-4896/ad1706"
+  },
+  {
+    "id": "pub_2",
+    "title": "Role of SSW on thermal-gradient induced domain-wall dynamics",
+    "authors": "M. A. S. Akanda, M. T. Islam, and X. R. Wang",
+    "journal": "Journal of Physics: Condensed Matter, 35(31), 315701, Institute of Physics (Q1; IF: 2.745)",
+    "year": "2023",
+    "description": "We study the thermal gradient (TG) induced domain wall (DW) dynamics in a uniaxial nanowire in the framework of the Stochastic-Landau–Lifshitz–Gilbert equation. TG drives the DW in a certain direction, and DW (linear and rotational) velocities increase with TG linearly, which can be explained by the magnonic angular momentum transfer to the DW. Interestingly, from Gilbert damping dependence of DW dynamics for fixed TG, we find that the DW velocity is significantly smaller even for lower damping, and DW velocity increases with damping (for a certain range of damping) and reaches a maximal value for critical damping which is contrary to our usual desire. This can be attributed to the formation of standing spin wave (SSW) modes (from the superposition of the spin waves and their reflection) together with travelling spin wave (TSW) modes. SSW does not carry any net energy/momentum to the DW, while TSW does. Damping α compels the spin current polarization to align with the local spin, which reduces the magnon propagation length and thus α hinders to generate SSWs, and contrarily the number of TSWs increases, which leads to the increment of DW speed with damping. For a similar reason, we observe that DW velocity increases with nanowire length and becomes saturated to maximal value for a certain length. Therefore, these findings may enhance the fundamental understanding as well as provide a way of utilizing the Joule heat in the spintronics (e.g. racetrack memory) devices.",
+    "url": "https://doi.org/10.1088/1361-648X/accfdc"
+  },
+  {
+    "id": "pub_3",
+    "title": "Role of shape anisotropy on thermal gradient-driven domain wall dynamics in magnetic nanowires",
+    "authors": "M. T. Islam, M. A. S. Akanda, F. Yesmin, M. A. J. Pikul, and J. M. T. Islam",
+    "journal": "Modern Physics Letters B, 37(12), 2350013, World Scientific Publishing (Q3; IF: 1.9)",
+    "year": "2023",
+    "description": "In this paper, we investigate the magnetic-domain wall (DW) dynamics in uniaxial/biaxial-nanowires under a thermal gradient (TG). The findings reveal that the DW propagates toward the hotter region in both nanowires. In uniaxial nanowire, the DW propagates accompanying a rotation of the DW-plane. In biaxial nanowire, the DW propagates in the hotter region, and the so-called Walker breakdown phenomenon is observed. The main physics of such DW dynamics is the magnonic angular momentum transfer to the DW. The hard (shape) anisotropy exists in biaxial-nanowire, which contributes an additional torque; hence DW speed is larger than that in uniaxial-nanowire. But the rotational speed is lower initially as hard anisotropy suppresses the DW-rotation. After certain TG, DW-plane overcomes the hard anisotropy and so the rotational speed increases slightly. With lower damping, the DW velocity is smaller and DW velocity increases with damping which is a contrary to usual desire. The reason is predicted as the formation of the standing spin-waves (by superposing the spin waves and its reflection from the boundary) which do not carry any net energy to DW. However, for larger damping, DW velocity decreases with damping since the magnon-propagation length decreases. Therefore, the above findings might be useful to realize the spintronics (i.e. racetrack-memory) devices.",
+    "url": "https://doi.org/10.1142/S0217984923500136"
+  },
+  {
+    "id": "pub_4",
+    "title": "Shape anisotropy effect on magnetization reversal induced by linear down chirp pulse",
+    "authors": "Z. K. Juthy, M. A. J. Pikul, M. A. S. Akanda, M. T. Islam",
+    "journal": "Physica B: Condensed Matter, 630, 413671, Elsevier (Q2; IF: 2.988)",
+    "year": "2022",
+    "description": "We investigate the influence of shape anisotropy on the magnetization reversal of a single-domain magnetic nanoparticle driven by a circularly polarized linear down-chirp microwave field pulse (DCMP). Based on the Landau-Lifshitz-Gilbert equation, numerical results show that the three controlling parameters of DCMP, namely, microwave amplitude, initial frequency and chirp rate, decrease with the increase of shape anisotropy. For certain shape anisotropy, the reversal time significantly reduces. These findings are related to the competition of shape anisotropy and uniaxial magnetocrystalline anisotropy and thus to the height of energy barrier which separates the two stable states. The result of damping dependence of magnetization reversal indicates that for a certain sample shape, there exists an optimal damping situation at which magnetization is fastest. Moreover, it is also shown that the required microwave field amplitude can be lowered by applying the spin-polarized current simultaneously. The usage of an optimum combination of both microwave field pulse and current is suggested to achieve cost efficiency and faster switching. So these findings may provide the knowledge to fabricate the shape of a single domain nanoparticle for the fast and power-efficient magnetic data storage device.",
+    "url": "https://doi.org/10.1016/j.physb.2022.413671"
+  },
+  {
+    "id": "pub_5",
+    "title": "Fast magnetization reversal of a magnetic nanoparticle induced by cosine chirp microwave field pulse",
+    "authors": "M. T. Islam, M. A. S. Akanda, M. A. J. Pikul and X. S. Wang",
+    "journal": "Journal of Physics: Condensed Matter, 34(10), 105802, Institute of Physics (Q1; IF: 2.745)",
+    "year": "2021",
+    "description": "We investigate the magnetization reversal of single-domain magnetic nanoparticle driven by the circularly polarized cosine chirp microwave pulse (CCMP). The numerical findings, based on the Landau–Lifshitz–Gilbert equation, reveal that the CCMP is by itself capable of driving fast and energy-efficient magnetization reversal. The microwave field amplitude and initial frequency required by a CCMP are much smaller than that of the linear down-chirp microwave pulse. This is achieved as the frequency change of the CCMP closely matches the frequency change of the magnetization precession which leads to an efficient stimulated microwave energy absorption (emission) by (from) the magnetic particle before (after) it crosses over the energy barrier. We further find that the enhancement of easy-plane shape anisotropy significantly reduces the required microwave amplitude and the initial frequency of CCMP. We also find that there is an optimal Gilbert damping for fast magnetization reversal. These findings may provide a pathway to realize the fast and low-cost memory device.",
+    "url": "https://doi.org/10.1088/1361-648X/ac3f66"
+  }
+]

@@ -1,109 +1,67 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Header from '../components/Header';
-import SEO from '../components/SEO';
-import Footer from '../components/Footer';
-import './DemoPage.css';
+import Page from '../components/Page';
+import { Button, Loader } from '../components/ui/primitives';
 
 function DemoPage() {
   const { name } = useParams();
-  const [loading, setLoading] = useState(true);
+  const [src, setSrc] = useState(null);
   const [error, setError] = useState(null);
-  const iframeRef = useRef(null);
 
   useEffect(() => {
-    if (!name) {
-      setError('Demo name not provided');
-      setLoading(false);
-      return;
-    }
-
-    // Load the HTML file
-    const loadDemo = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        
-        // Fetch the HTML file from public directory
-        const response = await fetch(`/demo/${name}.html`);
-        if (!response.ok) {
-          throw new Error(`Demo "${name}" not found`);
-        }
-        
-        const htmlContent = await response.text();
-        
-        // Create a blob URL for the HTML content
-        const blob = new Blob([htmlContent], { type: 'text/html' });
-        const url = URL.createObjectURL(blob);
-        
-        if (iframeRef.current) {
-          iframeRef.current.src = url;
-        }
-        
-        setLoading(false);
-        
-        // Cleanup blob URL on unmount
-        return () => {
-          URL.revokeObjectURL(url);
-        };
-      } catch (err) {
-        console.error('Error loading demo:', err);
-        setError(err.message);
-        setLoading(false);
-      }
+    let url;
+    let alive = true;
+    setSrc(null);
+    setError(null);
+    fetch(`/demo/${name}.html`)
+      .then((res) => {
+        if (!res.ok) throw new Error(`Demo “${name}” not found`);
+        return res.text();
+      })
+      .then((html) => {
+        // Serve through a blob URL so the SPA fallback can't swap in index.html.
+        url = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
+        if (alive) setSrc(url);
+      })
+      .catch((err) => alive && setError(err.message));
+    return () => {
+      alive = false;
+      if (url) URL.revokeObjectURL(url);
     };
-
-    loadDemo();
   }, [name]);
 
-  if (error) {
-    return (
-      <div className="app">
-        <Header />
-        <main className="demo-page-main">
-          <div className="demo-page-container">
-            <div className="demo-error">
-              <h1>Demo Not Found</h1>
-              <p>{error}</p>
-            </div>
-          </div>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
-
   return (
-    <div className="app">
-      <SEO 
-        title={`Demo - ${name}`}
-        description={`Interactive demo: ${name}`}
-        url={`/demo/${name}`}
-      />
-      <Header />
-      <main className="demo-page-main">
-        <div className="demo-page-container">
-          {loading && (
-            <div className="demo-loading">
-              <div className="loader"></div>
-              <p>Loading demo...</p>
-            </div>
-          )}
-          <div className="demo-wrapper">
-            <iframe
-              ref={iframeRef}
-              title={`Demo: ${name}`}
-              className="demo-iframe"
-              style={{ display: loading ? 'none' : 'block' }}
-              sandbox="allow-scripts allow-same-origin"
-            />
-          </div>
+    <Page seo={{ title: `Demo — ${name}`, description: `Interactive demo: ${name}` }}>
+      <section className="shell pb-10 pt-32">
+        <div className="mb-6 flex items-center justify-between">
+          <p className="eyebrow">Demo · {name}</p>
+          <Button to="/projects" variant="quiet" icon="right">
+            Projects
+          </Button>
         </div>
-      </main>
-      <Footer />
-    </div>
+        <div className="overflow-hidden rounded-3xl border border-line bg-surface">
+          <div className="flex items-center gap-2 border-b border-line px-4 py-3">
+            <span className="h-2.5 w-2.5 rounded-full bg-up" />
+            <span className="h-2.5 w-2.5 rounded-full bg-ink-3" />
+            <span className="h-2.5 w-2.5 rounded-full bg-down" />
+            <span className="ml-3 font-mono text-xs text-ink-3">/demo/{name}</span>
+          </div>
+          {error ? (
+            <div className="grid h-[60vh] place-items-center p-8 text-center">
+              <div>
+                <p className="font-display text-4xl text-ink">Demo not found</p>
+                <p className="mt-2 text-ink-2">{error}</p>
+              </div>
+            </div>
+          ) : src ? (
+            <iframe src={src} title={`Demo: ${name}`} className="block h-[75vh] w-full bg-white" sandbox="allow-scripts allow-same-origin" />
+          ) : (
+            <Loader label="Loading demo" />
+          )}
+        </div>
+      </section>
+    </Page>
   );
 }
 
 export default DemoPage;
-

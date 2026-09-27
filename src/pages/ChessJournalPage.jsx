@@ -1,426 +1,229 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
+import Dialog from '@mui/material/Dialog';
+import { FiArrowLeft, FiEdit2, FiPlus, FiSearch, FiTrash2, FiX } from 'react-icons/fi';
 import { auth } from '../firebase/config';
-import { FaEdit, FaTrash } from 'react-icons/fa';
-import Header from '../components/Header';
-import SEO from '../components/SEO';
-import Footer from '../components/Footer';
-import { 
-  getChessJournalEntries, 
+import Page, { PageHeader } from '../components/Page';
+import IndexList from '../components/IndexList';
+import { EmptyState } from '../components/ui/primitives';
+import { Reveal } from '../components/ui/Reveal';
+import useAsync from '../lib/useAsync';
+import { formatDate, toDate } from '../lib/format';
+import { journalExcerpt } from '../lib/chess/meta';
+import {
   addChessJournalEntry,
-  updateChessJournalEntry,
   deleteChessJournalEntry,
-  generateSlug 
+  generateSlug,
+  getChessJournalEntries,
+  updateChessJournalEntry,
 } from '../services/dataService';
-import './NotesPage.css';
-import './ChessJournalPage.css';
 
-function ChessJournalPage() {
-  const [entries, setEntries] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState(null);
-  const [showEditor, setShowEditor] = useState(false);
-  const [editingEntry, setEditingEntry] = useState(null);
-  const [editorTitle, setEditorTitle] = useState('');
-  const [editorContent, setEditorContent] = useState('');
-  const [editorDate, setEditorDate] = useState('');
+const EMPTY = { title: '', date: '', content: '' };
+const field =
+  'w-full rounded-2xl border border-line bg-bg px-4 py-3 text-ink outline-none transition-colors placeholder:text-ink-3 focus:border-up disabled:opacity-60';
+
+function Editor({ open, entry, onClose, onSaved }) {
+  const [form, setForm] = useState(EMPTY);
   const [saving, setSaving] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-    return () => unsubscribe();
-  }, []);
+    if (!open) return;
+    setError(null);
+    setForm(
+      entry
+        ? { title: entry.title ?? '', content: entry.content ?? '', date: toDate(entry.date)?.toISOString().slice(0, 10) ?? '' }
+        : EMPTY,
+    );
+  }, [open, entry]);
 
-  useEffect(() => {
-    loadEntries();
-  }, []);
-
-
-  const loadEntries = async () => {
-    setLoading(true);
-    try {
-      const data = await getChessJournalEntries();
-      setEntries(data || []);
-    } catch (error) {
-      console.error('Error loading journal entries:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const formatDate = (timestamp) => {
-    if (!timestamp) return '';
-    const date = typeof timestamp === 'number' 
-      ? new Date(timestamp * 1000) 
-      : new Date(timestamp);
-    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-  };
-
-  const handleOpenEditor = (entry = null) => {
-    if (entry) {
-      setEditingEntry(entry);
-      setEditorTitle(entry.title || '');
-      setEditorContent(entry.content || '');
-      // Convert timestamp to date string if needed
-      if (entry.date) {
-        const date = typeof entry.date === 'number' 
-          ? new Date(entry.date * 1000) 
-          : new Date(entry.date);
-        setEditorDate(date.toISOString().split('T')[0]);
-      } else {
-        setEditorDate('');
-      }
-    } else {
-      setEditingEntry(null);
-      setEditorTitle('');
-      setEditorContent('');
-      setEditorDate('');
-    }
-    setShowEditor(true);
-  };
-
-  const handleCloseEditor = () => {
-    setShowEditor(false);
-    setEditingEntry(null);
-    setEditorTitle('');
-    setEditorContent('');
-    setEditorDate('');
-  };
-
-  const handleSaveEntry = async () => {
-    if (!editorTitle.trim() || !editorContent.trim()) {
-      alert('Please fill in title and content');
-      return;
-    }
-
+  const save = async () => {
     setSaving(true);
+    setError(null);
     try {
-      if (editingEntry) {
-        await updateChessJournalEntry(editingEntry.id, {
-          title: editorTitle,
-          content: editorContent,
-          date: editorDate || null
-        });
-      } else {
-        await addChessJournalEntry({
-          title: editorTitle,
-          content: editorContent,
-          date: editorDate || null
-        });
-      }
-      handleCloseEditor();
-      await loadEntries();
-    } catch (error) {
-      console.error('Error saving entry:', error);
-      alert('Failed to save entry. Please try again.');
+      const data = { title: form.title.trim(), content: form.content, date: form.date || null };
+      if (entry) await updateChessJournalEntry(entry.id, data);
+      else await addChessJournalEntry(data);
+      onSaved();
+    } catch (e) {
+      console.error(e);
+      setError('Could not save the entry. Please try again.');
     } finally {
       setSaving(false);
     }
   };
 
-  const handleDeleteEntry = async (id) => {
-    if (!window.confirm('Are you sure you want to delete this entry?')) {
-      return;
-    }
-
-    try {
-      await deleteChessJournalEntry(id);
-      await loadEntries();
-    } catch (error) {
-      console.error('Error deleting entry:', error);
-      alert('Failed to delete entry. Please try again.');
-    }
-  };
-
-  // Filter entries based on search query
-  const filteredEntries = entries.filter(entry => {
-    if (!searchQuery.trim()) return true;
-    
-    const query = searchQuery.toLowerCase();
-    const title = (entry.title || '').toLowerCase();
-    const content = (entry.content || '')
-      .replace(/\\Chess\{[\s\S]*?\}/g, '') // Remove chess blocks
-      .replace(/#{1,6}\s+/g, '') // Remove headers
-      .replace(/\*\*([^*]+)\*\*/g, '$1') // Remove bold
-      .replace(/\*([^*]+)\*/g, '$1') // Remove italic
-      .replace(/`([^`]+)`/g, '$1') // Remove inline code
-      .toLowerCase();
-    
-    return title.includes(query) || content.includes(query);
-  });
-
-
-  if (loading) {
-    return (
-      <div className="app">
-        <Header />
-        <div className="loading-container">
-          <div className="loader"></div>
-        </div>
-      </div>
-    );
-  }
+  const valid = form.title.trim() && form.content.trim();
 
   return (
-    <div className="app">
-      <SEO 
-        title="Chess Journal"
-        description="Chess journal entries with game analysis and annotations"
-        url="/hobbies/chess/journal"
-      />
-      <Header />
-      <main className="chess-journal-page-main">
-        <div className="chess-journal-page-container">
-          <Link to="/hobbies/chess" className="back-link">Back to Chess</Link>
-          <div style={{ clear: 'both' }}></div>
-          <div className="journal-header-wrapper">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-              <h1 className="chess-journal-title" style={{ marginBottom: '0' }}>Chess Journal</h1>
-              {user && (
-                <button 
-                  className="add-entry-btn"
-                  onClick={() => handleOpenEditor()}
-                  style={{
-                    padding: '0.75rem 1.5rem',
-                    background: '#000000',
-                    border: '1px solid #000000',
-                    borderRadius: '0',
-                    color: '#ffffff',
-                    fontSize: '1rem',
-                    fontWeight: 400,
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease',
-                    fontFamily: 'inherit'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = '#1a1a1a';
-                    e.currentTarget.style.borderColor = '#1a1a1a';
-                    e.currentTarget.style.transform = 'translateY(-1px)';
-                    e.currentTarget.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.1)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = '#000000';
-                    e.currentTarget.style.borderColor = '#000000';
-                    e.currentTarget.style.transform = '';
-                    e.currentTarget.style.boxShadow = '';
-                  }}
-                >
-                  + Add Entry
-                </button>
-              )}
-            </div>
-            
-            {entries.length > 0 && (
-              <div className="journal-search-container">
-                <input
-                  type="text"
-                  className="journal-search-input"
-                  placeholder="Search entries..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-              </div>
-            )}
-          </div>
-          
-          {entries.length === 0 ? (
-            <div className="empty-message">No journal entries yet.</div>
-          ) : filteredEntries.length === 0 ? (
-            <div className="empty-message">No entries found matching your search.</div>
-          ) : (
-            <>
-              <div className="notes-list">
-                {filteredEntries.map(entry => {
-                  const entrySlug = generateSlug(entry.title);
-                  // Extract excerpt from content
-                  let excerpt = entry.content
-                    ? entry.content
-                        .replace(/\\Chess\{[\s\S]*?\}/g, '') // Remove chess blocks
-                        .replace(/#{1,6}\s+/g, '') // Remove headers
-                        .replace(/\*\*([^*]+)\*\*/g, '$1') // Remove bold
-                        .replace(/\*([^*]+)\*/g, '$1') // Remove italic
-                        .replace(/`([^`]+)`/g, '$1') // Remove inline code
-                        .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Convert links to text
-                        .trim()
-                    : '';
-                  
-                  return (
-                    <div key={entry.id} style={{ position: 'relative' }}>
-                      <Link 
-                        to={`/hobbies/chess/journal/${entrySlug}`}
-                        className="note-item note-item-link"
-                      >
-                        <h3 className="note-title">{entry.title}</h3>
-                        {entry.date && <p className="note-date">{formatDate(entry.date)}</p>}
-                        {excerpt && (
-                          <p className="note-description">
-                            {excerpt.length > 150 ? excerpt.substring(0, 150).trim() + '...' : excerpt}
-                          </p>
-                        )}
-                        <span className="note-link-text">Read Entry →</span>
-                      </Link>
-                      {user && (
-                        <div style={{
-                          position: 'absolute',
-                          bottom: '1rem',
-                          right: '1rem',
-                          display: 'flex',
-                          gap: '0.5rem',
-                          zIndex: 10
-                        }}>
-                          <button
-                            onClick={(e) => {
-                              e.preventDefault();
-                              e.stopPropagation();
-                              handleOpenEditor(entry);
-                            }}
-                            style={{
-                              background: 'transparent',
-                              border: '1px solid rgba(0, 0, 0, 0.1)',
-                              borderRadius: '0',
-                              padding: '0.5rem',
-                              cursor: 'pointer',
-                              fontSize: '1rem',
-                              color: 'var(--text-secondary)',
-                              transition: 'all 0.2s ease',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center'
-                            }}
-                            onMouseEnter={(e) => {
-                              e.currentTarget.style.background = '#000000';
-                              e.currentTarget.style.borderColor = '#000000';
-                              e.currentTarget.style.color = '#ffffff';
-                            }}
-                            onMouseLeave={(e) => {
-                              e.currentTarget.style.background = 'transparent';
-                              e.currentTarget.style.borderColor = 'rgba(0, 0, 0, 0.1)';
-                              e.currentTarget.style.color = 'var(--text-secondary)';
-                            }}
-                            title="Edit entry"
-                          >
-                            <FaEdit />
-                          </button>
-                          <button
-                            onClick={(e) => {
-                              e.preventDefault();
-                              e.stopPropagation();
-                              handleDeleteEntry(entry.id);
-                            }}
-                            style={{
-                              background: 'rgba(255, 68, 68, 0.2)',
-                              border: '1px solid rgba(255, 68, 68, 0.3)',
-                              borderRadius: '4px',
-                              padding: '0.5rem',
-                              cursor: 'pointer',
-                              fontSize: '1rem',
-                              color: 'rgba(255, 255, 255, 0.9)',
-                              transition: 'all 0.2s ease',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center'
-                            }}
-                            onMouseEnter={(e) => {
-                              e.currentTarget.style.background = 'rgba(255, 68, 68, 0.4)';
-                              e.currentTarget.style.borderColor = 'rgba(255, 68, 68, 0.6)';
-                            }}
-                            onMouseLeave={(e) => {
-                              e.currentTarget.style.background = 'rgba(255, 68, 68, 0.2)';
-                              e.currentTarget.style.borderColor = 'rgba(255, 68, 68, 0.3)';
-                            }}
-                            title="Delete entry"
-                          >
-                            <FaTrash />
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            </>
-          )}
-        </div>
+    <Dialog open={open} onClose={() => !saving && onClose()} fullWidth maxWidth="md" slotProps={{ paper: { sx: { borderRadius: '26px' } } }}>
+      <div className="flex items-center justify-between border-b border-line px-6 py-4">
+        <h2 className="font-display text-3xl text-ink">{entry ? 'Edit entry' : 'New entry'}</h2>
+        <button type="button" onClick={onClose} disabled={saving} className="grid h-10 w-10 place-items-center rounded-full text-ink-2 hover:bg-surface-2" aria-label="Close">
+          <FiX />
+        </button>
+      </div>
+      <div className="grid gap-4 px-6 py-5">
+        <label className="grid gap-1.5">
+          <span className="eyebrow">Title</span>
+          <input className={field} value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder="The Najdorf that got away" disabled={saving} />
+        </label>
+        <label className="grid gap-1.5">
+          <span className="eyebrow">Date (optional)</span>
+          <input type="date" className={field} value={form.date} onChange={(e) => setForm({ ...form, date: e.target.value })} disabled={saving} />
+        </label>
+        <label className="grid gap-1.5">
+          <span className="eyebrow">Content (Markdown)</span>
+          <textarea
+            className={`${field} min-h-[16rem] font-mono text-sm`}
+            value={form.content}
+            onChange={(e) => setForm({ ...form, content: e.target.value })}
+            placeholder={'Write in Markdown. Embed a replayable game with \\Chess{ ...PGN... }'}
+            disabled={saving}
+          />
+          <span className="text-xs text-ink-3">
+            Embed a game with <code className="rounded bg-surface-2 px-1 font-mono">\Chess{'{'} …PGN… {'}'}</code>
+          </span>
+        </label>
+        {error && <p className="rounded-2xl bg-red-500/10 px-4 py-3 text-sm text-red-500">{error}</p>}
+      </div>
+      <div className="flex justify-end gap-2 border-t border-line px-6 py-4">
+        <button type="button" onClick={onClose} disabled={saving} className="h-11 rounded-full border border-line-strong px-5 text-sm text-ink hover:border-ink">
+          Cancel
+        </button>
+        <button
+          type="button"
+          onClick={save}
+          disabled={saving || !valid}
+          className="h-11 rounded-full bg-ink px-6 font-mono text-xs uppercase tracking-[0.1em] text-bg transition-colors hover:bg-up hover:text-on-up disabled:opacity-40"
+        >
+          {saving ? 'Saving…' : entry ? 'Save changes' : 'Publish entry'}
+        </button>
+      </div>
+    </Dialog>
+  );
+}
 
-        {/* Editor Modal */}
-        {showEditor && (
-          <div className="editor-modal-overlay" onClick={() => !saving && handleCloseEditor()}>
-            <div className="editor-modal" onClick={(e) => e.stopPropagation()}>
-              <div className="editor-modal-header">
-                <h2>{editingEntry ? 'Edit Journal Entry' : 'Add Journal Entry'}</h2>
-                <button 
-                  className="close-editor-btn"
-                  onClick={handleCloseEditor}
-                  disabled={saving}
-                >
-                  ×
+function ChessJournalPage() {
+  const [refresh, setRefresh] = useState(0);
+  const { data: entries, loading } = useAsync(getChessJournalEntries, [refresh], []);
+  const [user, setUser] = useState(null);
+  const [query, setQuery] = useState('');
+  const [editing, setEditing] = useState(null); // null closed · {} new · entry
+  const [deleting, setDeleting] = useState(null);
+
+  useEffect(() => onAuthStateChanged(auth, setUser), []);
+
+  const q = query.trim().toLowerCase();
+  const shown = q ? entries.filter((e) => `${e.title} ${journalExcerpt(e.content, 100000)}`.toLowerCase().includes(q)) : entries;
+
+  const confirmDelete = async () => {
+    await deleteChessJournalEntry(deleting.id);
+    setDeleting(null);
+    setRefresh((r) => r + 1);
+  };
+
+  return (
+    <Page loading={loading} seo={{ title: 'Chess journal', description: 'Annotated chess games and notes, with replayable positions.', url: '/hobbies/chess/journal' }}>
+      <PageHeader
+        eyebrow={
+          <Link to="/hobbies/chess" className="inline-flex items-center gap-2 hover:text-ink">
+            <FiArrowLeft /> Chess · Journal
+          </Link>
+        }
+        title="Chess"
+        italic="journal."
+        count={entries.length}
+        countLabel={entries.length === 1 ? 'entry' : 'entries'}
+        lede="Games worth remembering, annotated. Every embedded game can be replayed move by move."
+      >
+        <Reveal delay={0.3} className="mt-10 flex flex-wrap items-center gap-3">
+          {entries.length > 0 && (
+            <label className="flex h-11 w-full items-center gap-3 rounded-full border border-line px-4 focus-within:border-ink sm:w-80">
+              <FiSearch className="text-ink-3" />
+              <input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search entries"
+                className="w-full bg-transparent text-sm text-ink outline-none placeholder:text-ink-3"
+              />
+            </label>
+          )}
+          {user && (
+            <button
+              type="button"
+              onClick={() => setEditing({})}
+              className="inline-flex h-11 items-center gap-2 rounded-full bg-ink px-5 font-mono text-xs uppercase tracking-[0.1em] text-bg transition-colors hover:bg-up hover:text-on-up"
+            >
+              <FiPlus /> New entry
+            </button>
+          )}
+        </Reveal>
+      </PageHeader>
+
+      <section className="shell">
+        {entries.length === 0 ? (
+          <EmptyState>No journal entries yet.</EmptyState>
+        ) : shown.length === 0 ? (
+          <EmptyState>No entries match “{query}”.</EmptyState>
+        ) : user ? (
+          // Signed in: same list with edit and delete controls.
+          <ul className="border-t border-line">
+            {shown.map((e) => (
+              <li key={e.id} className="flex items-center gap-4 border-b border-line py-5">
+                <Link to={`/hobbies/chess/journal/${generateSlug(e.title)}`} className="min-w-0 flex-1">
+                  <span className="block font-display text-3xl text-ink hover:text-up">{e.title}</span>
+                  <span className="mt-1 block text-sm text-ink-3">{formatDate(e.date)}</span>
+                </Link>
+                <button type="button" onClick={() => setEditing(e)} className="grid h-10 w-10 place-items-center rounded-full border border-line text-ink-2 hover:border-ink hover:text-ink" aria-label={`Edit ${e.title}`}>
+                  <FiEdit2 />
                 </button>
-              </div>
-              <div className="editor-modal-content">
-                <div className="editor-field">
-                  <label htmlFor="editor-title">Title *</label>
-                  <input
-                    id="editor-title"
-                    type="text"
-                    value={editorTitle}
-                    onChange={(e) => setEditorTitle(e.target.value)}
-                    placeholder="Entry title"
-                    disabled={saving}
-                  />
-                </div>
-                <div className="editor-field">
-                  <label htmlFor="editor-date">Date (optional)</label>
-                  <input
-                    id="editor-date"
-                    type="date"
-                    value={editorDate}
-                    onChange={(e) => setEditorDate(e.target.value)}
-                    disabled={saving}
-                  />
-                </div>
-                <div className="editor-field">
-                  <label htmlFor="editor-content">Content *</label>
-                  <textarea
-                    id="editor-content"
-                    value={editorContent}
-                    onChange={(e) => setEditorContent(e.target.value)}
-                    placeholder="Write your journal entry in Markdown. Use \Chess{...PGN notation...} to embed chess games."
-                    rows={15}
-                    disabled={saving}
-                  />
-                  <small className="editor-hint">
-                    Use <code>\Chess&#123;...PGN...&#125;</code> to embed chess games
-                  </small>
-                </div>
-              </div>
-              <div className="editor-modal-footer">
-                <button
-                  className="cancel-btn"
-                  onClick={handleCloseEditor}
-                  disabled={saving}
-                >
-                  Cancel
+                <button type="button" onClick={() => setDeleting(e)} className="grid h-10 w-10 place-items-center rounded-full border border-line text-ink-2 hover:border-red-500 hover:text-red-500" aria-label={`Delete ${e.title}`}>
+                  <FiTrash2 />
                 </button>
-                <button
-                  className="save-btn"
-                  onClick={handleSaveEntry}
-                  disabled={saving || !editorTitle.trim() || !editorContent.trim()}
-                >
-                  {saving ? 'Saving...' : (editingEntry ? 'Update Entry' : 'Save Entry')}
-                </button>
-              </div>
-            </div>
-          </div>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <IndexList
+            items={shown.map((e) => ({
+              key: e.id,
+              to: `/hobbies/chess/journal/${generateSlug(e.title)}`,
+              title: e.title,
+              description: journalExcerpt(e.content),
+              meta: formatDate(e.date, 'short'),
+            }))}
+          />
         )}
-      </main>
-      <Footer />
-    </div>
+      </section>
+
+      <Editor
+        open={editing !== null}
+        entry={editing?.id ? editing : null}
+        onClose={() => setEditing(null)}
+        onSaved={() => {
+          setEditing(null);
+          setRefresh((r) => r + 1);
+        }}
+      />
+
+      <Dialog open={Boolean(deleting)} onClose={() => setDeleting(null)} maxWidth="xs" fullWidth slotProps={{ paper: { sx: { borderRadius: '24px' } } }}>
+        <div className="p-6">
+          <h2 className="font-display text-3xl text-ink">Delete entry?</h2>
+          <p className="mt-2 text-ink-2">“{deleting?.title}” will be removed. This can’t be undone.</p>
+          <div className="mt-6 flex justify-end gap-2">
+            <button type="button" onClick={() => setDeleting(null)} className="h-11 rounded-full border border-line-strong px-5 text-sm text-ink hover:border-ink">
+              Cancel
+            </button>
+            <button type="button" onClick={confirmDelete} className="h-11 rounded-full bg-red-500 px-5 text-sm text-white hover:bg-red-600">
+              Delete
+            </button>
+          </div>
+        </div>
+      </Dialog>
+    </Page>
   );
 }
 
 export default ChessJournalPage;
-

@@ -1,0 +1,332 @@
+[
+  {
+    "id": "skill_javascript",
+    "name": "JavaScript",
+    "category": "Programming & Web",
+    "order": 0
+  },
+  {
+    "id": "skill_typescript",
+    "name": "TypeScript",
+    "category": "Programming & Web",
+    "order": 1
+  },
+  {
+    "id": "skill_python",
+    "name": "Python",
+    "category": "Programming & Web",
+    "order": 2
+  },
+  {
+    "id": "skill_c",
+    "name": "C",
+    "category": "Programming & Web",
+    "order": 3
+  },
+  {
+    "id": "skill_php",
+    "name": "PHP",
+    "category": "Programming & Web",
+    "order": 4
+  },
+  {
+    "id": "skill_react_js",
+    "name": "React.js",
+    "category": "Programming & Web",
+    "order": 5
+  },
+  {
+    "id": "skill_node_js",
+    "name": "Node.js",
+    "category": "Programming & Web",
+    "order": 6
+  },
+  {
+    "id": "skill_flask",
+    "name": "Flask",
+    "category": "Programming & Web",
+    "order": 7
+  },
+  {
+    "id": "skill_fastapi",
+    "name": "FastAPI",
+    "category": "Programming & Web",
+    "order": 8
+  },
+  {
+    "id": "skill_html",
+    "name": "HTML",
+    "category": "Programming & Web",
+    "order": 9
+  },
+  {
+    "id": "skill_css",
+    "name": "CSS",
+    "category": "Programming & Web",
+    "order": 10
+  },
+  {
+    "id": "skill_tailwind_css",
+    "name": "Tailwind CSS",
+    "category": "Programming & Web",
+    "order": 11
+  },
+  {
+    "id": "skill_postgresql",
+    "name": "PostgreSQL",
+    "category": "Backend & Data",
+    "order": 12
+  },
+  {
+    "id": "skill_sql",
+    "name": "SQL",
+    "category": "Backend & Data",
+    "order": 13
+  },
+  {
+    "id": "skill_firebase",
+    "name": "Firebase",
+    "category": "Backend & Data",
+    "order": 14
+  },
+  {
+    "id": "skill_supabase",
+    "name": "Supabase",
+    "category": "Backend & Data",
+    "order": 15
+  },
+  {
+    "id": "skill_rest_apis",
+    "name": "REST APIs",
+    "category": "Backend & Data",
+    "order": 16
+  },
+  {
+    "id": "skill_api_integration",
+    "name": "API Integration",
+    "category": "Backend & Data",
+    "order": 17
+  },
+  {
+    "id": "skill_database_design",
+    "name": "Database Design",
+    "category": "Backend & Data",
+    "order": 18
+  },
+  {
+    "id": "skill_linux",
+    "name": "Linux",
+    "category": "Cloud & Infrastructure",
+    "order": 19
+  },
+  {
+    "id": "skill_vps_administration",
+    "name": "VPS Administration",
+    "category": "Cloud & Infrastructure",
+    "order": 20
+  },
+  {
+    "id": "skill_cloudflare",
+    "name": "Cloudflare",
+    "category": "Cloud & Infrastructure",
+    "order": 21
+  },
+  {
+    "id": "skill_docker",
+    "name": "Docker",
+    "category": "Cloud & Infrastructure",
+    "order": 22
+  },
+  {
+    "id": "skill_nginx",
+    "name": "Nginx",
+    "category": "Cloud & Infrastructure",
+    "order": 23
+  },
+  {
+    "id": "skill_cpanel",
+    "name": "cPanel",
+    "category": "Cloud & Infrastructure",
+    "order": 24
+  },
+  {
+    "id": "skill_dns",
+    "name": "DNS",
+    "category": "Cloud & Infrastructure",
+    "order": 25
+  },
+  {
+    "id": "skill_zero_trust_networking",
+    "name": "Zero Trust Networking",
+    "category": "Cloud & Infrastructure",
+    "order": 26
+  },
+  {
+    "id": "skill_authentication_systems",
+    "name": "Authentication Systems",
+    "category": "Systems & Security",
+    "order": 27
+  },
+  {
+    "id": "skill_custom_sso",
+    "name": "Custom SSO",
+    "category": "Systems & Security",
+    "order": 28
+  },
+  {
+    "id": "skill_oauth",
+    "name": "OAuth",
+    "category": "Systems & Security",
+    "order": 29
+  },
+  {
+    "id": "skill_session_management",
+    "name": "Session Management",
+    "category": "Systems & Security",
+    "order": 30
+  },
+  {
+    "id": "skill_access_control",
+    "name": "Access Control",
+    "category": "Systems & Security",
+    "order": 31
+  },
+  {
+    "id": "skill_system_architecture",
+    "name": "System Architecture",
+    "category": "Systems & Security",
+    "order": 32
+  },
+  {
+    "id": "skill_multi_service_architecture",
+    "name": "Multi-Service Architecture",
+    "category": "Systems & Security",
+    "order": 33
+  },
+  {
+    "id": "skill_distributed_systems",
+    "name": "Distributed Systems",
+    "category": "Systems & Security",
+    "order": 34
+  },
+  {
+    "id": "skill_workflow_automation",
+    "name": "Workflow Automation",
+    "category": "Automation & Engineering",
+    "order": 35
+  },
+  {
+    "id": "skill_full_stack_development",
+    "name": "Full-Stack Development",
+    "category": "Automation & Engineering",
+    "order": 36
+  },
+  {
+    "id": "skill_service_integration",
+    "name": "Service Integration",
+    "category": "Automation & Engineering",
+    "order": 37
+  },
+  {
+    "id": "skill_deployment",
+    "name": "Deployment",
+    "category": "Automation & Engineering",
+    "order": 38
+  },
+  {
+    "id": "skill_ci_cd",
+    "name": "CI/CD",
+    "category": "Automation & Engineering",
+    "order": 39
+  },
+  {
+    "id": "skill_jupyterlab",
+    "name": "JupyterLab",
+    "category": "Scientific Computing",
+    "order": 40
+  },
+  {
+    "id": "skill_latex",
+    "name": "LaTeX",
+    "category": "Scientific Computing",
+    "order": 41
+  },
+  {
+    "id": "skill_overleaf",
+    "name": "Overleaf",
+    "category": "Scientific Computing",
+    "order": 42
+  },
+  {
+    "id": "skill_numerical_computing",
+    "name": "Numerical Computing",
+    "category": "Scientific Computing",
+    "order": 43
+  },
+  {
+    "id": "skill_scientific_programming",
+    "name": "Scientific Programming",
+    "category": "Scientific Computing",
+    "order": 44
+  },
+  {
+    "id": "skill_computational_modeling",
+    "name": "Computational Modeling",
+    "category": "Scientific Computing",
+    "order": 45
+  },
+  {
+    "id": "skill_mumax3",
+    "name": "MuMax3",
+    "category": "Scientific Computing",
+    "order": 46
+  },
+  {
+    "id": "skill_vasp",
+    "name": "VASP",
+    "category": "Scientific Computing",
+    "order": 47
+  },
+  {
+    "id": "skill_quantum_espresso",
+    "name": "Quantum ESPRESSO",
+    "category": "Scientific Computing",
+    "order": 48
+  },
+  {
+    "id": "skill_castep",
+    "name": "CASTEP",
+    "category": "Scientific Computing",
+    "order": 49
+  },
+  {
+    "id": "skill_hpc_gpu_computing",
+    "name": "HPC / GPU Computing",
+    "category": "Scientific Computing",
+    "order": 50
+  },
+  {
+    "id": "skill_git",
+    "name": "Git",
+    "category": "Development Tools",
+    "order": 51
+  },
+  {
+    "id": "skill_github",
+    "name": "GitHub",
+    "category": "Development Tools",
+    "order": 52
+  },
+  {
+    "id": "skill_bash",
+    "name": "Bash",
+    "category": "Development Tools",
+    "order": 53
+  },
+  {
+    "id": "skill_linux_cli",
+    "name": "Linux CLI",
+    "category": "Development Tools",
+    "order": 54
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "act_itcpr",
+    "organization": "Institute for Theoretical and Computational Physics Research",
+    "role": "Director of Operations & Co-Founder",
+    "startDate": 1704067200,
+    "endDate": null,
+    "website": "",
+    "order": 1
+  },
+  {
+    "id": "act_fermion",
+    "organization": "Fermion Physics Club",
+    "role": "Instructor & Founder",
+    "startDate": 1558569600,
+    "endDate": 1735689600,
+    "website": "https://fermionku.com/",
+    "order": 2
+  },
+  {
+    "id": "act_byei",
+    "organization": "Bangladesh Youth Environmental Initiative (BYEI)",
+    "role": "Regional Coordinator, Khulna",
+    "startDate": 1561939200,
+    "endDate": 1675382400,
+    "website": "https://www.byei.org/",
+    "order": 3
+  },
+  {
+    "id": "act_bdoaa",
+    "organization": "Bangladesh Olympiad on Astronomy and Astrophysics (BDOAA)",
+    "role": "Divisional Coordinator, Khulna",
+    "startDate": 1519862400,
+    "endDate": 1672185600,
+    "website": "https://bdoaa.org/",
+    "order": 4
+  }
+]

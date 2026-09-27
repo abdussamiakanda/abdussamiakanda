@@ -1,0 +1,56 @@
+[
+  {
+    "id": "edu_unl",
+    "institution": "University of Nebraska-Lincoln",
+    "degree": "Master of Science in Physics",
+    "location": "Nebraska, USA",
+    "startDate": 1690848000,
+    "endDate": 1764547200,
+    "order": 1
+  },
+  {
+    "id": "edu_ku",
+    "institution": "Khulna University, Khulna, Bangladesh",
+    "degree": "Bachelor of Science (Physics)",
+    "location": "",
+    "startDate": 1514764800,
+    "endDate": 1675296000,
+    "order": 2
+  },
+  {
+    "id": "edu_cpsc",
+    "institution": "Cantonment Public School & College, Mymensingh, Bangladesh",
+    "degree": "Higher School Certificate (Science)",
+    "location": "",
+    "startDate": 1437782400,
+    "endDate": 1500768000,
+    "order": 3
+  },
+  {
+    "id": "edu_jhs",
+    "institution": "Jahangirpur T.Amin Govt. Pilot High School, Madan, Netrakona, Bangladesh",
+    "degree": "Secondary School",
+    "location": "",
+    "startDate": 1262304000,
+    "endDate": 1432944000,
+    "order": 4
+  },
+  {
+    "id": "edu_jmps",
+    "institution": "Jahangirpur Model Govt. Primary School, Madan, Netrakona, Bangladesh",
+    "degree": "Primary School",
+    "location": "",
+    "startDate": 1167609600,
+    "endDate": 1262217600,
+    "order": 5
+  },
+  {
+    "id": "edu_kps",
+    "institution": "Kakoli Govt. Primary School, Netrakona, Bangladesh",
+    "degree": "Primary School",
+    "location": "",
+    "startDate": 1104537600,
+    "endDate": 1167523200,
+    "order": 6
+  }
+]
