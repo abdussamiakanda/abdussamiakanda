@@ -8,6 +8,7 @@ import { staggerItem } from '../lib/motion';
 import useAsync from '../lib/useAsync';
 import { formatRange } from '../lib/format';
 import { getCourses } from '../services/dataService';
+import { PAGE_META } from '../lib/pageMeta';
 
 function CourseCard({ course, index }) {
   return (
@@ -53,7 +54,7 @@ function CoursesPage() {
   const { data: courses, loading } = useAsync(getCourses, [], []);
 
   return (
-    <Page loading={loading} seo={{ title: 'Courses', description: 'Courses I have designed and taught.', url: '/courses' }}>
+    <Page loading={loading} seo={PAGE_META['/courses']}>
       <PageHeader
         eyebrow="Teaching · Courses"
         title="Lecture"

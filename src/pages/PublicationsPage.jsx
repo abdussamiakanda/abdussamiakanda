@@ -8,6 +8,7 @@ import { Reveal } from '../components/ui/Reveal';
 import useAsync from '../lib/useAsync';
 import { parseJournal } from '../lib/academic';
 import { getPublications, getResearchMetadata } from '../services/dataService';
+import { PAGE_META } from '../lib/pageMeta';
 
 function PublicationsPage() {
   const { data, loading } = useAsync(
@@ -32,7 +33,7 @@ function PublicationsPage() {
   });
 
   return (
-    <Page loading={loading} seo={{ title: 'Publications', description: 'Peer-reviewed publications in magnetism and spintronics.', url: '/publications' }}>
+    <Page loading={loading} seo={PAGE_META['/publications']}>
       <PageHeader
         eyebrow="Publications · Peer reviewed"
         title="Publications"
@@ -57,6 +58,7 @@ function PublicationsPage() {
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
+              aria-label="Filter publications"
               placeholder="Filter by title, author, journal"
               className="w-full bg-transparent text-sm text-ink outline-none placeholder:text-ink-3"
             />

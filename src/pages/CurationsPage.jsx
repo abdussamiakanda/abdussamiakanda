@@ -8,6 +8,7 @@ import { staggerItem } from '../lib/motion';
 import useAsync from '../lib/useAsync';
 import { titleCase } from '../lib/format';
 import { getCurationsEntries } from '../services/dataService';
+import { curationMeta } from '../lib/pageMeta';
 
 function Poster({ item }) {
   const body = (
@@ -58,7 +59,7 @@ function CurationsPage() {
   }
 
   return (
-    <Page loading={loading} seo={{ title: `Curated ${titleCase(tag)}`, description: `A curated selection of my favourite ${tag}.`, url: `/curations/${tag}` }}>
+    <Page loading={loading} seo={{ ...curationMeta(tag), noindex: !loading && entries.length === 0 }}>
       <PageHeader
         eyebrow={`Curations · ${titleCase(tag)}`}
         title="Curated"

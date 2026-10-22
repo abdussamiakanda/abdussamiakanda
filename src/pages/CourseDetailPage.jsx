@@ -10,6 +10,7 @@ import { EASE } from '../lib/motion';
 import useAsync from '../lib/useAsync';
 import { formatDate, formatRange } from '../lib/format';
 import { getCourses } from '../services/dataService';
+import { courseMeta } from '../lib/pageMeta';
 
 // The playlist iframe is heavy, so show a poster first and load YouTube only
 // when the reader asks for it (privacy-enhanced domain).
@@ -62,7 +63,7 @@ function CourseDetailPage() {
 
   if (!course) {
     return (
-      <Page seo={{ title: 'Course not found' }}>
+      <Page seo={{ title: 'Course not found', noindex: true }}>
         <div className="shell flex min-h-[70vh] flex-col items-start justify-center pt-32">
           <p className="eyebrow mb-4">Courses</p>
           <h1 className="font-display text-6xl text-ink md:text-8xl">
@@ -93,7 +94,7 @@ function CourseDetailPage() {
   ].filter((f) => f.value);
 
   return (
-    <Page seo={{ title: course.title, description: course.description, url: `/courses/${slug}`, ogImage: course.imageUrl }}>
+    <Page seo={courseMeta(course)}>
       <header className="shell pb-12 pt-36 md:pt-44">
         <Reveal className="mb-10">
           <Link to="/courses" className="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.12em] text-ink-2 hover:text-ink">

@@ -4,6 +4,7 @@ import { EmptyState } from '../components/ui/primitives';
 import useAsync from '../lib/useAsync';
 import { formatDate } from '../lib/format';
 import { getPosts, generateSlug, getSlugTitle } from '../services/dataService';
+import { PAGE_META } from '../lib/pageMeta';
 
 function PostsPage() {
   const { data: posts, loading } = useAsync(getPosts, [], []);
@@ -11,7 +12,7 @@ function PostsPage() {
   return (
     <Page
       loading={loading}
-      seo={{ title: 'Posts', description: 'Essays on academia, migration, and everything in between.', url: '/posts' }}
+      seo={PAGE_META['/posts']}
     >
       <PageHeader
         eyebrow="Posts · Essays"

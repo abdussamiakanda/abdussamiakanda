@@ -63,12 +63,14 @@ export default function GameReplay({ id, moves, orientation = 'white', resultMar
     >
       <div className="min-w-0">
         {top}
-        <div className="flex gap-3">
-          <EvalBar fen={fen} flipped={orientation === 'black'} />
-          <div className="min-w-0 flex-1">
-            <Board id={id} fen={fen} orientation={orientation} squareStyles={squareStyles} marks={marks} />
-          </div>
-        </div>
+        <Board
+          id={id}
+          fen={fen}
+          orientation={orientation}
+          squareStyles={squareStyles}
+          marks={marks}
+          aside={<EvalBar fen={fen} flipped={orientation === 'black'} />}
+        />
         {bottom}
       </div>
       {/* On wide screens the list fills the board's height and scrolls inside it. */}

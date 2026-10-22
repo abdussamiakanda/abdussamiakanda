@@ -101,7 +101,7 @@ export default function RecentGames({ username }) {
   const me = game && game[myColor];
 
   return (
-    <div className="grid gap-6 xl:grid-cols-[19rem_minmax(0,1fr)]">
+    <div className="grid grid-cols-1 gap-6 xl:grid-cols-[19rem_minmax(0,1fr)]">
       {/* Game list */}
       <aside className="flex min-h-0 flex-col gap-4">
         <div className="rounded-2xl border border-line p-4">

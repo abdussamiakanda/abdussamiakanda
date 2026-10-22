@@ -19,6 +19,9 @@ function DemoPage() {
         return res.text();
       })
       .then((html) => {
+        // A missing file still answers 200 with the SPA shell (host fallback);
+        // without this check the whole site would load inside the frame.
+        if (html.includes('<div id="root"></div>')) throw new Error(`Demo “${name}” not found`);
         // Serve through a blob URL so the SPA fallback can't swap in index.html.
         url = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
         if (alive) setSrc(url);
@@ -31,7 +34,7 @@ function DemoPage() {
   }, [name]);
 
   return (
-    <Page seo={{ title: `Demo — ${name}`, description: `Interactive demo: ${name}` }}>
+    <Page seo={{ title: `Demo — ${name}`, description: `Interactive demo: ${name}`, noindex: Boolean(error) }}>
       <section className="shell pb-10 pt-32">
         <div className="mb-6 flex items-center justify-between">
           <p className="eyebrow">Demo · {name}</p>
@@ -54,7 +57,7 @@ function DemoPage() {
               </div>
             </div>
           ) : src ? (
-            <iframe src={src} title={`Demo: ${name}`} className="block h-[75vh] w-full bg-white" sandbox="allow-scripts allow-same-origin" />
+            <iframe src={src} title={`Demo: ${name}`} className="block h-[75vh] w-full bg-white" sandbox="allow-scripts" />
           ) : (
             <Loader label="Loading demo" />
           )}

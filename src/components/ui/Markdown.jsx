@@ -13,7 +13,8 @@ const KATEX_OPTIONS = {
   throwOnError: false,
   errorColor: '#cc0000',
   strict: false,
-  trust: true,
+  // Only \href / \url to web or mail addresses; never javascript: links.
+  trust: ({ command, protocol }) => (command === '\\href' || command === '\\url') && ['http', 'https', 'mailto'].includes(protocol),
 };
 
 // Only the grammars the writing actually uses, and no auto-detection, so

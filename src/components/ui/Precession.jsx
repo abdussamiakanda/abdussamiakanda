@@ -1,18 +1,23 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { useInView } from 'motion/react';
-import { createTimeline, svg } from 'animejs';
+import { createTimeline } from 'animejs';
 
 /**
  * Damped precession of a single magnetic moment (Landau-Lifshitz-Gilbert):
  * the tip spirals around the field axis while the cone angle decays. The
- * trajectory is drawn with Anime.js drawables and the moment vector follows
- * the same parameter.
+ * trajectory and the moment vector are driven by the same parameter, so the
+ * drawn curve always ends exactly at the tip.
  */
 const SIZE = 320;
 const C = SIZE / 2;
 const R = 118;
 const TURNS = 7;
 const STEPS = 700;
+// Animation timing, in ms: draw the spiral, hold, then fade it out.
+const DRAW = 6200;
+const FADE_AT = 6600;
+const CYCLE = 7300;
+const easeInOutSine = (x) => -(Math.cos(Math.PI * x) - 1) / 2;
 
 const project = (polar, phi) => {
   const x = Math.sin(polar) * Math.cos(phi);
@@ -36,35 +41,62 @@ export default function Precession({ className = '' }) {
   const tipRef = useRef(null);
   const inView = useInView(ref, { amount: 0.4 });
 
-  const spiral = useMemo(() => toPath(Array.from({ length: STEPS + 1 }, (_, i) => pointAt(i / STEPS))), []);
+  // The spiral's points and the arc length up to each one. Turns shrink as
+  // the cone closes, so arc length is not proportional to the parameter;
+  // revealing the stroke by `cumulative[u]` keeps its end on the tip.
+  const { spiral, cumulative } = useMemo(() => {
+    const points = Array.from({ length: STEPS + 1 }, (_, i) => pointAt(i / STEPS));
+    const lengths = [0];
+    for (let i = 1; i < points.length; i += 1) {
+      lengths.push(lengths[i - 1] + Math.hypot(points[i][0] - points[i - 1][0], points[i][1] - points[i - 1][1]));
+    }
+    return { spiral: toPath(points), cumulative: lengths };
+  }, []);
   const rim = useMemo(() => toPath(Array.from({ length: 121 }, (_, i) => project(Math.PI / 2, (i / 120) * Math.PI * 2))), []);
   const origin = [C, C + 34];
   const axisTop = project(0, 0);
 
   useEffect(() => {
-    if (!inView || !pathRef.current) return undefined;
-    const setArm = (u) => {
+    const path = pathRef.current;
+    if (!inView || !path) return undefined;
+    const total = cumulative[STEPS];
+    path.style.strokeDasharray = `${total} ${total}`;
+
+    const setU = (u) => {
       const [x, y] = pointAt(u);
       armRef.current?.setAttribute('x2', x);
       armRef.current?.setAttribute('y2', y);
       tipRef.current?.setAttribute('cx', x);
       tipRef.current?.setAttribute('cy', y);
+      // Arc length at u, interpolated between the two neighbouring points.
+      const f = u * STEPS;
+      const i = Math.min(Math.floor(f), STEPS - 1);
+      const drawn = cumulative[i] + (cumulative[i + 1] - cumulative[i]) * (f - i);
+      path.style.strokeDashoffset = `${total - drawn}`;
     };
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setArm(1);
+      setU(1);
       return undefined;
     }
 
-    const [drawable] = svg.createDrawable(pathRef.current);
-    const state = { u: 0 };
-    const tl = createTimeline({ loop: true, loopDelay: 600 })
-      .add(drawable, { draw: ['0 0', '0 1'], opacity: [1, 1], duration: 6200, ease: 'inOutSine' }, 0)
-      .add(state, { u: [0, 1], duration: 6200, ease: 'inOutSine', onUpdate: () => setArm(state.u) }, 0)
-      .add(drawable, { opacity: [1, 0], duration: 700, ease: 'outQuad' }, 6600);
+    // One clock drives the whole cycle (draw, hold, fade), so every loop
+    // starts from the same state. Separate opacity tweens on the path would
+    // compete with each other and leave the curve hidden after the first fade.
+    const clock = { ms: 0 };
+    const tl = createTimeline({ loop: true, loopDelay: 600 }).add(clock, {
+      ms: [0, CYCLE],
+      duration: CYCLE,
+      ease: 'linear',
+      onUpdate: () => {
+        setU(easeInOutSine(Math.min(clock.ms / DRAW, 1)));
+        const fade = Math.max(0, (clock.ms - FADE_AT) / (CYCLE - FADE_AT));
+        path.style.opacity = `${1 - fade * (2 - fade)}`; // out-quad
+      },
+    });
 
     return () => tl.pause();
-  }, [inView]);
+  }, [inView, cumulative]);
 
   return (
     <svg ref={ref} viewBox={`0 0 ${SIZE} ${SIZE}`} className={className} role="img" aria-label="Damped precession of a magnetic moment">

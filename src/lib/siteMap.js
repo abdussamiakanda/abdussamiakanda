@@ -38,3 +38,10 @@ export const hobbyRoute = (hobby, slugify) => {
 };
 
 export const CV_URL = '/CV_Md_Abdus_Sami_Akanda.pdf';
+
+// Production origin, used for canonical URLs, social cards and the sitemap
+// (scripts/generate-seo-files.mjs reads the same value).
+export const SITE_URL = 'https://abdussamiakanda.com';
+export const SITE_NAME = 'Md Abdus Sami Akanda';
+
+export const absoluteUrl = (path = '/') => (/^https?:\/\//.test(path) ? path : `${SITE_URL}${path.startsWith('/') ? '' : '/'}${path}`);

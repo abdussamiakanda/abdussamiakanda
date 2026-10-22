@@ -7,6 +7,7 @@ import { LineReveal, Reveal } from '../components/ui/Reveal';
 import useAsync from '../lib/useAsync';
 import { formatRange, siteLabel } from '../lib/format';
 import { getPersonalProjects, generateSlug } from '../services/dataService';
+import { caseStudyMeta } from '../lib/pageMeta';
 
 function CaseStudyPage() {
   const { slug } = useParams();
@@ -19,7 +20,7 @@ function CaseStudyPage() {
 
   if (!project || !project.overview?.trim()) {
     return (
-      <Page seo={{ title: 'Case study not found' }}>
+      <Page seo={{ title: 'Case study not found', noindex: true }}>
         <div className="shell flex min-h-[70vh] flex-col items-start justify-center pt-32">
           <p className="eyebrow mb-4">Case study</p>
           <h1 className="font-display text-6xl text-ink md:text-8xl">
@@ -40,7 +41,7 @@ function CaseStudyPage() {
   ].filter((f) => f.value);
 
   return (
-    <Page seo={{ title: project.title, description: project.description || `Case study: ${project.title}`, url: `/projects/case/${slug}`, ogType: 'article' }}>
+    <Page seo={caseStudyMeta(project)}>
       <article>
         <header className="shell pb-16 pt-36 md:pt-44">
           <Reveal className="mb-10">

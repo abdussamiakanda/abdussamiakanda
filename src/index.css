@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&family=Noto+Serif+Bengali:wght@400..700&display=swap');
-
+/* Web fonts are linked from index.html. */
 @layer theme, base, mui, components, utilities;
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
@@ -22,15 +21,22 @@
   --line-strong: rgba(226, 238, 236, 0.17);
   --ink: #e4eeec;
   --ink-2: #95a7a4;
-  --ink-3: #5f716e;
+  --ink-3: #7a8c89; /* 5.1:1 on --surface (WCAG AA) */
   --up: #34e3a0;
   --up-soft: rgba(52, 227, 160, 0.12);
   --on-up: #03140d;
   --down: #9a8cff;
   --down-soft: rgba(154, 140, 255, 0.13);
   --code-num: #f0b86e;
-  --board-light: #c3d2ca;
-  --board-dark: #557866;
+  /* Chess board: cool ivory and deep jade squares in a dark frame. */
+  --board-light: #dfe6dc;
+  --board-light-2: #d2dbcf;
+  --board-dark: #557a67;
+  --board-dark-2: #4a6d5b;
+  --board-frame: #121b18;
+  --board-frame-2: #0b110f;
+  --board-coord: #8fa39c;
+  --board-highlight: rgba(232, 206, 104, 0.42);
   --glass: rgba(7, 10, 11, 0.72);
   --grain-opacity: 0.045;
 }
@@ -45,15 +51,21 @@
   --line-strong: rgba(10, 22, 20, 0.2);
   --ink: #0b1513;
   --ink-2: #4a5a57;
-  --ink-3: #80908d;
-  --up: #0a8a5c;
-  --up-soft: rgba(10, 138, 92, 0.1);
+  --ink-3: #5c6b68; /* 4.8:1 on --bg-2 (WCAG AA) */
+  --up: #06784f; /* 4.7:1 on --bg-2; white text on it 5.5:1 */
+  --up-soft: rgba(6, 120, 79, 0.1);
   --on-up: #ffffff;
   --down: #5a4fd6;
   --down-soft: rgba(90, 79, 214, 0.1);
   --code-num: #a35a00;
-  --board-light: #edf2ee;
-  --board-dark: #7fa08f;
+  --board-light: #f0f2e8;
+  --board-light-2: #e5e9dc;
+  --board-dark: #6f9582;
+  --board-dark-2: #628a76;
+  --board-frame: #23302b;
+  --board-frame-2: #18221e;
+  --board-coord: #a9bab3;
+  --board-highlight: rgba(232, 196, 72, 0.45);
   --glass: rgba(242, 245, 244, 0.75);
   --grain-opacity: 0.03;
 }
@@ -84,44 +96,15 @@
 }
 
 /* ------------------------------------------------------------------ *
- *  Legacy bridge — the chess, VASP and admin tools still read these.
- * ------------------------------------------------------------------ */
-:root {
-  --bg-dark: var(--bg);
-  --bg-darker: var(--bg-2);
-  --bg-card: var(--surface);
-  --bg-card-hover: var(--surface-2);
-  --primary-color: var(--up);
-  --primary-dark: var(--up);
-  --primary-light: var(--up);
-  --secondary-color: var(--down);
-  --accent-color: var(--line-strong);
-  --accent-2: var(--line-strong);
-  --btn-primary: var(--up);
-  --btn-secondary: var(--surface-2);
-  --btn-accent: var(--up);
-  --text-primary: var(--ink);
-  --text-secondary: var(--ink-2);
-  --text-accent: var(--up);
-  --text-light: var(--ink);
-  --glass-bg: var(--glass);
-  --glass-border: var(--line);
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.18);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.28);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.38);
-  --shadow-glow: 0 4px 20px var(--up-soft);
-  --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.45);
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-smooth: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* ------------------------------------------------------------------ *
  *  Base
  * ------------------------------------------------------------------ */
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
     scroll-padding-top: 6rem;
+    /* Reserve the scrollbar's width up front so the fixed header does not
+       jump sideways when a page grows tall enough to scroll. */
+    scrollbar-gutter: stable;
   }
 
   body {
@@ -477,7 +460,7 @@ body::after {
 }
 
 /* ------------------------------------------------------------------ *
- *  Legacy helpers still used by the preserved tool pages
+ *  Page frame
  * ------------------------------------------------------------------ */
 .app {
   position: relative;
@@ -487,25 +470,6 @@ body::after {
 }
 .app > main {
   flex: 1;
-}
-.loading-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 70vh;
-}
-.loader {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 2px solid var(--line);
-  border-top-color: var(--up);
-  animation: spin 0.9s linear infinite;
-}
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 /* Indeterminate route-loading bar (RouteProgress). */
@@ -520,29 +484,6 @@ body::after {
     transform: translateX(300%);
   }
 }
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.7rem 1.4rem;
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  border-radius: 999px;
-  border: 1px solid transparent;
-  transition: var(--transition);
-}
-.btn-primary { background: var(--ink); color: var(--bg); }
-.btn-primary:hover { background: var(--up); color: var(--on-up); }
-.btn-secondary { background: transparent; color: var(--ink); border-color: var(--line-strong); }
-.btn-secondary:hover { border-color: var(--ink); }
-.btn-small { padding: 0.45rem 0.9rem; font-size: 0.72rem; }
-.btn-danger { background: #9b1c1c; color: #fff; }
-.btn-danger:hover { background: #b91c1c; }
-.btn-link { background: none; border: 0; padding: 0; color: var(--up); text-transform: none; letter-spacing: 0; }
-
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

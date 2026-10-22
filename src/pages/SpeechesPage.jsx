@@ -10,6 +10,7 @@ import useAsync from '../lib/useAsync';
 import { formatDate, yearOf } from '../lib/format';
 import { parseTalk } from '../lib/academic';
 import { getSpeeches } from '../services/dataService';
+import { PAGE_META } from '../lib/pageMeta';
 
 const KIND_TONE = { Talk: 'up', Poster: 'down', Proceeding: 'default', Presentation: 'default' };
 
@@ -37,7 +38,7 @@ function SpeechesPage() {
   }, []);
 
   return (
-    <Page loading={loading} seo={{ title: 'Talks & Posters', description: 'Conference talks, posters and proceedings.', url: '/speeches' }}>
+    <Page loading={loading} seo={PAGE_META['/speeches']}>
       <PageHeader
         eyebrow="Talks · Posters · Proceedings"
         title="On the"

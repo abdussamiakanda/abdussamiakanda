@@ -12,8 +12,8 @@ import { staggerItem } from '../lib/motion';
 import useAsync from '../lib/useAsync';
 import { formatDate } from '../lib/format';
 import { getChessJournalEntries, getHobbies, generateSlug } from '../services/dataService';
-import { seoConfig } from '../utils/seoConfig';
 import { CHESS_COM_USERNAME, journalExcerpt } from '../lib/chess/meta';
+import { PAGE_META } from '../lib/pageMeta';
 
 function Section({ index, title, aside, children, action }) {
   return (
@@ -71,7 +71,7 @@ function ChessPage() {
   return (
     <Page
       loading={loading}
-      seo={{ title: hobby?.title || 'Chess', description: seoConfig.chess.description, keywords: seoConfig.chess.keywords }}
+      seo={PAGE_META['/hobbies/chess']}
     >
       <PageHeader
         back={{ to: '/hobbies', label: 'Hobbies' }}

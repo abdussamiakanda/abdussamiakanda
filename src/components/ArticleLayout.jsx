@@ -7,6 +7,8 @@ import Markdown from './ui/Markdown';
 import { LineReveal, Reveal } from './ui/Reveal';
 import { Button, Chip } from './ui/primitives';
 import { formatDate, readingTime } from '../lib/format';
+import { articleSchema } from '../lib/schema';
+import { articleMeta } from '../lib/pageMeta';
 
 const hasBangla = (s = '') => /[ঀ-৿]/.test(s);
 
@@ -21,7 +23,7 @@ export default function ArticleLayout(props) {
 
   if (error || !entry) {
     return (
-      <Page seo={{ title: 'Not found' }}>
+      <Page seo={{ title: 'Not found', noindex: true }}>
         <div className="shell flex min-h-[70vh] flex-col items-start justify-center pt-32">
           <p className="eyebrow mb-4">{section}</p>
           <h1 className="font-display text-6xl text-ink md:text-8xl">
@@ -68,22 +70,18 @@ function ArticleView({ entry, section, backTo, prev, next, linkFor, verse = fals
 
   const bangla = hasBangla(entry.title);
   const minutes = readingTime(entry.content);
+  const meta = articleMeta(entry);
 
   return (
     <Page
-      headerProgress={false}
+      progress={progress}
       seo={{
-        title: entry.title,
-        description: entry.description || `Read: ${entry.title}`,
-        url: seoPath,
-        ogType: 'article',
-        ogImage: entry.imageUrl || undefined,
+        ...meta,
+        jsonLd: articleSchema({ entry, path: seoPath, description: meta.description, section }),
       }}
     >
-      {/* Reading progress, pinned just under the header. */}
-      <motion.div className="fixed inset-x-0 top-0 z-[60] h-[3px] origin-left bg-up" style={{ scaleX: progress }} />
 
-      <article>
+      <article lang={bangla ? 'bn' : undefined}>
         <header className="shell pb-12 pt-36 md:pt-44">
           <Reveal className="mb-10">
             <Link to={backTo} className="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.12em] text-ink-2 hover:text-ink">

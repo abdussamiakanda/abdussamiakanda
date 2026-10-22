@@ -23,7 +23,7 @@ function NotFoundPage() {
   }, []);
 
   return (
-    <Page seo={{ title: 'Page not found', description: 'This page does not exist.' }}>
+    <Page seo={{ title: 'Page not found', description: 'This page does not exist.', noindex: true }}>
       <section className="relative flex min-h-screen items-center overflow-hidden">
         <SpinField className="absolute inset-0 h-full w-full opacity-70" spacing={40} />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-bg via-bg/40 to-bg/70" />

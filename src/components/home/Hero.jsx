@@ -105,9 +105,12 @@ export default function Hero({ profile }) {
           <span className="eyebrow">Researcher · Academic instructor</span>
         </div>
 
+        {/* The per-letter spans are for the animation only; assistive tech
+            reads the name once, from the visually hidden copy. */}
         <h1 data-name className="font-display text-[clamp(3.6rem,13.5vw,13.5rem)] leading-[0.84] tracking-[-0.045em] text-ink">
-          <span className="-mx-[0.12em] block overflow-hidden px-[0.12em] pb-[0.06em]">{splitChars(middle)}</span>
-          <span className="-mx-[0.12em] block overflow-hidden px-[0.12em] pb-[0.1em] italic">
+          <span className="sr-only">{profile?.name ?? 'Md Abdus Sami Akanda'}</span>
+          <span aria-hidden="true" className="-mx-[0.12em] block overflow-hidden px-[0.12em] pb-[0.06em]">{splitChars(middle)}</span>
+          <span aria-hidden="true" className="-mx-[0.12em] block overflow-hidden px-[0.12em] pb-[0.1em] italic">
             {splitChars(last)}
             <span data-char className="inline-block text-up not-italic">.</span>
           </span>

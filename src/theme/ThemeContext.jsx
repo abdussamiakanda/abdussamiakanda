@@ -22,7 +22,7 @@ const readInitialMode = () => {
 // tooltips sit in the same visual system as the Tailwind-styled surfaces.
 const palettes = {
   dark: { bg: '#070a0b', paper: '#10171a', ink: '#e4eeec', ink2: '#95a7a4', up: '#34e3a0', down: '#9a8cff', line: 'rgba(226,238,236,0.08)' },
-  light: { bg: '#f2f5f4', paper: '#fbfcfc', ink: '#0b1513', ink2: '#4a5a57', up: '#0a8a5c', down: '#5a4fd6', line: 'rgba(10,22,20,0.1)' },
+  light: { bg: '#f2f5f4', paper: '#fbfcfc', ink: '#0b1513', ink2: '#4a5a57', up: '#06784f', down: '#5a4fd6', line: 'rgba(10,22,20,0.1)' },
 };
 
 const buildMuiTheme = (mode) => {

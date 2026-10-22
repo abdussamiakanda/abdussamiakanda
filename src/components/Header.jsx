@@ -9,6 +9,7 @@ import { useThemeMode } from '../theme/themeModeContext';
 import CommandPalette from './CommandPalette';
 
 const EASE = [0.16, 1, 0.3, 1];
+const HEADER_HEIGHT = 73; // 72px bar + 1px bottom border
 
 // Module-level: survives the header remounting on each route change.
 let hasEnteredOnce = false;
@@ -29,7 +30,17 @@ function Dropdown({ item, pathname }) {
   const [open, setOpen] = useState(false);
   const active = item.children.some((c) => isActivePath(pathname, c.to));
   return (
-    <li className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+    <li
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+      onKeyDown={(e) => {
+        if (e.key === 'Escape' && open) {
+          setOpen(false);
+          e.currentTarget.querySelector('button')?.focus();
+        }
+      }}
+    >
       <button
         type="button"
         aria-expanded={open}
@@ -47,7 +58,7 @@ function Dropdown({ item, pathname }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 6, scale: 0.98 }}
             transition={{ duration: 0.25, ease: EASE }}
-            className="absolute left-1/2 top-full w-72 -translate-x-1/2 pt-3"
+            className="absolute left-1/2 top-full z-20 w-72 -translate-x-1/2 pt-3"
             onBlur={(e) => !e.currentTarget.parentElement.contains(e.relatedTarget) && setOpen(false)}
           >
             <ul className="rounded-2xl border border-line bg-surface/95 p-2 shadow-2xl shadow-black/20 backdrop-blur-xl">
@@ -55,6 +66,7 @@ function Dropdown({ item, pathname }) {
                 <motion.li key={c.to} initial={{ opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.03 * i, duration: 0.3 }}>
                   <Link
                     to={c.to}
+                    aria-current={isActivePath(pathname, c.to) ? 'page' : undefined}
                     onClick={() => setOpen(false)}
                     className="group flex items-center justify-between rounded-xl px-3.5 py-2.5 transition-colors hover:bg-surface-2"
                   >
@@ -74,8 +86,10 @@ function Dropdown({ item, pathname }) {
   );
 }
 
-// `showProgress` is off on article pages, which draw their own reading bar.
-function Header({ showProgress = true }) {
+// The hairline under the header shows scroll progress: through the whole
+// page by default, or through an article body when a page passes its own
+// `progress` motion value (0–1).
+function Header({ progress: pageProgress }) {
   const { pathname } = useLocation();
   const { mode, toggle } = useThemeMode();
   const [hidden, setHidden] = useState(false);
@@ -92,7 +106,8 @@ function Header({ showProgress = true }) {
   const [hovered, setHovered] = useState(null);
 
   const { scrollY, scrollYProgress } = useScroll();
-  const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 30, restDelta: 0.001 });
+  const scrollProgress = useSpring(scrollYProgress, { stiffness: 140, damping: 30, restDelta: 0.001 });
+  const progress = pageProgress ?? scrollProgress;
 
   useMotionValueEvent(scrollY, 'change', (y) => {
     const prev = scrollY.getPrevious() ?? 0;
@@ -116,6 +131,18 @@ function Header({ showProgress = true }) {
 
   return (
     <>
+      {/* Progress hairline: under the header while it shows, pinned to the
+          top edge when it hides on scroll. It sits below the header (z-49) so
+          open dropdowns cover it. HEADER_HEIGHT includes the 1px border. */}
+      <motion.div
+        aria-hidden="true"
+        initial={false}
+        animate={{ y: hidden ? 0 : HEADER_HEIGHT }}
+        transition={{ duration: 0.5, ease: EASE }}
+        className="pointer-events-none fixed inset-x-0 top-0 z-[49] h-[2px]"
+      >
+        <motion.div className="h-full origin-left bg-gradient-to-r from-down via-up to-up" style={{ scaleX: progress }} />
+      </motion.div>
       <motion.header
         // Slide in on the first visit only; later pages mount their own header
         // and it should simply be there.
@@ -125,7 +152,7 @@ function Header({ showProgress = true }) {
         className="fixed inset-x-0 top-0 z-50"
       >
         <div
-          className={`transition-[background-color,border-color,backdrop-filter] duration-500 ${
+          className={`relative z-10 transition-[background-color,border-color,backdrop-filter] duration-500 ${
             scrolled ? 'border-b border-line bg-[var(--glass)] backdrop-blur-xl' : 'border-b border-transparent'
           }`}
         >
@@ -143,6 +170,7 @@ function Header({ showProgress = true }) {
                     )}
                     <Link
                       to={item.to}
+                      aria-current={isActivePath(pathname, item.to) ? 'page' : undefined}
                       className={`relative z-10 block rounded-full px-4 py-2 text-sm transition-colors ${
                         isActivePath(pathname, item.to) ? 'text-ink' : 'text-ink-2 hover:text-ink'
                       }`}
@@ -222,7 +250,6 @@ function Header({ showProgress = true }) {
             </div>
           </nav>
         </div>
-        {showProgress && <motion.div className="h-px origin-left bg-gradient-to-r from-down via-up to-up" style={{ scaleX: progress }} />}
       </motion.header>
 
       <Drawer anchor="right" open={drawer} onClose={() => setDrawer(false)} slotProps={{ paper: { sx: { width: { xs: '100%', sm: 420 } } } }}>
@@ -249,7 +276,7 @@ function Header({ showProgress = true }) {
                       <ul className="mt-2 grid grid-cols-2 gap-x-4 gap-y-1">
                         {item.children.map((c) => (
                           <li key={c.to}>
-                            <Link to={c.to} className={`font-display text-2xl ${isActivePath(pathname, c.to) ? 'text-up' : 'text-ink'}`}>
+                            <Link to={c.to} onClick={() => setDrawer(false)} className={`font-display text-2xl ${isActivePath(pathname, c.to) ? 'text-up' : 'text-ink'}`}>
                               {c.label}
                             </Link>
                           </li>

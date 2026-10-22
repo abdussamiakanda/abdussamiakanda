@@ -4,6 +4,7 @@ import { EmptyState } from '../components/ui/primitives';
 import useAsync from '../lib/useAsync';
 import { formatDate } from '../lib/format';
 import { getNotes, generateSlug } from '../services/dataService';
+import { PAGE_META } from '../lib/pageMeta';
 
 function NotesPage() {
   const { data: notes, loading } = useAsync(getNotes, [], []);
@@ -11,7 +12,7 @@ function NotesPage() {
   return (
     <Page
       loading={loading}
-      seo={{ title: 'Notes', description: 'Academic notes covering topics in physics and related fields.', url: '/notes' }}
+      seo={PAGE_META['/notes']}
     >
       <PageHeader
         eyebrow="Notes · Physics explained"

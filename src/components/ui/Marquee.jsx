@@ -7,7 +7,8 @@ gsap.registerPlugin(ScrollTrigger);
 /**
  * Infinite ticker. The track holds two copies of the children and slides
  * by exactly one copy width; scroll velocity briefly speeds it up and flips
- * its direction to follow the reader.
+ * its direction to follow the reader. Hovering pauses it (WCAG 2.2.2), and
+ * it stays still under prefers-reduced-motion.
  */
 export default function Marquee({ children, speed = 40, className = '', reverse = false }) {
   const trackRef = useRef(null);
@@ -36,6 +37,16 @@ export default function Marquee({ children, speed = 40, className = '', reverse 
           reset = setTimeout(() => gsap.to(tween, { timeScale: 1, duration: 0.9, overwrite: true }), 140);
         },
       });
+
+      const frame = track.parentElement;
+      const pause = () => tween.pause();
+      const play = () => tween.play();
+      frame.addEventListener('pointerenter', pause);
+      frame.addEventListener('pointerleave', play);
+      return () => {
+        frame.removeEventListener('pointerenter', pause);
+        frame.removeEventListener('pointerleave', play);
+      };
     }, track);
 
     return () => {

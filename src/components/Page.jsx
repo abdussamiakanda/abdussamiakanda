@@ -10,21 +10,31 @@ import { Loader } from './ui/primitives';
 const EASE = [0.16, 1, 0.3, 1];
 
 // Standard page frame: SEO, header, animated main, footer.
-export default function Page({ seo, loading = false, children, className = '', headerProgress = true }) {
+// The footer waits for the content: shown under a loader it would sit in the
+// first viewport and then jump down, a large layout shift.
+export default function Page({ seo, loading = false, children, className = '', progress }) {
   const reduced = useReducedMotion();
   return (
     <div className="app">
       {seo && <SEO {...seo} />}
-      <Header showProgress={headerProgress} />
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-sm focus:text-bg"
+      >
+        Skip to content
+      </a>
+      <Header progress={progress} />
       <motion.main
-        className={`relative ${className}`}
+        id="main"
+        tabIndex={-1}
+        className={`relative outline-none ${className}`}
         initial={reduced ? false : { opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: EASE }}
       >
         {loading ? <Loader /> : children}
       </motion.main>
-      <Footer />
+      {!loading && <Footer />}
     </div>
   );
 }

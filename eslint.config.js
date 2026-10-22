@@ -5,7 +5,13 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  // public/ holds standalone legacy pages and vendored, minified scripts
+  // that are copied as-is, not part of the React app.
+  globalIgnores(['dist', 'public']),
+  {
+    files: ['scripts/**/*.{js,mjs}', '*.config.js'],
+    languageOptions: { globals: globals.node },
+  },
   {
     files: ['**/*.{js,jsx}'],
     extends: [

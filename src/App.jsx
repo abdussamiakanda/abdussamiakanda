@@ -46,14 +46,11 @@ const HobbiesPage = lazy(pages.HobbiesPage);
 const DemoPage = lazy(pages.DemoPage);
 const NotFoundPage = lazy(pages.NotFoundPage);
 
-// Tool pages carry heavy dependencies (chess engine, Firebase, editors) and
-// are left to load only when visited.
-const Admin = lazy(() => import('./pages/Admin'));
+// Chess pages carry the engine and board, so they load only when visited.
 const ChessPage = lazy(() => import('./pages/ChessPage'));
 const ChessBotPage = lazy(() => import('./pages/ChessBotPage'));
 const ChessJournalPage = lazy(() => import('./pages/ChessJournalPage'));
 const ChessJournalEntryDetailPage = lazy(() => import('./pages/ChessJournalEntryDetailPage'));
-const VaspPage = lazy(() => import('./pages/VaspPage'));
 
 function usePreloadPages() {
   useEffect(() => {
@@ -73,7 +70,6 @@ function App() {
       <Suspense fallback={<RouteProgress />}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/admin" element={<Admin />} />
           <Route path="/scribbling" element={<ScribblingPage />} />
           <Route path="/scribbling/:slug" element={<ScribblingDetailPage />} />
           <Route path="/courses" element={<CoursesPage />} />
@@ -94,7 +90,6 @@ function App() {
           <Route path="/hobbies/chess/bot" element={<ChessBotPage />} />
           <Route path="/hobbies/chess/journal" element={<ChessJournalPage />} />
           <Route path="/hobbies/chess/journal/:slug" element={<ChessJournalEntryDetailPage />} />
-          <Route path="/vasp" element={<VaspPage />} />
           <Route path="/demo/:name" element={<DemoPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

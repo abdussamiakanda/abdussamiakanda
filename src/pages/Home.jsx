@@ -16,6 +16,8 @@ import { ArrowLink, SectionHeading } from '../components/ui/primitives';
 import useAsync from '../lib/useAsync';
 import { toDate, yearOf } from '../lib/format';
 import * as api from '../services/dataService';
+import { personSchema, websiteSchema } from '../lib/schema';
+import { PAGE_META } from '../lib/pageMeta';
 
 const KEYWORDS = ['Spintronics', 'Domain-wall dynamics', 'Spin-transfer torque', 'Spin-orbit torque', 'Spin waves', 'Magnonic crystals', 'LLG equation', 'Magnetic nanowires'];
 
@@ -100,9 +102,8 @@ function Home() {
     <Page
       loading={loading}
       seo={{
-        title: data?.profile?.name ?? 'Md Abdus Sami Akanda',
-        description: data?.profile?.description ?? 'Physicist working on spintronics and magnetization dynamics.',
-        url: '/',
+        ...PAGE_META['/'],
+        jsonLd: data ? [personSchema(data.profile, data.education), websiteSchema()] : null,
       }}
     >
       {data && (

@@ -13,7 +13,7 @@ import { LineReveal, Reveal } from '../components/ui/Reveal';
 import { EASE } from '../lib/motion';
 import { kingSquares } from '../lib/chess/pgn';
 import { engineSource, getBotMove, onEngineSource } from '../lib/chess/service';
-import { seoConfig } from '../utils/seoConfig';
+import { PAGE_META } from '../lib/pageMeta';
 
 const START_SECONDS = 600;
 const VALUE = { p: 1, n: 3, b: 3, r: 5, q: 9 };
@@ -302,7 +302,7 @@ function ChessBotPage() {
   const youWon = result?.winner === playerColor;
 
   return (
-    <Page seo={{ title: 'Play the chess bot', description: seoConfig.chessBot.description, keywords: seoConfig.chessBot.keywords }}>
+    <Page seo={PAGE_META['/hobbies/chess/bot']}>
       <header className="shell pb-10 pt-32 md:pt-40">
         <Reveal className="mb-8">
           <Link to="/hobbies/chess" className="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.12em] text-ink-2 hover:text-ink">

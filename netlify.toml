@@ -2,6 +2,25 @@
   command = "npm run build"
   publish = "dist"
 
+# Baseline security headers for every response.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
+
+# Optimised images are regenerated under new content but the same name, so
+# cache them for a day rather than forever.
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# SPA fallback, kept as a safety net. In practice dist/_redirects (written
+# by scripts/generate-seo-files.mjs) is read first: it maps every route to
+# its own static head and answers unknown URLs with the app and a 404 status.
 [[redirects]]
   from = "/*"
   to = "/index.html"

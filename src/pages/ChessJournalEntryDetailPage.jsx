@@ -10,6 +10,7 @@ import useAsync from '../lib/useAsync';
 import { formatDate } from '../lib/format';
 import { kingSquares, loadGame } from '../lib/chess/pgn';
 import { generateSlug, getChessJournalEntries } from '../services/dataService';
+import { journalMeta } from '../lib/pageMeta';
 
 // Splits entry content into markdown and \Chess{...PGN...} segments.
 function segments(content = '') {
@@ -82,7 +83,7 @@ function ChessJournalEntryDetailPage() {
 
   if (!entry) {
     return (
-      <Page seo={{ title: 'Entry not found' }}>
+      <Page seo={{ title: 'Entry not found', noindex: true }}>
         <div className="shell flex min-h-[70vh] flex-col items-start justify-center pt-32">
           <p className="eyebrow mb-4">Chess journal</p>
           <h1 className="font-display text-6xl text-ink md:text-8xl">
@@ -104,7 +105,7 @@ function ChessJournalEntryDetailPage() {
   const parts = segments(entry.content).map((p) => (p.type === 'game' ? { ...p, index: ++n } : p));
 
   return (
-    <Page seo={{ title: entry.title, description: `Chess journal: ${entry.title}`, url: `/hobbies/chess/journal/${slug}`, ogType: 'article' }}>
+    <Page seo={journalMeta(entry)}>
       <article>
         <header className="shell pb-10 pt-36 md:pt-44">
           <Reveal className="mb-10">

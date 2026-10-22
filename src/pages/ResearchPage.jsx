@@ -15,6 +15,7 @@ import { getSocialIcon } from '../lib/socialIcons';
 import { BROAD_AREA, INTERESTS, LLG_TEX, SPECIFIC_AREAS } from '../lib/research';
 import training from '../data/researchTraining.json';
 import { getPersonalProjects, getPublications, getResearch, getResearchMetadata, getSpeeches } from '../services/dataService';
+import { PAGE_META } from '../lib/pageMeta';
 
 // Small numbered heading for the sections of this page.
 function Block({ index, title, aside, children, id }) {
@@ -49,7 +50,7 @@ function ResearchPage() {
     null,
   );
 
-  if (loading || !data) return <Page loading seo={{ title: 'Research' }} />;
+  if (loading || !data) return <Page loading seo={PAGE_META['/research']} />;
 
   // Software projects (e.g. GitLaTeX) live on the Projects page, not here.
   const researchProjects = data.projects.filter((p) => p.category !== 'software');
@@ -64,7 +65,7 @@ function ResearchPage() {
   ];
 
   return (
-    <Page seo={{ title: 'Research', description: 'Research in spintronics, magnetization dynamics and spin waves.', url: '/research' }}>
+    <Page seo={PAGE_META['/research']}>
       <PageHeader
         eyebrow={`Research · ${BROAD_AREA}`}
         title="Magnetization,"
@@ -96,8 +97,8 @@ function ResearchPage() {
       </section>
 
       <Block index="01" title="Interests" aside={`Broad area: ${BROAD_AREA}. Within it, the questions I keep returning to:`}>
-        <Stagger className="grid gap-4 md:grid-cols-12">
-          <motion.div variants={staggerItem} className="rounded-3xl border border-line bg-surface p-6 md:col-span-5 md:row-span-3 md:p-8">
+        <Stagger className="grid grid-cols-1 gap-4 md:grid-cols-12">
+          <motion.div variants={staggerItem} className="min-w-0 rounded-3xl border border-line bg-surface p-6 md:col-span-5 md:row-span-3 md:p-8">
             <div className="flex items-center justify-between">
               <span className="eyebrow">Fig. 1 — Gilbert damping</span>
               <Chip tone="up">LLG</Chip>
@@ -112,7 +113,7 @@ function ResearchPage() {
           </motion.div>
 
           {INTERESTS.map((it, i) => (
-            <motion.div key={it.title} variants={staggerItem} className="group rounded-3xl border border-line bg-surface p-6 transition-colors hover:border-line-strong md:col-span-7">
+            <motion.div key={it.title} variants={staggerItem} className="group min-w-0 rounded-3xl border border-line bg-surface p-6 transition-colors hover:border-line-strong md:col-span-7">
               <div className="flex items-start gap-5">
                 <span
                   className={`grid h-14 w-14 shrink-0 place-items-center rounded-2xl font-mono text-sm transition-transform duration-500 group-hover:rotate-[-8deg] ${

@@ -7,6 +7,7 @@ import { EmptyState } from '../components/ui/primitives';
 import useAsync from '../lib/useAsync';
 import { yearOf } from '../lib/format';
 import { getScribblingEntries, generateSlug, getSlugTitle } from '../services/dataService';
+import { PAGE_META } from '../lib/pageMeta';
 
 function ScribblingPage() {
   const { data: entries, loading } = useAsync(() => getScribblingEntries(), [], []);
@@ -20,7 +21,7 @@ function ScribblingPage() {
   const shown = tag === 'All' ? entries : entries.filter((e) => (e.tag || 'Other') === tag);
 
   return (
-    <Page loading={loading} seo={{ title: 'Scribbling', description: 'Poems, stories and creative writing.', url: '/scribbling' }}>
+    <Page loading={loading} seo={PAGE_META['/scribbling']}>
       <PageHeader
         eyebrow="Scribbling · Verse & prose"
         title="Scribbling"

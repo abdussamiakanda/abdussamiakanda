@@ -3,13 +3,14 @@ import ProjectCard from '../components/ProjectCard';
 import { EmptyState } from '../components/ui/primitives';
 import useAsync from '../lib/useAsync';
 import { getPersonalProjects } from '../services/dataService';
+import { PAGE_META } from '../lib/pageMeta';
 
 function ProjectsPage() {
   // Already sorted: ongoing first by start date, then finished by end date.
   const { data: projects, loading } = useAsync(getPersonalProjects, [], []);
 
   return (
-    <Page loading={loading} seo={{ title: 'Projects', description: 'Research simulations and software projects.', url: '/projects' }}>
+    <Page loading={loading} seo={PAGE_META['/projects']}>
       <PageHeader
         eyebrow="Projects · Simulation & software"
         title="Built,"

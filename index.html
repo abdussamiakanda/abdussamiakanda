@@ -29,28 +29,33 @@
       })();
     </script>
 
+    <!-- Fonts load from the document, not via @import inside the bundled CSS,
+         so the browser discovers them without waiting for that stylesheet. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&family=Noto+Serif+Bengali:wght@400..700&display=swap"
+    />
 
-    <!-- Default SEO meta tags (will be updated dynamically) -->
+    <!-- Per-page head. The build writes a copy of this file for every route
+         with these tags filled in (scripts/generate-seo-files.mjs); in the
+         browser the SEO component keeps them current. -->
+    <!-- page-meta:start -->
+    <title>Md Abdus Sami Akanda — Physicist, spintronics research</title>
     <meta name="description" content="Md Abdus Sami Akanda — physicist (MS, University of Nebraska–Lincoln) working on spintronics, magnetization dynamics and micromagnetic simulation." />
-    <meta name="author" content="Md Abdus Sami Akanda" />
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Md Abdus Sami Akanda" />
-    <meta property="og:image" content="/favicon.png" />
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="/favicon.png" />
-
-    <title>Md Abdus Sami Akanda</title>
-    <!-- Font Awesome kit and KaTeX auto-render are used by the VASP tool page. -->
-    <script src="/assets/js/a1b0511c5a.js" crossorigin="anonymous"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+    <link rel="canonical" href="https://abdussamiakanda.com/" />
+    <meta property="og:image" content="https://abdussamiakanda.com/images/og-default.jpg" />
+    <!-- page-meta:end -->
   </head>
   <body>
+    <noscript>
+      <p style="padding: 2rem; font-family: system-ui, sans-serif">
+        This site needs JavaScript. You can still reach Md Abdus Sami Akanda at
+        <a href="mailto:abdussamiakanda@gmail.com">abdussamiakanda@gmail.com</a> or read the
+        <a href="/CV_Md_Abdus_Sami_Akanda.pdf">CV (PDF)</a>.
+      </p>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

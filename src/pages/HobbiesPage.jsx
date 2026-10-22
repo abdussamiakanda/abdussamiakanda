@@ -10,13 +10,14 @@ import useAsync from '../lib/useAsync';
 import { getHobbies, generateSlug } from '../services/dataService';
 import { hobbyRoute } from '../lib/siteMap';
 import ChessCardArt from '../components/chess/ChessCardArt';
+import { PAGE_META } from '../lib/pageMeta';
 
 function HobbiesPage() {
   const { data: hobbies, loading } = useAsync(getHobbies, [], []);
   const list = hobbies.filter((h) => h?.title);
 
   return (
-    <Page loading={loading} seo={{ title: 'Hobbies', description: 'Chess and other diversions.', url: '/hobbies' }}>
+    <Page loading={loading} seo={PAGE_META['/hobbies']}>
       <PageHeader eyebrow="Hobbies · Off the clock" title="Off the" italic="clock." count={list.length} countLabel="pursuits" lede="What fills the hours between simulations." />
       <section className="shell">
         {list.length === 0 ? (

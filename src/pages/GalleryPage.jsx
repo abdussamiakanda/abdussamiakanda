@@ -7,6 +7,7 @@ import { EmptyState } from '../components/ui/primitives';
 import { EASE } from '../lib/motion';
 import useAsync from '../lib/useAsync';
 import { getGallery } from '../services/dataService';
+import { PAGE_META } from '../lib/pageMeta';
 
 function Lightbox({ items, index, onClose, onStep }) {
   const [dir, setDir] = useState(0);
@@ -101,7 +102,7 @@ function GalleryPage() {
   const onStep = useCallback((d) => setIndex((i) => (i === null ? i : (i + d + images.length) % images.length)), [images.length]);
 
   return (
-    <Page loading={loading} seo={{ title: 'Gallery', description: 'Moments, framed.', url: '/gallery' }}>
+    <Page loading={loading} seo={PAGE_META['/gallery']}>
       <PageHeader eyebrow="Gallery · Photographs" title="Moments," italic="framed." count={images.length} countLabel="frames" />
       <section className="shell">
         {images.length === 0 ? (
