@@ -35,8 +35,13 @@ function PosterFan({ images }) {
   );
 }
 
+// Cover for the Gallery card: the shoreline at sunset. Picked by id, and not
+// one of the strip's photos above it, so the two never repeat.
+const GALLERY_COVER_ID = 'gal_img-1411';
+
 export default function Beyond({ gallery, curations, hobbies }) {
   const photos = gallery.filter((g) => g.imageUrl).slice(0, 12);
+  const cover = gallery.find((g) => g.id === GALLERY_COVER_ID && g.imageUrl) ?? photos[photos.length > 3 ? 3 : 0];
   const tags = [...new Set(curations.map((c) => c.tag).filter(Boolean))];
 
   return (
@@ -106,9 +111,9 @@ export default function Beyond({ gallery, curations, hobbies }) {
 
         <motion.div variants={staggerItem}>
           <Link to="/gallery" className="group relative flex h-full min-h-[320px] flex-col justify-between overflow-hidden rounded-3xl border border-line p-8">
-            {photos[0] && (
+            {cover && (
               <img
-                src={photos[photos.length > 3 ? 3 : 0].thumbUrl || photos[photos.length > 3 ? 3 : 0].imageUrl}
+                src={cover.thumbUrl || cover.imageUrl}
                 alt=""
                 loading="lazy"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.4s] ease-out-expo group-hover:scale-105"
