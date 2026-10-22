@@ -93,7 +93,7 @@ function Footer() {
               <span className="text-up">.</span>
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-ink-2">
-              Physicist (MS, University of Nebraska–Lincoln). Researcher and academic instructor in condensed matter physics.
+              Physicist (MS, University of Nebraska–Lincoln) working in condensed matter physics, and full-stack developer.
             </p>
             <ul className="mt-6 flex flex-wrap gap-1.5">
               {socials.map((link) => {

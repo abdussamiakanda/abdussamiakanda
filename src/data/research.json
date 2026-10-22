@@ -1,5 +1,14 @@
 [
   {
+    "id": "res_itcpr",
+    "institution": "Institute for Theoretical and Computational Physics Research",
+    "role": "Co-Founder · Director of Operations",
+    "startDate": 1704067200,
+    "endDate": null,
+    "description": "Co-founded ITCPR, which provides research opportunities to people typically overlooked in science, and run its operations.",
+    "order": 1
+  },
+  {
     "id": "res_ku",
     "institution": "Khulna University",
     "role": "Research Assistant, Physics Discipline",

@@ -182,6 +182,11 @@ Results after this pass: `npm run lint` **0 problems**; build passes; `npm run c
 
 Note on `/demo/:name`: on Netlify, `/demo/dino` is served straight from `public/demo/dino.html` (the file takes precedence), so the React demo frame never appears for existing demos. That was already the live behaviour and is unchanged.
 
+### Later additions
+
+- **Developer identity and `/developer`.** The site now presents the owner as physicist and full-stack developer: hero, footer, bio, page title, description, `Person.jobTitle` and the social card. A top-level **Developer** nav item leads to `/developer` (17 curated projects from `src/data/developer.json`, 4 featured, category filters) and detail pages for ChessBD, ITCPR, GitLaTeX and FloorLab. The home "Lab" section became "03 — Developer"; later sections were renumbered. `programming.json` and `webDev.json` were retired; GitLaTeX moved from `/projects` (old URL 301-redirects to `/developer/gitlatex`). Descriptions were drafted from each repo's README or live site and should be reviewed by the owner. Verified in the browser at desktop width and at 320px (no overflow), and with `npm test` (44 sitemap URLs, 31/31 checks).
+- **Chess board** restyled (framed board, outside coordinates, polished squares, piece shadows, warm last-move highlight, eval bar inside the frame).
+
 ## 7. Limitations
 
 - **Not tested:** `/admin` and `/vasp` behind Google sign-in (no credentials used), the chess bot and Chess.com integration beyond page load, and Netlify-specific behaviour (headers, redirects) which only applies after deploy.

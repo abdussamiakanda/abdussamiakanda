@@ -17,8 +17,7 @@ import skillsJson from '../data/skills.json';
 import activitiesJson from '../data/activities.json';
 import awardsJson from '../data/awards.json';
 import personalProjectsJson from '../data/personalProjects.json';
-import programmingJson from '../data/programming.json';
-import webDevJson from '../data/webDev.json';
+import developerJson from '../data/developer.json';
 import scribblingJson from '../data/scribbling.json';
 import curationsJson from '../data/curations.json';
 import galleryJson from '../data/gallery.json';
@@ -96,10 +95,9 @@ export const getCurationsEntries = async (tag = null) =>
     byOrder(),
   );
 
-export const getProgramming = async () => ({ description: programmingJson.description, githubUrl: programmingJson.githubUrl });
-export const getProgrammingProjects = async () => programmingJson.projects || [];
-export const getWebDevelopment = async () => ({ description: webDevJson.description });
-export const getWebDevProjects = async () => webDevJson.projects || [];
+// Software I have built: { intro, github, stack, categories, projects }.
+export const getDeveloper = async () => developerJson;
+export const getDeveloperProject = async (slug) => developerJson.projects.find((p) => p.slug === slug) || null;
 
 export const getNoteBySlug = async (slug) => (await getNotes()).find((n) => generateSlug(n.title) === slug) || null;
 export const getPostBySlug = async (slug) => (await getPosts()).find((p) => generateSlug(getSlugTitle(p)) === slug) || null;

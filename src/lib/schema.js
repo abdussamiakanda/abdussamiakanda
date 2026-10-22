@@ -14,7 +14,12 @@ export const personSchema = (profile, education = []) => ({
   name: profile?.name ?? SITE_NAME,
   url: `${SITE_URL}/`,
   image: absoluteUrl('/images/portrait/sami.webp'),
-  description: 'Physicist working on spintronics, magnetization dynamics and micromagnetic simulation.',
+  description: 'Physicist working on spintronics and magnetization dynamics, and full-stack developer.',
+  jobTitle: ['Physicist', 'Full-stack developer'],
+  worksFor: [
+    { '@type': 'Organization', name: 'WeezLab', url: 'https://weezlab.com' },
+    { '@type': 'ResearchOrganization', name: 'Institute for Theoretical and Computational Physics Research', url: 'https://itcpr.org' },
+  ],
   ...(profile?.socialLinks?.some((l) => l.url?.startsWith('mailto:'))
     ? { email: profile.socialLinks.find((l) => l.url.startsWith('mailto:')).url }
     : {}),
@@ -22,7 +27,10 @@ export const personSchema = (profile, education = []) => ({
   alumniOf: education
     .filter((e) => /bachelor|master|doctor|ph\.?d/i.test(e.degree ?? ''))
     .map((e) => ({ '@type': 'CollegeOrUniversity', name: e.institution.split(',')[0].trim() })),
-  knowsAbout: ['Spintronics', 'Magnetization dynamics', 'Domain-wall dynamics', 'Spin waves', 'Micromagnetic simulation', 'Landau–Lifshitz–Gilbert equation'],
+  knowsAbout: [
+    'Spintronics', 'Magnetization dynamics', 'Domain-wall dynamics', 'Spin waves', 'Micromagnetic simulation', 'Landau–Lifshitz–Gilbert equation',
+    'Full-stack web development', 'React', 'Python', 'Firebase', 'Supabase',
+  ],
 });
 
 export const websiteSchema = () => ({

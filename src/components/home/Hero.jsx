@@ -99,10 +99,10 @@ export default function Hero({ profile }) {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-up opacity-60" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-up" />
             </span>
-            MS Physics · University of Nebraska–Lincoln
+            Physicist · Full-stack developer
           </span>
           <span className="eyebrow hidden sm:inline">/</span>
-          <span className="eyebrow">Researcher · Academic instructor</span>
+          <span className="eyebrow">MS Physics · University of Nebraska–Lincoln</span>
         </div>
 
         {/* The per-letter spans are for the animation only; assistive tech
@@ -120,8 +120,8 @@ export default function Hero({ profile }) {
 
         <div data-foot className="mt-8 grid gap-8 md:grid-cols-12 md:items-end">
           <p className="max-w-md text-lg leading-relaxed text-ink-2 md:col-span-5">
-            Condensed-matter physicist studying how electron <span className="text-ink">spin</span> moves, switches and carries information — from
-            domain walls in nanowires to picosecond switching of magnetic tunnel junctions.
+            Condensed-matter physicist studying how electron <span className="text-ink">spin</span> moves, switches and carries information, and a
+            full-stack developer who <span className="text-ink">builds</span> the platforms and tools around it.
           </p>
           <div className="flex flex-wrap gap-3 md:col-span-4">
             <Magnetic>
@@ -130,8 +130,13 @@ export default function Hero({ profile }) {
               </Button>
             </Magnetic>
             <Magnetic>
-              <Button href={profile?.cvUrl || CV_URL} variant="ghost">
-                Curriculum vitae
+              <Button to="/developer" variant="ghost" icon="right">
+                Developer
+              </Button>
+            </Magnetic>
+            <Magnetic>
+              <Button href={profile?.cvUrl || CV_URL} variant="quiet">
+                CV
               </Button>
             </Magnetic>
           </div>

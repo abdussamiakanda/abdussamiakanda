@@ -1,6 +1,7 @@
 // Single source of truth for navigation, the command palette and the footer.
 export const PRIMARY_NAV = [
   { label: 'Research', to: '/research' },
+  { label: 'Developer', to: '/developer' },
   { label: 'Publications', to: '/publications' },
   { label: 'Talks', to: '/speeches' },
   {
@@ -14,7 +15,7 @@ export const PRIMARY_NAV = [
   {
     label: 'More',
     children: [
-      { label: 'Projects', to: '/projects', hint: 'Simulations & software' },
+      { label: 'Projects', to: '/projects', hint: 'Research simulations' },
       { label: 'Courses', to: '/courses', hint: 'Lectures I have taught' },
       { label: 'Gallery', to: '/gallery', hint: 'Moments, framed' },
       { label: 'Hobbies', to: '/hobbies', hint: 'Chess and other diversions' },

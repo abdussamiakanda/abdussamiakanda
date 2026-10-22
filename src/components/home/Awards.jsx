@@ -10,7 +10,7 @@ export default function Awards({ awards }) {
     <section id="recognition" className="relative py-28 md:py-40">
       <div className="shell">
         <SectionHeading
-          index="05"
+          index="06"
           label="Recognition"
           lines={['Problems,', <span key="i" className="italic text-ink-2">solved under pressure.</span>]}
           aside="International physics competitions and conference honours — mostly earned solving hard problems against the clock."

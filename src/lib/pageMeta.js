@@ -5,7 +5,7 @@
 import { SITE_NAME } from './siteMap.js';
 
 export const DEFAULT_DESCRIPTION =
-  'Md Abdus Sami Akanda — physicist (MS, University of Nebraska–Lincoln) working on spintronics, magnetization dynamics and micromagnetic simulation.';
+  'Md Abdus Sami Akanda — physicist (MS, University of Nebraska–Lincoln) working on spintronics and magnetization dynamics, and full-stack developer.';
 export const DEFAULT_IMAGE = '/images/og-default.jpg'; // 1200x630, scripts/make-og-image.mjs
 
 // "Page — Md Abdus Sami Akanda", unless the title already leads with the name.
@@ -20,9 +20,9 @@ export const clipDescription = (text, max = 160) => {
 
 export const PAGE_META = {
   '/': {
-    title: 'Md Abdus Sami Akanda — Physicist, spintronics research',
+    title: 'Md Abdus Sami Akanda — Physicist & full-stack developer',
     description:
-      'Md Abdus Sami Akanda, physicist (MS, University of Nebraska–Lincoln): research on spintronics, domain-wall dynamics, spin waves and micromagnetic simulation.',
+      'Md Abdus Sami Akanda: physicist (MS, University of Nebraska–Lincoln) researching spintronics and magnetization dynamics, and full-stack developer building web platforms.',
   },
   '/research': { title: 'Research', description: 'Research in spintronics, magnetization dynamics and spin waves.' },
   '/publications': { title: 'Publications', description: 'Peer-reviewed publications in magnetism and spintronics.' },
@@ -30,7 +30,11 @@ export const PAGE_META = {
   '/notes': { title: 'Notes', description: 'Academic notes covering topics in physics and related fields.' },
   '/posts': { title: 'Posts', description: 'Essays on academia, migration, and everything in between.' },
   '/scribbling': { title: 'Scribbling', description: 'Poems, stories and creative writing.' },
-  '/projects': { title: 'Projects', description: 'Research simulations and software projects.' },
+  '/projects': { title: 'Projects', description: 'Research simulations and computational physics projects.' },
+  '/developer': {
+    title: 'Developer',
+    description: 'Full-stack web apps, platforms and packages by Md Abdus Sami Akanda: ChessBD, the ITCPR platform, GitLaTeX, FloorLab and more.',
+  },
   '/courses': { title: 'Courses', description: 'Courses I have designed and taught.' },
   '/gallery': { title: 'Gallery', description: 'Moments, framed.' },
   '/hobbies': { title: 'Hobbies', description: 'Chess and other diversions.' },
@@ -72,6 +76,12 @@ export const courseMeta = (course) => ({
   title: course.title,
   description: course.description,
   ogImage: course.imageUrl || undefined,
+});
+
+export const developerProjectMeta = (project) => ({
+  title: project.title,
+  description: project.description || project.tagline,
+  ogType: 'article',
 });
 
 export const caseStudyMeta = (project) => ({

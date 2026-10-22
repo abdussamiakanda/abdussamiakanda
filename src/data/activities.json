@@ -1,12 +1,21 @@
 [
   {
+    "id": "act_weezlab",
+    "organization": "WeezLab",
+    "role": "Co-Founder",
+    "startDate": 1777593600,
+    "endDate": null,
+    "website": "https://weezlab.com",
+    "order": 1
+  },
+  {
     "id": "act_itcpr",
     "organization": "Institute for Theoretical and Computational Physics Research",
     "role": "Director of Operations & Co-Founder",
     "startDate": 1704067200,
     "endDate": null,
     "website": "",
-    "order": 1
+    "order": 2
   },
   {
     "id": "act_fermion",
@@ -15,7 +24,7 @@
     "startDate": 1558569600,
     "endDate": 1735689600,
     "website": "https://fermionku.netlify.app/",
-    "order": 2
+    "order": 3
   },
   {
     "id": "act_byei",
@@ -24,7 +33,7 @@
     "startDate": 1561939200,
     "endDate": 1675382400,
     "website": "https://www.byei.org/",
-    "order": 3
+    "order": 4
   },
   {
     "id": "act_bdoaa",
@@ -33,6 +42,6 @@
     "startDate": 1519862400,
     "endDate": 1672185600,
     "website": "https://bdoaa.org/",
-    "order": 4
+    "order": 5
   }
 ]

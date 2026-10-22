@@ -11,11 +11,11 @@ import { Reveal, Stagger } from '../components/ui/Reveal';
 import { staggerItem } from '../lib/motion';
 import useAsync from '../lib/useAsync';
 import { formatRange, toDate } from '../lib/format';
-import { getSocialIcon } from '../lib/socialIcons';
 import { BROAD_AREA, INTERESTS, LLG_TEX, SPECIFIC_AREAS } from '../lib/research';
 import training from '../data/researchTraining.json';
 import { getPersonalProjects, getPublications, getResearch, getResearchMetadata, getSpeeches } from '../services/dataService';
 import { PAGE_META } from '../lib/pageMeta';
+import ProfileLinks from '../components/ui/ProfileLinks';
 
 // Small numbered heading for the sections of this page.
 function Block({ index, title, aside, children, id }) {
@@ -80,6 +80,11 @@ function ResearchPage() {
             Talks &amp; posters
           </Button>
         </Reveal>
+        {data.links.length > 0 && (
+          <Reveal delay={0.35} className="mt-6 flex flex-wrap items-center gap-3">
+            <ProfileLinks links={data.links} />
+          </Reveal>
+        )}
       </PageHeader>
 
       {/* Output at a glance */}
@@ -209,28 +214,6 @@ function ResearchPage() {
         </ul>
       </Block>
 
-      {data.links.length > 0 && (
-        <section className="shell pt-8">
-          <Reveal className="flex flex-wrap items-center gap-3 rounded-3xl border border-line p-4">
-            <span className="eyebrow px-2">Find the work on</span>
-            {data.links.map((l) => {
-              const Icon = getSocialIcon(l.label);
-              return (
-                <a
-                  key={l.url}
-                  href={l.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex h-11 items-center gap-2 rounded-full border border-line px-4 text-sm text-ink-2 transition-colors hover:border-ink hover:text-ink"
-                >
-                  <Icon /> {l.label}
-                  <FiArrowUpRight className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                </a>
-              );
-            })}
-          </Reveal>
-        </section>
-      )}
     </Page>
   );
 }

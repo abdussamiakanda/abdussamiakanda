@@ -47,7 +47,7 @@ export default function About({ profile, stats }) {
   const figures = [
     { label: 'Peer-reviewed papers', value: stats.publications },
     { label: 'Talks & posters', value: stats.talks },
-    { label: 'Awards & medals', value: stats.awards },
+    { label: 'Projects shipped', value: stats.shipped },
     { label: 'Years teaching', value: stats.yearsTeaching },
   ];
 

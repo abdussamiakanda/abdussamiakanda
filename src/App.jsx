@@ -22,6 +22,8 @@ const pages = {
   PostDetailPage: () => import('./pages/PostDetailPage'),
   ProjectsPage: () => import('./pages/ProjectsPage'),
   CaseStudyPage: () => import('./pages/CaseStudyPage'),
+  DeveloperPage: () => import('./pages/DeveloperPage'),
+  DeveloperProjectPage: () => import('./pages/DeveloperProjectPage'),
   GalleryPage: () => import('./pages/GalleryPage'),
   HobbiesPage: () => import('./pages/HobbiesPage'),
   DemoPage: () => import('./pages/DemoPage'),
@@ -41,6 +43,8 @@ const PostsPage = lazy(pages.PostsPage);
 const PostDetailPage = lazy(pages.PostDetailPage);
 const ProjectsPage = lazy(pages.ProjectsPage);
 const CaseStudyPage = lazy(pages.CaseStudyPage);
+const DeveloperPage = lazy(pages.DeveloperPage);
+const DeveloperProjectPage = lazy(pages.DeveloperProjectPage);
 const GalleryPage = lazy(pages.GalleryPage);
 const HobbiesPage = lazy(pages.HobbiesPage);
 const DemoPage = lazy(pages.DemoPage);
@@ -84,6 +88,8 @@ function App() {
           <Route path="/posts/:slug" element={<PostDetailPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/projects/case/:slug" element={<CaseStudyPage />} />
+          <Route path="/developer" element={<DeveloperPage />} />
+          <Route path="/developer/:slug" element={<DeveloperProjectPage />} />
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/hobbies" element={<HobbiesPage />} />
           <Route path="/hobbies/chess" element={<ChessPage />} />

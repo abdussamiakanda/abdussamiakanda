@@ -1,0 +1,436 @@
+{
+  "intro": "I build full-stack web apps end to end: React front ends, Firebase and Supabase back ends, Python and Go services, and the occasional package on PyPI. I co-founded WeezLab, a digital studio in Dhaka, and built the web platform of ITCPR, the research institute I co-founded.",
+  "profileLinks": [
+    {
+      "label": "GitHub",
+      "url": "https://github.com/abdussamiakanda"
+    },
+    {
+      "label": "PyPI",
+      "url": "https://pypi.org/user/abdussamiakanda/"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/abdussamiakanda"
+    },
+    {
+      "label": "WeezLab",
+      "url": "https://weezlab.com"
+    }
+  ],
+  "positions": [
+    {
+      "id": "dev_weezlab",
+      "organization": "WeezLab",
+      "url": "https://weezlab.com",
+      "role": "Co-Founder · Front-End & UI Developer",
+      "startDate": 1777593600,
+      "endDate": null,
+      "description": "A digital studio in Dhaka that brings branding, content production, digital marketing, web development, and automation & AI under one roof. I build the parts of a site people actually touch: fast, accessible interfaces for websites, online stores and internal tools.",
+      "products": [
+        "floorlab",
+        "clientkhata",
+        "gitlatex"
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "id": "platforms",
+      "label": "Platforms"
+    },
+    {
+      "id": "research",
+      "label": "Research & LaTeX"
+    },
+    {
+      "id": "community",
+      "label": "Community"
+    },
+    {
+      "id": "utilities",
+      "label": "Utilities & dev"
+    },
+    {
+      "id": "games",
+      "label": "Games"
+    }
+  ],
+  "projects": [
+    {
+      "slug": "chessbd",
+      "title": "ChessBD",
+      "tagline": "A chess platform for the Bangladesh chess community.",
+      "description": "Game analysis with Stockfish 17, player profiles and leaderboards, events, clubs, a forum, news and interactive lessons, in one place for Bangladeshi players.",
+      "category": "community",
+      "featured": true,
+      "status": "live",
+      "years": "2025–2026",
+      "stack": [
+        "React",
+        "Vite",
+        "Firebase",
+        "Supabase",
+        "chess.js",
+        "Stockfish"
+      ],
+      "links": {
+        "live": "https://chessbd.app",
+        "source": "https://github.com/abdussamiakanda/chessBD"
+      },
+      "overview": "ChessBD brings the tools a chess community needs into one site for players in Bangladesh.\n\n### Analysis\n\n- **Game review** of any PGN with the Stockfish 17 engine: every move is classified (brilliant, great, best, excellent, good, inaccuracy, mistake, miss, blunder), with win percentages, an evaluation graph and best-move suggestions.\n- **An engine board** for exploring positions, **bots** at several strengths, and **puzzles** for tactics training.\n\n### Community\n\n- **Player profiles** with statistics, ratings and game history, and **leaderboards**.\n- **Events** for tournaments, a **club directory**, a **forum** and a **news** feed.\n\n### Learning\n\n- Step-by-step **interactive lessons** and **video tutorials**.\n\n### Stack\n\nA React and Vite front end, with Firebase and Supabase behind it and chess.js for move handling."
+    },
+    {
+      "slug": "itcpr",
+      "title": "ITCPR platform",
+      "tagline": "The web platform of the Institute for Theoretical and Computational Physics Research.",
+      "description": "A family of connected apps sharing one sign-on: a research portal, a code-sharing lab, a browser terminal that runs MuMax3 simulations, a forum with LaTeX, events, a library and a physics news feed.",
+      "category": "platforms",
+      "featured": true,
+      "status": "live",
+      "years": "2023–2026",
+      "stack": [
+        "React",
+        "Vite",
+        "Firebase",
+        "Supabase",
+        "SSO"
+      ],
+      "links": {
+        "live": "https://itcpr.org",
+        "source": "https://github.com/abdussamiakanda/itcpr"
+      },
+      "services": [
+        {
+          "label": "itcpr.org",
+          "url": "https://itcpr.org",
+          "description": "Public website of the institute"
+        },
+        {
+          "label": "Portal",
+          "url": "https://portal.itcpr.org",
+          "description": "Research workspace for groups, projects, courses, meetings and guides"
+        },
+        {
+          "label": "SSO",
+          "url": "https://sso.itcpr.org",
+          "description": "Single sign-on shared by every app"
+        },
+        {
+          "label": "CodeLab",
+          "url": "https://code.itcpr.org",
+          "description": "Code sharing for members"
+        },
+        {
+          "label": "Terminal",
+          "url": "https://terminal.itcpr.org",
+          "description": "Browser terminal with a file editor and MuMax3 job management"
+        },
+        {
+          "label": "Forum",
+          "url": "https://forum.itcpr.org",
+          "description": "Discussions with voting, comments, Markdown and LaTeX"
+        },
+        {
+          "label": "Events",
+          "url": "https://events.itcpr.org",
+          "description": "Schools, seminars and workshops"
+        },
+        {
+          "label": "Library",
+          "url": "https://library.itcpr.org",
+          "description": "The institute's library"
+        },
+        {
+          "label": "BuildBox",
+          "url": "https://buildbox.itcpr.org",
+          "description": "BuildBox"
+        },
+        {
+          "label": "Physics news",
+          "url": "https://news.itcpr.org/",
+          "description": "Latest physics news and discoveries"
+        },
+        {
+          "label": "Physics engines",
+          "url": "https://physics.itcpr.org/",
+          "description": "Interactive physics engines"
+        }
+      ],
+      "overview": "The Institute for Theoretical and Computational Physics Research (ITCPR) aims to provide research opportunities to people typically overlooked in science. I co-founded the institute and serve as its Director of Operations. Its work happens across a set of web apps I built, all behind one sign-on.\n\n### One login, many apps\n\nThe **SSO** service issues the session every other app trusts, so members sign in once and move between the portal, CodeLab, the terminal and the forum.\n\n### For research\n\n- The **Portal** is the workspace: groups, projects, courses, meetings and guides.\n- **CodeLab** is where members share code.\n- The **Terminal** is a browser-based terminal with command history, a nano-style editor and MuMax3 simulation jobs, with a notification when a job finishes.\n\n### For the community\n\n- A **Forum** with voting, comments, search and Markdown with LaTeX.\n- **Events** for schools, seminars and workshops, a **Library**, a **physics news** feed and interactive **physics engines**.\n\n### Stack\n\nEach app is a React and Vite front end on Firebase and Supabase, sharing the same authentication."
+    },
+    {
+      "slug": "gitlatex",
+      "title": "GitLaTeX",
+      "tagline": "A local, Git-native LaTeX editor that runs in your browser.",
+      "description": "Write in a Monaco editor, compile to PDF and push to GitHub, without Overleaf, a subscription or your files leaving your machine. Published on PyPI.",
+      "category": "research",
+      "featured": true,
+      "status": "package",
+      "years": "2026",
+      "stack": [
+        "Python",
+        "Flask",
+        "TypeScript",
+        "Monaco Editor",
+        "GitPython",
+        "LaTeX"
+      ],
+      "links": {
+        "package": "https://pypi.org/project/gitlatex/",
+        "source": "https://github.com/abdussamiakanda/gitlatex"
+      },
+      "overview": "GitLaTeX is a local, Git-native LaTeX editor that runs in the browser: write in a Monaco editor, compile to PDF, and push to GitHub, without Overleaf, a subscription, or your files ever leaving your own machine. Your `.tex` files are plain files on disk, and your history is plain Git.\n\n```bash\npip install gitlatex\ngitlatex\n```\n\nIt opens at `http://localhost:5000`. Clone a repository or create a folder, and start writing; changes save as you type.\n\n### Why build it\n\nOverleaf is excellent until you want your files on your own disk, your own Git remote, and no upload limits. GitLaTeX keeps the same shape of workflow (editor, live PDF, one-click compile) but runs everything locally against a real repository, so unpublished work never leaves your machine.\n\n### Editor\n\n- Built on **Monaco**, the editor behind VS Code, with LaTeX and BibTeX highlighting in light and dark themes.\n- **Autocomplete** for 150+ commands and 50+ environments. Inside `\\ref{}` and `\\cite{}` it completes from the project's own labels and `.bib` keys, showing each entry's title, author and year.\n- A **document outline** that follows the cursor, and matched `\\begin`/`\\end` colouring so an unclosed environment is obvious.\n\n### LaTeX-aware spell checking\n\n- Skips comments, math, verbatim blocks and the arguments of `\\ref`, `\\cite`, `\\url` and friends, so only prose is checked.\n- Built for papers: coinages like *nanowire* or *anti-symmetric* resolve against their parts instead of being flagged, with a personal dictionary that persists across projects.\n\n### Compiling\n\n- **One click to PDF**, shown beside the editor, with `pdflatex`, `xelatex` or `lualatex`.\n- **Full multi-pass builds**: `biber` or `bibtex` runs when needed and the engine reruns until references settle, so no more compiling three times to clear `??`.\n- Errors and warnings are parsed from the log into a **clickable problems list** that jumps to the line.\n- An optional **remote compiler API** lets it build on a web service, so no TeX distribution is needed locally.\n\n### Git\n\n- Status, diff, pull and push from the toolbar; push stages, commits and pushes in one action.\n- A **version history** panel with per-file changes, and side-by-side diffs between any two commits.\n\n### Collaboration\n\nAn optional relay ([gitlatex-collab](https://github.com/abdussamiakanda/gitlatex-collab)) on Cloudflare Workers lets a few co-authors edit the same project in real time. It only relays text: each collaborator still saves, compiles and commits on their own machine.\n\n### How it's built\n\nA **Flask** server with a strict split: `services/` holds the logic (LaTeX runs and log parsing, spell checking on symspellpy, Git through GitPython, the project index for autocomplete) and knows nothing about HTTP, while `routes/` holds thin blueprints in front of it.\n\nBuilt and maintained with [Md Atiqur Rahman](https://github.com/revolutionibus). Released under the ISC license.",
+      "org": "WeezLab"
+    },
+    {
+      "slug": "floorlab",
+      "title": "FloorLab",
+      "tagline": "A floor plan designer with a 3D view.",
+      "description": "Draw 2D floor plans with walls, doors, windows and rooms, adjust colours and dimensions, walk around them in 3D, save to the cloud and export to JSON or PNG.",
+      "category": "utilities",
+      "featured": true,
+      "status": "live",
+      "years": "2026",
+      "stack": [
+        "React",
+        "Vite",
+        "Three.js",
+        "React Three Fiber",
+        "Firebase"
+      ],
+      "links": {
+        "live": "https://floorlab.samicodes.org",
+        "source": "https://github.com/abdussamiakanda/FloorLab"
+      },
+      "overview": "FloorLab is a floor plan designer in the browser.\n\n### What it does\n\n- Draw **2D floor plans** with walls, doors, windows and rooms.\n- Customise **colours and dimensions**.\n- View the plan in **3D**.\n- **Save to the cloud** under your Google account, and **export** to JSON or PNG.\n\n### Stack\n\n- **React 19** and **Vite 7**, with React Router protecting signed-in routes.\n- **Three.js** through **React Three Fiber** and **drei** for the 3D viewer.\n- **Firebase**: Google sign-in and Firestore, with security rules scoped to each user's plans.",
+      "org": "WeezLab"
+    },
+    {
+      "slug": "gitlatex-collab",
+      "title": "GitLaTeX Collab",
+      "tagline": "Real-time co-editing relay for GitLaTeX.",
+      "description": "A tiny Cloudflare Workers and Durable Objects server that syncs text between co-authors with Yjs; compiling and committing stay on each person's machine.",
+      "category": "research",
+      "status": "source",
+      "years": "2026",
+      "stack": [
+        "TypeScript",
+        "Cloudflare Workers",
+        "Durable Objects",
+        "Yjs"
+      ],
+      "links": {
+        "source": "https://github.com/abdussamiakanda/gitlatex-collab"
+      }
+    },
+    {
+      "slug": "latex-fastapi",
+      "title": "LaTeX compiler API",
+      "tagline": "Compile LaTeX over a REST API.",
+      "description": "A FastAPI service that compiles documents with pdflatex, xelatex or lualatex, with API-key authentication and a compile timeout.",
+      "category": "research",
+      "status": "source",
+      "years": "2026",
+      "stack": [
+        "Python",
+        "FastAPI",
+        "LaTeX"
+      ],
+      "links": {
+        "source": "https://github.com/abdussamiakanda/latex-fastapi"
+      }
+    },
+    {
+      "slug": "grefornoobs",
+      "title": "GRE for Noobs",
+      "tagline": "A Python library for GRE vocabulary practice.",
+      "description": "Build a vocabulary database, look up meanings, run flashcards and random quizzes, and track progress from the Python prompt.",
+      "category": "utilities",
+      "status": "package",
+      "years": "2021",
+      "stack": [
+        "Python"
+      ],
+      "links": {
+        "package": "https://pypi.org/project/grefornoobs/",
+        "source": "https://github.com/abdussamiakanda/grefornoobs"
+      }
+    },
+    {
+      "slug": "clientkhata",
+      "title": "ClientKhata",
+      "tagline": "Track client work and payments.",
+      "description": "Clients, jobs that move from pending to paid, partial and full payments, and an AI helper that summarises job posts and drafts replies.",
+      "category": "utilities",
+      "status": "live",
+      "years": "2026",
+      "stack": [
+        "React",
+        "Vite",
+        "Firebase"
+      ],
+      "links": {
+        "live": "https://clientkhata.pro.bd",
+        "source": "https://github.com/abdussamiakanda/ClientKhata"
+      },
+      "org": "WeezLab"
+    },
+    {
+      "slug": "smtp2https",
+      "title": "smtp2https",
+      "tagline": "Receive email, forward it to a webhook.",
+      "description": "An SMTP receiver that turns each inbound message, attachments included, into a JSON POST, with per-domain routing, optional API keys and SPF results.",
+      "category": "utilities",
+      "status": "source",
+      "years": "2026",
+      "stack": [
+        "Go"
+      ],
+      "links": {
+        "source": "https://github.com/abdussamiakanda/smtp2https"
+      }
+    },
+    {
+      "slug": "react-components",
+      "title": "React components",
+      "tagline": "A gallery of React components.",
+      "description": "A collection of React components I have built.",
+      "category": "utilities",
+      "status": "live",
+      "years": "2026",
+      "stack": [
+        "React",
+        "Vite",
+        "CSS"
+      ],
+      "links": {
+        "live": "https://react.samicodes.org/",
+        "source": "https://github.com/abdussamiakanda/react"
+      }
+    },
+    {
+      "slug": "uniphysicsbd",
+      "title": "UPC Bangladesh",
+      "tagline": "Bangladeshi teams in the University Physics Competition.",
+      "description": "Bangladesh-only results from the University Physics Competition, with an admin portal for keeping the data current.",
+      "category": "community",
+      "status": "live",
+      "years": "2026",
+      "stack": [
+        "React",
+        "Vite",
+        "Supabase"
+      ],
+      "links": {
+        "live": "https://uniphysicsbd.netlify.app",
+        "source": "https://github.com/abdussamiakanda/uniphysicsbd"
+      }
+    },
+    {
+      "slug": "qurannerds",
+      "title": "QuranNerds",
+      "tagline": "A place to share Quran study notes.",
+      "description": "A Medium-style platform for writing and reading Quran study posts and reflections, with accounts and an editor.",
+      "category": "community",
+      "status": "live",
+      "years": "2025",
+      "stack": [
+        "React",
+        "Vite",
+        "Supabase"
+      ],
+      "links": {
+        "live": "https://qurannerds.netlify.app",
+        "source": "https://github.com/abdussamiakanda/qurannerds"
+      }
+    },
+    {
+      "slug": "fermion-physics-club",
+      "title": "Fermion Physics Club",
+      "tagline": "Website of Fermion Physics Club, Bangladesh.",
+      "description": "The club's site, home to its courses and seminars.",
+      "category": "community",
+      "status": "live",
+      "years": "2022–2024",
+      "stack": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "links": {
+        "live": "https://fermionku.netlify.app/",
+        "source": "https://github.com/abdussamiakanda/fermion_physics_club"
+      }
+    },
+    {
+      "slug": "uno",
+      "title": "UNO Online",
+      "tagline": "Multiplayer UNO for 2–4 players.",
+      "description": "Create a game, share its ID with friends, and play UNO together in the browser.",
+      "category": "games",
+      "status": "live",
+      "years": "2021–2025",
+      "stack": [
+        "JavaScript"
+      ],
+      "links": {
+        "live": "https://uno.samicodes.org",
+        "source": "https://github.com/abdussamiakanda/UNO"
+      }
+    },
+    {
+      "slug": "rock-paper-scissors",
+      "title": "Rock Paper Scissors",
+      "tagline": "Real-time multiplayer Rock Paper Scissors.",
+      "description": "Play against other people in real time, with sign-in, game history and statistics.",
+      "category": "games",
+      "status": "live",
+      "years": "2025",
+      "stack": [
+        "React",
+        "Vite",
+        "Firebase",
+        "Tailwind CSS"
+      ],
+      "links": {
+        "live": "https://rockpaperscissors.samicodes.org",
+        "source": "https://github.com/abdussamiakanda/rockpaperscissor"
+      }
+    },
+    {
+      "slug": "tic-tac-toe",
+      "title": "Tic-Tac-Toe",
+      "tagline": "Tic-Tac-Toe against four computer opponents.",
+      "description": "From Noob, who moves at random, to Jarvis Pro, who cannot be beaten.",
+      "category": "games",
+      "status": "live",
+      "years": "2021–2026",
+      "stack": [
+        "JavaScript",
+        "HTML",
+        "CSS"
+      ],
+      "links": {
+        "live": "https://tictactoe.samicodes.org",
+        "source": "https://github.com/abdussamiakanda/TIC-TAC-TOE"
+      }
+    },
+    {
+      "slug": "filmfreak",
+      "title": "FilmFreak",
+      "tagline": "A web app for film lovers.",
+      "description": "One of my early web projects.",
+      "category": "games",
+      "status": "live",
+      "years": "2021",
+      "stack": [
+        "JavaScript"
+      ],
+      "links": {
+        "live": "https://filmfreak.netlify.app/",
+        "source": "https://github.com/abdussamiakanda/FilmFreak"
+      }
+    }
+  ]
+}

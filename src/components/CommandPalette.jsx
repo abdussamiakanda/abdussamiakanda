@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Dialog from '@mui/material/Dialog';
-import { FiSearch, FiCornerDownLeft, FiFileText, FiBookOpen, FiMic, FiFeather, FiCompass, FiBox, FiEdit3, FiLayers } from 'react-icons/fi';
+import { FiSearch, FiCornerDownLeft, FiFileText, FiBookOpen, FiMic, FiFeather, FiCompass, FiBox, FiEdit3, FiLayers, FiCode } from 'react-icons/fi';
 import {
-  getPublications, getNotes, getPosts, getScribblingEntries, getSpeeches, getPersonalProjects, getCourses,
+  getPublications, getNotes, getPosts, getScribblingEntries, getSpeeches, getPersonalProjects, getCourses, getDeveloper,
   generateSlug, getSlugTitle,
 } from '../services/dataService';
 import { CV_URL, flatNav } from '../lib/siteMap';
@@ -17,12 +17,13 @@ const GROUP_ICONS = {
   Scribbling: FiFeather,
   Projects: FiBox,
   Courses: FiLayers,
+  Developer: FiCode,
 };
 
 // Builds the searchable index once per palette mount.
 async function buildIndex() {
-  const [pubs, talks, notes, posts, scribbles, projects, courses] = await Promise.all([
-    getPublications(), getSpeeches(), getNotes(), getPosts(), getScribblingEntries(), getPersonalProjects(), getCourses(),
+  const [pubs, talks, notes, posts, scribbles, projects, courses, developer] = await Promise.all([
+    getPublications(), getSpeeches(), getNotes(), getPosts(), getScribblingEntries(), getPersonalProjects(), getCourses(), getDeveloper(),
   ]);
   return [
     ...flatNav().map((n) => ({ group: 'Pages', title: n.label, sub: n.hint || n.to, to: n.to })),
@@ -32,6 +33,12 @@ async function buildIndex() {
     ...notes.map((n) => ({ group: 'Notes', title: n.title, sub: n.description, to: `/notes/${generateSlug(n.title)}` })),
     ...posts.map((p) => ({ group: 'Posts', title: p.title, sub: p.englishTitle !== p.title ? p.englishTitle : p.description, to: `/posts/${generateSlug(getSlugTitle(p))}` })),
     ...scribbles.map((s) => ({ group: 'Scribbling', title: s.title, sub: s.englishTitle || s.tag, to: `/scribbling/${generateSlug(getSlugTitle(s))}` })),
+    ...developer.projects.map((p) => ({
+      group: 'Developer',
+      title: p.title,
+      sub: p.tagline,
+      ...(p.overview ? { to: `/developer/${p.slug}` } : p.links?.live || p.links?.package || p.links?.source ? { href: p.links.live || p.links.package || p.links.source } : { to: '/developer' }),
+    })),
     ...courses.map((c) => ({ group: 'Courses', title: c.title, sub: c.language, to: `/courses/${c.slug}` })),
     ...projects.map((p) => ({ group: 'Projects', title: p.title, sub: p.technologies?.join(' · '), to: p.overview ? `/projects/case/${generateSlug(p.title)}` : '/projects' })),
   ];

@@ -8,7 +8,7 @@ import Research from '../components/home/Research';
 import Trajectory from '../components/home/Trajectory';
 import Awards from '../components/home/Awards';
 import Teaching from '../components/home/Teaching';
-import Lab from '../components/home/Lab';
+import Developer from '../components/home/Developer';
 import Writing from '../components/home/Writing';
 import Beyond from '../components/home/Beyond';
 import Marquee from '../components/ui/Marquee';
@@ -17,6 +17,7 @@ import useAsync from '../lib/useAsync';
 import { toDate, yearOf } from '../lib/format';
 import * as api from '../services/dataService';
 import { personSchema, websiteSchema } from '../lib/schema';
+import { shippedCount } from '../lib/developer';
 import { PAGE_META } from '../lib/pageMeta';
 
 const KEYWORDS = ['Spintronics', 'Domain-wall dynamics', 'Spin-transfer torque', 'Spin-orbit torque', 'Spin waves', 'Magnonic crystals', 'LLG equation', 'Magnetic nanowires'];
@@ -26,7 +27,7 @@ const settle = (p, fallback) => p.then((v) => v ?? fallback).catch(() => fallbac
 async function loadHome() {
   const [
     profile, research, researchMeta, publications, speeches, teaching, teachingMeta, courses,
-    education, activities, awards, projects, programming, webDev, skills, notes, posts, scribbles,
+    education, activities, awards, developer, skills, notes, posts, scribbles,
     gallery, curations, hobbies,
   ] = await Promise.all([
     settle(api.getProfile(), null),
@@ -40,9 +41,7 @@ async function loadHome() {
     settle(api.getEducation(), []),
     settle(api.getActivities(), []),
     settle(api.getAwards(), []),
-    settle(api.getPersonalProjects(), []),
-    settle(Promise.all([api.getProgramming(), api.getProgrammingProjects()]).then(([m, projects]) => ({ ...m, projects })), null),
-    settle(Promise.all([api.getWebDevelopment(), api.getWebDevProjects()]).then(([m, projects]) => ({ ...m, projects })), null),
+    settle(api.getDeveloper(), null),
     settle(api.getSkills(), []),
     settle(api.getNotes(), []),
     settle(api.getPosts(), []),
@@ -53,21 +52,28 @@ async function loadHome() {
   ]);
   return {
     profile, research, researchMeta, publications, speeches, teaching, teachingMeta, courses,
-    education, activities, awards, projects, programming, webDev, skills, notes, posts, scribbles,
+    education, activities, awards, developer, skills, notes, posts, scribbles,
     gallery, curations, hobbies,
   };
 }
 
-// Education, research, teaching and leadership merged into one chronology.
+// Education, research, teaching, developer roles and leadership merged into
+// one chronology. An organisation already listed as a research or developer
+// position (ITCPR, WeezLab) is not repeated as leadership.
 function buildMilestones(d) {
   const primary = /primary school/i;
+  const devPositions = d.developer?.positions ?? [];
+  const listed = new Set([...d.research.map((r) => r.institution), ...devPositions.map((p) => p.organization)]);
   return [
     ...d.education
       .filter((e) => !primary.test(e.degree))
       .map((e) => ({ key: e.id, kind: 'Education', title: e.degree, org: e.institution, start: e.startDate, end: e.endDate })),
     ...d.research.map((r) => ({ key: r.id, kind: 'Research', title: r.role.split(',')[0], org: r.institution, start: r.startDate, end: r.endDate })),
     ...d.teaching.map((t) => ({ key: t.id, kind: 'Teaching', title: t.role, org: t.institution, start: t.startDate, end: t.endDate })),
-    ...d.activities.map((a) => ({ key: a.id, kind: 'Leadership', title: a.role, org: a.organization, start: a.startDate, end: a.endDate })),
+    ...devPositions.map((p) => ({ key: p.id, kind: 'Developer', title: p.role, org: p.organization, start: p.startDate, end: p.endDate })),
+    ...d.activities
+      .filter((a) => !listed.has(a.organization))
+      .map((a) => ({ key: a.id, kind: 'Leadership', title: a.role, org: a.organization, start: a.startDate, end: a.endDate })),
   ].sort((a, b) => (toDate(a.start)?.getTime() ?? 0) - (toDate(b.start)?.getTime() ?? 0));
 }
 
@@ -82,6 +88,7 @@ function Home() {
       publications: data.publications.filter((p) => !p.status).length,
       talks: data.speeches.length,
       awards: data.awards.length,
+      shipped: shippedCount(data.developer?.projects),
       yearsTeaching: Number.isFinite(firstTeaching) ? new Date().getFullYear() - firstTeaching : 0,
     };
   }, [data]);
@@ -121,12 +128,13 @@ function Home() {
 
           <About profile={data.profile} stats={stats} />
           <Research positions={data.research} links={data.researchMeta?.profileLinks ?? []} />
+          <Developer developer={data.developer} skills={data.skills} />
 
           {data.publications.length > 0 && (
             <section id="publications" className="relative py-28 md:py-40">
               <div className="shell">
                 <SectionHeading
-                  index="03"
+                  index="04"
                   label="Publications"
                   lines={['Selected', <span key="i" className="italic text-ink-2">papers.</span>]}
                   aside={
@@ -153,7 +161,6 @@ function Home() {
           {milestones.length > 0 && <Trajectory milestones={milestones} />}
           <Awards awards={data.awards} />
           <Teaching roles={data.teaching} meta={data.teachingMeta} courses={data.courses} />
-          <Lab projects={data.projects} programming={data.programming} webDev={data.webDev} skills={data.skills} />
           <Writing notes={data.notes} posts={data.posts} scribbles={data.scribbles} />
           <Beyond gallery={data.gallery} curations={data.curations} hobbies={data.hobbies} />
         </>

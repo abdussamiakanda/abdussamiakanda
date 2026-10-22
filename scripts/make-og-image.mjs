@@ -20,10 +20,10 @@ const text = `
 <svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">
   <rect x="${PORTRAIT_W}" y="0" width="${W - PORTRAIT_W}" height="${H}" fill="#070a0b"/>
   <rect x="${PORTRAIT_W + 64}" y="200" width="48" height="2" fill="#34e3a0"/>
-  <text x="${PORTRAIT_W + 64}" y="176" font-family="Consolas, 'Courier New', monospace" font-size="20" letter-spacing="3" fill="#95a7a4">PHYSICIST · SPINTRONICS</text>
+  <text x="${PORTRAIT_W + 64}" y="176" font-family="Consolas, 'Courier New', monospace" font-size="20" letter-spacing="3" fill="#95a7a4">PHYSICIST · FULL-STACK DEVELOPER</text>
   <text x="${PORTRAIT_W + 60}" y="300" font-family="Georgia, 'Times New Roman', serif" font-size="78" fill="#e4eeec">Md Abdus Sami</text>
   <text x="${PORTRAIT_W + 60}" y="388" font-family="Georgia, 'Times New Roman', serif" font-size="78" font-style="italic" fill="#e4eeec">Akanda<tspan fill="#34e3a0" font-style="normal">.</tspan></text>
-  <text x="${PORTRAIT_W + 64}" y="460" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#95a7a4">Magnetization dynamics · Spin waves · Micromagnetics</text>
+  <text x="${PORTRAIT_W + 64}" y="460" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#95a7a4">Spintronics research · Web platforms &amp; tools</text>
   <text x="${PORTRAIT_W + 64}" y="560" font-family="Consolas, 'Courier New', monospace" font-size="20" letter-spacing="2" fill="#34e3a0">abdussamiakanda.com</text>
 </svg>`;
 

@@ -1,12 +1,11 @@
 import { motion } from 'motion/react';
-import { FiArrowUpRight } from 'react-icons/fi';
 import Precession from '../ui/Precession';
 import TeX from '../ui/TeX';
 import { ArrowLink, Chip, SectionHeading } from '../ui/primitives';
 import { Stagger } from '../ui/Reveal';
 import { staggerItem } from '../../lib/motion';
 import { formatRange } from '../../lib/format';
-import { getSocialIcon } from '../../lib/socialIcons';
+import ProfileLinks from '../ui/ProfileLinks';
 import { INTERESTS, LLG_TEX } from '../../lib/research';
 
 
@@ -95,22 +94,7 @@ export default function Research({ positions, links }) {
           {/* Profiles */}
           {links.length > 0 && (
             <motion.div variants={staggerItem} className="flex flex-wrap items-center gap-3 rounded-3xl border border-line p-4 md:col-span-12">
-              <span className="eyebrow px-2">Find the work on</span>
-              {links.map((l) => {
-                const Icon = getSocialIcon(l.label);
-                return (
-                  <a
-                    key={l.url}
-                    href={l.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group inline-flex h-11 items-center gap-2 rounded-full border border-line px-4 text-sm text-ink-2 transition-colors hover:border-ink hover:text-ink"
-                  >
-                    <Icon /> {l.label}
-                    <FiArrowUpRight className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                  </a>
-                );
-              })}
+              <ProfileLinks links={links} />
             </motion.div>
           )}
         </Stagger>

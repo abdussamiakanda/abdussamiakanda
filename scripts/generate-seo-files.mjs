@@ -27,6 +27,7 @@ import {
   articleMeta,
   caseStudyMeta,
   clipDescription,
+  developerProjectMeta,
   courseMeta,
   curationMeta,
   fullTitle,
@@ -67,6 +68,7 @@ export function collectUrls() {
   }
   for (const c of data('courses')) if (c.slug) add(`/courses/${c.slug}`, courseMeta(c));
   for (const p of data('personalProjects')) if (p.overview) add(`/projects/case/${generateSlug(p.title)}`, caseStudyMeta(p));
+  for (const p of data('developer').projects) if (p.overview) add(`/developer/${p.slug}`, developerProjectMeta(p));
   for (const tag of new Set(data('curations').map((c) => c.tag).filter(Boolean))) add(`/curations/${tag}`, curationMeta(tag));
 
   if (data('hobbies').some((h) => generateSlug(h.title) === 'chess')) {
@@ -162,7 +164,8 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const template = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8');
 
   fs.rmSync(path.join(DIST, META_DIR), { recursive: true, force: true });
-  const rewrites = [];
+  // Moved pages first, so they win over the rewrites below.
+  const rewrites = ['/projects/case/gitlatex  /developer/gitlatex  301'];
   for (const url of urls) {
     const file = metaFileFor(url.path);
     const out = path.join(DIST, file);

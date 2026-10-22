@@ -13,7 +13,7 @@ export default function Teaching({ roles, meta, courses }) {
     <section id="teaching" className="relative py-28 md:py-40">
       <div className="shell">
         <SectionHeading
-          index="06"
+          index="07"
           label="Teaching"
           lines={['Explaining it', <span key="i" className="italic text-ink-2">is how I learn it.</span>]}
           aside={meta?.description}

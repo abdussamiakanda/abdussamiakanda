@@ -37,6 +37,12 @@
   --board-frame-2: #0b110f;
   --board-coord: #8fa39c;
   --board-highlight: rgba(232, 206, 104, 0.42);
+  /* Trajectory: one distinct hue per kind of role. */
+  --kind-education: #6aa8ff;
+  --kind-research: #34e3a0;
+  --kind-teaching: #c084fc;
+  --kind-developer: #f0b86e;
+  --kind-leadership: #ff7aa8;
   --glass: rgba(7, 10, 11, 0.72);
   --grain-opacity: 0.045;
 }
@@ -66,6 +72,11 @@
   --board-frame-2: #18221e;
   --board-coord: #a9bab3;
   --board-highlight: rgba(232, 196, 72, 0.45);
+  --kind-education: #1f5fc9;
+  --kind-research: #06784f;
+  --kind-teaching: #8a35c9;
+  --kind-developer: #9a5300;
+  --kind-leadership: #b8245a;
   --glass: rgba(242, 245, 244, 0.75);
   --grain-opacity: 0.03;
 }

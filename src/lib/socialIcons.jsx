@@ -2,10 +2,11 @@ import {
   FaGithub, FaLinkedin, FaTwitter, FaEnvelope, FaGlobe, FaFacebook, FaInstagram, FaYoutube,
   FaFilePdf, FaOrcid, FaResearchgate, FaMedium, FaBlog, FaStackOverflow, FaGraduationCap, FaSoundcloud,
 } from 'react-icons/fa';
-import { SiGooglescholar, SiArxiv, SiDblp, SiSemanticscholar, SiX, SiAcademia } from 'react-icons/si';
+import { SiGooglescholar, SiArxiv, SiDblp, SiSemanticscholar, SiX, SiAcademia, SiPypi } from 'react-icons/si';
 
 const ICONS = {
   github: FaGithub,
+  pypi: SiPypi,
   'google scholar': SiGooglescholar,
   googlescholar: SiGooglescholar,
   scholar: SiGooglescholar,
