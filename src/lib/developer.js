@@ -17,3 +17,12 @@ export const projectLinks = (project, { withDetail = true } = {}) =>
 
 // Projects that count as shipped: running live or published as a package.
 export const shippedCount = (projects = []) => projects.filter((p) => p.status === 'live' || p.status === 'package').length;
+
+// The layers I build across, top (what people touch) to bottom, each with
+// technologies used in the projects on /developer.
+export const STACK_LAYERS = [
+  { layer: 'Interface', tools: ['React', 'Vite', 'Tailwind CSS', 'Three.js', 'Monaco'] },
+  { layer: 'Services', tools: ['Node.js', 'Python', 'FastAPI', 'Flask', 'Go'] },
+  { layer: 'Data & auth', tools: ['Firebase', 'Supabase', 'PostgreSQL', 'SSO'] },
+  { layer: 'Edge & infra', tools: ['Cloudflare Workers', 'Netlify', 'PyPI'] },
+];

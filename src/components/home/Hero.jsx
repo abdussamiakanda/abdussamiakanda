@@ -142,7 +142,7 @@ export default function Hero({ profile }) {
           </div>
           <div className="hidden md:col-span-3 md:block">
             <Readout stats={stats} />
-            <p className="mt-3 font-mono text-[0.62rem] uppercase tracking-[0.1em] text-ink-3">Move the cursor to apply a field</p>
+            <p className="mt-3 font-mono text-[0.62rem] uppercase tracking-[0.1em] text-ink-3">Move to apply a field · click for a spin wave</p>
           </div>
         </div>
       </div>
