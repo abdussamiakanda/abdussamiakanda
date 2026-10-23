@@ -6,7 +6,9 @@ import python from 'highlight.js/lib/languages/python';
 import bash from 'highlight.js/lib/languages/bash';
 import javascript from 'highlight.js/lib/languages/javascript';
 import json from 'highlight.js/lib/languages/json';
+import { Suspense } from 'react';
 import CodeBlock from './CodeBlock';
+import { WIDGETS } from '../ssw';
 import { prepareMarkdown } from '../../utils/markdown';
 
 const KATEX_OPTIONS = {
@@ -45,6 +47,15 @@ const components = {
   // with **Figure:** / **Fig. 2.** is styled as that figure's caption.
   p: (all) => {
     const { node, children, ...props } = all;
+    const widget = (node?.children ?? []).length === 1 && node.children[0].type === 'text' ? node.children[0].value.trim().match(/^\[\[widget:([\w-]+)\]\]$/) : null;
+    if (widget && WIDGETS[widget[1]]) {
+      const Widget = WIDGETS[widget[1]];
+      return (
+        <Suspense fallback={<div className="my-12 h-64 rounded-3xl border border-line bg-surface" />}>
+          <Widget />
+        </Suspense>
+      );
+    }
     const kids = (node?.children ?? []).filter((c) => !(c.type === 'text' && !c.value.trim()));
     if (kids.length === 1 && kids[0].tagName === 'img') return <figure className="md-figure">{children}</figure>;
     const first = kids[0];
